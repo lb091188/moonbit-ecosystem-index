@@ -2,7 +2,7 @@
 
 MoonBit 这两年长得比很多人以为的快。
 
-我上周拉了一次 mooncakes 的全量数据，已发布模块 3520 个。桌面、移动端、Web 框架、终端 UI、游戏引擎、HTTP 服务、数据库、LLM、微信小程序、鸿蒙……该有的基本都有了，有些方向还不止一个方案。
+11 月 2 日我拉了一次 mooncakes 的全量数据，已发布模块 3520 个。桌面、移动端、Web 框架、终端 UI、游戏引擎、HTTP 服务、数据库、LLM、微信小程序、鸿蒙……该有的基本都有了，有些方向还不止一个方案。
 
 问题是：除了包作者自己，没多少人知道它们都在那儿。
 
@@ -29,155 +29,78 @@ MoonBit 这两年长得比很多人以为的快。
 
 37 个场景里 15 个有完整方案，一共 71 个包。剩下 22 个场景还没有框架级实现，那里的候选全部是基础库，就不硬分出「完整方案」这一栏。
 
-**这 71 个完整方案，我每个写了一句人话简介。**
+这 71 个方案，我每个写了一句简介。不是注册表里那句英文描述，而是回答：它是什么形态的方案、它替你做了哪些决定、什么情况下该选它。
 
-不是注册表里那句英文描述，而是回答三个问题：它是什么形态的方案、它替你做了哪些决定、什么情况下该选它。
+下面挑几个场景展开。完整清单在站点上。
 
-下面就是全部内容。
+## 三、生态已经长到什么程度
 
-## 三、界面与端
+### 桌面：三条技术路线并存
 
-### 桌面（7）
+桌面是我最早想解决的场景，也是最能说明问题的一个。现在这个方向上同时跑着三种路线。
 
-- **moonbit-community/proton** — 基于内置浏览器渲染的桌面运行时，兼容现有前端技术栈，并提供托盘、剪贴板、全局热键等系统模块。
-- **wzzc-dev/moui** — 自带渲染引擎的跨端 GUI 框架，不依赖系统 WebView，桌面与移动共用一套代码。
-- **NoahLiu/native-gui** — 原生桌面 GUI 框架，一套代码生成 Windows、Linux、macOS 窗口，内置托盘、通知与快捷键。
-- **vectie/lepusa** — MoonBit 原生桌面框架的研究性实现，适合作为架构参考，尚不适用于生产环境。
-- **Nanaloveyuki/orbit** — 组合式桌面应用基座，原生窗口配系统 WebView，IPC 支持策略授权，附 orbit-cli 工具链。
-- **lepus-apps/webview** — 以 Web 技术构建桌面应用的框架，界面层由 HTML/CSS 实现，MoonBit 负责窗口与系统调用。
-- **tonyfettes/giraffe** — 基于 GTK4 的声明式 UI 框架，采用 Elm 架构与原生控件，Linux 桌面支持最完整。
+**把界面交给浏览器。** `proton` 用内置浏览器渲染，能直接复用前端技术栈，托盘、剪贴板、全局热键这些系统模块都配了；`orbit` 用系统 WebView，IPC 带策略授权，另附一套 orbit-cli 工具链；`lepus-apps/webview` 更彻底，界面层完全交给 HTML/CSS，MoonBit 只管窗口与系统调用。
 
-### 移动端（7）
+**自己画。** `moui` 自带渲染引擎，不依赖系统 WebView，桌面和移动共用一套代码。
 
-- **XiLaiTL/moobile** — Rabbita（TEA）移动端方案，一套代码输出 Android、iOS 与 Web，React Native 渲染。
-- **wzzc-dev/moui** — 自带渲染引擎的跨端 GUI 框架，不依赖系统 WebView，桌面与移动共用一套代码。
-- **lampclaw/minimoon** — 面向微信小程序 Skyline 渲染引擎的 UI 运行时，采用 Elm 状态机，局部状态更新具备事务性。
-- **Magic486/moon-miniprogram** — 微信小程序开发框架，提供类型安全运行时、状态自动 diff、跨页 store 与声明式路由。
-- **shop1111/moonohos** — HarmonyOS 原生模块框架，支持异步任务、平台模块调用与 HAR 打包。
-- **lampclaw/lampo** — 面向小程序 Skyline 的 UI 框架，采用纯 Elm 风格，状态按组件隔离，不使用全局 store。
-- **vectie/bunnia** — 小程序 UI 框架，采用 Rabbita 风格，通过可插拔的平台适配层支持多端。
+**走原生控件。** `native-gui` 一套代码生成 Windows、Linux、macOS 原生窗口，托盘、通知、快捷键都内置；`giraffe` 绑 GTK4，走 Elm 架构，Linux 上完成度最高。
 
-### Web UI / 前端框架（6）
+三条路线各有代价：webview 能复用前端生态，但产物重、启动慢；自绘引擎完全可控，但控件要自己长；原生控件最贴平台，跨平台一致性得自己填。
 
-- **moonbit-community/rabbita** — 官方函数式 Web UI 框架，采用 Elm 架构（Model-Update-View），生态配套最完整。
-- **mizchi/luna** — 细粒度响应式 UI 库，基于信号驱动，不使用虚拟 DOM diff，更新粒度与产物体积可控。
-- **marianoguerra/tutuca** — 完整 UI 框架，集成模板语言、虚拟 DOM、组件、运行时、lint 与 CLI。
-- **lampclaw/minimoon** — 面向微信小程序 Skyline 渲染引擎的 UI 运行时，采用 Elm 状态机，局部状态更新具备事务性。
-- **Arcelyth/aitne** — 轻量响应式 Web 框架，运行时开销低，适用于内容型页面。
-- **vectie/bunnia** — 小程序 UI 框架，采用 Rabbita 风格，通过可插拔的平台适配层支持多端。
+第七个 `lepusa` 是研究性实现，更像一份架构参考，目前不适合放进生产。
 
-### 终端 UI（5）
+一个方向上有七种选择，说明生态已经过了「有没有」的阶段，开始有「选哪个」的烦恼了。
 
-- **mizchi/tui** — 基于信号驱动的终端 UI 库，状态变更自动重绘，适用于响应式编程风格的项目。
-- **moonbit-community/rabbita_tui** — 官方终端 UI 工具包，采用 Elm 架构，与 Rabbita 共享同一套组织方式。
-- **Frank-III/onebit-tui** — 集成 Yoga flexbox 布局引擎的终端 UI 库，以 CSS 盒模型方式排版。
-- **moonbitstack/moonetui** — 功能完备的终端 UI 工具包，含单元格缓冲、差分 ANSI 渲染、增量按键解析、五十个组件与设计系统。
-- **brickfrog/pippa** — 终端 UI 框架，采用 Bubble Tea 风格与 Model-Update-View 模式，消息类型化。
+### HTTP：13 个框架，几乎把主流设计搬了一遍
 
-### 游戏引擎 / ECS（6）
+这是竞争最充分的地方。官方的 `moonback` 是默认底座，路由、中间件、请求响应抽象都齐。
 
-- **Milky2018/selene** — 基于 ECS 架构的游戏引擎，实体、组件与系统分层明确，适用于逻辑复杂且持续扩展的项目。
-- **mizchi/kagura** — 2D 游戏引擎，参照 Ebiten 设计，提供游戏循环与精灵绘制，适用于中小规模项目。
-- **sssssurf/abyssal_chord** — 卡牌对战专用引擎，内置回合、牌库与结算流程，附带命令行示例。
-- **sacckey/moon8bit** — 复古风格 2D 引擎，资源以文本描述，运行时具备确定性，适用于快速迭代与自动化生成。
-- **firefly/firefly** — Firefly Zero 掌机的游戏 SDK，仅面向该硬件平台，不适用于通用桌面环境。
-- **sennenki/reisen** — 视觉小说引擎，以剧本、立绘与分支组织内容，不适用于通用游戏开发。
+其余十二个有意思的地方在于，它们几乎覆盖了当下所有主流框架的设计思路：`kupas/express` 直接对标 Express，底层走 uWebSockets；`mizchi/mars` 和 `anccnuer/onho` 是 Hono 风格，trie 路由加 SSE；`RabitLogic/mbit` 学 Gin；`KKKIIO/moondark` 学 Django，建在 moonback 上还带工程结构约定；`wflixu/Halo` 用 Koa 的洋葱模型；`jaredzhou/pony` 是 Go 的 Chi 那一路。
 
-## 四、服务与数据
+另外五个各占一个位置：把路由、参数、响应都纳入类型检查的 `moonapi`，同工程组织前后端的 `moonway`，面向多服务拆分的 `moonzero`，接口接近 Express 的 `mocket`，以及出自 MoonBit 语言作者之手、偏探索性质的 `crescent`。
 
-### Web 后端 / HTTP（13）
+从 Web 转过来的人基本能找到自己熟的那一套，迁移成本主要不在框架，在语言本身。
 
-- **moonbitlang/moonback** — 官方 Web 后端框架，提供路由、中间件与请求响应抽象，是生态项目的常用基础。
-- **mizchi/mars** — Hono 风格 Web 框架，提供 trie 路由、中间件与 SSE，可运行于原生与 Node.js。
-- **oboard/mocket** — 通用 Web 框架，提供路由与中间件，接口风格接近 Express。
-- **bobzhang/crescent** — Web 框架，由 MoonBit 语言作者实现，具有探索性质，宜作参考而非直接用于生产。
-- **jaredzhou/pony** — 轻量 HTTP 框架与路由器，采用 Go 的 Chi 风格，适用于仅需路由与中间件的服务。
-- **RabitLogic/mbit** — Gin 风格 Web 框架，API 设计与 Go 生态一致，迁移成本低。
-- **moonbitstack/moonapi** — 类型化 Web 框架，路由、参数与响应均纳入类型检查，错误在编译期暴露。
-- **daqing/moonway** — 全栈 Web 框架，前后端在同一工程内组织，无需拆分构建流程。
-- **wflixu/Halo** — 基于 Koa 洋葱模型的中间件框架，支持结构化并发与流式响应，适用于中间件层次较多的服务。
-- **kupas/express** — Express 兼容的 Web 框架，底层采用 uWebSockets，便于从 Node.js 迁移。
-- **KKKIIO/moondark** — Django 风格的后端框架，基于 moonback，对工程结构有明确约定。
-- **moonbitstack/moonzero** — 服务框架，面向多服务拆分而非单机 HTTP 应用，抽象层次高于 Web 框架。
-- **anccnuer/onho** — Hono 风格轻量 Web 框架，提供基础的路由与中间件。
+### 小程序：官方没覆盖的地方，社区补了四套
 
-### 数据库 / 存储（5）
+这个场景值得单独说，因为它是社区在填空白。
 
-- **moonbitstack/moondb** — 数据库访问的标准接口层，定义驱动与查询层之间的契约，本身不实现具体数据库。用于避免上层代码绑定特定数据库。
-- **oboard/morm** — 轻量 ORM，提供类型化查询与代码生成，支持多种数据库引擎。
-- **moonbitstack/moonorm** — ORM 与 SQL 工具包，模型映射与查询构建由同一套接口提供。
-- **wflixu/Orion** — Derive 与代码生成 ORM，以 Schema DSL 描述表结构，生成类型安全 CRUD 与查询构建器。
-- **zen314/shadow** — 轻量 ORM，接口简单，适用于中小规模项目。
+微信小程序的 Skyline 渲染引擎，现在有两套 MoonBit 实现：`minimoon` 和 `lampo`，都是 Elm 风格，区别在状态管理——前者用事务性的局部状态更新，后者干脆不要全局 store，状态按组件隔离。
 
-### 异步 / 并发（4）
+`moon-miniprogram` 走的是另一条路，做完整开发框架：类型安全运行时、状态自动 diff、跨页 store、声明式路由。`bunnia` 则把平台适配做成可插拔的，用一套代码走多端小程序。
 
-- **moonbitlang/async** — 官方异步库，提供协程调度与 IO 抽象，是生态中的基础依赖。
-- **peter-jerry-ye/async** — 异步库，提供 Promise、事件循环与 IO，接口风格接近 JavaScript。
-- **didiLjf/moonorbit** — Actor 并发框架，以消息传递代替共享状态，适用于并发写入冲突较多的服务。
-- **kalculos/miao** — 异步 IO 库，默认运行时为 libuv，行为与 Node.js 生态接近。
+鸿蒙那边有 `moonohos`，解决异步任务、平台模块调用与 HAR 打包。
 
-### 配置 / 标记格式（1）
+一个平台出现三四种互不相同的实现，通常意味着需求已经明确、但还没有形成标准答案。
 
-- **Yu-zh/data** — serde 形态的序列化框架，以单一数据模型支持多种格式，切换格式无需重写序列化逻辑。
+### LLM：五个方案，形态完全不同
 
-### LLM / Agent / MCP（5）
+LLM 是最近长得最快的一类，但这里没有出现「大家都做同一件事」的情况。
 
-- **colmugx/posoco** — 六边形架构（端口-适配器）Agent 框架，定义扩展端口与 Agent 循环，LLM 与工具可替换。
-- **colmugx/mcp** — 类型安全的 MCP SDK，同时提供服务端与客户端，支持 STDIO 与 HTTP 两种传输。
-- **golemcloud/golem_sdk** — Golem 平台的 SDK，用于构建可持久化、可故障恢复的 agent，需绑定该托管平台。
-- **weopqrst/agent** — LangChain 核心库的 MoonBit 实现，类型安全、可组合，LLM 客户端基于 mizchi/llm。
-- **soehi/moonlm** — 本地 LLM 推理引擎与强类型 agent 运行时，无需外部 API 即可运行模型。
+`posoco` 是六边形架构的 Agent 框架，`mcp` 是类型安全的 MCP SDK，服务端客户端都有，`weopqrst/agent` 把 LangChain 的核心搬了过来，`golem_sdk` 绑定 Golem 平台做可持久化 agent，`moonlm` 更彻底，直接做本地推理引擎，不依赖外部 API。
 
-## 五、工具与底层
+同一个方向上五种不同的切入点，说明这里还没有共识，也说明现在入场还不算晚。
 
-### CLI 参数解析（4）
+## 四、还有 22 个方向没有框架级实现
 
-- **Yoorkin/ArgParser** — 轻量参数解析库，支持命令、选项与子命令定义，无额外依赖。
-- **mizchi/admiral** — 声明式 CLI 构建器，采用 gunshi 风格，以数据描述命令结构，自动生成帮助文本与补全。
-- **TheWaWaR/clap** — Rust clap 的移植版本，接口与用法基本一致，迁移成本低。
-- **totto2727/admiral** — admiral 的异步优先分支，命令处理可直接返回异步结果。
+把 37 个场景排完，我发现最有用的信息不是「有哪些包」，而是「哪些地方还是空的」。
 
-### 运维 / 系统管理（4）
+下面这 22 个方向，目前没有任何框架、引擎或运行时级的实现，全是需要自己拼的基础库：
 
-- **chensuiyi/bm2** — 面向 Bun 与 Node.js 应用的 Linux 进程管理器，以 MoonBit 实现。
-- **mizchi/actrun** — 兼容 GitHub Actions 的本地 CI 运行器，工作流可在本机执行，不依赖远端。
-- **kupas/pm3** — 语言无关的进程管理器，参照 PM2 设计，内置日志轮转。
-- **tiye/redstart** — 面向本地开发的轻量进程管理器，支持一组服务的批量启动与停止。
+图形渲染、图像编解码、音视频、HTTP 客户端、网络传输、应用协议与 RPC、JSON 解析、二进制编码、日志与追踪、文件与路径、数学与数值计算、数据结构与算法、开发工具、Markdown 与文档转换、时间日期、Unicode 文本处理、哈希校验、加密与签名、编码转义、压缩归档、编译器与代码生成、正则匹配。
 
-### 解析器 / 语法（2）
+这份名单换个角度看就是机会清单。比如 JSON 解析有 119 个基础库，却没有一个能当骨架用的方案；图形渲染有 101 个，同样没有。这些数字说明有人在等，也说明有人在重复造。
 
-- **moonbitlang/yacc** — 官方 LR(1) 语法分析器生成器，由文法生成解析器，适用于完整语言语法的实现。
-- **cogna-dev/parkit** — nom 风格的解析器组合子框架，以函数组合构建解析逻辑，适用于局部格式解析。
+## 五、清单在这里
 
-### 测试 / 断言（4）
-
-- **moonbitlang/quickcheck** — 官方 QuickCheck 实现，以属性描述行为并自动生成输入查找反例。
-- **moonrockz/moonspec** — BDD 测试框架，支持 Gherkin 语法与 Cucumber 表达式，可按需求描述编写可执行测试。
-- **aspnmy/moonitest** — 集成测试框架，通过真实 Docker、TCP 与 HTTP 调用后端接口，作为单元测试的补充。
-- **Duckweed/moon-proof** — 文档示例的持续验证框架，抽取文档中的代码块并隔离编译运行，用于确认示例是否仍然有效。
-
-### WebAssembly / JS 互操作（1）
-
-- **Milky2018/wasmoon** — WebAssembly 运行时，内置 JIT 与解释器，支持 WASI 与组件模型。
-
----
-
-以上是全部 15 个场景的完整方案，共 71 个包。其中 moui、minimoon、bunnia 三个跨场景通用，所以会在两处出现，正文条目数比包数多几条。
-
-剩下 22 个场景没有完整方案，那里列的是按用途分好的基础库，需要的时候去站点上查就行。
-
-## 六、最后还是公开了
-
-这东西一开始只是给自己做的一张表。做完发现，卡在「不知道有什么」这一步的人应该不止我一个。
-
-所以放了上来。站点是纯静态的，两边都能切语言：
+站点是纯静态的，中英双语，71 个方案的简介都在上面，22 个空场景也各自列了基础库：
 
 **https://moonbit-ecosystem-index.pages.dev**
 
-数据是 2026-11-02 的快照，不随注册表实时更新，之后新发布的包不在里面。分类也一定有错，尤其是我按规则砍掉的那些包，保不齐误伤。
+数据是 11 月 2 日的快照，不随注册表实时更新，之后新发布的包不在里面。分类也一定有错，尤其是我按规则砍掉的那些，难免误伤。
 
 觉得某个包该在某个场景里、或者某个包不该出现，欢迎到 GitHub 提：
 
 **https://github.com/lb091188/moonbit-ecosystem-index**
 
-如果你也在写 MoonBit，希望这张表能省下你翻 README 的那个下午。
+如果你也在用 MoonBit，这份索引应该能省下一些翻 README 的时间。
