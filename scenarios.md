@@ -14,43 +14,43 @@
 
 ## 目录
 
-- [桌面](#gui) — 方案 7 / 基础库 31
+- [桌面](#gui) — 方案 7 / 基础库 30
 - [移动端](#mobi) — 方案 7 / 基础库 8
-- [Web UI / 前端框架](#ui) — 方案 6 / 基础库 50
-- [终端 UI / TUI](#tui) — 方案 5 / 基础库 50
-- [CLI 参数解析](#cli) — 方案 4 / 基础库 86
-- [游戏引擎 / ECS](#game) — 方案 6 / 基础库 48
-- [图形 / 图表 / 渲染](#graphics) — 无方案 / 基础库 123
-- [图像编解码](#img) — 无方案 / 基础库 36
+- [Web UI / 前端框架](#ui) — 方案 6 / 基础库 55
+- [终端 UI / TUI](#tui) — 方案 5 / 基础库 52
+- [CLI 参数解析](#cli) — 方案 4 / 基础库 6
+- [游戏引擎 / ECS](#game) — 方案 6 / 基础库 44
+- [图形 / 图表 / 渲染](#graphics) — 无方案 / 基础库 101
+- [图像编解码](#img) — 无方案 / 基础库 38
 - [音频 / 视频](#media) — 无方案 / 基础库 36
-- [Web 后端 / HTTP 服务](#http) — 方案 13 / 基础库 85
+- [Web 后端 / HTTP 服务](#http) — 方案 13 / 基础库 71
 - [HTTP 客户端](#httpc) — 无方案 / 基础库 15
-- [网络传输 / 套接字](#net) — 无方案 / 基础库 58
-- [应用协议 / RPC](#proto) — 无方案 / 基础库 23
-- [数据库 / 存储](#db) — 方案 5 / 基础库 75
-- [异步 / 并发](#async) — 方案 4 / 基础库 41
-- [JSON 解析](#json) — 无方案 / 基础库 115
-- [配置 / 标记格式](#datafmt) — 方案 1 / 基础库 61
-- [二进制编码](#binfmt) — 无方案 / 基础库 19
-- [日志 / 追踪](#log) — 无方案 / 基础库 29
+- [网络传输 / 套接字](#net) — 无方案 / 基础库 61
+- [应用协议 / RPC](#proto) — 无方案 / 基础库 26
+- [数据库 / 存储](#db) — 方案 5 / 基础库 95
+- [异步 / 并发](#async) — 方案 4 / 基础库 43
+- [JSON 解析](#json) — 无方案 / 基础库 119
+- [配置 / 标记格式](#datafmt) — 方案 1 / 基础库 65
+- [二进制编码](#binfmt) — 无方案 / 基础库 22
+- [日志 / 追踪](#log) — 无方案 / 基础库 31
 - [运维 / 系统管理](#ops) — 方案 4 / 基础库 8
-- [LLM / Agent / MCP](#llm) — 方案 5 / 基础库 111
-- [解析器 / 语法](#parser) — 方案 2 / 基础库 227
-- [编译器 / 代码生成](#compiler) — 无方案 / 基础库 79
-- [正则匹配](#regex) — 无方案 / 基础库 9
-- [Unicode / 文本处理](#unicode) — 无方案 / 基础库 104
+- [LLM / Agent / MCP](#llm) — 方案 5 / 基础库 117
+- [解析器 / 语法](#parser) — 方案 2 / 基础库 232
+- [编译器 / 代码生成](#compiler) — 无方案 / 基础库 85
+- [正则匹配](#regex) — 无方案 / 基础库 10
+- [Unicode / 文本处理](#unicode) — 无方案 / 基础库 109
 - [哈希 / 校验](#hash) — 无方案 / 基础库 44
 - [加密 / 签名](#cipher) — 无方案 / 基础库 29
-- [编码 / 转义](#encode) — 无方案 / 基础库 35
+- [编码 / 转义](#encode) — 无方案 / 基础库 36
 - [压缩 / 归档](#archive) — 无方案 / 基础库 55
-- [文件 / 路径 / IO](#fs) — 无方案 / 基础库 122
-- [数学 / 数值计算](#math) — 无方案 / 基础库 64
-- [数据结构 / 算法](#ds) — 无方案 / 基础库 95
-- [测试 / 断言 / 属性测试](#test) — 方案 4 / 基础库 62
-- [开发工具 / 代码质量](#tool) — 无方案 / 基础库 60
-- [Markdown / 文档转换](#doc) — 无方案 / 基础库 94
-- [时间 / 日期](#time) — 无方案 / 基础库 40
-- [WebAssembly / JS 互操作](#wasm) — 方案 1 / 基础库 303
+- [文件 / 路径 / IO](#fs) — 无方案 / 基础库 64
+- [数学 / 数值计算](#math) — 无方案 / 基础库 65
+- [数据结构 / 算法](#ds) — 无方案 / 基础库 72
+- [测试 / 断言 / 属性测试](#test) — 方案 4 / 基础库 63
+- [开发工具 / 代码质量](#tool) — 无方案 / 基础库 63
+- [Markdown / 文档转换](#doc) — 无方案 / 基础库 90
+- [时间 / 日期](#time) — 无方案 / 基础库 41
+- [WebAssembly / JS 互操作](#wasm) — 方案 1 / 基础库 247
 
 
 ## 桌面
@@ -69,7 +69,7 @@
 | 6 | [lepus-apps/webview](https://mooncakes.io/docs/lepus-apps/webview) | 0.1.15 | A modern desktop application framework based on web technologies. |
 | 7 | [tonyfettes/giraffe](https://mooncakes.io/docs/tonyfettes/giraffe) | 0.2.0 | Elm-style declarative UI framework for MoonBit, built on GTK4 |
 
-### 基础库（31）
+### 基础库（30）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -132,18 +132,18 @@ Android、iOS、HarmonyOS 与微信小程序上的应用开发。生态中尚无
 | 5 | [Arcelyth/aitne](https://mooncakes.io/docs/Arcelyth/aitne) | 0.4.20 | A lightweight and high-performance reactive web framework. |
 | 6 | [vectie/bunnia](https://mooncakes.io/docs/vectie/bunnia) | 0.1.0 | MoonBit mini-app UI framework with Rabbita-style authoring and modular platform … |
 
-### 基础库（50）
+### 基础库（55）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
 | 1 | [mizchi/signals](https://mooncakes.io/docs/mizchi/signals) | 0.6.6 | Fine-grained reactive signals for MoonBit (alien-signals inspired) |
-| 2 | [mizchi/wit](https://mooncakes.io/docs/mizchi/wit) | 0.3.3 | WIT parser and resolver in MoonBit |
-| 3 | [mizchi/crater](https://mooncakes.io/docs/mizchi/crater) | 0.19.0 | CSS Layout Engine that implements Box/Flex/Grid |
-| 4 | [mizchi/layout](https://mooncakes.io/docs/mizchi/layout) | 0.2.1 | Pure layout computation kernel: alignment, justify, clamp, axis utilities |
-| 5 | [dowdiness/incr](https://mooncakes.io/docs/dowdiness/incr) | 0.15.1 | Salsa-inspired incremental recomputation library with automatic dependency track… |
-| 6 | [mizchi/css](https://mooncakes.io/docs/mizchi/css) | 0.7.4 | Standalone CSS parser, selector, cascade and computed-style engine for MoonBit |
-| 7 | [Milky2018/moon_taffy](https://mooncakes.io/docs/Milky2018/moon_taffy) | 0.5.3 | MoonBit port of the Rust crate taffy (v0.5.x) |
-| 8 | [bobzhang/html_parser](https://mooncakes.io/docs/bobzhang/html_parser) | 0.2.2 | MoonBit HTML parser and sanitizer ported from JustHTML. |
+| 2 | [mizchi/crater](https://mooncakes.io/docs/mizchi/crater) | 0.19.0 | CSS Layout Engine that implements Box/Flex/Grid |
+| 3 | [mizchi/layout](https://mooncakes.io/docs/mizchi/layout) | 0.2.1 | Pure layout computation kernel: alignment, justify, clamp, axis utilities |
+| 4 | [dowdiness/incr](https://mooncakes.io/docs/dowdiness/incr) | 0.15.1 | Salsa-inspired incremental recomputation library with automatic dependency track… |
+| 5 | [mizchi/css](https://mooncakes.io/docs/mizchi/css) | 0.7.4 | Standalone CSS parser, selector, cascade and computed-style engine for MoonBit |
+| 6 | [Milky2018/moon_taffy](https://mooncakes.io/docs/Milky2018/moon_taffy) | 0.5.3 | MoonBit port of the Rust crate taffy (v0.5.x) |
+| 7 | [bobzhang/html_parser](https://mooncakes.io/docs/bobzhang/html_parser) | 0.2.2 | MoonBit HTML parser and sanitizer ported from JustHTML. |
+| 8 | [mizchi/crater-dom](https://mooncakes.io/docs/mizchi/crater-dom) | 0.19.0 | DOM, HTML, AOM, and scheduling packages for crater |
 
 
 ## 终端 UI / TUI
@@ -160,7 +160,7 @@ Android、iOS、HarmonyOS 与微信小程序上的应用开发。生态中尚无
 | 4 | [moonbitstack/moonetui](https://mooncakes.io/docs/moonbitstack/moonetui) | 0.3.1 | A terminal UI toolkit for MoonBit: cell buffer, differential ANSI renderer, incr… |
 | 5 | [brickfrog/pippa](https://mooncakes.io/docs/brickfrog/pippa) | 0.1.0 | A terminal UI framework for MoonBit, inspired by bubbletea (Go) and Elm architec… |
 
-### 基础库（50）
+### 基础库（52）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -187,18 +187,16 @@ Android、iOS、HarmonyOS 与微信小程序上的应用开发。生态中尚无
 | 3 | [TheWaWaR/clap](https://mooncakes.io/docs/TheWaWaR/clap) | 0.2.6 | Command Line Argument Parser |
 | 4 | [totto2727/admiral](https://mooncakes.io/docs/totto2727/admiral) | 0.6.5 | Async-first declarative CLI builder for MoonBit, inspired by gunshi |
 
-### 基础库（86）
+### 基础库（6）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
 | 1 | [DzmingLi/clap](https://mooncakes.io/docs/DzmingLi/clap) | 0.2.8 | Command Line Argument Parser |
-| 2 | [cli/core](https://mooncakes.io/docs/cli/core) | 0.9.1 | Shared runtime core for cli command modules. |
-| 3 | [moonrockz/smithy-cli](https://mooncakes.io/docs/moonrockz/smithy-cli) | 0.8.0 | Smithy command-line application |
-| 4 | [jqlssg/moondocopt](https://mooncakes.io/docs/jqlssg/moondocopt) | 0.1.1 | Help-first command-line parsing with docopt semantics and bounded reusable compi… |
-| 5 | [moonrockz/mission-control-cli](https://mooncakes.io/docs/moonrockz/mission-control-cli) | 0.1.0 | Mission Control command-line application |
-| 6 | [cli/sh](https://mooncakes.io/docs/cli/sh) | 0.2.5 | sh command for MoonX. |
-| 7 | [cli/wget](https://mooncakes.io/docs/cli/wget) | 0.2.5 | wget command for MoonX. |
-| 8 | [cli/curl](https://mooncakes.io/docs/cli/curl) | 0.2.5 | curl command for MoonX. |
+| 2 | [Milky2018/options](https://mooncakes.io/docs/Milky2018/options) | 0.1.3 | Command line argument parser for MoonBit |
+| 3 | [peter-jerry-ye/parse_args](https://mooncakes.io/docs/peter-jerry-ye/parse_args) | 0.1.2 | A arg parser inspired by minimalist |
+| 4 | [cauchyQ/moonbit-argkit](https://mooncakes.io/docs/cauchyQ/moonbit-argkit) | 0.1.0 | Small dependency-free command line argument parser for MoonBit. |
+| 5 | [jqlssg/moondocopt](https://mooncakes.io/docs/jqlssg/moondocopt) | 0.1.1 | Help-first command-line parsing with docopt semantics and bounded reusable compi… |
+| 6 | [moonrockz/zig-cross](https://mooncakes.io/docs/moonrockz/zig-cross) | 0.3.2 | Cross-compile MoonBit native binaries with zig |
 
 
 ## 游戏引擎 / ECS
@@ -211,32 +209,32 @@ Android、iOS、HarmonyOS 与微信小程序上的应用开发。生态中尚无
 |---|---|---|---|
 | 1 | [Milky2018/selene](https://mooncakes.io/docs/Milky2018/selene) | 0.38.0 | ECS game engine in MoonBit |
 | 2 | [mizchi/kagura](https://mooncakes.io/docs/mizchi/kagura) | 0.6.0 | 2D-first game engine for MoonBit inspired by Ebiten |
-| 3 | [sennenki/reisen](https://mooncakes.io/docs/sennenki/reisen) | 0.3.2 | A visual novel engine in MoonBit |
-| 4 | [sssssurf/abyssal_chord](https://mooncakes.io/docs/sssssurf/abyssal_chord) | 0.1.0 | 深渊协奏 (Abyssal Chord) - A MoonBit card battle game engine with CLI demo |
-| 5 | [sacckey/moon8bit](https://mooncakes.io/docs/sacckey/moon8bit) | 0.1.0 | A minimal retro 2D game engine for MoonBit with text-first assets, deterministic… |
-| 6 | [firefly/firefly](https://mooncakes.io/docs/firefly/firefly) | 0.10.0 | MoonBit SDK for making Firefly Zero games |
+| 3 | [sssssurf/abyssal_chord](https://mooncakes.io/docs/sssssurf/abyssal_chord) | 0.1.0 | 深渊协奏 (Abyssal Chord) - A MoonBit card battle game engine with CLI demo |
+| 4 | [sacckey/moon8bit](https://mooncakes.io/docs/sacckey/moon8bit) | 0.1.0 | A minimal retro 2D game engine for MoonBit with text-first assets, deterministic… |
+| 5 | [firefly/firefly](https://mooncakes.io/docs/firefly/firefly) | 0.10.0 | MoonBit SDK for making Firefly Zero games |
+| 6 | [sennenki/reisen](https://mooncakes.io/docs/sennenki/reisen) | 0.3.2 | A visual novel engine in MoonBit |
 
-### 基础库（48）
+### 基础库（44）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
-| 1 | [mizchi/terrain](https://mooncakes.io/docs/mizchi/terrain) | 0.1.1 | 117 procedural dungeon/terrain generation algorithms |
-| 2 | [Milky2018/selene_webgpu](https://mooncakes.io/docs/Milky2018/selene_webgpu) | 0.38.0 | Default backend for Selene game engine. |
-| 3 | [mizchi/differentiable_ecs](https://mooncakes.io/docs/mizchi/differentiable_ecs) | 0.2.1 | Game-agnostic parameter optimizer using CMA-ES for balance tuning (experimental) |
-| 4 | [Milky2018/selene-canvas](https://mooncakes.io/docs/Milky2018/selene-canvas) | 0.20.1 | Default backend for Selene game engine. |
-| 5 | [Milky2018/selene_raylib](https://mooncakes.io/docs/Milky2018/selene_raylib) | 0.38.0 | Native raylib backend for Selene. |
-| 6 | [KKKIIO/selene](https://mooncakes.io/docs/KKKIIO/selene) | 0.37.5 | ECS game engine in MoonBit |
-| 7 | [KKKIIO/selene_webgpu](https://mooncakes.io/docs/KKKIIO/selene_webgpu) | 0.37.5 | Default backend for Selene game engine. |
-| 8 | [Milky2018/mecs](https://mooncakes.io/docs/Milky2018/mecs) | 0.2.1 | A performance-first ECS experiment for MoonBit. |
+| 1 | [Milky2018/gamepad](https://mooncakes.io/docs/Milky2018/gamepad) | 0.4.8 | — |
+| 2 | [mizchi/terrain](https://mooncakes.io/docs/mizchi/terrain) | 0.1.1 | 117 procedural dungeon/terrain generation algorithms |
+| 3 | [Milky2018/selene_raylib](https://mooncakes.io/docs/Milky2018/selene_raylib) | 0.38.0 | Native raylib backend for Selene. |
+| 4 | [Milky2018/selene_webgpu](https://mooncakes.io/docs/Milky2018/selene_webgpu) | 0.38.0 | Default backend for Selene game engine. |
+| 5 | [mizchi/differentiable_ecs](https://mooncakes.io/docs/mizchi/differentiable_ecs) | 0.2.1 | Game-agnostic parameter optimizer using CMA-ES for balance tuning (experimental) |
+| 6 | [tonyfettes/raylib](https://mooncakes.io/docs/tonyfettes/raylib) | 0.5.0 | MoonBit bindings for raylib |
+| 7 | [Milky2018/selene-canvas](https://mooncakes.io/docs/Milky2018/selene-canvas) | 0.20.1 | Default backend for Selene game engine. |
+| 8 | [KKKIIO/selene](https://mooncakes.io/docs/KKKIIO/selene) | 0.37.5 | ECS game engine in MoonBit |
 
 
 ## 图形 / 图表 / 渲染
 
 矢量图形、SVG、场景图、图表与图形布局、绘图原语。
 
-> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 123 个候选均为基础库，需按需组合。
+> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 101 个候选均为基础库，需按需组合。
 
-### 基础库（123）
+### 基础库（101）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -258,9 +256,9 @@ Android、iOS、HarmonyOS 与微信小程序上的应用开发。生态中尚无
 
 图像格式的编解码与像素处理：PNG / JPEG / GIF / BMP / QOI / WebP。
 
-> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 36 个候选均为基础库，需按需组合。
+> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 38 个候选均为基础库，需按需组合。
 
-### 基础库（36）
+### 基础库（38）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -319,18 +317,18 @@ HTTP 服务、路由、中间件与后端 API 开发。
 | 7 | [moonbitstack/moonapi](https://mooncakes.io/docs/moonbitstack/moonapi) | 0.17.7 | A typed web framework for MoonBit. |
 | 8 | [daqing/moonway](https://mooncakes.io/docs/daqing/moonway) | 0.11.9 | A full-stack web framework for MoonBit |
 
-### 基础库（85）
+### 基础库（71）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
 | 1 | [ShellWen/sw_router](https://mooncakes.io/docs/ShellWen/sw_router) | 0.2.0 | A fast and flexible URL router implementation for the MoonBit language. |
-| 2 | [gaato/http](https://mooncakes.io/docs/gaato/http) | 0.5.0 | Sans-IO HTTP vocabulary for MoonBit SDKs: request/response types, a Transport tr… |
-| 3 | [mizchi/github](https://mooncakes.io/docs/mizchi/github) | 0.1.5 | GitHub REST API client for MoonBit |
-| 4 | [gaato/http-async](https://mooncakes.io/docs/gaato/http-async) | 0.5.0 | gaato/http Transport over moonbitlang/async. Native, JS, and moonrun Wasm target… |
-| 5 | [gaato/sdk-runtime](https://mooncakes.io/docs/gaato/sdk-runtime) | 0.7.0 | API-agnostic client runtime for MoonBit SDKs: error taxonomy, Retry-After and ba… |
-| 6 | [moonbitstack/moonhttp](https://mooncakes.io/docs/moonbitstack/moonhttp) | 0.15.4 | HTTP formats for MoonBit with no I/O: HTTP/1 to HTTP/3, WebSocket, SSE and multi… |
-| 7 | [mldong/moon-token-moonback](https://mooncakes.io/docs/mldong/moon-token-moonback) | 0.1.19 | moonback adapter for moon-token: per-route authentication middleware, request pr… |
-| 8 | [ryota0624/googleapis](https://mooncakes.io/docs/ryota0624/googleapis) | 0.4.1 | MoonBit client library for Google REST APIs |
+| 2 | [mizchi/crater-browser-http](https://mooncakes.io/docs/mizchi/crater-browser-http) | 0.19.0 | HTTP, cache, cookie, and request sandbox helpers for crater browser |
+| 3 | [gaato/sdk-runtime](https://mooncakes.io/docs/gaato/sdk-runtime) | 0.7.0 | API-agnostic client runtime for MoonBit SDKs: error taxonomy, Retry-After and ba… |
+| 4 | [moonbitstack/moonhttp](https://mooncakes.io/docs/moonbitstack/moonhttp) | 0.15.4 | HTTP formats for MoonBit with no I/O: HTTP/1 to HTTP/3, WebSocket, SSE and multi… |
+| 5 | [mldong/moon-token-moonback](https://mooncakes.io/docs/mldong/moon-token-moonback) | 0.1.19 | moonback adapter for moon-token: per-route authentication middleware, request pr… |
+| 6 | [oboard/mio](https://mooncakes.io/docs/oboard/mio) | 0.5.4 | Best async http library for Moonbit |
+| 7 | [hnlyxiaobing/crescent](https://mooncakes.io/docs/hnlyxiaobing/crescent) | 0.10.7 | Crescent: A web framework for MoonBit. Fork of hnlyxiaobing/crescent with Debug … |
+| 8 | [mizchi/astra](https://mooncakes.io/docs/mizchi/astra) | 0.23.4 | Mountable Mars middleware for static site generation |
 
 
 ## HTTP 客户端
@@ -361,9 +359,9 @@ HTTP 服务、路由、中间件与后端 API 开发。
 
 TCP / UDP、套接字、DNS、TLS 等传输层能力。
 
-> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 58 个候选均为基础库，需按需组合。
+> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 61 个候选均为基础库，需按需组合。
 
-### 基础库（58）
+### 基础库（61）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -385,9 +383,9 @@ TCP / UDP、套接字、DNS、TLS 等传输层能力。
 
 WebSocket、MQTT、gRPC、SSE 等应用层协议与 RPC 通信。
 
-> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 23 个候选均为基础库，需按需组合。
+> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 26 个候选均为基础库，需按需组合。
 
-### 基础库（23）
+### 基础库（26）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -419,18 +417,18 @@ SQLite 绑定、ORM、KV 存储、迁移工具。
 | 4 | [wflixu/Orion](https://mooncakes.io/docs/wflixu/Orion) | 0.2.0 | Derive + Codegen ORM for MoonBit. Schema DSL, type-safe CRUD, Query Builder. |
 | 5 | [zen314/shadow](https://mooncakes.io/docs/zen314/shadow) | 0.1.0 | Simple ORM Framework |
 
-### 基础库（75）
+### 基础库（95）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
-| 1 | [mizchi/sqlite](https://mooncakes.io/docs/mizchi/sqlite) | 0.3.1 | libsqlite3 bindings for MoonBit |
-| 2 | [prowk/moonsqlitefile](https://mooncakes.io/docs/prowk/moonsqlitefile) | 0.8.1 | Pure MoonBit read-only SQLite file format parser and inspector |
-| 3 | [f4ah6o/duckdb](https://mooncakes.io/docs/f4ah6o/duckdb) | 0.8.0 | MoonBit bindings for DuckDB on native and JavaScript targets (Node.js and browse… |
-| 4 | [moonbitstack/moonsqlite](https://mooncakes.io/docs/moonbitstack/moonsqlite) | 0.3.3 | SQLite driver for moondb/moonorm — native FFI, amalgamation vendored here (isola… |
-| 5 | [daqing/sqlite](https://mooncakes.io/docs/daqing/sqlite) | 0.4.0 | SQLite3 bindings for latest MoonBit toolchian |
-| 6 | [mizchi/cloudflare](https://mooncakes.io/docs/mizchi/cloudflare) | 0.1.13 | MoonBit bindings for Cloudflare Workers APIs (KV, D1, R2, Durable Objects, etc.) |
-| 7 | [jaredzhou/moonpg](https://mooncakes.io/docs/jaredzhou/moonpg) | 0.14.0 | A pure MoonBit PostgreSQL client, wire protocol from scratch. |
-| 8 | [moonbitstack/moonpostgres](https://mooncakes.io/docs/moonbitstack/moonpostgres) | 0.6.7 | Pure-MoonBit PostgreSQL wire-protocol driver implementing @moondb.AsyncDriver — … |
+| 1 | [moonbit-community/sqlite3](https://mooncakes.io/docs/moonbit-community/sqlite3) | 0.2.3 | A lightweight, low-level SQLite3 binding for MoonBit, providing a thin interface… |
+| 2 | [mizchi/sqlite](https://mooncakes.io/docs/mizchi/sqlite) | 0.3.1 | libsqlite3 bindings for MoonBit |
+| 3 | [moonbit-community/proton_safe_storage](https://mooncakes.io/docs/moonbit-community/proton_safe_storage) | 0.6.0 | Native OS-backed safe storage helpers for MoonBit. |
+| 4 | [prowk/moonsqlitefile](https://mooncakes.io/docs/prowk/moonsqlitefile) | 0.8.1 | Pure MoonBit read-only SQLite file format parser and inspector |
+| 5 | [f4ah6o/duckdb](https://mooncakes.io/docs/f4ah6o/duckdb) | 0.8.0 | MoonBit bindings for DuckDB on native and JavaScript targets (Node.js and browse… |
+| 6 | [moonbitstack/moonsqlite](https://mooncakes.io/docs/moonbitstack/moonsqlite) | 0.3.3 | SQLite driver for moondb/moonorm — native FFI, amalgamation vendored here (isola… |
+| 7 | [myfreess/sqlite3](https://mooncakes.io/docs/myfreess/sqlite3) | 0.1.1 | — |
+| 8 | [daqing/sqlite](https://mooncakes.io/docs/daqing/sqlite) | 0.4.0 | SQLite3 bindings for latest MoonBit toolchian |
 
 
 ## 异步 / 并发
@@ -446,7 +444,7 @@ async 运行时、协程、并发原语、任务调度。
 | 3 | [didiLjf/moonorbit](https://mooncakes.io/docs/didiLjf/moonorbit) | 0.2.1 | A lightweight, high-performance Actor concurrency framework for MoonBit |
 | 4 | [kalculos/miao](https://mooncakes.io/docs/kalculos/miao) | 0.1.0-M2 | Another async I/O for moonbit, with libuv served as the default async runtime im… |
 
-### 基础库（41）
+### 基础库（43）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -456,17 +454,17 @@ async 运行时、协程、并发原语、任务调度。
 | 4 | [moonbit-community/pty](https://mooncakes.io/docs/moonbit-community/pty) | 0.4.4 | Cross-platform PTY (pseudo-terminal) spawning for MoonBit native targets, integr… |
 | 5 | [moonbit-community/tty](https://mooncakes.io/docs/moonbit-community/tty) | 0.6.2 | Low-level terminal primitives for MoonBit native and wasm targets: a sidecar-hel… |
 | 6 | [moonbitlang/jsonl](https://mooncakes.io/docs/moonbitlang/jsonl) | 0.2.1 | Async reader for JSON Lines (newline-delimited JSON) streams. |
-| 7 | [Nanaloveyuki/sync](https://mooncakes.io/docs/Nanaloveyuki/sync) | 0.7.3 | Minimal native concurrency primitives for MoonBit. |
-| 8 | [mizchi/js_core](https://mooncakes.io/docs/mizchi/js_core) | 0.13.0 | js ffi foundation for MoonBit (Any, Promise, Nullable, target-specific interop) |
+| 7 | [moonrockz/moon-lander-logging-hosting-async](https://mooncakes.io/docs/moonrockz/moon-lander-logging-hosting-async) | 0.11.0 | Console and rolling file delivery for Moon-Lander logging, with bounded async se… |
+| 8 | [Nanaloveyuki/sync](https://mooncakes.io/docs/Nanaloveyuki/sync) | 0.7.3 | Minimal native concurrency primitives for MoonBit. |
 
 
 ## JSON 解析
 
 JSON、JSON Lines、JSON5 的解析、生成与 JSON Schema 校验。
 
-> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 115 个候选均为基础库，需按需组合。
+> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 119 个候选均为基础库，需按需组合。
 
-### 基础库（115）
+### 基础库（119）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -496,27 +494,27 @@ YAML、TOML、XML、CSV、INI、Ion 等配置与标记语言的解析与生成�
 
 > 完整方案仅 1 个，说明该类需求目前在生态中主要依靠基础库组合实现，下方基础库清单的实用价值更高。
 
-### 基础库（61）
+### 基础库（65）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
-| 1 | [moonrockz/ion](https://mooncakes.io/docs/moonrockz/ion) | 0.7.0 | A MoonBit implementation of the Amazon Ion data format and Ion Schema. |
-| 2 | [Milky2018/xml](https://mooncakes.io/docs/Milky2018/xml) | 0.6.1 | A document-buffered pull XML parser for MoonBit |
-| 3 | [moonbit-community/toml](https://mooncakes.io/docs/moonbit-community/toml) | 0.5.1 | A TOML parser implementation in MoonBit |
-| 4 | [moonbit-community/NyaCSV](https://mooncakes.io/docs/moonbit-community/NyaCSV) | 0.3.4 | Purr-fectly parse your CSV files with delightful simplicity! |
-| 5 | [moonbitstack/moonyaml](https://mooncakes.io/docs/moonbitstack/moonyaml) | 0.1.3 | YAML 1.0, 1.1 and 1.2 for MoonBit. |
-| 6 | [xunyoyo/NyaCSV](https://mooncakes.io/docs/xunyoyo/NyaCSV) | 0.3.3 | Purr-fectly parse your CSV files with delightful simplicity! |
-| 7 | [maria/csv_parser](https://mooncakes.io/docs/maria/csv_parser) | 0.1.0 | A robust RFC 4180 compliant CSV parser with support for custom delimiters, quote… |
-| 8 | [MuVirus/moonfig](https://mooncakes.io/docs/MuVirus/moonfig) | 0.1.8 | MoonBit 原生配置库：一处声明，多来源汇入。 |
+| 1 | [moonbit-community/yaml](https://mooncakes.io/docs/moonbit-community/yaml) | 0.0.8 | A simple YAML parsing and stringifying library for MoonBit, support a simplified… |
+| 2 | [moonrockz/ion](https://mooncakes.io/docs/moonrockz/ion) | 0.7.0 | A MoonBit implementation of the Amazon Ion data format and Ion Schema. |
+| 3 | [Milky2018/xml](https://mooncakes.io/docs/Milky2018/xml) | 0.6.1 | A document-buffered pull XML parser for MoonBit |
+| 4 | [moonbit-community/toml](https://mooncakes.io/docs/moonbit-community/toml) | 0.5.1 | A TOML parser implementation in MoonBit |
+| 5 | [moonbit-community/NyaCSV](https://mooncakes.io/docs/moonbit-community/NyaCSV) | 0.3.4 | Purr-fectly parse your CSV files with delightful simplicity! |
+| 6 | [moonbitstack/moonyaml](https://mooncakes.io/docs/moonbitstack/moonyaml) | 0.1.3 | YAML 1.0, 1.1 and 1.2 for MoonBit. |
+| 7 | [xunyoyo/NyaCSV](https://mooncakes.io/docs/xunyoyo/NyaCSV) | 0.3.3 | Purr-fectly parse your CSV files with delightful simplicity! |
+| 8 | [maria/csv_parser](https://mooncakes.io/docs/maria/csv_parser) | 0.1.0 | A robust RFC 4180 compliant CSV parser with support for custom delimiters, quote… |
 
 
 ## 二进制编码
 
 CBOR、Protocol Buffers、MessagePack、ASN.1 等二进制序列化格式。
 
-> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 19 个候选均为基础库，需按需组合。
+> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 22 个候选均为基础库，需按需组合。
 
-### 基础库（19）
+### 基础库（22）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -531,23 +529,23 @@ CBOR、Protocol Buffers、MessagePack、ASN.1 等二进制序列化格式。
 | 9 | [hbYlj/moonldap](https://mooncakes.io/docs/hbYlj/moonldap) | 0.3.0 | RFC-driven LDAPv3 client library for MoonBit with a generic ASN.1 BER codec |
 | 10 | [MuVirus/moonfig](https://mooncakes.io/docs/MuVirus/moonfig) | 0.1.8 | MoonBit 原生配置库：一处声明，多来源汇入。 |
 | 11 | [f4ah6o/direct_sdk](https://mooncakes.io/docs/f4ah6o/direct_sdk) | 0.11.2 | MoonBit SDK for Direct4B WebSocket API with MessagePack RPC |
-| 12 | [2515050243qyf/moon_bencode](https://mooncakes.io/docs/2515050243qyf/moon_bencode) | 0.2.0 | A fast and compliant Bencode encoder and decoder for MoonBit. |
+| 12 | [oilleelssq-wq/moonua](https://mooncakes.io/docs/oilleelssq-wq/moonua) | 0.3.0 | Pure MoonBit OPC UA Binary Encoding primitives and data-model codecs. |
 
 
 ## 日志 / 追踪
 
 结构化日志、tracing、OpenTelemetry、指标。
 
-> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 29 个候选均为基础库，需按需组合。
+> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 31 个候选均为基础库，需按需组合。
 
-### 基础库（29）
+### 基础库（31）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
 | 1 | [tonyfettes/xlog](https://mooncakes.io/docs/tonyfettes/xlog) | 0.4.2 | Native structured logging with levels and category-based filtering. |
-| 2 | [moonbitstack/moonlog](https://mooncakes.io/docs/moonbitstack/moonlog) | 0.1.4 | Structured logging for MoonBit. |
-| 3 | [moonrockz/moon-lander-logging](https://mooncakes.io/docs/moonrockz/moon-lander-logging) | 0.11.0 | Structured logging with a bring-your-own logger trait for the Moon-Lander framew… |
-| 4 | [moonrockz/moon-lander-logging-hosting-async](https://mooncakes.io/docs/moonrockz/moon-lander-logging-hosting-async) | 0.11.0 | Console and rolling file delivery for Moon-Lander logging, with bounded async se… |
+| 2 | [moonrockz/moon-lander-logging](https://mooncakes.io/docs/moonrockz/moon-lander-logging) | 0.11.0 | Structured logging with a bring-your-own logger trait for the Moon-Lander framew… |
+| 3 | [moonrockz/moon-lander-logging-hosting-async](https://mooncakes.io/docs/moonrockz/moon-lander-logging-hosting-async) | 0.11.0 | Console and rolling file delivery for Moon-Lander logging, with bounded async se… |
+| 4 | [moonbitstack/moonlog](https://mooncakes.io/docs/moonbitstack/moonlog) | 0.1.4 | Structured logging for MoonBit. |
 | 5 | [brickfrog/moontrace](https://mooncakes.io/docs/brickfrog/moontrace) | 0.14.0 | Structured tracing for MoonBit with spans, structured fields, pluggable subscrib… |
 | 6 | [Milky2018/sysinfo](https://mooncakes.io/docs/Milky2018/sysinfo) | 0.1.6 | System metrics and process inspection library. |
 | 7 | [mohongquan0630/moon-prometheus](https://mooncakes.io/docs/mohongquan0630/moon-prometheus) | 0.2.6 | — |
@@ -603,7 +601,7 @@ CBOR、Protocol Buffers、MessagePack、ASN.1 等二进制序列化格式。
 | 4 | [weopqrst/agent](https://mooncakes.io/docs/weopqrst/agent) | 0.5.1 | MoonBit version of LangChain core library — type-safe, composable, embeddable AI… |
 | 5 | [soehi/moonlm](https://mooncakes.io/docs/soehi/moonlm) | 0.1.2 | Local LLM inference engine and strongly-typed agent runtime, in MoonBit |
 
-### 基础库（111）
+### 基础库（117）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -612,8 +610,8 @@ CBOR、Protocol Buffers、MessagePack、ASN.1 等二进制序列化格式。
 | 3 | [DC-Z-lab/moonllm](https://mooncakes.io/docs/DC-Z-lab/moonllm) | 0.1.0 | Type-safe, OpenAI-compatible LLM client for MoonBit: chat completions, streaming… |
 | 4 | [marianoguerra/llm](https://mooncakes.io/docs/marianoguerra/llm) | 0.4.2 | A dialect-agnostic LLM IR, one wire mapping per provider protocol, a data-driven… |
 | 5 | [colmugx/lody](https://mooncakes.io/docs/colmugx/lody) | 0.1.0 | 1:1 MoonBit mirror of the LodyAI acp-extension-core contract (tool vocabulary, _… |
-| 6 | [totto2727/codex-sdk](https://mooncakes.io/docs/totto2727/codex-sdk) | 0.4.1 | MoonBit SDK for embedding the Codex agent in workflows and applications |
-| 7 | [wzzc-dev/moui_agent_mcp](https://mooncakes.io/docs/wzzc-dev/moui_agent_mcp) | 0.2.6 | MCP JSON-RPC router and stdio transport exposing a MoUI AgentHost to external ag… |
+| 6 | [wzzc-dev/moui_agent_mcp](https://mooncakes.io/docs/wzzc-dev/moui_agent_mcp) | 0.2.6 | MCP JSON-RPC router and stdio transport exposing a MoUI AgentHost to external ag… |
+| 7 | [totto2727/codex-sdk](https://mooncakes.io/docs/totto2727/codex-sdk) | 0.4.1 | MoonBit SDK for embedding the Codex agent in workflows and applications |
 | 8 | [gaato/openai](https://mooncakes.io/docs/gaato/openai) | 0.6.0 | Thin OpenAI API client for MoonBit built on gaato/http and gaato/sdk-runtime: mo… |
 
 
@@ -630,15 +628,15 @@ CBOR、Protocol Buffers、MessagePack、ASN.1 等二进制序列化格式。
 
 > 完整方案仅 2 个，说明该类需求目前在生态中主要依靠基础库组合实现，下方基础库清单的实用价值更高。
 
-### 基础库（227）
+### 基础库（232）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
 | 1 | [moonbitlang/parser](https://mooncakes.io/docs/moonbitlang/parser) | 0.4.7 | AST and parsers for the MoonBit programming language |
 | 2 | [bobzhang/lexer](https://mooncakes.io/docs/bobzhang/lexer) | 0.3.1 | A generic lexer library for handwritten lexers in MoonBit |
-| 3 | [Milky2018/xml](https://mooncakes.io/docs/Milky2018/xml) | 0.6.1 | A document-buffered pull XML parser for MoonBit |
-| 4 | [moonrockz/krueger](https://mooncakes.io/docs/moonrockz/krueger) | 0.8.0 | Parser and parsing utilities for Elm and Elm-like dialects (e.g. Morphir) in Moo… |
-| 5 | [moonbitlang/lexer](https://mooncakes.io/docs/moonbitlang/lexer) | 0.4.4 | Lexer for the MoonBit programming language |
+| 3 | [moonbitlang/lexer](https://mooncakes.io/docs/moonbitlang/lexer) | 0.4.4 | Lexer for the MoonBit programming language |
+| 4 | [Milky2018/xml](https://mooncakes.io/docs/Milky2018/xml) | 0.6.1 | A document-buffered pull XML parser for MoonBit |
+| 5 | [moonrockz/krueger](https://mooncakes.io/docs/moonrockz/krueger) | 0.8.0 | Parser and parsing utilities for Elm and Elm-like dialects (e.g. Morphir) in Moo… |
 | 6 | [moonbit-community/toml](https://mooncakes.io/docs/moonbit-community/toml) | 0.5.1 | A TOML parser implementation in MoonBit |
 | 7 | [dowdiness/graphviz](https://mooncakes.io/docs/dowdiness/graphviz) | 0.1.0 | Parser, layout engine, and SVG renderer for Graphviz DOT graphs |
 | 8 | [mizchi/cst](https://mooncakes.io/docs/mizchi/cst) | 0.1.10 | Concrete Syntax Tree library with Red-Green Tree pattern |
@@ -648,9 +646,9 @@ CBOR、Protocol Buffers、MessagePack、ASN.1 等二进制序列化格式。
 
 编译器、字节码与虚拟机、代码生成、类型检查、LLVM 与原生后端。
 
-> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 79 个候选均为基础库，需按需组合。
+> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 85 个候选均为基础库，需按需组合。
 
-### 基础库（79）
+### 基础库（85）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -672,9 +670,9 @@ CBOR、Protocol Buffers、MessagePack、ASN.1 等二进制序列化格式。
 
 正则表达式引擎与匹配。
 
-> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 9 个候选均为基础库，需按需组合。
+> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 10 个候选均为基础库，需按需组合。
 
-### 基础库（9）
+### 基础库（10）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -686,16 +684,17 @@ CBOR、Protocol Buffers、MessagePack、ASN.1 等二进制序列化格式。
 | 6 | [ZijianFeng33/regexp](https://mooncakes.io/docs/ZijianFeng33/regexp) | 0.1.0 | a simple regex matcher in moon |
 | 7 | [Hjyyutr/moonyara](https://mooncakes.io/docs/Hjyyutr/moonyara) | 0.1.5 | A native MoonBit threat signature matching and malware scanning engine. |
 | 8 | [YeeHh2004/mooninput](https://mooncakes.io/docs/YeeHh2004/mooninput) | 0.2.2 | Composable structured input editing: dynamic masks, bounded regex, validation, n… |
-| 9 | [FidollarinLA/moonmask](https://mooncakes.io/docs/FidollarinLA/moonmask) | 0.1.0 | Constrained decoding for LLMs in MoonBit: compile JSON Schema and regex to byte-… |
+| 9 | [hackwaly/regex](https://mooncakes.io/docs/hackwaly/regex) | 0.0.1 | — |
+| 10 | [FidollarinLA/moonmask](https://mooncakes.io/docs/FidollarinLA/moonmask) | 0.1.0 | Constrained decoding for LLMs in MoonBit: compile JSON Schema and regex to byte-… |
 
 
 ## Unicode / 文本处理
 
 Unicode 分类、字素簇、宽度计算、字符串工具。
 
-> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 104 个候选均为基础库，需按需组合。
+> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 109 个候选均为基础库，需按需组合。
 
-### 基础库（104）
+### 基础库（109）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -765,9 +764,9 @@ Unicode 分类、字素簇、宽度计算、字符串工具。
 
 Base64 / Base32 / Hex 等编码、URL 百分号编码、转义与变长整数。
 
-> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 35 个候选均为基础库，需按需组合。
+> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 36 个候选均为基础库，需按需组合。
 
-### 基础库（35）
+### 基础库（36）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -775,14 +774,14 @@ Base64 / Base32 / Hex 等编码、URL 百分号编码、转义与变长整数。
 | 2 | [gmlewis/base64](https://mooncakes.io/docs/gmlewis/base64) | 0.16.14 | MoonBit base64: provide simple base64 operations. |
 | 3 | [mizchi/cbor](https://mooncakes.io/docs/mizchi/cbor) | 0.1.1 | CBOR (RFC 8949) implementation for MoonBit - Pure and FFI versions |
 | 4 | [moonbitstack/moonbase](https://mooncakes.io/docs/moonbitstack/moonbase) | 0.4.2 | Every base encoding, one shape: base2 through base85, bech32 and multibase for M… |
-| 5 | [moonbitstack/moonurl](https://mooncakes.io/docs/moonbitstack/moonurl) | 0.2.3 | URLs for MoonBit: WHATWG and RFC 3986 parsing, IDNA, URI templates, percent codi… |
-| 6 | [tonyfettes/encoding](https://mooncakes.io/docs/tonyfettes/encoding) | 0.3.9 | Encoding package extracted from moonbitlang/x |
+| 5 | [tonyfettes/encoding](https://mooncakes.io/docs/tonyfettes/encoding) | 0.3.9 | Encoding package extracted from moonbitlang/x |
+| 6 | [moonbitstack/moonurl](https://mooncakes.io/docs/moonbitstack/moonurl) | 0.2.3 | URLs for MoonBit: WHATWG and RFC 3986 parsing, IDNA, URI templates, percent codi… |
 | 7 | [LL728/moon_encoding](https://mooncakes.io/docs/LL728/moon_encoding) | 0.2.0 | WHATWG Encoding Standard 的 MoonBit 实现：label 解析、流式解码与一次性编码 API，覆盖规范定义的全部 40 种编码（含… |
 | 8 | [superbigcup325/colenc](https://mooncakes.io/docs/superbigcup325/colenc) | 0.1.3 | Columnar encoding kernel for MoonBit: the Parquet page-level encoding family as … |
-| 9 | [moonbitstack/moonvar](https://mooncakes.io/docs/moonbitstack/moonvar) | 0.2.0 | moonvar — how a number becomes bytes and back, for MoonBit: byte order for the f… |
-| 10 | [f4ah6o/encoding_sjis](https://mooncakes.io/docs/f4ah6o/encoding_sjis) | 0.1.1 | encoding_rs-compliant Shift_JIS decoder for MoonBit |
-| 11 | [horideicom/encoding_sjis](https://mooncakes.io/docs/horideicom/encoding_sjis) | 0.1.1 | encoding_rs-compliant Shift_JIS decoder for MoonBit |
-| 12 | [2d5rrr333/toolsfx-moonbit](https://mooncakes.io/docs/2d5rrr333/toolsfx-moonbit) | 0.3.0 | Pure-MoonBit crypto & CTF toolbox (a port of ToolsFx): national crypto SM2/SM3/S… |
+| 9 | [f4ah6o/encoding_sjis](https://mooncakes.io/docs/f4ah6o/encoding_sjis) | 0.1.1 | encoding_rs-compliant Shift_JIS decoder for MoonBit |
+| 10 | [horideicom/encoding_sjis](https://mooncakes.io/docs/horideicom/encoding_sjis) | 0.1.1 | encoding_rs-compliant Shift_JIS decoder for MoonBit |
+| 11 | [moonbitstack/moonvar](https://mooncakes.io/docs/moonbitstack/moonvar) | 0.2.0 | moonvar — how a number becomes bytes and back, for MoonBit: byte order for the f… |
+| 12 | [tonyfettes/base64](https://mooncakes.io/docs/tonyfettes/base64) | 0.1.0 | — |
 
 
 ## 压缩 / 归档
@@ -813,33 +812,33 @@ DEFLATE / zlib / gzip / ZIP 的压缩与解压实现。
 
 文件系统访问、路径与环境变量、临时文件、通用 IO 抽象与文件监听。
 
-> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 122 个候选均为基础库，需按需组合。
+> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 64 个候选均为基础库，需按需组合。
 
-### 基础库（122）
+### 基础库（64）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
 | 1 | [mizchi/tempfile](https://mooncakes.io/docs/mizchi/tempfile) | 0.1.3 | Temporary file and directory management for MoonBit |
 | 2 | [mizchi/x](https://mooncakes.io/docs/mizchi/x) | 0.6.1 | Cross-platform MoonBit compatibility facades with native delegation and accelera… |
 | 3 | [gmlewis/io](https://mooncakes.io/docs/gmlewis/io) | 0.23.20 | MoonBit io: provide simplified I/O abstractions similar to Go. |
-| 4 | [moonbitlang/jsonl](https://mooncakes.io/docs/moonbitlang/jsonl) | 0.2.1 | Async reader for JSON Lines (newline-delimited JSON) streams. |
-| 5 | [mizchi/fswatch](https://mooncakes.io/docs/mizchi/fswatch) | 0.2.1 | Cross-platform filesystem watcher for MoonBit: FSEvents on macOS, inotify on Lin… |
-| 6 | [cc06b/mooncry](https://mooncakes.io/docs/cc06b/mooncry) | 0.95.0 | Pure-MoonBit crypto primitives: SHA-1/2 (incl. SHA-512/224/256), SHA-3, Keccak-2… |
-| 7 | [Kaida-Amethyst/path](https://mooncakes.io/docs/Kaida-Amethyst/path) | 0.1.1 | A cross-platform file path manipulation library for MoonBit, supporting both Uni… |
-| 8 | [trkbt10/osenv](https://mooncakes.io/docs/trkbt10/osenv) | 0.1.0 | OS environment utilities: platform detection, safe path operations, and OS-stand… |
-| 9 | [totto2727/target-file-discovery](https://mooncakes.io/docs/totto2727/target-file-discovery) | 0.2.1 | Reusable target file discovery for MoonBit |
-| 10 | [ZSeanYves/bufferutils](https://mooncakes.io/docs/ZSeanYves/bufferutils) | 0.37.0 | Zero-copy shared byte buffers with high-performance synchronous, native, and asy… |
-| 11 | [vicTop-cw/RX-MBT](https://mooncakes.io/docs/vicTop-cw/RX-MBT) | 0.4.0 | Rx-Rust 的 MoonBit 复刻：基于 Observer 模式的响应式编程库（Observable / Subject / Scheduler / 操作… |
-| 12 | [mizchi/js_web](https://mooncakes.io/docs/mizchi/js_web) | 0.13.1 | web standard api bindings (fetch, Streams, Blob, URL, Crypto, ...) |
+| 4 | [mizchi/fswatch](https://mooncakes.io/docs/mizchi/fswatch) | 0.2.1 | Cross-platform filesystem watcher for MoonBit: FSEvents on macOS, inotify on Lin… |
+| 5 | [Kaida-Amethyst/path](https://mooncakes.io/docs/Kaida-Amethyst/path) | 0.1.1 | A cross-platform file path manipulation library for MoonBit, supporting both Uni… |
+| 6 | [BigOrangeQWQ/wasi-filesystem](https://mooncakes.io/docs/BigOrangeQWQ/wasi-filesystem) | 0.2.6 | — |
+| 7 | [trkbt10/osenv](https://mooncakes.io/docs/trkbt10/osenv) | 0.1.0 | OS environment utilities: platform detection, safe path operations, and OS-stand… |
+| 8 | [totto2727/target-file-discovery](https://mooncakes.io/docs/totto2727/target-file-discovery) | 0.2.1 | Reusable target file discovery for MoonBit |
+| 9 | [ZSeanYves/bufferutils](https://mooncakes.io/docs/ZSeanYves/bufferutils) | 0.37.0 | Zero-copy shared byte buffers with high-performance synchronous, native, and asy… |
+| 10 | [justjavac/glob](https://mooncakes.io/docs/justjavac/glob) | 0.2.0 | A glob library for MoonBit, supporting wildcard pattern matching on file paths. |
+| 11 | [riantr/moonbit_static_analysis](https://mooncakes.io/docs/riantr/moonbit_static_analysis) | 0.4.39 | Three-inspection (structural / type / behavior) static analysis for MoonBit prog… |
+| 12 | [justjavac/walkdir](https://mooncakes.io/docs/justjavac/walkdir) | 0.1.9 | A deterministic walkdir library for MoonBit. |
 
 
 ## 数学 / 数值计算
 
 高精度数学、线性代数、矩阵、BLAS、统计。
 
-> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 64 个候选均为基础库，需按需组合。
+> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 65 个候选均为基础库，需按需组合。
 
-### 基础库（64）
+### 基础库（65）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -861,24 +860,24 @@ DEFLATE / zlib / gzip / ZIP 的压缩与解压实现。
 
 有序映射、B 树、堆、图算法、集合。
 
-> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 95 个候选均为基础库，需按需组合。
+> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 72 个候选均为基础库，需按需组合。
 
-### 基础库（95）
+### 基础库（72）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
 | 1 | [dowdiness/btree](https://mooncakes.io/docs/dowdiness/btree) | 0.2.0 | Generic counted B-tree with O(log n) indexed access, insert, delete, and range o… |
 | 2 | [dowdiness/order-tree](https://mooncakes.io/docs/dowdiness/order-tree) | 0.1.2 | Order-statistic B-tree with O(log n) position-indexed operations |
 | 3 | [dowdiness/alga](https://mooncakes.io/docs/dowdiness/alga) | 0.4.0 | Algebraic graphs for MoonBit — directed graph trait and algorithm library inspir… |
-| 4 | [dowdiness/rle](https://mooncakes.io/docs/dowdiness/rle) | 0.2.3 | Generic run-length encoded sequence with O(log n) position lookup |
-| 5 | [dowdiness/event-graph-walker](https://mooncakes.io/docs/dowdiness/event-graph-walker) | 0.8.0 | Implementation of the eg-walker CRDT algorithm with FugueMax sequence CRDT |
+| 4 | [dowdiness/event-graph-walker](https://mooncakes.io/docs/dowdiness/event-graph-walker) | 0.8.0 | Implementation of the eg-walker CRDT algorithm with FugueMax sequence CRDT |
+| 5 | [dowdiness/rle](https://mooncakes.io/docs/dowdiness/rle) | 0.2.3 | Generic run-length encoded sequence with O(log n) position lookup |
 | 6 | [moonbit-community/diago](https://mooncakes.io/docs/moonbit-community/diago) | 0.4.0 | A diagram toolkit for MoonBit with Dagre, ELK, and Railway layout engines, rende… |
 | 7 | [wedarp/moongraph](https://mooncakes.io/docs/wedarp/moongraph) | 0.2.2 | Pure MoonBit generic graph data structures and algorithms |
-| 8 | [wzzc-dev/moui_skia](https://mooncakes.io/docs/wzzc-dev/moui_skia) | 0.2.6 | MoonBit bindings for the Skia Graphics Library |
-| 9 | [totto2727/any-collection](https://mooncakes.io/docs/totto2727/any-collection) | 0.2.2 | Typed references over mutable and immutable maps of dynamically typed values |
-| 10 | [bobzhang/loop_invariants](https://mooncakes.io/docs/bobzhang/loop_invariants) | 0.9.0 | Comprehensive collection of algorithms and data structures with well-documented … |
-| 11 | [wzzc-dev/moui_sun](https://mooncakes.io/docs/wzzc-dev/moui_sun) | 0.2.6 | Experimental MoonBit-native CPU raster stack for MoUI |
-| 12 | [aurasuisui/indexmap](https://mooncakes.io/docs/aurasuisui/indexmap) | 0.4.0 | A hash map that preserves insertion order - MoonBit port of Rust's indexmap |
+| 8 | [totto2727/any-collection](https://mooncakes.io/docs/totto2727/any-collection) | 0.2.2 | Typed references over mutable and immutable maps of dynamically typed values |
+| 9 | [bobzhang/loop_invariants](https://mooncakes.io/docs/bobzhang/loop_invariants) | 0.9.0 | Comprehensive collection of algorithms and data structures with well-documented … |
+| 10 | [aurasuisui/indexmap](https://mooncakes.io/docs/aurasuisui/indexmap) | 0.4.0 | A hash map that preserves insertion order - MoonBit port of Rust's indexmap |
+| 11 | [BigOrangeQWQ/unification_table](https://mooncakes.io/docs/BigOrangeQWQ/unification_table) | 0.1.2 | A module for unification table operations in data structures and algorithms. |
+| 12 | [HCHogan/btree](https://mooncakes.io/docs/HCHogan/btree) | 0.2.1 | An ordered map backed by a B-tree |
 
 
 ## 测试 / 断言 / 属性测试
@@ -894,7 +893,7 @@ DEFLATE / zlib / gzip / ZIP 的压缩与解压实现。
 | 3 | [aspnmy/moonitest](https://mooncakes.io/docs/aspnmy/moonitest) | 0.2.1 | MoonBit integration test framework - real Docker/TCP/HTTP API via fangyinc/socke… |
 | 4 | [Duckweed/moon-proof](https://mooncakes.io/docs/Duckweed/moon-proof) | 0.1.3 | MoonProof：MoonBit 文档与教程示例的持续验证框架——把文档里的代码块抽出来，隔离编译运行，回答“我们文档里的例子还都对吗” |
 
-### 基础库（62）
+### 基础库（63）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -912,9 +911,9 @@ DEFLATE / zlib / gzip / ZIP 的压缩与解压实现。
 
 代码格式化、静态分析、lint、结构化搜索与重构、代码生成与脚手架。
 
-> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 60 个候选均为基础库，需按需组合。
+> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 63 个候选均为基础库，需按需组合。
 
-### 基础库（60）
+### 基础库（63）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -936,9 +935,9 @@ DEFLATE / zlib / gzip / ZIP 的压缩与解压实现。
 
 Markdown 解析、HTML/PDF/DOCX 转换、文档排版。
 
-> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 94 个候选均为基础库，需按需组合。
+> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 90 个候选均为基础库，需按需组合。
 
-### 基础库（94）
+### 基础库（90）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -952,17 +951,17 @@ Markdown 解析、HTML/PDF/DOCX 转换、文档排版。
 | 8 | [moonrockz/pretty](https://mooncakes.io/docs/moonrockz/pretty) | 0.3.0 | Wadler-style pretty printer for MoonBit: documents, groups and layout that fits … |
 | 9 | [Lampese/office-viewer](https://mooncakes.io/docs/Lampese/office-viewer) | 0.2.6 | A read-only DOCX, XLSX, PPTX, and PDF viewer with structured selections. |
 | 10 | [moonbit-community/html](https://mooncakes.io/docs/moonbit-community/html) | 0.2.3 | WHATWG HTML5 spec-compliant parser for MoonBit |
-| 11 | [justjavac/template](https://mooncakes.io/docs/justjavac/template) | 0.1.2 | A small and fast precompiled template engine for MoonBit. |
-| 12 | [Xiao-li-He/MoonMarkMind](https://mooncakes.io/docs/Xiao-li-He/MoonMarkMind) | 0.1.0 | Markdown mind-map toolkit and browser application built with MoonBit |
+| 11 | [Xiao-li-He/MoonMarkMind](https://mooncakes.io/docs/Xiao-li-He/MoonMarkMind) | 0.1.0 | Markdown mind-map toolkit and browser application built with MoonBit |
+| 12 | [wzzc-dev/moui_markdown](https://mooncakes.io/docs/wzzc-dev/moui_markdown) | 0.2.6 | Reusable Markdown editing chrome components for MoUI (outline, find/replace, for… |
 
 
 ## 时间 / 日期
 
 日期时间、时区、RFC3339、cron。
 
-> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 40 个候选均为基础库，需按需组合。
+> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 41 个候选均为基础库，需按需组合。
 
-### 基础库（40）
+### 基础库（41）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -992,7 +991,7 @@ Wasm 组件模型、WASI、FFI、JS 绑定。
 
 > 完整方案仅 1 个，说明该类需求目前在生态中主要依靠基础库组合实现，下方基础库清单的实用价值更高。
 
-### 基础库（303）
+### 基础库（247）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|

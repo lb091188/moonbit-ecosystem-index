@@ -125,7 +125,7 @@ SCENARIOS = [
                "skia", "immediate-mode", "imgui", "egui", "native-gui", "appkit", "webgpu",
                "wgpu", "wayland", "cocoa", "framebuffer"],
          ex=["graphql", "game engine"],
-         ex_desc=["event-time", "watermark", "graphql", "audit", "cucumber"],
+         ex_desc=["event-time", "watermark", "graphql", "audit", "cucumber", "kagura"],
          pin=["wzzc-dev/moui", "moonbit-community/proton"],
          # 框架级包（一事全包：窗口+控件+系统能力）优先于单一绑定，
          # 否则新发布的框架会被 2 万下载的老绑定压在十几名开外。
@@ -174,7 +174,9 @@ SCENARIOS = [
          intro="浏览器里的 UI 框架、响应式状态、组件、布局与 CSS。",
          kw=["ui", "component", "dom", "frontend", "css", "reactive", "signals"],
          desc=["user interface", "component", "frontend"],
-         ex=["terminal", "tui", "component-model"],   # component-model 是 wasm 组件模型，不是 UI 组件
+         ex=["terminal", "tui", "component-model", "wit"],   # 前者是 wasm 组件模型，后者是 WIT 解析
+         # tree-sitter 语法包属于"解析器"，只是恰好解析的是 CSS
+         ex_desc=["for tree-sitter", "tree-sitter grammar"],
          pin=["moonbit-community/rabbita"]),
     dict(id="tui", group="app", title="终端 UI / TUI", icon="⌨️",
          intro="终端界面、字符画布、ANSI 控制、PTY。",
@@ -188,18 +190,25 @@ SCENARIOS = [
              "clap", "subcommand"],
          desc=["command line", "argument parser", "argument-parser"],
          core=["argparse", "argv", "command-line", "subcommand", "argument-parser", "docopt",
-               "clap"],
-         ex=["tui", "terminal", "browser"]),
+               "clap", "argument", "args"],
+         ex=["tui", "terminal", "browser"],
+         # 描述自称 "xxx command-line application" 的是应用本身，不是解析库
+         ex_desc=["command-line application", "command line application", "command set"],
+         force=["Milky2018/options"]),
     dict(id="game", group="app", title="游戏引擎 / ECS", icon="🎮",
          intro="游戏引擎、ECS 架构、程序化生成、游戏后端。",
-         kw=["game", "engine", "ecs", "gamedev", "sprite"],
+         # "engine" 不进关键词：它会命中模板引擎、工程计算引擎、时区引擎等一切 xxx engine，
+         # 游戏引擎改用描述短语 "game engine" 命中。
+         kw=["game", "ecs", "gamedev", "sprite", "raylib", "gamepad"],
          desc=["game engine", "game"], ex=[]),
     dict(id="graphics", group="app", title="图形 / 图表 / 渲染", icon="🎨",
          intro="矢量图形、SVG、场景图、图表与图形布局、绘图原语。",
          kw=["graphics", "rendering", "svg", "canvas", "scene-graph", "vector", "drawing",
              "diagram", "chart"],
          desc=["rendering", "vector graphics", "scene graph", "diagram"],
-         ex=["vector database", "ann"], ex_prefix=["wzzc-dev/moui_"]),
+         ex=["vector database", "ann"],
+         force=["wzzc-dev/moui_skia"],      # Skia 绑定本身，与 moui 的渲染器实现无关
+         ex_prefix=["wzzc-dev/moui_"]),
     dict(id="img", group="app", title="图像编解码", icon="🖼️",
          intro="图像格式的编解码与像素处理：PNG / JPEG / GIF / BMP / QOI / WebP。",
          kw=["image", "png", "jpeg", "jpg", "gif", "bmp", "webp", "qoi", "ico", "tiff",
@@ -217,7 +226,9 @@ SCENARIOS = [
          intro="HTTP 服务、路由、中间件与后端 API 开发。",
          kw=["http", "router", "rest", "middleware", "backend", "web-framework", "endpoint"],
          desc=["http server", "web framework", "router", "rest api"],
-         ex=["compatibility", "ui", "frontend", "tea", "desktop-app", "gui"],
+         ex=["compatibility", "ui", "frontend", "tea", "desktop-app", "gui",
+             "client", "http-client", "fetch"],      # 客户端归 httpc，不混进服务端
+         ex_desc=["api client", "client for", "client library", "http client"],
          pin=["moonbitlang/moonback"],
          core=["http", "router", "rest", "middleware", "backend"],
          # 注册表元数据只有 web + framework 两个泛词，命不中本场景关键词，单独补入
@@ -231,6 +242,7 @@ SCENARIOS = [
          kw=["network", "tcp", "udp", "socket", "dns", "tls", "ip-address", "net"],
          desc=["network", "socket", "tcp"],
          ex=["compatibility", "git"],
+         force=["BigOrangeQWQ/wasi-sockets", "tonyfettes/socket"],
          pin=["moonbitstack/moonnet"]),
     dict(id="proto", group="svc", title="应用协议 / RPC", icon="🛰️",
          intro="WebSocket、MQTT、gRPC、SSE 等应用层协议与 RPC 通信。",
@@ -239,7 +251,8 @@ SCENARIOS = [
          ex=["compatibility", "git"]),
     dict(id="db", group="svc", title="数据库 / 存储", icon="🗄️",
          intro="SQLite 绑定、ORM、KV 存储、迁移工具。",
-         kw=["database", "sqlite", "sql", "storage", "kv", "orm", "postgres", "migration"],
+         kw=["database", "sqlite", "sqlite3", "sql", "storage", "kv", "orm", "postgres",
+             "mysql", "migration"],
          desc=["database", "storage engine", "key-value"],
          pin=["mizchi/sqlite", "moonbitstack/moonsqlite"]),
     dict(id="async", group="svc", title="异步 / 并发", icon="⚡",
@@ -261,7 +274,8 @@ SCENARIOS = [
          intro="CBOR、Protocol Buffers、MessagePack、ASN.1 等二进制序列化格式。",
          kw=["cbor", "protobuf", "msgpack", "bencode", "asn1", "avro", "thrift", "capnp",
              "binary format"],
-         desc=["binary format", "binary encoding"]),
+         desc=["binary format", "binary encoding"],
+         force=["oilleelssq-wq/moonua"]),
     dict(id="log", group="svc", title="日志 / 追踪", icon="📝",
          intro="结构化日志、tracing、OpenTelemetry、指标。",
          kw=["logging", "tracing", "log", "telemetry", "otel", "metrics", "observability"],
@@ -346,10 +360,13 @@ SCENARIOS = [
          pin=["mizchi/zlib", "moonbit-community/flate"]),
     dict(id="fs", group="lang", title="文件 / 路径 / IO", icon="📁",
          intro="文件系统访问、路径与环境变量、临时文件、通用 IO 抽象与文件监听。",
-         kw=["filesystem", "file", "path", "directory", "tempfile", "io", "stream",
-             "watch", "fswatch"],
+         # 'stream' 太泛（流式编解码器全被拉进来），去掉；'path' 保留——目录/路径类库
+         # 靠它才能进来，图算法那类改由 ex 里的 graph 挡掉
+         kw=["filesystem", "file", "path", "directory", "tempfile", "io", "watch", "fswatch"],
          desc=["file system", "filesystem", "temporary file", "path", "io abstraction"],
-         ex=["git", "svg"],
+         ex=["git", "svg", "graph", "graphql", "graphics"],
+         ex_desc=["ldap"],                          # "directory" 在 LDAP 里是目录服务
+
          ex_prefix=["moonbit-community/proton_"],   # 桌面框架的内部扩展包，不单列
          pin=["mizchi/tempfile", "gmlewis/io"]),
     dict(id="math", group="lang", title="数学 / 数值计算", icon="📐",
@@ -359,7 +376,9 @@ SCENARIOS = [
     dict(id="ds", group="lang", title="数据结构 / 算法", icon="🧱",
          intro="有序映射、B 树、堆、图算法、集合。",
          kw=["data-structure", "collection", "map", "set", "heap", "graph", "queue", "btree", "indexmap"],
-         desc=["data structure", "algorithm"], ex=["syntax", "svg", "compatibility", "grapheme"]),
+         desc=["data structure", "algorithm"],
+         # graphics / graphql 会被 'graph' 前缀命中（Skia 绑定、GitHub 客户端）
+         ex=["syntax", "svg", "compatibility", "grapheme", "graphics", "graphql"]),
     dict(id="test", group="lang", title="测试 / 断言 / 属性测试", icon="🧪",
          intro="单元测试、属性测试（quickcheck）、断言库、BDD、基准。",
          kw=["testing", "test", "property", "benchmark", "quickcheck", "fuzz", "assert", "mock"],
@@ -374,7 +393,9 @@ SCENARIOS = [
     dict(id="doc", group="lang", title="Markdown / 文档转换", icon="📄",
          intro="Markdown 解析、HTML/PDF/DOCX 转换、文档排版。",
          kw=["markdown", "html", "pdf", "document", "epub", "asciidoc", "docx", "latex"],
-         desc=["markdown", "pdf", "document"], ex=["font", "ui", "framework", "tea"]),
+         desc=["markdown", "pdf", "document"],
+         ex=["font", "ui", "framework", "tea"],
+         ex_desc=["template engine"]),
     dict(id="time", group="lang", title="时间 / 日期", icon="🕒",
          intro="日期时间、时区、RFC3339、cron。",
          kw=["time", "date", "datetime", "timezone", "tzif", "cron", "duration"],
@@ -533,8 +554,26 @@ def _kw_hit(term, mod):
     return False
 
 
+# 整族不进任何场景的包：
+#   cli/*            MoonX 的 coreutils 复刻（cli/sh、cli/jq、cli/base64…），单个包就是
+#                    一条命令的实现，不是可供选型的库；它们的关键词覆盖 command-line、
+#                    json、hash、base64 等，会同时污染六七个场景。
+#   gmlewis/fonts-*  按字母切分的硬编码字体数据（fonts-a…fonts-z，30 个），是
+#                    gmlewis/fonts 的数据分片，主包已代表这条路线。
+GLOBAL_EXCLUDE_PREFIX = ("cli/", "gmlewis/fonts-")
+
+# 三字母也能当强信号，但这几个太泛：名字里带 net 的可能是 moonxi-net（深度学习框架），
+# 带 map 的可能是索引结构，带 ui 的可能是某个 UI 的附属包。
+AMBIGUOUS_NAME_TOKENS = {"net", "map", "set", "ui", "io", "os", "fs", "log", "api", "app",
+                         "key", "job", "run", "src", "bin", "cmd", "dev", "sdk",
+                         # 名字里带 test/demo 的多是作者的发布探针（test_postadd、try_publish）
+                         "test", "tests", "demo", "example", "sample"}
+
+
 def relevance(mod, sc):
     if mod["yanked"]:
+        return None
+    if mod["name"].startswith(GLOBAL_EXCLUDE_PREFIX):
         return None
     # core 门控：必须命中真正的领域词，避免只带 "desktop"/"native" 的外围包混进来
     core = sc.get("core")
@@ -551,7 +590,11 @@ def relevance(mod, sc):
         if _kw_hit(t, mod):
             rel += 3
         elif _hit(t, mod["_ntok"]):
-            rel += 2
+            # 包名里出现与场景词完全相同的词（sqlite3、yaml、gamepad、console），
+            # 是比关键词字段更强的信号：注册表里 yaml 的关键词为空，名字才是唯一线索。
+            # 但只在词长 >=4 时算强命中，"net"、"ui" 这类太短的词仍按弱信号处理。
+            rel += 3 if (len(t) >= 3 and t in mod["_ntok"]
+                         and t not in AMBIGUOUS_NAME_TOKENS) else 2
         elif _hit(t, mod["_dtok"]):
             rel += 1
     for t in sc["desc"]:
