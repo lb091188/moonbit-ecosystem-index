@@ -179,16 +179,30 @@ python3 pipeline/analyze.py
 
 ### 部署至 Cloudflare Pages
 
+产物是纯静态文件且已随仓库提交，因此有两种方式，选一种即可。
+
+**方式一：Git 集成（推荐，push 即发布）**
+
+1. Cloudflare 控制台 → Workers & Pages → 创建 → Pages → 连接到 Git，授权并选中本仓库；
+2. 分支选 `main`，框架预设选 `None`；
+3. **构建命令留空**，**构建输出目录填 `dist`**；
+4. 保存并部署，站点落在 `moonbit-ecosystem-index.pages.dev`。
+
+之后每次 `git push` 都会自动发布一次新产物，云端不执行任何构建。
+
+**方式二：本地直传**
+
 ```bash
 npx wrangler pages deploy dist --project-name moonbit-ecosystem-index
 ```
 
-也可在 Cloudflare 控制台创建 Pages 项目，将**输出目录设为 `dist`**，构建命令留空。
-由于产物已入库，云端无需执行任何构建步骤。
+首次运行会打开浏览器完成 Cloudflare 授权，并自动创建同名项目；`wrangler.toml` 里的
+`pages_build_output_dir` 已指向 `dist`。
 
 本项目未采用「在 Cloudflare 上运行构建脚本」的方式：Pages 的构建镜像以 Node.js 为主，
 Python 可用性不作保证；而站点产物为纯静态文件，本地构建后上传即可满足需求，无须为此
-引入额外的 Node 构建链。
+引入额外的 Node 构建链。若确实需要云端重建（例如以后加定时抓取），把构建命令改为
+`python3 pipeline/analyze.py` 即可——`data/raw/` 已在仓库内，脚本无第三方依赖。
 
 ### 本地预览
 
