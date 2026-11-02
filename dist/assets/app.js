@@ -6,8 +6,7 @@ const MK = n => 'https://mooncakes.io/docs/' + n;
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g,
   c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-const human = n => n >= 10000 ? (n / 10000).toFixed(1) + '\u4e07'
-  : n >= 1000 ? (n / 1000).toFixed(1) + 'k' : String(n);
+// 数据里没有下载量：名次只是列表位置，右侧不再有第二个数字可供比对。
 
 let D = null;          // 全部数据
 const SC = {};         // 场景索引
@@ -16,15 +15,14 @@ const PREVIEW = 5;     // 首页每个场景固定展示的包数
 /* ---------------------------------------------------------------- 渲染片段 */
 
 function pkg(name, i) {
-  const m = D.modules[name] || [0, '', '', 0];
-  const ver = m[1] ? `<span class="v">v${esc(m[1])}</span>` : '';
-  const yk = m[3] ? '<span class="yk">yanked</span>' : '';
+  const m = D.modules[name] || ['', '', 0];   // [版本, 描述, yanked]
+  const ver = m[0] ? `<span class="v">v${esc(m[0])}</span>` : '';
+  const yk = m[2] ? '<span class="yk">yanked</span>' : '';
   return `<li><span class="rk${i > 5 ? ' dim' : ''}">${i}</span>
     <div class="b">
       <div class="n"><a href="${MK(name)}" target="_blank" rel="noopener">${esc(name)}</a>${ver}${yk}</div>
-      <div class="d">${esc(m[2] || '\u2014')}</div>
-    </div>
-    <span class="dl">${human(m[0])}</span></li>`;
+      <div class="d">${esc(m[1] || '\u2014')}</div>
+    </div></li>`;
 }
 
 function rows(list, n) {
@@ -105,7 +103,7 @@ function viewScene(id) {
 function viewSearch(q) {
   return `<p class="crumb"><a href="#/">\u9996\u9875</a> \u203a \u68c0\u7d22</p>
     <input class="sbox" id="q" autocomplete="off" placeholder="\u68c0\u7d22\u5168\u90e8 ${D.meta.modules} \u4e2a\u5305\uff1a\u540d\u79f0\u6216\u63cf\u8ff0\uff0c\u4f8b\u5982 json\u3001http\u3001parser">
-    <div id="sout"><p class="smeta">\u8f93\u5165\u5173\u952e\u8bcd\u5f00\u59cb\u68c0\u7d22\u3002\u6309\u4e0b\u8f7d\u91cf\u964d\u5e8f\u3002</p></div>`;
+    <div id="sout"><p class="smeta">\u8f93\u5165\u5173\u952e\u8bcd\u5f00\u59cb\u68c0\u7d22\u3002\u6309\u5339\u914d\u7a0b\u5ea6\u6392\u5e8f\uff0c\u540c\u4e00\u7a0b\u5ea6\u6309\u540d\u79f0\u6392\u5217\u3002</p></div>`;
 }
 
 function doSearch(q) {
@@ -113,15 +111,26 @@ function doSearch(q) {
   if (!out) return;
   const t = q.trim().toLowerCase();
   if (!t) {
-    out.innerHTML = '<p class="smeta">\u8f93\u5165\u5173\u952e\u8bcd\u5f00\u59cb\u68c0\u7d22\u3002\u6309\u4e0b\u8f7d\u91cf\u964d\u5e8f\u3002</p>';
+    out.innerHTML = '<p class="smeta">\u8f93\u5165\u5173\u952e\u8bcd\u5f00\u59cb\u68c0\u7d22\u3002\u6309\u5339\u914d\u7a0b\u5ea6\u6392\u5e8f\uff0c\u540c\u4e00\u7a0b\u5ea6\u6309\u540d\u79f0\u6392\u5217\u3002</p>';
     return;
   }
+  // 检索不再按下载量排序：命中程度优先（包名全等 > 包名开头 > 包名包含 > 描述包含），
+  // 同程度按名称排列，顺序可复现，不需要读者相信任何隐藏权重。
+  const score = n => {
+    const full = n.toLowerCase(), seg = full.split('/').pop(), d = (D.modules[n][1] || '').toLowerCase();
+    if (full === t || seg === t) return 4;
+    if (seg.startsWith(t)) return 3;
+    if (full.includes(t)) return 2;
+    if (d.includes(t)) return 1;
+    return 0;
+  };
   const hit = [];
-  for (const [n, m] of Object.entries(D.modules)) {
-    if (n.toLowerCase().includes(t) || (m[2] || '').toLowerCase().includes(t)) hit.push(n);
+  for (const n of Object.keys(D.modules)) {
+    const s = score(n);
+    if (s) hit.push([s, n]);
   }
-  hit.sort((a, b) => D.modules[b][0] - D.modules[a][0]);
-  const top = hit.slice(0, 200);
+  hit.sort((a, b) => b[0] - a[0] || a[1].localeCompare(b[1]));
+  const top = hit.slice(0, 200).map(x => x[1]);
   out.innerHTML = `<p class="smeta">\u300c${esc(q.trim())}\u300d\uff1a\u547d\u4e2d ${hit.length} \u4e2a${
     hit.length > top.length ? '\uff0c\u4ec5\u5217\u524d ' + top.length + ' \u4e2a' : ''}</p>
     <div class="panel"><ul class="pkglist all">${
@@ -132,18 +141,19 @@ function doSearch(q) {
 function footer() {
   const m = D.meta;
   return `<footer>
-    <p><b>\u6570\u636e\u6765\u6e90</b>\u3000mooncakes.io \u5b98\u65b9 API\uff08\u6a21\u5757\u5143\u6570\u636e\u4e0e\u4e0b\u8f7d\u91cf\uff09\u3002\u672c\u7ad9\u4ec5\u505a\u573a\u666f\u5bfc\u822a\uff0c
-      \u4e0d\u590d\u5236\u6ce8\u518c\u8868\u80fd\u529b\uff1a\u7248\u672c\u5386\u53f2\u3001\u5b8c\u6574 API \u6587\u6863\u4e0e\u4f9d\u8d56\u5173\u7cfb\u8bf7\u5230 mooncakes \u5305\u9875\u67e5\u770b\uff0c
-      \u9875\u9762\u5185\u6bcf\u4e2a\u5305\u540d\u5747\u6307\u5411\u8be5\u9875\u3002</p>
-    <p><b>\u6570\u636e\u65f6\u6548</b>\u3000\u91c7\u96c6\u4e8e ${m.collected_at}\uff0c\u6784\u5efa\u4e8e ${m.built_at}\u3002\u672c\u7ad9\u4e3a\u79bb\u7ebf\u5feb\u7167\uff0c
-      \u4e0d\u968f\u6ce8\u518c\u8868\u5b9e\u65f6\u66f4\u65b0\uff0c\u4e0d\u542b\u6b64\u540e\u7684\u65b0\u589e\u3001\u7248\u672c\u53d8\u66f4\u4e0e yanked \u6807\u8bb0\u3002</p>
-    <p><b>\u5206\u5c42\u6807\u51c6</b>\u3000\u5b8c\u6574\u65b9\u6848\u6307\u80fd\u63a5\u7ba1\u7a0b\u5e8f\u7ed3\u6784\u3001\u53ef\u76f4\u63a5\u9009\u578b\u7684\u5305\uff08\u6846\u67b6\u3001\u5f15\u64ce\u3001\u8fd0\u884c\u65f6\u3001
-      \u811a\u624b\u67b6\u3001ORM\uff09\uff1b\u57fa\u7840\u5e93\u6307\u63d0\u4f9b\u5355\u70b9\u80fd\u529b\u3001\u7531\u8c03\u7528\u65b9\u7ec4\u5408\u7684\u5305\u3002\u300c\u57fa\u7840\u5e93\u300d\u4e0d\u7b49\u540c\u4e8e
-      \u300c\u4f9d\u8d56\u300d\uff1a\u5728 mooncakes \u751f\u6001\u4e2d\u5b8c\u6574\u65b9\u6848\u672c\u8eab\u4ea6\u4e3a\u4f9d\u8d56\uff0c\u5206\u5c42\u552f\u4e00\u6807\u51c6\u662f\u80fd\u5426\u63a5\u7ba1\u7a0b\u5e8f\u7ed3\u6784\u3002
-      ${m.scenarios - m.with_solutions} \u4e2a\u573a\u666f\u5c1a\u65e0\u5b8c\u6574\u65b9\u6848\u3002</p>
-    <p><b>\u6392\u5e8f\u65b9\u6cd5</b>\u3000\u573a\u666f\u5185\u6392\u5e8f = \u5173\u952e\u8bcd\u5339\u914d\u5ea6 + \u4e0b\u8f7d\u91cf\uff1b\u4e0d\u5f15\u5165\u53cd\u5411\u4f9d\u8d56\u6570\u7b49\u6d3e\u751f\u6307\u6807\u3002
-      \u684c\u9762\u4e0e\u624b\u673a\u7b49\u73af\u5883\u7531\u4e8e\u7f3a\u4e4f\u7a33\u5b9a\u5173\u952e\u8bcd\uff0c\u6539\u4e3a\u4eba\u5de5\u56f4\u5b9a\u3002</p>
-    <p><b>\u6784\u5efa</b>\u3000<code>python3 pipeline/analyze.py</code>\u3000\u00b7\u3000<b>\u67e5\u8be2</b>\u3000<code>python3 pipeline/query.py json</code></p>
+    <p><b>数据来源</b>　mooncakes.io 官方 API（模块元数据）。本索引仅做场景导航，不做注册表镜像：
+      版本历史、完整 API 文档与依赖关系请到 mooncakes 包页查看，页面内每个包名均指向该页。</p>
+    <p><b>数据时效</b>　采集于 ${m.collected_at}，构建于 ${m.built_at}。本站为离线快照，
+      不随注册表实时更新，不含此后的新增、版本变更与 yanked 标记。</p>
+    <p><b>分层标准</b>　完整方案指能接管程序结构、可直接选型的包（框架、引擎、运行时、
+      脚手架、ORM）；基础库指提供单点能力、由调用方组合的包。「基础库」不等同于
+      「依赖」：在 mooncakes 生态中完整方案本身亦为依赖，分层唯一标准是能否接管程序结构。
+      ${m.scenarios - m.with_solutions} 个场景尚无完整方案。</p>
+    <p><b>排序方法</b>　不设名次宣称。清单顺序在构建时确定：关键词相关度为主，注册表的下载量级
+      参与排序但不对外呈现——它是累计计数，快照必然滞后，且一旦与名次并排显示，就会被
+      读成「下载多的更适合」。选型要看 API 形态与维护状态，这两项请到包页自行核对。
+      桌面、手机、运维等缺乏稳定关键词的场景为人工圈定的顺序。</p>
+    <p><b>构建</b>　<code>python3 pipeline/analyze.py</code>　·　<b>查询</b>　<code>python3 pipeline/query.py json</code></p>
   </footer>`;
 }
 
