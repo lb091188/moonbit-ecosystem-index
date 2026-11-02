@@ -57,10 +57,17 @@
   .brand { font-size:15px; font-weight:650; letter-spacing:-.2px; text-decoration:none;
     white-space:nowrap; }
   .ts { font-size:11.5px; color:#8b939f; font-variant-numeric:tabular-nums; }
-  .sbtn { margin-left:auto; font-size:12.5px; text-decoration:none; color:var(--muted);
+  /* 右侧工具组：语言切换 + 检索，整体靠右，窄屏换行时也不会分家 */
+  .tools { margin-left:auto; display:flex; align-items:center; gap:8px; flex:0 0 auto; }
+  .sbtn { font-size:12.5px; text-decoration:none; color:var(--muted);
     border:1px solid var(--line); border-radius:7px; padding:5px 12px; background:var(--panel);
     white-space:nowrap; }
   .sbtn:hover { color:var(--accent); border-color:var(--accent); }
+  /* 语言切换：显示的是「点它会切到的语言」，所以中文界面写 EN、英文界面写 中文 */
+  .lang-btn { font:inherit; font-size:12px; line-height:1.25;
+    color:var(--muted); background:var(--panel); border:1px solid var(--line);
+    border-radius:7px; padding:4px 9px; cursor:pointer; white-space:nowrap; }
+  .lang-btn:hover { color:var(--accent); border-color:var(--accent); }
 
   /* ---------- 首页卡片 ---------- */
   .lede { color:var(--muted); font-size:13px; margin:0 0 18px; max-width:88ch; }
@@ -154,7 +161,8 @@
       justify-content:center; gap:4px; width:34px; height:34px; padding:0; cursor:pointer;
       border:1px solid var(--line); border-radius:8px; background:var(--panel); }
     .menu-btn:active { background:var(--line-soft); }
-    .brand { font-size:14.5px; }
+    .brand { font-size:14.5px; flex:0 1 auto; min-width:0; overflow:hidden;
+      text-overflow:ellipsis; }
     .ts { flex:1 1 100%; order:3; font-size:11px; }
 
     /* 窄屏：侧栏改为左侧抽屉，默认移出视口，由标题栏菜单唤出 */
@@ -197,7 +205,12 @@
         <i></i><i></i><i></i></button>
       <a class="brand" href="#/" data-i18n="brand">MoonBit 生态索引</a>
       <span class="ts" id="ts"></span>
-      <a class="sbtn" href="#/search" data-i18n="search">检索</a>
+      <div class="tools">
+        <button type="button" class="lang-btn" id="langBtn" data-i18n="langBtn"
+                data-i18n-aria="langAria" data-i18n-title="langAria"
+                aria-label="切换到英文" title="切换到英文">EN</button>
+        <a class="sbtn" href="#/search" data-i18n="search">检索</a>
+      </div>
     </header>
     <div id="view"><p class="loading" data-i18n="loading">正在加载数据…</p></div>
   </main>

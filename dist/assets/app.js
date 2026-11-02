@@ -13,20 +13,25 @@ const SC = {};         // 场景索引
 const PREVIEW = 5;     // 首页每个场景固定展示的包数
 
 /* ---------------------------------------------------------------- 双语
-   语言只判定一次：浏览器首选语言是中文就中文，否则英文。
-   URL 加 ?lang=zh 或 ?lang=en 可强制指定（便于分享链接与自查）。
+   语言优先级：URL 的 ?lang= > 上次手动选择（localStorage）> 浏览器首选语言。
+   浏览器首选语言以 zh 开头即中文，其余一律英文。
    数据里的标题 / 简介 / 说明是 [中文, 英文] 两元数组，用 L() 取值；
    界面文案在下面的 T 表里，中英各一份，不存在第三种来源。 */
 
-const LANG = (() => {
+const LS_KEY = 'moonbit-index-lang';
+
+let LANG = (() => {
   const p = new URLSearchParams(location.search).get('lang');
   if (p === 'zh' || p === 'en') return p;
+  let saved = '';
+  try { saved = localStorage.getItem(LS_KEY) || ''; } catch (e) { /* 隐私模式下不可用 */ }
+  if (saved === 'zh' || saved === 'en') return saved;
   const list = navigator.languages && navigator.languages.length
     ? navigator.languages : [navigator.language || ''];
   for (const l of list) if (l) return l.toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en';
   return 'en';
 })();
-const ZH = LANG === 'zh';
+let ZH = LANG === 'zh';
 const L = x => Array.isArray(x) ? (x[ZH ? 0 : 1] || x[0]) : x;
 
 function fill(s, o) {
@@ -41,6 +46,8 @@ const T = {
     docDesc: '按使用场景组织的 MoonBit 包索引：{n} 个场景，区分完整方案与基础库。',
     brand: 'MoonBit 生态索引',
     search: '检索',
+    langBtn: 'EN',
+    langAria: '切换到英文',
     navGroups: '场景分类',
     navClose: '关闭场景导航',
     navOpen: '打开场景导航',
@@ -94,6 +101,8 @@ const T = {
     docDesc: 'A MoonBit package index organized by use case: {n} scenarios, split into complete solutions and libraries.',
     brand: 'MoonBit Ecosystem Index',
     search: 'Search',
+    langBtn: '中文',
+    langAria: 'Switch to Chinese',
     navGroups: 'Scenario groups',
     navClose: 'Close scenario navigation',
     navOpen: 'Open scenario navigation',
@@ -153,7 +162,7 @@ const T = {
   },
 };
 
-const t = T[LANG];
+let t = T[LANG];
 
 /* 静态骨架里的文案（品牌名、按钮、aria-label）按 data-i18n 键填充；
    放在 fetch 之前执行，避免中文闪一下再变英文。 */
@@ -169,8 +178,27 @@ function applyStatic() {
   });
   document.querySelectorAll('[data-i18n-aria]').forEach(n => {
     const v = t[n.dataset.i18nAria];
-    if (typeof v === 'string') n.setAttribute('aria-label', v);
+    if (typeof v === 'string') { n.setAttribute('aria-label', v); n.title = v; }
   });
+  const ts = document.getElementById('ts');
+  if (ts && D) ts.textContent = fill(t.ts, { c: D.meta.collected_at, b: D.meta.built_at });
+}
+
+/* 手动切换：写进 URL（可分享、刷新不丢）并记住选择；下次从无参数链接进来时沿用。
+   切换后不重载页面，只重建文案与当前视图。 */
+function setLang(next) {
+  LANG = next === 'zh' ? 'zh' : 'en';
+  ZH = LANG === 'zh';
+  t = T[LANG];
+  try { localStorage.setItem(LS_KEY, LANG); } catch (e) { /* 隐私模式下忽略 */ }
+  const u = new URL(location.href);
+  u.searchParams.set('lang', LANG);
+  history.replaceState(null, '', u);
+  applyStatic();
+  if (!D) return;
+  const keep = ($('#q') || {}).value || '';   // 检索页：切语言不丢当前查询
+  route();
+  if (keep) { const b = $('#q'); if (b) { b.value = keep; doSearch(keep); } }
 }
 
 /* ---------------------------------------------------------------- 渲染片段 */
@@ -376,6 +404,9 @@ document.addEventListener('click', e => {
 
 window.addEventListener('hashchange', route);
 
+/* 语言切换：按钮上写的是「点它会切到的语言」 */
+$('#langBtn').addEventListener('click', () => setLang(ZH ? 'en' : 'zh'));
+
 /* 抽屉开关：菜单按钮唤出，遮罩 / 关闭按钮 / Esc / 选中场景后收起 */
 $('#menuBtn').addEventListener('click', () => setDrawer(!drawerOpen()));
 $('#scrim').addEventListener('click', () => setDrawer(false));
@@ -391,8 +422,7 @@ window.addEventListener('resize', () => { if (window.innerWidth > 880) setDrawer
     if (!r.ok) throw new Error('HTTP ' + r.status);
     D = await r.json();
     D.scenarios.forEach(s => { SC[s.id] = s; });
-    $('#ts').textContent = fill(t.ts, { c: D.meta.collected_at, b: D.meta.built_at });
-    applyStatic();                    // 场景数已就绪，补一次 meta description
+    applyStatic();                    // 文案与时间已就绪，补一次 meta description
     route();
   } catch (err) {
     $('#view').innerHTML = `<p class="loading">${
