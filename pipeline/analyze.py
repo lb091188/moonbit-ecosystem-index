@@ -103,6 +103,10 @@ GROUPS = [
 # desc : 需要出现在描述里的短语
 # ex   : 命中即排除的词（用于压掉同名不同义的噪声）
 # pick : 人工圈定的候选清单（生态里没有可靠关键词信号时使用）
+# audit: 人工场景的复核词。build 时扫描全量模块，命中这些词却不在 pick 里的包会被打印
+#        出来，防止「覆盖了某个场景却没出现在该场景」的漏收悄悄发生
+# skip : audit 命中但确认不收的包及其理由（写清楚才能长期维护）
+# note : 场景详情页的补充说明（用于解释分层口径等）
 SCENARIOS = [
     # ---------------------------------------------------------------- 界面与应用
     # 桌面：生态里没有统一的 "desktop gui" 关键词，靠 core 门控——
@@ -123,17 +127,24 @@ SCENARIOS = [
          # 否则新发布的框架会被 2 万下载的老绑定压在十几名开外。
          boost={"wzzc-dev/moui": 2.0, "NoahLiu/native-gui": 3.0}, top=10,
          ex_prefix=["wzzc-dev/moui_"]),
-    # 移动端：关键词层面不存在（mobile 会被 window 的三端后端命中，ios 会命中 versions），
-    # 因此整段走人工圈定。
+    # 移动端：关键词层面不可靠（"mobile" 会命中 window 的三端后端，"ios" 会命中
+    # "scenarios" 这类词），候选以人工圈定为主。
+    # 收录原则：**覆盖即出现**。一个包只要支持移动端，就必须在这里列出，哪怕它主要
+    # 归类在别的场景（如 MoUI 的桌面主线）。清单是封闭集合，靠人维护，因此 build 时
+    # 会用 audit 词扫描一遍全量模块，把「有覆盖迹象却没进清单」的包打印出来复核。
     dict(id="mobi", group="app", title="移动端", icon="📱",
          intro="Android、iOS、HarmonyOS 与微信小程序上的应用开发。生态中尚无统一的"
-               "移动端关键词信号，候选清单为人工圈定，涵盖 UI 运行时、原生桥接与小程序宿主。",
+               "移动端关键词信号，候选清单为人工圈定，涵盖全平台 UI 框架、小程序运行时与"
+               "组件库、原生桥接、小程序宿主。",
          curated=True, top=10,
          pick=[
-             "XiLaiTL/moobile",           # 移动端 UI：Android / iOS / Web 一套 rabbita
+             "XiLaiTL/moobile",           # Android / iOS / Web 一套 rabbita，React Native 渲染
+             "wzzc-dev/moui",             # 全平台 GUI：HarmonyOS 已承诺，Android / iOS 实验性
              "lampclaw/minimoon",         # 微信小程序 Skyline UI 运行时
              "Magic486/moon-miniprogram", # 微信小程序框架：类型安全运行时 + 声明式路由
              "shop1111/moonohos",         # HarmonyOS 原生模块框架（async / 平台模块 / HAR）
+             "lampclaw/lampo",            # 小程序 Skyline，纯 Elm 风格编写
+             "vectie/bunnia",             # 小程序 UI 框架：微信 / 支付宝 / 抖音适配层
              "wzzc-dev/window",           # 窗口层，含 desktop / Web / mobile 三后端
              "Nanaloveyuki/ajni",         # Android JNI 双向桥
              "Nanaloveyuki/moonview",     # 原生 WebView 嵌入
@@ -141,7 +152,14 @@ SCENARIOS = [
              "shop1111/moonohos_ohos",    # HarmonyOS 平台包（HiLog / RawFile / deviceinfo）
              "Nanaloveyuki/madk",         # Android Open Accessory 协议
              "Nanaloveyuki/wasee-moon",   # Android 上的 WASI host
-         ]),
+             "wzzc-dev/moui_cli",         # MoUI 的工程生成器与环境检查，含 --platform 移动端
+         ],
+         audit=["miniapp", "miniprogram", "skyline", "android", "ios", "harmonyos",
+                "mobile", "wechat"],
+         skip={"daqing/moon-pay-sdk": "微信支付 SDK，服务端为主，不属移动端 UI 或运行时",
+               "kupas/imrelay": "消息网关，与移动端开发无关",
+               "tonyfettes/create-moonbit-raylib-android-app":
+                   "模板仓库，注册表无描述与关键词，无法判断可用性"}),
     dict(id="ui", group="app", title="Web UI / 前端框架", icon="🌐",
          intro="浏览器里的 UI 框架、响应式状态、组件、布局与 CSS。",
          kw=["ui", "component", "dom", "frontend", "css", "reactive", "signals"],
@@ -200,23 +218,36 @@ SCENARIOS = [
          intro="结构化日志、tracing、OpenTelemetry、指标。",
          kw=["logging", "tracing", "log", "telemetry", "otel", "metrics", "observability"],
          desc=["logging", "tracing", "observability"], ex=["font"]),
-    # 运维：生态里既没有运维框架，也没有稳定关键词（process 会被 "processing" 命中），
-    # 全部走人工圈定，且不含任何「完整方案」——事实如此，卡片会如实标注。
+    # 运维：生态里没有运维框架，但有可整件部署的成品工具（进程管理器、CI 运行器），
+    # 这些按「完整方案」计；其余是可组合的基础库。
+    # process 类关键词会被 "processing" 命中，因此整段人工圈定，同样用 audit 词复核缺口。
     dict(id="ops", group="svc", title="运维 / 系统管理", icon="🛠️",
-         intro="系统指标与进程检查、子进程与命令执行、伪终端控制、CI 任务运行。"
-               "生态中尚无运维框架，以下按能力列出可组合的基础库。",
+         intro="进程守护与进程检查、子进程与命令执行、伪终端控制、CI 任务运行。"
+               "生态中尚无运维框架，但已有可直接部署的成品工具，与若干可组合的基础库。",
+         note="进程管理器与 CI 运行器本身就是可用成品，计入「完整方案」；"
+              "其余为单点能力的基础库，需要自行组装。",
          curated=True, top=10,
          pick=[
+             "chensuiyi/bm2",                    # 进程管理器：守护 Bun / Node 应用（类 PM2）
+             "mizchi/actrun",                    # GitHub Actions 兼容的 CI 运行器
+             "kupas/pm3",                        # 语言无关的进程管理器，自带日志轮转
+             "tiye/redstart",                    # 轻量进程管理器，面向本地开发
              "moonbit-community/pty",            # 跨平台伪终端，接 async
              "moonbit-community/tty",            # 底层终端原语：raw 模式、尺寸与 resize 事件
              "Milky2018/sysinfo",                # 系统指标与进程检查
              "mizchi/process_pool",              # 进程池
              "moonbit-community/proton_process", # 原生子进程（Win/Linux/macOS）
              "trkbt10/subprocess",               # Node child_process 风格子进程管理
-             "mizchi/actrun",                    # GitHub Actions 兼容的 CI 运行器
              "trkbt10/osenv",                    # 环境变量、XDG 目录、平台路径
              "mizchi/tempfile",                  # 临时文件与目录
-         ]),
+         ],
+         audit=["process manager", "process-manager", "supervisor", "daemon",
+                "systemd", "sysinfo", "subprocess", "pty"],
+         skip={"moonbit-community/proton_cefsetup": "Proton 的 CEF 运行时装包器，不是运维工具",
+               "Milky2018/selene_editor_service": "编辑器配套的本地服务，非通用运维",
+               "mst-mkt/clipboard": "剪贴板绑定，只是实现里用了子进程",
+               "chensuiyi/dcipc": "守护进程的控制通道库，粒度低于本场景定位",
+               "tonyfettes/pty": "与 moonbit-community/pty 同一实现，只保留下载量高的那个"}),
     dict(id="llm", group="svc", title="LLM / Agent / MCP", icon="🤖",
          intro="大模型客户端、Agent 框架、MCP 服务端/客户端、提示词。",
          kw=["llm", "agent", "mcp", "openai", "embedding", "prompt"],
@@ -327,14 +358,18 @@ SOLUTIONS = {
            "Arcelyth/aitne", "lampclaw/minimoon", "vectie/bunnia"],
     "gui": ["moonbit-community/proton", "wzzc-dev/moui", "NoahLiu/native-gui",
             "vectie/lepusa", "lepus-apps/webview", "tonyfettes/giraffe"],
-    # 移动端：小程序 / HarmonyOS / React Native 三条路线各有自己的运行时
-    "mobi": ["XiLaiTL/moobile", "lampclaw/minimoon", "Magic486/moon-miniprogram",
-             "shop1111/moonohos"],
+    # 移动端：小程序 / HarmonyOS / React Native 三条路线各有自己的运行时，
+    # 全平台 GUI 框架（moui）同样覆盖移动端，一并计入
+    "mobi": ["XiLaiTL/moobile", "wzzc-dev/moui", "lampclaw/minimoon",
+             "Magic486/moon-miniprogram", "shop1111/moonohos",
+             "lampclaw/lampo", "vectie/bunnia"],
+    # 运维：无框架，但进程管理器与 CI 运行器是可整件部署的成品
+    "ops": ["chensuiyi/bm2", "mizchi/actrun", "kupas/pm3", "tiye/redstart"],
     "llm": ["colmugx/posoco", "colmugx/mcp", "golemcloud/golem_sdk", "soehi/moonlm",
             "weopqrst/agent"],
     # 这些场景在生态里**没有任何完整方案**，全是基础库：按需要挑，别指望有个骨架
     # regex / unicode / crypto / math / graphics / doc / time / img / ds / net / log
-    # ops  / fs / archive / tool
+    # fs / archive / tool
 }
 
 # 名字里带 "framework" 但实际只是基础库或接口规范的，禁止被兜底规则抬成方案
@@ -561,6 +596,8 @@ def write_md(mods, ranked, top_n=8):
         if sc.get("curated"):
             lines.append("> 本场景为**人工圈定**：候选包与其顺序由人工确定，"
                          "因为该领域在生态里还没有形成可靠的关键词信号。\n")
+        if sc.get("note"):
+            lines.append(f"> {sc['note']}\n")
         if sol:
             lines.append(f"### 完整方案（{len(sol)}）\n")
             _md_table(lines, sol, sc.get("top", top_n))
@@ -831,6 +868,14 @@ function viewHome() {
     <div class="grid">${D.scenarios.map(card).join('')}</div>${footer()}`;
 }
 
+function sceneNote(sc) {
+  const base = sc.curated
+    ? '\\u672c\\u573a\\u666f\\u4e3a\\u4eba\\u5de5\\u56f4\\u5b9a\\uff1a\\u8be5\\u9886\\u57df\\u5728\\u751f\\u6001\\u4e2d\\u5c1a\\u672a\\u5f62\\u6210\\u53ef\\u9760\\u7684\\u5173\\u952e\\u8bcd\\u4fe1\\u53f7\\uff0c\\u5019\\u9009\\u5305\\u4e0e\\u5176\\u987a\\u5e8f\\u7531\\u4eba\\u5de5\\u786e\\u5b9a\\u3002'
+    : '';
+  const t = (base + ' ' + (sc.note || '')).trim();
+  return t ? `<p class="note">${esc(t)}</p>` : '';
+}
+
 function viewScene(id) {
   const sc = SC[id];
   if (!sc) return `<p class="loading">\\u672a\\u77e5\\u573a\\u666f\\uff1a${esc(id)}</p>`;
@@ -845,7 +890,7 @@ function viewScene(id) {
   return `<p class="crumb"><a href="#/">\\u9996\\u9875</a> \\u203a ${esc(sc.title)}</p>
     <div class="dhead"><h1>${sc.icon} ${esc(sc.title)}</h1>
       <p>${esc(sc.intro)}</p></div>
-    ${sc.curated ? '<p class="note">\\u672c\\u573a\\u666f\\u4e3a\\u4eba\\u5de5\\u56f4\\u5b9a\\uff1a\\u8be5\\u9886\\u57df\\u5728\\u751f\\u6001\\u4e2d\\u5c1a\\u672a\\u5f62\\u6210\\u53ef\\u9760\\u7684\\u5173\\u952e\\u8bcd\\u4fe1\\u53f7\\uff0c\\u5019\\u9009\\u5305\\u4e0e\\u5176\\u987a\\u5e8f\\u7531\\u4eba\\u5de5\\u786e\\u5b9a\\u3002</p>' : ''}
+    ${sceneNote(sc)}
     ${sec('sol', sc.sol, '\\u5b8c\\u6574\\u65b9\\u6848')}
     ${sec('lib', sc.lib, '\\u57fa\\u7840\\u5e93')}
     ${footer()}`;
@@ -1082,6 +1127,7 @@ def write_scenarios_json(mods, ranked):
             "icon": sc["icon"],
             "intro": sc["intro"],
             "curated": bool(sc.get("curated")),
+            "note": sc.get("note", ""),
             "sol": [m["name"] for _s, m in sol],
             "lib": [m["name"] for _s, m in lib],
         })
@@ -1138,6 +1184,33 @@ def main():
             print("  " + p)
         if len(pending) > 14:
             print(f"  … 另有 {len(pending) - 14} 个")
+
+    # 人工圈定场景的覆盖缺口：命中 audit 词却没进清单，说明「覆盖了却没出现」。
+    # 人工清单是封闭集合，靠人维护；这里把缺口暴露在构建日志里，避免长期漏收。
+    gaps = []
+    for sc in SCENARIOS:
+        if not sc.get("curated"):
+            continue
+        chosen = set(sc.get("pick", ()))
+        skip = sc.get("skip", {})
+        for name, m in mods.items():
+            if name in chosen or name in skip or m["yanked"]:
+                continue
+            if m["downloads"] < MIN_DOWNLOADS:
+                continue
+            hit = next((t for t in sc.get("audit", ())
+                        if (t in m["_desc_l"] if " " in t
+                            else (_kw_hit(t, m) or _hit(t, m["_ntok"])
+                                  or _hit(t, m["_dtok"])))), None)
+            if hit:
+                gaps.append((sc["title"], name, hit, m["downloads"]))
+    if gaps:
+        gaps.sort(key=lambda x: -x[3])
+        print(f"\n人工场景的覆盖缺口（{len(gaps)}，确认后加进 pick，或记进 skip 说明为何不收）：")
+        for title, name, hit, dl in gaps[:14]:
+            print(f"  {title}  {name:<34} 命中 {hit}  下载 {dl}")
+        if len(gaps) > 14:
+            print(f"  … 另有 {len(gaps) - 14} 个")
 
 
 if __name__ == "__main__":

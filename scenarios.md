@@ -13,7 +13,7 @@
 ## 目录
 
 - [桌面](#gui) — 方案 6 / 基础库 29
-- [移动端](#mobi) — 方案 4 / 基础库 7
+- [移动端](#mobi) — 方案 7 / 基础库 8
 - [Web UI / 前端框架](#ui) — 方案 6 / 基础库 50
 - [终端 UI / TUI](#tui) — 方案 5 / 基础库 50
 - [CLI 参数解析](#cli) — 方案 4 / 基础库 221
@@ -26,7 +26,7 @@
 - [异步 / 并发](#async) — 方案 4 / 基础库 41
 - [JSON / 序列化格式](#json) — 方案 1 / 基础库 184
 - [日志 / 追踪](#log) — 无方案 / 基础库 29
-- [运维 / 系统管理](#ops) — 无方案 / 基础库 9
+- [运维 / 系统管理](#ops) — 方案 4 / 基础库 8
 - [LLM / Agent / MCP](#llm) — 方案 5 / 基础库 111
 - [解析器 / 编译器 / 语法](#parser) — 方案 2 / 基础库 286
 - [正则匹配](#regex) — 无方案 / 基础库 9
@@ -76,20 +76,23 @@
 
 ## 移动端
 
-Android、iOS、HarmonyOS 与微信小程序上的应用开发。生态中尚无统一的移动端关键词信号，候选清单为人工圈定，涵盖 UI 运行时、原生桥接与小程序宿主。
+Android、iOS、HarmonyOS 与微信小程序上的应用开发。生态中尚无统一的移动端关键词信号，候选清单为人工圈定，涵盖全平台 UI 框架、小程序运行时与组件库、原生桥接、小程序宿主。
 
 > 本场景为**人工圈定**：候选包与其顺序由人工确定，因为该领域在生态里还没有形成可靠的关键词信号。
 
-### 完整方案（4）
+### 完整方案（7）
 
 | # | 包 | 版本 | 下载 | 说明 |
 |---|---|---|---|---|
 | 1 | [XiLaiTL/moobile](https://mooncakes.io/docs/XiLaiTL/moobile) | 0.6.0 | 81 | MoonBit UI for mobile: Android, iOS and Web from one rabbita (TEA) app, rendered… |
-| 2 | [lampclaw/minimoon](https://mooncakes.io/docs/lampclaw/minimoon) | 0.3.2 | 196 | A MoonBit UI runtime for WeChat MiniApp Skyline with Elm-style state machines, V… |
-| 3 | [Magic486/moon-miniprogram](https://mooncakes.io/docs/Magic486/moon-miniprogram) | 0.6.1 | 100 | MoonBit 微信小程序开发框架：类型安全运行时、状态自动 diff、跨页 store、声明式路由与无头测试基建 |
-| 4 | [shop1111/moonohos](https://mooncakes.io/docs/shop1111/moonohos) | 0.6.0 | 62 | HarmonyOS Native module framework for MoonBit: async tasks, platform modules and… |
+| 2 | [wzzc-dev/moui](https://mooncakes.io/docs/wzzc-dev/moui) | 0.2.6 | 1.8k | MoUI is a multi-platform MoonBit GUI framework |
+| 3 | [lampclaw/minimoon](https://mooncakes.io/docs/lampclaw/minimoon) | 0.3.2 | 196 | A MoonBit UI runtime for WeChat MiniApp Skyline with Elm-style state machines, V… |
+| 4 | [Magic486/moon-miniprogram](https://mooncakes.io/docs/Magic486/moon-miniprogram) | 0.6.1 | 100 | MoonBit 微信小程序开发框架：类型安全运行时、状态自动 diff、跨页 store、声明式路由与无头测试基建 |
+| 5 | [shop1111/moonohos](https://mooncakes.io/docs/shop1111/moonohos) | 0.6.0 | 62 | HarmonyOS Native module framework for MoonBit: async tasks, platform modules and… |
+| 6 | [lampclaw/lampo](https://mooncakes.io/docs/lampclaw/lampo) | 0.1.0 | 48 | A MoonBit UI runtime for WeChat MiniApp Skyline with pure Elm-style authoring, c… |
+| 7 | [vectie/bunnia](https://mooncakes.io/docs/vectie/bunnia) | 0.1.0 | 30 | MoonBit mini-app UI framework with Rabbita-style authoring and modular platform … |
 
-### 基础库（7）
+### 基础库（8）
 
 | # | 包 | 版本 | 下载 | 说明 |
 |---|---|---|---|---|
@@ -100,6 +103,7 @@ Android、iOS、HarmonyOS 与微信小程序上的应用开发。生态中尚无
 | 5 | [shop1111/moonohos_ohos](https://mooncakes.io/docs/shop1111/moonohos_ohos) | 0.6.0 | 41 | HarmonyOS platform packages (HiLog, RawFile, task cancellation, device info, net… |
 | 6 | [Nanaloveyuki/madk](https://mooncakes.io/docs/Nanaloveyuki/madk) | 0.1.0 | 66 | Transport-independent Android Open Accessory protocol support for MoonBit. |
 | 7 | [Nanaloveyuki/wasee-moon](https://mooncakes.io/docs/Nanaloveyuki/wasee-moon) | 0.1.0 | 36 | Android WASI host integration for MoonBit guests. |
+| 8 | [wzzc-dev/moui_cli](https://mooncakes.io/docs/wzzc-dev/moui_cli) | 0.2.6 | 250 | Standalone project generator and environment doctor for MoUI |
 
 
 ## Web UI / 前端框架
@@ -433,15 +437,22 @@ JSON、YAML、TOML、XML、CBOR 等格式的解析与生成。
 
 ## 运维 / 系统管理
 
-系统指标与进程检查、子进程与命令执行、伪终端控制、CI 任务运行。生态中尚无运维框架，以下按能力列出可组合的基础库。
+进程守护与进程检查、子进程与命令执行、伪终端控制、CI 任务运行。生态中尚无运维框架，但已有可直接部署的成品工具，与若干可组合的基础库。
 
 > 本场景为**人工圈定**：候选包与其顺序由人工确定，因为该领域在生态里还没有形成可靠的关键词信号。
 
-### 完整方案（0）
+> 进程管理器与 CI 运行器本身就是可用成品，计入「完整方案」；其余为单点能力的基础库，需要自行组装。
 
-> 本场景**尚无完整方案**。这表明该需求在生态中尚未形成「一套骨架」，需要由开发者自行组合基础库。下方按用途列出可用的基础库，共 9 个，此处列出前 9 个。
+### 完整方案（4）
 
-### 基础库（9）
+| # | 包 | 版本 | 下载 | 说明 |
+|---|---|---|---|---|
+| 1 | [chensuiyi/bm2](https://mooncakes.io/docs/chensuiyi/bm2) | 0.8.0 | 127 | A lightweight Linux process manager for Bun and Node.js applications, written in… |
+| 2 | [mizchi/actrun](https://mooncakes.io/docs/mizchi/actrun) | 0.32.0 | 785 | MVP GitHub Actions-compatible push CI runner with bitflow lowering, native execu… |
+| 3 | [kupas/pm3](https://mooncakes.io/docs/kupas/pm3) | 0.1.8 | 64 | A language-agnostic process manager (PM2-like) with built-in log rotation |
+| 4 | [tiye/redstart](https://mooncakes.io/docs/tiye/redstart) | 0.1.4 | 59 | Lightweight process manager for local development |
+
+### 基础库（8）
 
 | # | 包 | 版本 | 下载 | 说明 |
 |---|---|---|---|---|
@@ -451,9 +462,8 @@ JSON、YAML、TOML、XML、CBOR 等格式的解析与生成。
 | 4 | [mizchi/process_pool](https://mooncakes.io/docs/mizchi/process_pool) | 0.1.4 | 6.5k | — |
 | 5 | [moonbit-community/proton_process](https://mooncakes.io/docs/moonbit-community/proton_process) | 0.2.6 | 1.7k | Native child process spawning for MoonBit on Windows, Linux, and macOS. |
 | 6 | [trkbt10/subprocess](https://mooncakes.io/docs/trkbt10/subprocess) | 0.2.0 | 404 | Node.js child_process-like subprocess management for MoonBit |
-| 7 | [mizchi/actrun](https://mooncakes.io/docs/mizchi/actrun) | 0.32.0 | 785 | MVP GitHub Actions-compatible push CI runner with bitflow lowering, native execu… |
-| 8 | [trkbt10/osenv](https://mooncakes.io/docs/trkbt10/osenv) | 0.1.0 | 626 | OS environment utilities: platform detection, safe path operations, and OS-stand… |
-| 9 | [mizchi/tempfile](https://mooncakes.io/docs/mizchi/tempfile) | 0.1.3 | 15.5万 | Temporary file and directory management for MoonBit |
+| 7 | [trkbt10/osenv](https://mooncakes.io/docs/trkbt10/osenv) | 0.1.0 | 626 | OS environment utilities: platform detection, safe path operations, and OS-stand… |
+| 8 | [mizchi/tempfile](https://mooncakes.io/docs/mizchi/tempfile) | 0.1.3 | 15.5万 | Temporary file and directory management for MoonBit |
 
 
 ## LLM / Agent / MCP

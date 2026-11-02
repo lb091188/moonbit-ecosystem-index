@@ -64,6 +64,14 @@ function viewHome() {
     <div class="grid">${D.scenarios.map(card).join('')}</div>${footer()}`;
 }
 
+function sceneNote(sc) {
+  const base = sc.curated
+    ? '\u672c\u573a\u666f\u4e3a\u4eba\u5de5\u56f4\u5b9a\uff1a\u8be5\u9886\u57df\u5728\u751f\u6001\u4e2d\u5c1a\u672a\u5f62\u6210\u53ef\u9760\u7684\u5173\u952e\u8bcd\u4fe1\u53f7\uff0c\u5019\u9009\u5305\u4e0e\u5176\u987a\u5e8f\u7531\u4eba\u5de5\u786e\u5b9a\u3002'
+    : '';
+  const t = (base + ' ' + (sc.note || '')).trim();
+  return t ? `<p class="note">${esc(t)}</p>` : '';
+}
+
 function viewScene(id) {
   const sc = SC[id];
   if (!sc) return `<p class="loading">\u672a\u77e5\u573a\u666f\uff1a${esc(id)}</p>`;
@@ -78,7 +86,7 @@ function viewScene(id) {
   return `<p class="crumb"><a href="#/">\u9996\u9875</a> \u203a ${esc(sc.title)}</p>
     <div class="dhead"><h1>${sc.icon} ${esc(sc.title)}</h1>
       <p>${esc(sc.intro)}</p></div>
-    ${sc.curated ? '<p class="note">\u672c\u573a\u666f\u4e3a\u4eba\u5de5\u56f4\u5b9a\uff1a\u8be5\u9886\u57df\u5728\u751f\u6001\u4e2d\u5c1a\u672a\u5f62\u6210\u53ef\u9760\u7684\u5173\u952e\u8bcd\u4fe1\u53f7\uff0c\u5019\u9009\u5305\u4e0e\u5176\u987a\u5e8f\u7531\u4eba\u5de5\u786e\u5b9a\u3002</p>' : ''}
+    ${sceneNote(sc)}
     ${sec('sol', sc.sol, '\u5b8c\u6574\u65b9\u6848')}
     ${sec('lib', sc.lib, '\u57fa\u7840\u5e93')}
     ${footer()}`;
