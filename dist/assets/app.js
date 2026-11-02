@@ -2,6 +2,9 @@
 
 const ROOT = 'data/scenarios.json';
 const MK = n => 'https://mooncakes.io/docs/' + n;
+// https://github.com/lb091188/moonbit-ecosystem-index 在构建时被替换成 analyze.py 顶部的 REPO，地址只有一处来源。
+const REPO = 'https://github.com/lb091188/moonbit-ecosystem-index';
+const ISSUE = REPO + '/issues/new';
 
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g,
@@ -93,6 +96,12 @@ const T = {
           + '选型要看 API 形态与维护状态，这两项请到包页自行核对。'
           + '桌面、手机、运维等缺乏稳定关键词的场景为人工圈定的顺序。' },
     ],
+    ghAria: '在 GitHub 上查看源码或反馈问题',
+    issueLink: 'issue',
+    foot2: { h: '反馈与勘误',
+      p: '数据、分类或排序若有错漏，欢迎到 {repo} 提 {issue}；指出一个包名就能定位，'
+        + '场景的判定词、显式收录（force）与排除清单都集中在 pipeline/analyze.py 一处，'
+        + '站点由它从 data/raw/ 的快照重建。' },
     buildLabel: '构建',
     queryLabel: '查询',
   },
@@ -157,6 +166,13 @@ const T = {
           + 'the package page. Desktop, mobile, and ops lack a stable keyword signal, so their order is '
           + 'hand-set.' },
     ],
+    ghAria: 'View the source or report a problem on GitHub',
+    issueLink: 'an issue',
+    foot2: { h: 'Feedback',
+      p: 'If a package is missing, misfiled, or the order looks wrong, open {issue} on {repo}. '
+        + 'A package name is enough to locate the rule: the scenario keyword lists, the '
+        + 'force-included packages and the exclusion lists all live in one file, '
+        + 'pipeline/analyze.py, which rebuilds the site from the snapshot in data/raw/.' },
     buildLabel: 'build',
     queryLabel: 'query',
   },
@@ -293,7 +309,7 @@ function viewSearch(q) {
   return `<p class="crumb"><a href="#/">${t.home}</a> › ${t.search}</p>
     <input class="sbox" id="q" autocomplete="off"
       placeholder="${esc(fill(t.ph, { n: D.meta.modules }))}">
-    <div id="sout"><p class="smeta">${t.sHint}</p></div>`;
+    <div id="sout"><p class="smeta">${t.sHint}</p></div>${footer()}`;
 }
 
 function doSearch(q) {
@@ -332,9 +348,17 @@ function doSearch(q) {
 function footer() {
   const m = D.meta;
   const sep = ZH ? '　' : ': ';
-  const vars = { c: m.collected_at, b: m.built_at, x: m.scenarios - m.with_solutions };
+  // 站点自己生成的链接：外部打开，文字直接显示地址，读者不用悬停才知道去哪
+  const link = (href, text) =>
+    `<a href="${href}" target="_blank" rel="noopener noreferrer">${esc(text)}</a>`;
+  const vars = {
+    c: m.collected_at, b: m.built_at, x: m.scenarios - m.with_solutions,
+    repo: link(REPO, REPO.replace(/^https:\/\//, '')),
+    issue: link(ISSUE, t.issueLink),
+  };
   const ps = t.foot.map(f => `<p><b>${f.h}</b>${sep}${fill(f.p, vars)}</p>`).join('');
-  return `<footer>${ps}
+  const fb = `<p><b>${t.foot2.h}</b>${sep}${fill(t.foot2.p, vars)}</p>`;
+  return `<footer>${ps}${fb}
     <p><b>${t.buildLabel}</b>${sep}<code>python3 pipeline/analyze.py</code> · <b>${t.queryLabel}</b>${sep}<code>python3 pipeline/query.py json</code></p>
   </footer>`;
 }

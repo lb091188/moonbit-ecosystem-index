@@ -33,6 +33,9 @@ ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "data" / "raw"
 OUT = ROOT / "data"
 DIST = ROOT / "dist"          # 静态发布目录（Cloudflare Pages / 任意静态托管）
+
+# 仓库地址：页首的 GitHub 入口与页脚的反馈段都由它生成，避免两处写死不同地址。
+REPO = "https://github.com/lb091188/moonbit-ecosystem-index"
 OUT.mkdir(parents=True, exist_ok=True)
 
 TOKEN = re.compile(r"[a-z0-9]+")
@@ -862,6 +865,12 @@ HTML_CSS = """
     color:var(--muted); background:var(--panel); border:1px solid var(--line);
     border-radius:7px; padding:4px 9px; cursor:pointer; white-space:nowrap; }
   .lang-btn:hover { color:var(--accent); border-color:var(--accent); }
+  /* GitHub 入口：只放图标，窄屏也挤得下；可读名称由 aria-label / title 提供 */
+  .icon-btn { display:inline-flex; align-items:center; justify-content:center;
+    width:30px; height:30px; color:var(--muted); background:var(--panel);
+    border:1px solid var(--line); border-radius:7px; text-decoration:none; }
+  .icon-btn:hover { color:var(--accent); border-color:var(--accent); }
+  .icon-btn svg { width:16px; height:16px; display:block; }
 
   /* ---------- 首页卡片 ---------- */
   .lede { color:var(--muted); font-size:13px; margin:0 0 18px; max-width:88ch; }
@@ -941,6 +950,8 @@ HTML_CSS = """
     color:var(--muted); font-size:12px; line-height:1.85; }
   footer p { margin:0 0 7px; max-width:100ch; }
   footer b { color:var(--ink); font-weight:600; }
+  footer a { color:var(--accent); text-decoration:none; overflow-wrap:anywhere; }
+  footer a:hover { text-decoration:underline; text-underline-offset:2px; }
   code { background:var(--line-soft); padding:1px 5px; border-radius:4px; font-size:11.5px; }
 
   @media (max-width:880px) {
@@ -988,6 +999,9 @@ HTML_JS = """
 
 const ROOT = 'data/scenarios.json';
 const MK = n => 'https://mooncakes.io/docs/' + n;
+// @@REPO@@ 在构建时被替换成 analyze.py 顶部的 REPO，地址只有一处来源。
+const REPO = '@@REPO@@';
+const ISSUE = REPO + '/issues/new';
 
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g,
@@ -1079,6 +1093,12 @@ const T = {
           + '选型要看 API 形态与维护状态，这两项请到包页自行核对。'
           + '桌面、手机、运维等缺乏稳定关键词的场景为人工圈定的顺序。' },
     ],
+    ghAria: '在 GitHub 上查看源码或反馈问题',
+    issueLink: 'issue',
+    foot2: { h: '反馈与勘误',
+      p: '数据、分类或排序若有错漏，欢迎到 {repo} 提 {issue}；指出一个包名就能定位，'
+        + '场景的判定词、显式收录（force）与排除清单都集中在 pipeline/analyze.py 一处，'
+        + '站点由它从 data/raw/ 的快照重建。' },
     buildLabel: '构建',
     queryLabel: '查询',
   },
@@ -1143,6 +1163,13 @@ const T = {
           + 'the package page. Desktop, mobile, and ops lack a stable keyword signal, so their order is '
           + 'hand-set.' },
     ],
+    ghAria: 'View the source or report a problem on GitHub',
+    issueLink: 'an issue',
+    foot2: { h: 'Feedback',
+      p: 'If a package is missing, misfiled, or the order looks wrong, open {issue} on {repo}. '
+        + 'A package name is enough to locate the rule: the scenario keyword lists, the '
+        + 'force-included packages and the exclusion lists all live in one file, '
+        + 'pipeline/analyze.py, which rebuilds the site from the snapshot in data/raw/.' },
     buildLabel: 'build',
     queryLabel: 'query',
   },
@@ -1279,7 +1306,7 @@ function viewSearch(q) {
   return `<p class="crumb"><a href="#/">${t.home}</a> › ${t.search}</p>
     <input class="sbox" id="q" autocomplete="off"
       placeholder="${esc(fill(t.ph, { n: D.meta.modules }))}">
-    <div id="sout"><p class="smeta">${t.sHint}</p></div>`;
+    <div id="sout"><p class="smeta">${t.sHint}</p></div>${footer()}`;
 }
 
 function doSearch(q) {
@@ -1318,9 +1345,17 @@ function doSearch(q) {
 function footer() {
   const m = D.meta;
   const sep = ZH ? '\u3000' : ': ';
-  const vars = { c: m.collected_at, b: m.built_at, x: m.scenarios - m.with_solutions };
+  // 站点自己生成的链接：外部打开，文字直接显示地址，读者不用悬停才知道去哪
+  const link = (href, text) =>
+    `<a href="${href}" target="_blank" rel="noopener noreferrer">${esc(text)}</a>`;
+  const vars = {
+    c: m.collected_at, b: m.built_at, x: m.scenarios - m.with_solutions,
+    repo: link(REPO, REPO.replace(/^https:\/\//, '')),
+    issue: link(ISSUE, t.issueLink),
+  };
   const ps = t.foot.map(f => `<p><b>${f.h}</b>${sep}${fill(f.p, vars)}</p>`).join('');
-  return `<footer>${ps}
+  const fb = `<p><b>${t.foot2.h}</b>${sep}${fill(t.foot2.p, vars)}</p>`;
+  return `<footer>${ps}${fb}
     <p><b>${t.buildLabel}</b>${sep}<code>python3 pipeline/analyze.py</code> · <b>${t.queryLabel}</b>${sep}<code>python3 pipeline/query.py json</code></p>
   </footer>`;
 }
@@ -1446,6 +1481,10 @@ def write_html(mods, ranked):
       <a class="brand" href="#/" data-i18n="brand">MoonBit 生态索引</a>
       <span class="ts" id="ts"></span>
       <div class="tools">
+        <a class="icon-btn" href="{REPO}" target="_blank" rel="noopener noreferrer"
+           data-i18n-aria="ghAria" data-i18n-title="ghAria"
+           aria-label="在 GitHub 上查看源码或反馈问题" title="在 GitHub 上查看源码或反馈问题">
+          <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.6-.17 1.28-.27 2-.27.72 0 1.4.1 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
         <button type="button" class="lang-btn" id="langBtn" data-i18n="langBtn"
                 data-i18n-aria="langAria" data-i18n-title="langAria"
                 aria-label="切换到英文" title="切换到英文">EN</button>
@@ -1461,7 +1500,9 @@ def write_html(mods, ranked):
 """
     (DIST / "assets").mkdir(parents=True, exist_ok=True)
     (DIST / "index.html").write_text(doc, encoding="utf-8")
-    (DIST / "assets" / "app.js").write_text(HTML_JS.lstrip(), encoding="utf-8")
+    app_js = HTML_JS.lstrip().replace("@@REPO@@", REPO)
+    assert "@@REPO@@" not in app_js, "仓库地址占位符未被替换"
+    (DIST / "assets" / "app.js").write_text(app_js, encoding="utf-8")
     return DIST / "index.html"
 
 
