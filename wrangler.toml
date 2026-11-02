@@ -1,0 +1,5 @@
+# Cloudflare Pages 配置
+# 产物为纯静态文件，已随仓库提交，云端无需执行构建命令。
+name = "moonbit-ecosystem-index"
+pages_build_output_dir = "./dist"
+compatibility_date = "2026-11-01"

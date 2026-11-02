@@ -1,0 +1,14 @@
+{
+  "name": "moonbit-ecosystem-index",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Scenario-oriented package index for the MoonBit ecosystem",
+  "scripts": {
+    "build": "python3 pipeline/analyze.py",
+    "preview": "python3 -m http.server 8000 --directory dist",
+    "deploy": "wrangler pages deploy dist"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
