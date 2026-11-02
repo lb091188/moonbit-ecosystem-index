@@ -627,6 +627,14 @@ HTML_CSS = """
   .snav a .n { margin-left:auto; font-size:11px; color:#9aa2ae; font-variant-numeric:tabular-nums; }
   .snav a.on .n { color:var(--accent); }
 
+  /* 抽屉组件在宽屏不出现：侧栏本身常驻，无需菜单入口与遮罩 */
+  .menu-btn, .drw-head, .scrim { display:none; }
+  .menu-btn i { display:block; width:15px; height:1.7px; background:#3d444e; border-radius:1px; }
+  .drw-head button { margin-left:auto; width:27px; height:27px; padding:0; border:0;
+    border-radius:7px; background:#f2f4f7; color:var(--muted); font-size:13px; line-height:1;
+    cursor:pointer; }
+  .drw-head button:hover { background:var(--line); color:var(--ink); }
+
   /* ---------- 主区：独立滚动 ---------- */
   .main { flex:1; overflow-y:auto; overscroll-behavior:contain; padding:0 26px 64px; }
   .top { position:sticky; top:0; z-index:10; display:flex; align-items:center; gap:14px;
@@ -718,18 +726,40 @@ HTML_CSS = """
   code { background:var(--line-soft); padding:1px 5px; border-radius:4px; font-size:11.5px; }
 
   @media (max-width:880px) {
-    body { overflow:auto; }
+    body { overflow-x:hidden; }
     .app { display:block; height:auto; }
-    .side { width:100%; flex:none; height:auto; max-height:none; overflow-x:auto;
-      overflow-y:hidden; white-space:nowrap; padding:8px 12px; display:flex;
-      align-items:center; gap:5px; border-right:0; border-bottom:1px solid var(--line);
-      position:sticky; top:0; z-index:12; }
-    .side-home, .snav a { display:inline-flex; margin:0; padding:5px 10px; }
-    .gt, .snav a .n { display:none; }
-    .snav { display:flex; gap:4px; }
-    .main { overflow:visible; height:auto; padding:0 14px 40px; }
-    .top { position:static; flex-wrap:wrap; gap:6px 12px; }
-    .ts { flex:1 1 100%; order:3; }
+
+    /* 标题栏：菜单入口 + 标题 + 检索，滚动时吸顶 */
+    .main { overflow:visible; height:auto; padding:0 14px 44px; }
+    .top { position:sticky; top:0; z-index:14; flex-wrap:wrap; gap:4px 10px;
+      padding:10px 0 9px; margin-bottom:14px; }
+    .menu-btn { display:inline-flex; flex:0 0 34px; flex-direction:column; align-items:center;
+      justify-content:center; gap:4px; width:34px; height:34px; padding:0; cursor:pointer;
+      border:1px solid var(--line); border-radius:8px; background:var(--panel); }
+    .menu-btn:active { background:var(--line-soft); }
+    .brand { font-size:14.5px; }
+    .ts { flex:1 1 100%; order:3; font-size:11px; }
+
+    /* 窄屏：侧栏改为左侧抽屉，默认移出视口，由标题栏菜单唤出 */
+    .drw-head { display:flex; align-items:center; gap:8px; position:sticky; top:0;
+      z-index:1; margin:0 -10px 6px; padding:12px 10px 10px 18px; background:var(--panel);
+      border-bottom:1px solid var(--line-soft); font-size:12.5px; font-weight:600;
+      color:var(--muted); }
+    .side { position:fixed; top:0; bottom:0; left:0; width:288px; max-width:86vw;
+      height:auto; max-height:none; flex:none; z-index:40; padding:0 10px 30px;
+      background:var(--panel); border-right:1px solid var(--line); border-bottom:0;
+      overflow-x:hidden; overflow-y:auto; white-space:normal;
+      transform:translateX(-100%); transition:transform .26s cubic-bezier(.4,0,.2,1); }
+    body.drawer-open .side { transform:translateX(0); box-shadow:0 0 60px rgba(16,24,40,.22); }
+    .side-home { margin-bottom:12px; }
+    .snav a { padding:9px 12px; }
+
+    .scrim { display:block; position:fixed; inset:0; z-index:36;
+      background:rgba(16,24,40,.36); opacity:0; pointer-events:none;
+      transition:opacity .26s ease; }
+    body.drawer-open .scrim { opacity:1; pointer-events:auto; }
+    body.drawer-open { overflow:hidden; }
+
     .grid { grid-template-columns:minmax(0,1fr); }
   }
 """
@@ -883,7 +913,18 @@ function renderSide(active) {
   $('#snav').innerHTML = h;
 }
 
+/* ---------------------------------------------------------------- 抽屉（窄屏导航） */
+
+function setDrawer(on) {
+  document.body.classList.toggle('drawer-open', on);
+  const b = $('#menuBtn');
+  if (b) b.setAttribute('aria-expanded', on ? 'true' : 'false');
+}
+
+const drawerOpen = () => document.body.classList.contains('drawer-open');
+
 function route() {
+  setDrawer(false);          // 切页即收起抽屉，避免遮挡新页面
   const h = location.hash || '#/';
   const view = $('#view');
   if (h.startsWith('#/s/')) {
@@ -920,6 +961,14 @@ document.addEventListener('click', e => {
 
 window.addEventListener('hashchange', route);
 
+/* 抽屉开关：菜单按钮唤出，遮罩 / 关闭按钮 / Esc / 选中场景后收起 */
+$('#menuBtn').addEventListener('click', () => setDrawer(!drawerOpen()));
+$('#scrim').addEventListener('click', () => setDrawer(false));
+$('#drwClose').addEventListener('click', () => setDrawer(false));
+$('#snav').addEventListener('click', e => { if (e.target.closest('a')) setDrawer(false); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') setDrawer(false); });
+window.addEventListener('resize', () => { if (window.innerWidth > 880) setDrawer(false); });
+
 (async function boot() {
   try {
     const r = await fetch(ROOT);
@@ -951,9 +1000,17 @@ def write_html(mods, ranked):
 </head>
 <body>
 <div class="app">
-  <aside class="side"><div id="snav"></div></aside>
+  <aside class="side" id="side">
+    <div class="drw-head"><span>场景分类</span>
+      <button type="button" id="drwClose" aria-label="关闭场景导航">&#10005;</button></div>
+    <div id="snav"></div>
+  </aside>
+  <div class="scrim" id="scrim"></div>
   <main class="main">
     <header class="top">
+      <button type="button" class="menu-btn" id="menuBtn"
+              aria-label="打开场景导航" aria-controls="side" aria-expanded="false">
+        <i></i><i></i><i></i></button>
       <a class="brand" href="#/">MoonBit 生态索引</a>
       <span class="ts" id="ts"></span>
       <a class="sbtn" href="#/search">检索</a>

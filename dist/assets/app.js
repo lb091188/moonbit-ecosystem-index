@@ -146,7 +146,18 @@ function renderSide(active) {
   $('#snav').innerHTML = h;
 }
 
+/* ---------------------------------------------------------------- 抽屉（窄屏导航） */
+
+function setDrawer(on) {
+  document.body.classList.toggle('drawer-open', on);
+  const b = $('#menuBtn');
+  if (b) b.setAttribute('aria-expanded', on ? 'true' : 'false');
+}
+
+const drawerOpen = () => document.body.classList.contains('drawer-open');
+
 function route() {
+  setDrawer(false);          // 切页即收起抽屉，避免遮挡新页面
   const h = location.hash || '#/';
   const view = $('#view');
   if (h.startsWith('#/s/')) {
@@ -182,6 +193,14 @@ document.addEventListener('click', e => {
 });
 
 window.addEventListener('hashchange', route);
+
+/* 抽屉开关：菜单按钮唤出，遮罩 / 关闭按钮 / Esc / 选中场景后收起 */
+$('#menuBtn').addEventListener('click', () => setDrawer(!drawerOpen()));
+$('#scrim').addEventListener('click', () => setDrawer(false));
+$('#drwClose').addEventListener('click', () => setDrawer(false));
+$('#snav').addEventListener('click', e => { if (e.target.closest('a')) setDrawer(false); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') setDrawer(false); });
+window.addEventListener('resize', () => { if (window.innerWidth > 880) setDrawer(false); });
 
 (async function boot() {
   try {
