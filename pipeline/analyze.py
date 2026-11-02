@@ -170,50 +170,88 @@ SCENARIOS = [
          intro="终端界面、字符画布、ANSI 控制、PTY。",
          kw=["tui", "terminal", "ansi", "console", "pty", "curses"],
          desc=["terminal ui", "terminal"], ex=[]),
+    # CLI：关键词 "cli" 本身极宽（任何命令行程序都带），故加 core 门控，
+    # 必须命中参数解析器本身的词，把「带 CLI 的应用」挡在外面。
     dict(id="cli", group="app", title="CLI 参数解析", icon="🧰",
          intro="命令行工具的参数、子命令、帮助信息解析。",
-         kw=["cli", "argparse", "command-line", "args", "argument-parser", "docopt", "argv"],
+         kw=["cli", "argparse", "command-line", "args", "argument-parser", "docopt", "argv",
+             "clap", "subcommand"],
          desc=["command line", "argument parser", "argument-parser"],
+         core=["argparse", "argv", "command-line", "subcommand", "argument-parser", "docopt",
+               "clap"],
          ex=["tui", "terminal", "browser"]),
     dict(id="game", group="app", title="游戏引擎 / ECS", icon="🎮",
          intro="游戏引擎、ECS 架构、程序化生成、游戏后端。",
          kw=["game", "engine", "ecs", "gamedev", "sprite"],
          desc=["game engine", "game"], ex=[]),
-    dict(id="graphics", group="app", title="图形 / 渲染", icon="🎨",
-         intro="矢量图形、SVG、场景图、绘图与布局。",
-         kw=["graphics", "rendering", "svg", "canvas", "scene-graph", "vector", "drawing"],
-         desc=["rendering", "vector graphics", "scene graph"], ex=[]),
-    dict(id="img", group="app", title="图像 / 媒体", icon="🖼️",
-         intro="图像编解码（PNG/JPEG/GIF/BMP）、像素比较、音视频。",
-         kw=["image", "png", "jpeg", "gif", "bmp", "qoi", "audio", "video", "codec", "svg"],
-         desc=["image", "codec", "audio", "video"], ex=[]),
+    dict(id="graphics", group="app", title="图形 / 图表 / 渲染", icon="🎨",
+         intro="矢量图形、SVG、场景图、图表与图形布局、绘图原语。",
+         kw=["graphics", "rendering", "svg", "canvas", "scene-graph", "vector", "drawing",
+             "diagram", "chart"],
+         desc=["rendering", "vector graphics", "scene graph", "diagram"],
+         ex=["vector database", "ann"], ex_prefix=["wzzc-dev/moui_"]),
+    dict(id="img", group="app", title="图像编解码", icon="🖼️",
+         intro="图像格式的编解码与像素处理：PNG / JPEG / GIF / BMP / QOI / WebP。",
+         kw=["image", "png", "jpeg", "jpg", "gif", "bmp", "webp", "qoi", "ico", "tiff",
+             "pixel", "pixmap"],
+         desc=["image", "pixel"]),
+    dict(id="media", group="app", title="音频 / 视频", icon="🔊",
+         intro="音频采集与播放、音频编码、MIDI、麦克风与设备接口。",
+         kw=["audio", "video", "wav", "mp3", "midi", "opus", "ffmpeg", "mp4", "flac",
+             "playback", "microphone", "speech"],
+         desc=["audio", "video", "media"]),
 
     # ---------------------------------------------------------------- 服务与数据
+    # HTTP 服务端：只收服务端框架与路由/中间件，客户端另立 httpc
     dict(id="http", group="svc", title="Web 后端 / HTTP 服务", icon="🚀",
          intro="HTTP 服务、路由、中间件与后端 API 开发。",
-         kw=["http", "server", "web", "router", "api", "rest", "backend"],
-         desc=["http server", "web framework", "router", "backend framework"],
+         kw=["http", "router", "rest", "middleware", "backend", "web-framework", "endpoint"],
+         desc=["http server", "web framework", "router", "rest api"],
          ex=["compatibility", "ui", "frontend", "tea", "desktop-app", "gui"],
-         pin=["moonbitlang/moonback"]),
+         pin=["moonbitlang/moonback"],
+         core=["http", "router", "rest", "middleware", "backend"],
+         # 注册表元数据只有 web + framework 两个泛词，命不中本场景关键词，单独补入
+         force=["moonbitstack/moonapi", "daqing/moonway"]),
+    dict(id="httpc", group="svc", title="HTTP 客户端", icon="📡",
+         intro="发起 HTTP 请求：请求构造、连接复用、重定向、SSE 流式读取。",
+         kw=["http-client", "httpc", "fetch", "axios", "client", "request"],
+         desc=["http client"], core=["http"]),
+    dict(id="net", group="svc", title="网络传输 / 套接字", icon="🔌",
+         intro="TCP / UDP、套接字、DNS、TLS 等传输层能力。",
+         kw=["network", "tcp", "udp", "socket", "dns", "tls", "ip-address", "net"],
+         desc=["network", "socket", "tcp"],
+         ex=["compatibility", "git"],
+         pin=["moonbitstack/moonnet"]),
+    dict(id="proto", group="svc", title="应用协议 / RPC", icon="🛰️",
+         intro="WebSocket、MQTT、gRPC、SSE 等应用层协议与 RPC 通信。",
+         kw=["websocket", "mqtt", "sse", "grpc", "amqp", "http2", "rpc", "socket.io"],
+         desc=["websocket", "rpc", "messaging protocol"],
+         ex=["compatibility", "git"]),
     dict(id="db", group="svc", title="数据库 / 存储", icon="🗄️",
          intro="SQLite 绑定、ORM、KV 存储、迁移工具。",
          kw=["database", "sqlite", "sql", "storage", "kv", "orm", "postgres", "migration"],
          desc=["database", "storage engine", "key-value"],
          pin=["mizchi/sqlite", "moonbitstack/moonsqlite"]),
-    dict(id="net", group="svc", title="网络 / 协议", icon="🔌",
-         intro="TCP/UDP、WebSocket、MQTT、HTTP 协议栈、TLS。",
-         kw=["network", "tcp", "udp", "websocket", "protocol", "streaming", "mqtt", "amqp", "socket", "tls"],
-         desc=["network protocol", "websocket", "socket"],
-         ex=["compatibility", "git", "json", "jsonl", "cucumber", "codec"],
-         pin=["moonbitstack/moonnet", "moonbitstack/moonhttp"]),
     dict(id="async", group="svc", title="异步 / 并发", icon="⚡",
          intro="async 运行时、协程、并发原语、任务调度。",
          kw=["async", "concurrency", "coroutine", "future", "promise", "thread", "parallel"],
          desc=["asynchronous", "concurren"], ex=[]),
-    dict(id="json", group="svc", title="JSON / 序列化格式", icon="🧾",
-         intro="JSON、YAML、TOML、XML、CBOR 等格式的解析与生成。",
-         kw=["json", "serialization", "serde", "yaml", "toml", "csv", "xml", "cbor"],
-         desc=["serializ", "data format"], ex=[]),
+    # 序列化按「文本格式 / 配置格式 / 二进制格式」三分，原先一个场景混装 184 个包
+    dict(id="json", group="svc", title="JSON 解析", icon="🧾",
+         intro="JSON、JSON Lines、JSON5 的解析、生成与 JSON Schema 校验。",
+         kw=["json", "jsonl", "ndjson", "json5", "json-schema"],
+         desc=["json"], ex=["jsonrpc"]),
+    dict(id="datafmt", group="svc", title="配置 / 标记格式", icon="📋",
+         intro="YAML、TOML、XML、CSV、INI、Ion 等配置与标记语言的解析与生成。",
+         kw=["yaml", "toml", "xml", "csv", "ini", "hcl", "ion", "properties"],
+         desc=["data format", "configuration file"], ex=["toml-config-ui"],
+         # 只带 serialization / serde 关键词，命不中具体格式名，按「多格式框架」补入
+         force=["Yu-zh/data"]),
+    dict(id="binfmt", group="svc", title="二进制编码", icon="🔢",
+         intro="CBOR、Protocol Buffers、MessagePack、ASN.1 等二进制序列化格式。",
+         kw=["cbor", "protobuf", "msgpack", "bencode", "asn1", "avro", "thrift", "capnp",
+             "binary format"],
+         desc=["binary format", "binary encoding"]),
     dict(id="log", group="svc", title="日志 / 追踪", icon="📝",
          intro="结构化日志、tracing、OpenTelemetry、指标。",
          kw=["logging", "tracing", "log", "telemetry", "otel", "metrics", "observability"],
@@ -254,10 +292,18 @@ SCENARIOS = [
          desc=["language model", "llm", "agent"], ex=["wasi", "io"]),
 
     # ---------------------------------------------------------------- 语言与工具
-    dict(id="parser", group="lang", title="解析器 / 编译器 / 语法", icon="🌳",
+    # 解析器与编译器分开：前者是「把文本读成结构」，后者是「把结构变成可执行物」
+    dict(id="parser", group="lang", title="解析器 / 语法", icon="🌳",
          intro="词法、语法、parser combinator、AST、tree-sitter、parser generator。",
-         kw=["parser", "lexer", "compiler", "grammar", "tree-sitter", "ast", "codegen"],
-         desc=["parser", "compiler", "lexer", "interpreter"], ex=[]),
+         kw=["parser", "lexer", "grammar", "ast", "tree-sitter", "parser-combinator",
+             "tokenizer"],
+         desc=["parser", "lexer"],
+         ex=["argparse", "cli", "command-line", "docopt"]),
+    dict(id="compiler", group="lang", title="编译器 / 代码生成", icon="⚙️",
+         intro="编译器、字节码与虚拟机、代码生成、类型检查、LLVM 与原生后端。",
+         kw=["compiler", "codegen", "interpreter", "type-checker", "bytecode", "llvm",
+             "virtual-machine"],
+         desc=["compiler", "code generation", "interpreter"]),
     dict(id="regex", group="lang", title="正则匹配", icon="🔍",
          intro="正则表达式引擎与匹配。",
          kw=["regex", "regexp", "regular-expression"],
@@ -266,10 +312,22 @@ SCENARIOS = [
          intro="Unicode 分类、字素簇、宽度计算、字符串工具。",
          kw=["unicode", "grapheme", "string", "text", "width", "collation"],
          desc=["unicode", "grapheme"], ex=[]),
-    dict(id="crypto", group="lang", title="加密 / 哈希 / 编码", icon="🔐",
-         intro="哈希、对称加密、Base64/编码、安全相关。",
-         kw=["crypto", "hash", "sha256", "sha512", "aes", "encoding", "base64", "security", "bcrypt", "hmac"],
-         desc=["cryptograph", "hashing"], ex=["simd"]),
+    # 密码学按能力三分：哈希只管校验、cipher 管机密性与身份、encode 管字节到文本
+    dict(id="hash", group="lang", title="哈希 / 校验", icon="#️⃣",
+         intro="哈希函数、消息摘要、HMAC 与校验和（CRC / FNV）。",
+         kw=["hash", "sha256", "sha512", "sha1", "md5", "blake2", "blake3", "crc",
+             "checksum", "digest", "hmac", "xxhash", "fnv"],
+         desc=["hashing", "hash function", "checksum"], ex=["simd"]),
+    dict(id="cipher", group="lang", title="加密 / 签名", icon="🔐",
+         intro="对称与非对称加密、数字签名、密钥交换、证书。",
+         kw=["aes", "rsa", "ed25519", "x25519", "chacha", "cipher", "encrypt", "cryptography",
+             "signature", "ecdsa", "pkcs", "curve25519"],
+         desc=["encryption", "cryptography", "signing"], ex=["simd"]),
+    dict(id="encode", group="lang", title="编码 / 转义", icon="🔡",
+         intro="Base64 / Base32 / Hex 等编码、URL 百分号编码、转义与变长整数。",
+         kw=["base64", "base32", "base58", "hex", "percent-encoding", "encoding", "escape",
+             "urlencode", "varint"],
+         desc=["encoding", "escape"]),
     dict(id="archive", group="lang", title="压缩 / 归档", icon="🗜️",
          intro="DEFLATE / zlib / gzip / ZIP 的压缩与解压实现。",
          kw=["zip", "gzip", "zlib", "deflate", "compression", "compress", "archive", "tar",
@@ -341,7 +399,8 @@ SOLUTIONS = {
              "moonbitstack/moonapi", "jaredzhou/pony", "RabitLogic/mbit", "KKKIIO/moondark",
              "moonbitstack/moonzero", "daqing/moonway", "wflixu/Halo", "kupas/express",
              "anccnuer/onho"],
-    "json": ["Yu-zh/data"],          # 生态里唯一的序列化框架（serde 式：定义一次数据模型，多格式）
+    "json": [],          # JSON 场景只收格式实现，序列化框架（serde 式）归 datafmt
+    "datafmt": ["Yu-zh/data"],   # 生态里唯一的序列化框架：定义一次数据模型，多格式
     "async": ["moonbitlang/async", "peter-jerry-ye/async", "didiLjf/moonorbit", "kalculos/miao"],
     "cli": ["Yoorkin/ArgParser", "mizchi/admiral", "totto2727/admiral", "TheWaWaR/clap"],
     "tui": ["mizchi/tui", "moonbit-community/rabbita_tui", "moonbitstack/moonetui",
@@ -479,10 +538,19 @@ def rank_all(mods, top_n=10):
                 rows.append((200.0 - 10.0 * i, mod, tier_of(mod, sc)))   # 优先级序号，非算法分
         else:
             rows = []
+            seen = set()
             for mod in mods.values():
                 s = score(mod, sc)
                 if s is not None:
                     rows.append((s, mod, tier_of(mod, sc)))
+                    seen.add(mod["name"])
+            # force：元数据描述不足、但确实属于本场景的包（注册表关键词太泛时兜底）
+            for name in sc.get("force", ()):
+                mod = mods.get(name)
+                if (mod and mod["name"] not in seen and not mod["yanked"]
+                        and mod["downloads"] >= MIN_DOWNLOADS):
+                    rows.append((6.0 + math.log1p(mod["downloads"]) * 1.35, mod,
+                                 tier_of(mod, sc)))
             rows.sort(key=lambda x: -x[0])
         out.append((sc, rows))
     return out
@@ -575,8 +643,9 @@ def write_md(mods, ranked, top_n=8):
     lines.append(f"> **数据时效**　采集于 {COLLECTED_AT}，早于本报告的生成时间。"
                  f"本报告为离线生成的静态快照，不随注册表更新，不含此后的新增、版本变更与 "
                  f"yanked 标记；选型判断请以 mooncakes.io 及仓库实际状态为准。\n")
-    lines.append("每个场景分两层：**完整方案**（能直接选型、定骨架的）与"
-                 "**基础库**（提供单点能力，由调用方组合）。框架、引擎、运行时、"
+    lines.append("有完整方案的场景分两层：**完整方案**（能直接选型、定骨架的）与"
+                 "**基础库**（提供单点能力，由调用方组合）；尚无完整方案的场景不设分层，"
+                 "候选全部为基础库。框架、引擎、运行时、"
                  "脚手架、ORM 均属「完整方案」的不同形态。「基础库」不等同于「依赖」："
                  "在 mooncakes 生态中，完整方案本身同样是依赖，分层的唯一标准是"
                  "该包能否接管程序结构。\n")
@@ -605,10 +674,9 @@ def write_md(mods, ranked, top_n=8):
                 lines.append(f"> 完整方案仅 {len(sol)} 个，说明该类需求目前在生态中"
                              f"主要依靠基础库组合实现，下方基础库清单的实用价值更高。\n")
         else:
-            lines.append("### 完整方案（0）\n")
-            lines.append(f"> 本场景**尚无完整方案**。这表明该需求在生态中尚未形成"
-                         f"「一套骨架」，需要由开发者自行组合基础库。下方按用途列出"
-                         f"可用的基础库，共 {len(lib)} 个，此处列出前 {min(len(lib), 12)} 个。\n")
+            # 没有完整方案的场景不做两层划分，全部候选都只是基础库
+            lines.append(f"> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。"
+                         f"下列 {len(lib)} 个候选均为基础库，需按需组合。\n")
         if lib:
             lines.append(f"### 基础库（{len(lib)}）\n")
             _md_table(lines, lib, 12 if not sol else sc.get("top", top_n))
@@ -748,6 +816,9 @@ HTML_CSS = """
     border-radius:4px; padding:1px 6px; font-weight:500; }
   .note { margin:10px 0 0; padding:9px 13px; background:#fffaf0; border:1px solid #f2e3bd;
     border-radius:7px; font-size:12.5px; color:var(--warm); }
+  .tag { margin-left:auto; font-size:11px; color:var(--muted); background:var(--line-soft);
+    border-radius:5px; padding:2px 8px; font-variant-numeric:tabular-nums; }
+  .soless { margin:16px 0 0; font-size:12.5px; color:var(--muted); }
 
   /* ---------- 检索页 ---------- */
   .sbox { width:100%; padding:12px 15px; font:inherit; font-size:14px; border:1px solid var(--line);
@@ -847,6 +918,16 @@ function card(sc) {
         ? '<li class="empty">\\u672c\\u573a\\u666f\\u5c1a\\u65e0\\u5b8c\\u6574\\u65b9\\u6848\\uff0c'
           + '\\u9700\\u7531\\u57fa\\u7840\\u5e93\\u7ec4\\u5408\\u5b9e\\u73b0</li>'
         : rows(list, PREVIEW)}</ul>`;
+  // 没有完整方案的场景：不设两组标签，候选全部只是基础库
+  if (!ns) {
+    return `<section class="card" data-id="${sc.id}">
+      <div class="hd"><span class="ico">${sc.icon}</span><h2>${esc(sc.title)}</h2>
+        <span class="tag">\u57fa\u7840\u5e93 ${nl}</span></div>
+      <p class="intro">${esc(sc.intro)}</p>
+      <ul class="pkglist">${rows(sc.lib, PREVIEW)}</ul>
+      <a class="more" href="#/s/${sc.id}">\u67e5\u770b\u5168\u90e8 ${nl} \u4e2a \u2192</a>
+    </section>`;
+  }
   return `<section class="card" data-id="${sc.id}">
     <div class="hd"><span class="ico">${sc.icon}</span><h2>${esc(sc.title)}</h2>
       <div class="tabs">${tab('sol', ns, '\\u5b8c\\u6574\\u65b9\\u6848')}${tab('lib', nl, '\\u57fa\\u7840\\u5e93')}</div></div>
@@ -862,8 +943,8 @@ function card(sc) {
 function viewHome() {
   const m = D.meta;
   return `<p class="lede">\\u6309\\u4f7f\\u7528\\u573a\\u666f\\u7ec4\\u7ec7\\u7684 MoonBit \\u5305\\u7d22\\u5f15\\uff0c\\u5171 ${D.groups.length}
-    \\u7ec4 ${m.scenarios} \\u4e2a\\u573a\\u666f\\u3002\\u6bcf\\u4e2a\\u573a\\u666f\\u5206\\u4e24\\u5c42\\uff1a<b>\\u5b8c\\u6574\\u65b9\\u6848</b>\\uff08\\u80fd\\u76f4\\u63a5\\u9009\\u578b\\u3001\\u5b9a\\u9aa8\\u67b6\\uff09\\u4e0e
-    <b>\\u57fa\\u7840\\u5e93</b>\\uff08\\u63d0\\u4f9b\\u5355\\u70b9\\u80fd\\u529b\\uff09\\u3002\\u9996\\u9875\\u6bcf\\u4e2a\\u573a\\u666f\\u53ea\\u5c55\\u793a\\u524d ${PREVIEW} \\u4e2a\\uff0c
+    \\u7ec4 ${m.scenarios} \\u4e2a\\u573a\\u666f\\u3002\u6709\u5b8c\u6574\u65b9\u6848\u7684\u573a\u666f\u5206\u4e24\u5c42\uff1a<b>\\u5b8c\\u6574\\u65b9\\u6848</b>\\uff08\\u80fd\\u76f4\\u63a5\\u9009\\u578b\\u3001\\u5b9a\\u9aa8\\u67b6\\uff09\\u4e0e
+    <b>\\u57fa\\u7840\\u5e93</b>\\uff08\u63d0\u4f9b\u5355\u70b9\u80fd\u529b\uff09\uff1b${m.scenarios - m.with_solutions} \u4e2a\u573a\u666f\u5c1a\u65e0\u5b8c\u6574\u65b9\u6848\uff0c\u5168\u90e8\u5f52\u4e3a\u57fa\u7840\u5e93\u3002\\u9996\\u9875\\u6bcf\\u4e2a\\u573a\\u666f\\u53ea\\u5c55\\u793a\\u524d ${PREVIEW} \\u4e2a\\uff0c
     \\u5b8c\\u6574\\u6e05\\u5355\\u5728\\u573a\\u666f\\u8be6\\u60c5\\u9875\\u3002</p>
     <div class="grid">${D.scenarios.map(card).join('')}</div>${footer()}`;
 }
@@ -879,11 +960,10 @@ function sceneNote(sc) {
 function viewScene(id) {
   const sc = SC[id];
   if (!sc) return `<p class="loading">\\u672a\\u77e5\\u573a\\u666f\\uff1a${esc(id)}</p>`;
+  const hasSol = sc.sol.length > 0;
   const sec = (k, list, title) => {
     if (!list.length && k === 'lib') return '';
-    const body = list.length
-      ? `<ul class="pkglist all">${list.map((x, i) => pkg(x, i + 1)).join('')}</ul>`
-      : `<ul class="pkglist all"><li class="empty">\\u5c1a\\u65e0\\u5b8c\\u6574\\u65b9\\u6848\\uff0c\\u8be5\\u9700\\u6c42\\u76ee\\u524d\\u9700\\u7531\\u57fa\\u7840\\u5e93\\u7ec4\\u5408\\u5b9e\\u73b0</li></ul>`;
+    const body = `<ul class="pkglist all">${list.map((x, i) => pkg(x, i + 1)).join('')}</ul>`;
     return `<div class="sect"><h3>${title}<span class="k">${list.length} \\u4e2a</span></h3>
       <div class="panel">${body}</div></div>`;
   };
@@ -891,7 +971,8 @@ function viewScene(id) {
     <div class="dhead"><h1>${sc.icon} ${esc(sc.title)}</h1>
       <p>${esc(sc.intro)}</p></div>
     ${sceneNote(sc)}
-    ${sec('sol', sc.sol, '\\u5b8c\\u6574\\u65b9\\u6848')}
+    ${hasSol ? sec('sol', sc.sol, '\\u5b8c\\u6574\\u65b9\\u6848') : ''}
+    ${hasSol ? '' : `<p class="soless">\u672c\u573a\u666f\u5728\u751f\u6001\u4e2d\u5c1a\u65e0\u5b8c\u6574\u65b9\u6848\uff08\u65e0\u6846\u67b6\u6216\u5f15\u64ce\u7ea7\u5b9e\u73b0\uff09\uff0c\u4e0b\u5217\u5747\u4e3a\u57fa\u7840\u5e93\uff0c\u9700\u8981\u6309\u9700\u7ec4\u5408\u3002</p>`}
     ${sec('lib', sc.lib, '\\u57fa\\u7840\\u5e93')}
     ${footer()}`;
 }

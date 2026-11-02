@@ -43,6 +43,16 @@ function card(sc) {
         ? '<li class="empty">\u672c\u573a\u666f\u5c1a\u65e0\u5b8c\u6574\u65b9\u6848\uff0c'
           + '\u9700\u7531\u57fa\u7840\u5e93\u7ec4\u5408\u5b9e\u73b0</li>'
         : rows(list, PREVIEW)}</ul>`;
+  // 没有完整方案的场景：不设两组标签，候选全部只是基础库
+  if (!ns) {
+    return `<section class="card" data-id="${sc.id}">
+      <div class="hd"><span class="ico">${sc.icon}</span><h2>${esc(sc.title)}</h2>
+        <span class="tag">基础库 ${nl}</span></div>
+      <p class="intro">${esc(sc.intro)}</p>
+      <ul class="pkglist">${rows(sc.lib, PREVIEW)}</ul>
+      <a class="more" href="#/s/${sc.id}">查看全部 ${nl} 个 →</a>
+    </section>`;
+  }
   return `<section class="card" data-id="${sc.id}">
     <div class="hd"><span class="ico">${sc.icon}</span><h2>${esc(sc.title)}</h2>
       <div class="tabs">${tab('sol', ns, '\u5b8c\u6574\u65b9\u6848')}${tab('lib', nl, '\u57fa\u7840\u5e93')}</div></div>
@@ -58,8 +68,8 @@ function card(sc) {
 function viewHome() {
   const m = D.meta;
   return `<p class="lede">\u6309\u4f7f\u7528\u573a\u666f\u7ec4\u7ec7\u7684 MoonBit \u5305\u7d22\u5f15\uff0c\u5171 ${D.groups.length}
-    \u7ec4 ${m.scenarios} \u4e2a\u573a\u666f\u3002\u6bcf\u4e2a\u573a\u666f\u5206\u4e24\u5c42\uff1a<b>\u5b8c\u6574\u65b9\u6848</b>\uff08\u80fd\u76f4\u63a5\u9009\u578b\u3001\u5b9a\u9aa8\u67b6\uff09\u4e0e
-    <b>\u57fa\u7840\u5e93</b>\uff08\u63d0\u4f9b\u5355\u70b9\u80fd\u529b\uff09\u3002\u9996\u9875\u6bcf\u4e2a\u573a\u666f\u53ea\u5c55\u793a\u524d ${PREVIEW} \u4e2a\uff0c
+    \u7ec4 ${m.scenarios} \u4e2a\u573a\u666f\u3002有完整方案的场景分两层：<b>\u5b8c\u6574\u65b9\u6848</b>\uff08\u80fd\u76f4\u63a5\u9009\u578b\u3001\u5b9a\u9aa8\u67b6\uff09\u4e0e
+    <b>\u57fa\u7840\u5e93</b>\uff08提供单点能力）；${m.scenarios - m.with_solutions} 个场景尚无完整方案，全部归为基础库。\u9996\u9875\u6bcf\u4e2a\u573a\u666f\u53ea\u5c55\u793a\u524d ${PREVIEW} \u4e2a\uff0c
     \u5b8c\u6574\u6e05\u5355\u5728\u573a\u666f\u8be6\u60c5\u9875\u3002</p>
     <div class="grid">${D.scenarios.map(card).join('')}</div>${footer()}`;
 }
@@ -75,11 +85,10 @@ function sceneNote(sc) {
 function viewScene(id) {
   const sc = SC[id];
   if (!sc) return `<p class="loading">\u672a\u77e5\u573a\u666f\uff1a${esc(id)}</p>`;
+  const hasSol = sc.sol.length > 0;
   const sec = (k, list, title) => {
     if (!list.length && k === 'lib') return '';
-    const body = list.length
-      ? `<ul class="pkglist all">${list.map((x, i) => pkg(x, i + 1)).join('')}</ul>`
-      : `<ul class="pkglist all"><li class="empty">\u5c1a\u65e0\u5b8c\u6574\u65b9\u6848\uff0c\u8be5\u9700\u6c42\u76ee\u524d\u9700\u7531\u57fa\u7840\u5e93\u7ec4\u5408\u5b9e\u73b0</li></ul>`;
+    const body = `<ul class="pkglist all">${list.map((x, i) => pkg(x, i + 1)).join('')}</ul>`;
     return `<div class="sect"><h3>${title}<span class="k">${list.length} \u4e2a</span></h3>
       <div class="panel">${body}</div></div>`;
   };
@@ -87,7 +96,8 @@ function viewScene(id) {
     <div class="dhead"><h1>${sc.icon} ${esc(sc.title)}</h1>
       <p>${esc(sc.intro)}</p></div>
     ${sceneNote(sc)}
-    ${sec('sol', sc.sol, '\u5b8c\u6574\u65b9\u6848')}
+    ${hasSol ? sec('sol', sc.sol, '\u5b8c\u6574\u65b9\u6848') : ''}
+    ${hasSol ? '' : `<p class="soless">本场景在生态中尚无完整方案（无框架或引擎级实现），下列均为基础库，需要按需组合。</p>`}
     ${sec('lib', sc.lib, '\u57fa\u7840\u5e93')}
     ${footer()}`;
 }
