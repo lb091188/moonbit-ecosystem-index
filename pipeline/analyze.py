@@ -4,18 +4,19 @@
 
 数据来源（全部为公开数据，已落盘到 data/raw/）：
   1. modules_api.json   mooncakes.io /api/v0/modules        全量模块元数据（3520）
-  2. downloads.json      mooncakes.io /api/v0/search         每个模块的下载量（3518）
-  3. metrics.tsv         gaato/mooncakes-graph 每日快照      每个模块的直接/传递反向依赖数
-  4. versions.jsonl      gaato/mooncakes-graph              每个已发布版本的记录
+  2. downloads.json     mooncakes.io /api/v0/search         每个模块的下载量（3518）
+
+本索引只做场景导航，不复制注册表的能力：不引入依赖图、不计算反向依赖数、
+不展示版本历史。包的完整信息请到 mooncakes 包页查看（页面上每个包都链过去）。
 
 输出：
   data/modules.json          合并后的模块表
+  data/scenarios.json        站点数据（前端 fetch 加载，与 HTML 分离）
   data/moonbit_index.db      SQLite 索引（modules / scenarios 两张表）
   scenarios.md               场景推荐报告（中文）
-  index.html                 可浏览的场景推荐页
+  dist/index.html            站点骨架（不含数据，数据在 dist/data/）
 """
 
-import csv
 import datetime
 import html
 import json
@@ -40,37 +41,37 @@ def _fix_url(u):
         return "https://" + u.lstrip("/")
     return u
 
+
+def murl(name):
+    """包在 mooncakes 上的文档页。
+
+    本索引只做导航：版本历史、完整 API 文档、依赖关系一律回注册表查看，
+    页面与报告里的包名全部指向这里，不复制注册表的能力。
+    """
+    return "https://mooncakes.io/docs/" + name
+
 # ---------------------------------------------------------------- 数据合并
 
 def load_modules():
+    """合并两份官方快照：模块元数据 + 下载量。
+
+    本索引只做「场景导航」，不替代 mooncakes：所有字段均来自注册表本身，
+    不引入依赖图、反向依赖数等派生指标。包的详细信息（文档、版本历史、
+    依赖关系）请直接到 mooncakes 包页查看，页面上每个包都链到那里。
+    """
     api = json.loads((RAW / "modules_api.json").read_text())
     dl = json.loads((RAW / "downloads.json").read_text())
-    metrics = {}
-    with (RAW / "metrics.tsv").open() as f:
-        for row in csv.DictReader(f, delimiter="\t"):
-            name = (row.get("module") or row.get("\ufeffmodule") or "").strip()
-            if not name:
-                continue
-            metrics[name] = (
-                int(row.get("direct") or 0),
-                int(row.get("transitive") or 0),
-                int(row.get("owners") or 0),
-            )
 
     mods = {}
     for m in api:
         name = m["name"]
         d = dl.get(name, {})
-        direct, transitive, owners = metrics.get(name, (0, 0, 0))
         desc = (m.get("description") or d.get("description") or "").strip()
         keywords = [k.lower() for k in (m.get("keywords") or [])]
         mods[name] = {
             "name": name,
             "version": m.get("version") or d.get("version") or "",
             "downloads": int(d.get("downloads") or 0),
-            "direct": direct,
-            "transitive": transitive,
-            "owners": owners,
             "license": m.get("license") or "",
             "repository": _fix_url(m.get("repository") or ""),
             "keywords": keywords,
@@ -91,82 +92,24 @@ def load_modules():
 # desc : 需要出现在描述里的短语
 # ex   : 命中即排除的词（用于压掉同名不同义的噪声）
 
+# 场景分组：左侧导航按组渲染，组内按下列顺序
+GROUPS = [
+    ("app", "界面与应用"),
+    ("svc", "服务与数据"),
+    ("lang", "语言与工具"),
+]
+
+# kw   : 命中 keywords / 模块名的词（权重最高）
+# desc : 需要出现在描述里的短语
+# ex   : 命中即排除的词（用于压掉同名不同义的噪声）
+# pick : 人工圈定的候选清单（生态里没有可靠关键词信号时使用）
 SCENARIOS = [
-    dict(id="http", title="Web 后端 / HTTP 服务", icon="🌐",
-         intro="HTTP 服务、路由、中间件与后端 API 开发。",
-         kw=["http", "server", "web", "router", "api", "rest", "backend"],
-         desc=["http server", "web framework", "router", "backend framework"],
-         ex=["compatibility", "ui", "frontend", "tea", "desktop-app", "gui"],
-         pin=["moonbitlang/moonback"]),
-    dict(id="json", title="JSON / 序列化格式", icon="🧾",
-         intro="JSON、YAML、TOML、XML、CBOR 等格式的解析与生成。",
-         kw=["json", "serialization", "serde", "yaml", "toml", "csv", "xml", "cbor"],
-         desc=["serializ", "data format"], ex=[]),
-    dict(id="async", title="异步 / 并发", icon="⚡",
-         intro="async 运行时、协程、并发原语、任务调度。",
-         kw=["async", "concurrency", "coroutine", "future", "promise", "thread", "parallel"],
-         desc=["asynchronous", "concurren"], ex=[]),
-    dict(id="cli", title="CLI 参数解析", icon="⌨️",
-         intro="命令行工具的参数、子命令、帮助信息解析。",
-         kw=["cli", "argparse", "command-line", "args", "argument-parser", "docopt", "argv"],
-         desc=["command line", "argument parser", "argument-parser"],
-         ex=["tui", "terminal", "browser"]),
-    dict(id="tui", title="终端 UI / TUI", icon="🖥️",
-         intro="终端界面、字符画布、ANSI 控制、PTY。",
-         kw=["tui", "terminal", "ansi", "console", "pty", "curses"],
-         desc=["terminal ui", "terminal"], ex=[]),
-    dict(id="test", title="测试 / 断言 / 属性测试", icon="🧪",
-         intro="单元测试、属性测试（quickcheck）、断言库、BDD、基准。",
-         kw=["testing", "test", "property", "benchmark", "quickcheck", "fuzz", "assert", "mock"],
-         desc=["test framework", "property-based", "assertion"], ex=["image", "pixel"]),
-    dict(id="regex", title="正则匹配", icon="🔍",
-         intro="正则表达式引擎与匹配。",
-         kw=["regex", "regexp", "regular-expression"],
-         desc=["regular expression"], ex=[]),
-    dict(id="unicode", title="Unicode / 文本处理", icon="🔤",
-         intro="Unicode 分类、字素簇、宽度计算、字符串工具。",
-         kw=["unicode", "grapheme", "string", "text", "width", "collation"],
-         desc=["unicode", "grapheme"], ex=[]),
-    dict(id="crypto", title="加密 / 哈希 / 编码", icon="🔐",
-         intro="哈希、对称加密、Base64/编码、安全相关。",
-         kw=["crypto", "hash", "sha256", "sha512", "aes", "encoding", "base64", "security", "bcrypt", "hmac"],
-         desc=["cryptograph", "hashing"], ex=["simd"]),
-    dict(id="db", title="数据库 / 存储", icon="🗄️",
-         intro="SQLite 绑定、ORM、KV 存储、迁移工具。",
-         kw=["database", "sqlite", "sql", "storage", "kv", "orm", "postgres", "migration"],
-         desc=["database", "storage engine", "key-value"],
-         pin=["mizchi/sqlite", "moonbitstack/moonsqlite"]),
-    dict(id="wasm", title="WebAssembly / JS 互操作", icon="🧩",
-         intro="Wasm 组件模型、WASI、FFI、JS 绑定。",
-         kw=["wasm", "wasi", "ffi", "javascript", "webassembly", "component-model"],
-         desc=["webassembly", "component model"], ex=[]),
-    dict(id="parser", title="解析器 / 编译器 / 语法", icon="🌳",
-         intro="词法、语法、parser combinator、AST、tree-sitter、parser generator。",
-         kw=["parser", "lexer", "compiler", "grammar", "tree-sitter", "ast", "codegen"],
-         desc=["parser", "compiler", "lexer", "interpreter"], ex=[]),
-    dict(id="math", title="数学 / 数值计算", icon="📐",
-         intro="高精度数学、线性代数、矩阵、BLAS、统计。",
-         kw=["math", "numeric", "linear-algebra", "matrix", "statistics", "bigint", "blas", "arithmetic"],
-         desc=["linear algebra", "numeric", "arbitrary precision"], ex=[]),
-    dict(id="graphics", title="图形 / 渲染", icon="🎨",
-         intro="矢量图形、SVG、场景图、绘图与布局。",
-         kw=["graphics", "rendering", "svg", "canvas", "scene-graph", "vector", "drawing"],
-         desc=["rendering", "vector graphics", "scene graph"], ex=[]),
-    dict(id="game", title="游戏引擎 / ECS", icon="🎮",
-         intro="游戏引擎、ECS 架构、程序化生成、游戏后端。",
-         kw=["game", "engine", "ecs", "gamedev", "sprite"],
-         desc=["game engine", "game"], ex=[]),
-    dict(id="ui", title="Web UI / 前端框架", icon="🪟",
-         intro="浏览器里的 UI 框架、响应式状态、组件、布局与 CSS。",
-         kw=["ui", "component", "dom", "frontend", "css", "reactive", "signals"],
-         desc=["user interface", "component", "frontend"],
-         ex=["terminal", "tui", "component-model"],   # component-model 是 wasm 组件模型，不是 UI 组件
-         pin=["moonbit-community/rabbita"]),
-    # 桌面 GUI：生态里没有统一的 "desktop gui" 关键词，靠 core 门控——
+    # ---------------------------------------------------------------- 界面与应用
+    # 桌面：生态里没有统一的 "desktop gui" 关键词，靠 core 门控——
     # 必须命中真正的窗口/渲染/控件绑定词，光有 desktop/native 的插件包不算。
-    dict(id="gui", title="桌面 GUI / 跨平台窗口", icon="🪟",
+    dict(id="gui", group="app", title="桌面", icon="🖥️",
          intro="原生桌面应用开发：窗口创建、事件循环、控件布局与渲染后端接入。"
-               "Proton 的托盘、剪贴板、全局热键等配套模块不计入本表，检索 “proton” 可见全套。",
+               "Proton 的托盘、剪贴板、全局热键等配套模块不计入本表。",
          kw=["gui", "windowing", "window", "renderer", "widget", "native-gui", "desktop", "tray"],
          desc=["desktop", "native window", "window system", "windowing", "gui framework",
                "cross-platform gui"],
@@ -180,67 +123,173 @@ SCENARIOS = [
          # 否则新发布的框架会被 2 万下载的老绑定压在十几名开外。
          boost={"wzzc-dev/moui": 2.0, "NoahLiu/native-gui": 3.0}, top=10,
          ex_prefix=["wzzc-dev/moui_"]),
-    # 注：Yoorkin/rabbit-tea（TEA 旧实现，4.7k 下载）已被 yanked，故不在候选内。
-# 跨端 UI：关键词层面根本不存在（没人打 cross-end 标签），只能人工圈定。
-    dict(id="xui", title="跨端 UI（一套代码多端）", icon="📱",
-         intro="以同一套 UI 代码覆盖 Web、桌面、移动端与小程序。候选清单为人工圈定："
-               "生态中尚无统一的跨端关键词，上述目标的实现需组合多个包方成立。",
-         kw=["cross-platform", "mobile", "android", "ios", "webview", "tea", "vdom", "ui"],
-         desc=["one codebase", "android", "ios", "multi-platform", "cross-platform", "desktop and web"],
-         ex_desc=["cross-platform native clipboard", "cross-platform auto-launch",
-                  "cross-platform native global hotkey", "cross-platform native tray",
-                  "cross-platform path"],
-         curated=True, top=12,
+    # 移动端：关键词层面不存在（mobile 会被 window 的三端后端命中，ios 会命中 versions），
+    # 因此整段走人工圈定。
+    dict(id="mobi", group="app", title="移动端", icon="📱",
+         intro="Android、iOS、HarmonyOS 与微信小程序上的应用开发。生态中尚无统一的"
+               "移动端关键词信号，候选清单为人工圈定，涵盖 UI 运行时、原生桥接与小程序宿主。",
+         curated=True, top=10,
          pick=[
-             "moonbit-community/rabbita",        # Web 端 UI 主体（TEA / vdom）
-             "moonbit-community/proton",         # 桌面端宿主（webview + 原生外壳）
-             "moonbit-community/proton_rabbita", # 把 rabbita 的 cmd/sub 接到原生契约
-             "wzzc-dev/moui",                    # 自绘框架：桌面 / Web / 终端共用一套语义树
-             "wzzc-dev/window",                  # 窗口层，桌面 / Web / 移动三后端
-             "XiLaiTL/moobile",                  # 移动端：Android / iOS / Web 一套 rabbita
-             "moonbit-community/rabbita_tui",    # 终端端：同一个 TEA 应用跑原生 TUI
-             "lampclaw/minimoon",                # 微信小程序 Skyline 端
-             "vectie/lepusa",                    # 桌面 webview 应用框架
-             "helios-house/valence",             # dual-render 尝试
-             "marianoguerra/tutuca",             # vdom + app runtime 的完整实现
+             "XiLaiTL/moobile",           # 移动端 UI：Android / iOS / Web 一套 rabbita
+             "lampclaw/minimoon",         # 微信小程序 Skyline UI 运行时
+             "Magic486/moon-miniprogram", # 微信小程序框架：类型安全运行时 + 声明式路由
+             "shop1111/moonohos",         # HarmonyOS 原生模块框架（async / 平台模块 / HAR）
+             "wzzc-dev/window",           # 窗口层，含 desktop / Web / mobile 三后端
+             "Nanaloveyuki/ajni",         # Android JNI 双向桥
+             "Nanaloveyuki/moonview",     # 原生 WebView 嵌入
+             "lampclaw/minimoon_ui",      # 小程序 Skyline 组件库
+             "shop1111/moonohos_ohos",    # HarmonyOS 平台包（HiLog / RawFile / deviceinfo）
+             "Nanaloveyuki/madk",         # Android Open Accessory 协议
+             "Nanaloveyuki/wasee-moon",   # Android 上的 WASI host
          ]),
-    dict(id="doc", title="Markdown / 文档转换", icon="📄",
-         intro="Markdown 解析、HTML/PDF/DOCX 转换、文档排版。",
-         kw=["markdown", "html", "pdf", "document", "epub", "asciidoc", "docx", "latex"],
-         desc=["markdown", "pdf", "document"], ex=["font", "ui", "framework", "tea"]),
-    dict(id="time", title="时间 / 日期", icon="🕒",
-         intro="日期时间、时区、RFC3339、cron。",
-         kw=["time", "date", "datetime", "timezone", "tzif", "cron", "duration"],
-         desc=["timezone", "date and time"], ex=[]),
-    dict(id="log", title="日志 / 追踪", icon="📝",
-         intro="结构化日志、tracing、OpenTelemetry、指标。",
-         kw=["logging", "tracing", "log", "telemetry", "otel", "metrics", "observability"],
-         desc=["logging", "tracing", "observability"], ex=["font"]),
-    dict(id="net", title="网络 / 协议", icon="🔌",
+    dict(id="ui", group="app", title="Web UI / 前端框架", icon="🌐",
+         intro="浏览器里的 UI 框架、响应式状态、组件、布局与 CSS。",
+         kw=["ui", "component", "dom", "frontend", "css", "reactive", "signals"],
+         desc=["user interface", "component", "frontend"],
+         ex=["terminal", "tui", "component-model"],   # component-model 是 wasm 组件模型，不是 UI 组件
+         pin=["moonbit-community/rabbita"]),
+    dict(id="tui", group="app", title="终端 UI / TUI", icon="⌨️",
+         intro="终端界面、字符画布、ANSI 控制、PTY。",
+         kw=["tui", "terminal", "ansi", "console", "pty", "curses"],
+         desc=["terminal ui", "terminal"], ex=[]),
+    dict(id="cli", group="app", title="CLI 参数解析", icon="🧰",
+         intro="命令行工具的参数、子命令、帮助信息解析。",
+         kw=["cli", "argparse", "command-line", "args", "argument-parser", "docopt", "argv"],
+         desc=["command line", "argument parser", "argument-parser"],
+         ex=["tui", "terminal", "browser"]),
+    dict(id="game", group="app", title="游戏引擎 / ECS", icon="🎮",
+         intro="游戏引擎、ECS 架构、程序化生成、游戏后端。",
+         kw=["game", "engine", "ecs", "gamedev", "sprite"],
+         desc=["game engine", "game"], ex=[]),
+    dict(id="graphics", group="app", title="图形 / 渲染", icon="🎨",
+         intro="矢量图形、SVG、场景图、绘图与布局。",
+         kw=["graphics", "rendering", "svg", "canvas", "scene-graph", "vector", "drawing"],
+         desc=["rendering", "vector graphics", "scene graph"], ex=[]),
+    dict(id="img", group="app", title="图像 / 媒体", icon="🖼️",
+         intro="图像编解码（PNG/JPEG/GIF/BMP）、像素比较、音视频。",
+         kw=["image", "png", "jpeg", "gif", "bmp", "qoi", "audio", "video", "codec", "svg"],
+         desc=["image", "codec", "audio", "video"], ex=[]),
+
+    # ---------------------------------------------------------------- 服务与数据
+    dict(id="http", group="svc", title="Web 后端 / HTTP 服务", icon="🚀",
+         intro="HTTP 服务、路由、中间件与后端 API 开发。",
+         kw=["http", "server", "web", "router", "api", "rest", "backend"],
+         desc=["http server", "web framework", "router", "backend framework"],
+         ex=["compatibility", "ui", "frontend", "tea", "desktop-app", "gui"],
+         pin=["moonbitlang/moonback"]),
+    dict(id="db", group="svc", title="数据库 / 存储", icon="🗄️",
+         intro="SQLite 绑定、ORM、KV 存储、迁移工具。",
+         kw=["database", "sqlite", "sql", "storage", "kv", "orm", "postgres", "migration"],
+         desc=["database", "storage engine", "key-value"],
+         pin=["mizchi/sqlite", "moonbitstack/moonsqlite"]),
+    dict(id="net", group="svc", title="网络 / 协议", icon="🔌",
          intro="TCP/UDP、WebSocket、MQTT、HTTP 协议栈、TLS。",
          kw=["network", "tcp", "udp", "websocket", "protocol", "streaming", "mqtt", "amqp", "socket", "tls"],
          desc=["network protocol", "websocket", "socket"],
          ex=["compatibility", "git", "json", "jsonl", "cucumber", "codec"],
          pin=["moonbitstack/moonnet", "moonbitstack/moonhttp"]),
-    dict(id="llm", title="LLM / Agent / MCP", icon="🤖",
+    dict(id="async", group="svc", title="异步 / 并发", icon="⚡",
+         intro="async 运行时、协程、并发原语、任务调度。",
+         kw=["async", "concurrency", "coroutine", "future", "promise", "thread", "parallel"],
+         desc=["asynchronous", "concurren"], ex=[]),
+    dict(id="json", group="svc", title="JSON / 序列化格式", icon="🧾",
+         intro="JSON、YAML、TOML、XML、CBOR 等格式的解析与生成。",
+         kw=["json", "serialization", "serde", "yaml", "toml", "csv", "xml", "cbor"],
+         desc=["serializ", "data format"], ex=[]),
+    dict(id="log", group="svc", title="日志 / 追踪", icon="📝",
+         intro="结构化日志、tracing、OpenTelemetry、指标。",
+         kw=["logging", "tracing", "log", "telemetry", "otel", "metrics", "observability"],
+         desc=["logging", "tracing", "observability"], ex=["font"]),
+    # 运维：生态里既没有运维框架，也没有稳定关键词（process 会被 "processing" 命中），
+    # 全部走人工圈定，且不含任何「完整方案」——事实如此，卡片会如实标注。
+    dict(id="ops", group="svc", title="运维 / 系统管理", icon="🛠️",
+         intro="系统指标与进程检查、子进程与命令执行、伪终端控制、CI 任务运行。"
+               "生态中尚无运维框架，以下按能力列出可组合的基础库。",
+         curated=True, top=10,
+         pick=[
+             "moonbit-community/pty",            # 跨平台伪终端，接 async
+             "moonbit-community/tty",            # 底层终端原语：raw 模式、尺寸与 resize 事件
+             "Milky2018/sysinfo",                # 系统指标与进程检查
+             "mizchi/process_pool",              # 进程池
+             "moonbit-community/proton_process", # 原生子进程（Win/Linux/macOS）
+             "trkbt10/subprocess",               # Node child_process 风格子进程管理
+             "mizchi/actrun",                    # GitHub Actions 兼容的 CI 运行器
+             "trkbt10/osenv",                    # 环境变量、XDG 目录、平台路径
+             "mizchi/tempfile",                  # 临时文件与目录
+         ]),
+    dict(id="llm", group="svc", title="LLM / Agent / MCP", icon="🤖",
          intro="大模型客户端、Agent 框架、MCP 服务端/客户端、提示词。",
          kw=["llm", "agent", "mcp", "openai", "embedding", "prompt"],
          desc=["language model", "llm", "agent"], ex=["wasi", "io"]),
-    dict(id="img", title="图像 / 媒体", icon="🖼️",
-         intro="图像编解码（PNG/JPEG/GIF/BMP）、像素比较、音视频。",
-         kw=["image", "png", "jpeg", "gif", "bmp", "qoi", "audio", "video", "codec", "svg"],
-         desc=["image", "codec", "audio", "video"], ex=[]),
-    dict(id="ds", title="数据结构 / 算法", icon="🧱",
+
+    # ---------------------------------------------------------------- 语言与工具
+    dict(id="parser", group="lang", title="解析器 / 编译器 / 语法", icon="🌳",
+         intro="词法、语法、parser combinator、AST、tree-sitter、parser generator。",
+         kw=["parser", "lexer", "compiler", "grammar", "tree-sitter", "ast", "codegen"],
+         desc=["parser", "compiler", "lexer", "interpreter"], ex=[]),
+    dict(id="regex", group="lang", title="正则匹配", icon="🔍",
+         intro="正则表达式引擎与匹配。",
+         kw=["regex", "regexp", "regular-expression"],
+         desc=["regular expression"], ex=[]),
+    dict(id="unicode", group="lang", title="Unicode / 文本处理", icon="🔤",
+         intro="Unicode 分类、字素簇、宽度计算、字符串工具。",
+         kw=["unicode", "grapheme", "string", "text", "width", "collation"],
+         desc=["unicode", "grapheme"], ex=[]),
+    dict(id="crypto", group="lang", title="加密 / 哈希 / 编码", icon="🔐",
+         intro="哈希、对称加密、Base64/编码、安全相关。",
+         kw=["crypto", "hash", "sha256", "sha512", "aes", "encoding", "base64", "security", "bcrypt", "hmac"],
+         desc=["cryptograph", "hashing"], ex=["simd"]),
+    dict(id="archive", group="lang", title="压缩 / 归档", icon="🗜️",
+         intro="DEFLATE / zlib / gzip / ZIP 的压缩与解压实现。",
+         kw=["zip", "gzip", "zlib", "deflate", "compression", "compress", "archive", "tar",
+             "brotli", "inflate", "lz4"],
+         desc=["compression", "deflate", "gzip", "zip archive"],
+         pin=["mizchi/zlib", "moonbit-community/flate"]),
+    dict(id="fs", group="lang", title="文件 / 路径 / IO", icon="📁",
+         intro="文件系统访问、路径与环境变量、临时文件、通用 IO 抽象与文件监听。",
+         kw=["filesystem", "file", "path", "directory", "tempfile", "io", "stream",
+             "watch", "fswatch"],
+         desc=["file system", "filesystem", "temporary file", "path", "io abstraction"],
+         ex=["git", "svg"],
+         ex_prefix=["moonbit-community/proton_"],   # 桌面框架的内部扩展包，不单列
+         pin=["mizchi/tempfile", "gmlewis/io"]),
+    dict(id="math", group="lang", title="数学 / 数值计算", icon="📐",
+         intro="高精度数学、线性代数、矩阵、BLAS、统计。",
+         kw=["math", "numeric", "linear-algebra", "matrix", "statistics", "bigint", "blas", "arithmetic"],
+         desc=["linear algebra", "numeric", "arbitrary precision"], ex=[]),
+    dict(id="ds", group="lang", title="数据结构 / 算法", icon="🧱",
          intro="有序映射、B 树、堆、图算法、集合。",
          kw=["data-structure", "collection", "map", "set", "heap", "graph", "queue", "btree", "indexmap"],
          desc=["data structure", "algorithm"], ex=["syntax", "svg", "compatibility", "grapheme"]),
+    dict(id="test", group="lang", title="测试 / 断言 / 属性测试", icon="🧪",
+         intro="单元测试、属性测试（quickcheck）、断言库、BDD、基准。",
+         kw=["testing", "test", "property", "benchmark", "quickcheck", "fuzz", "assert", "mock"],
+         desc=["test framework", "property-based", "assertion"], ex=["image", "pixel"]),
+    dict(id="tool", group="lang", title="开发工具 / 代码质量", icon="🧭",
+         intro="代码格式化、静态分析、lint、结构化搜索与重构、代码生成与脚手架。",
+         kw=["formatter", "linter", "lint", "static-analysis", "prettifier", "refactor",
+             "codegen", "scaffold"],
+         desc=["static analysis", "code formatter", "linter", "code generation"],
+         ex=["toml", "hcl", "json"],   # 数据格式的格式化 CLI 属于对应格式领域
+         pin=["moonbitlang/formatter", "riantr/moonbit_static_analysis"]),
+    dict(id="doc", group="lang", title="Markdown / 文档转换", icon="📄",
+         intro="Markdown 解析、HTML/PDF/DOCX 转换、文档排版。",
+         kw=["markdown", "html", "pdf", "document", "epub", "asciidoc", "docx", "latex"],
+         desc=["markdown", "pdf", "document"], ex=["font", "ui", "framework", "tea"]),
+    dict(id="time", group="lang", title="时间 / 日期", icon="🕒",
+         intro="日期时间、时区、RFC3339、cron。",
+         kw=["time", "date", "datetime", "timezone", "tzif", "cron", "duration"],
+         desc=["timezone", "date and time"], ex=[]),
+    dict(id="wasm", group="lang", title="WebAssembly / JS 互操作", icon="🧩",
+         intro="Wasm 组件模型、WASI、FFI、JS 绑定。",
+         kw=["wasm", "wasi", "ffi", "javascript", "webassembly", "component-model"],
+         desc=["webassembly", "component model"], ex=[]),
 ]
 
 MIN_DOWNLOADS = 20   # 只推荐下载量 > 20 的包
 
 # 数据快照时间。本索引为离线快照，不随时间自动更新，务必与构建时间一并披露。
-META_SNAPSHOT = "2026-11-02"   # 模块元数据与下载量（mooncakes.io 官方 API）
-GRAPH_SNAPSHOT = "2026-11-01"  # 反向依赖数（gaato/mooncakes-graph 每日快照）
+COLLECTED_AT = "2026-11-02"   # 模块元数据与下载量的采集日期（mooncakes.io 官方 API）
 
 
 # ---------------------------------------------------------------- 层级：完整方案 / 基础库
@@ -278,12 +327,14 @@ SOLUTIONS = {
            "Arcelyth/aitne", "lampclaw/minimoon", "vectie/bunnia"],
     "gui": ["moonbit-community/proton", "wzzc-dev/moui", "NoahLiu/native-gui",
             "vectie/lepusa", "lepus-apps/webview", "tonyfettes/giraffe"],
-    "xui": ["moonbit-community/rabbita", "wzzc-dev/moui", "moonbit-community/proton",
-            "lampclaw/minimoon"],
+    # 移动端：小程序 / HarmonyOS / React Native 三条路线各有自己的运行时
+    "mobi": ["XiLaiTL/moobile", "lampclaw/minimoon", "Magic486/moon-miniprogram",
+             "shop1111/moonohos"],
     "llm": ["colmugx/posoco", "colmugx/mcp", "golemcloud/golem_sdk", "soehi/moonlm",
             "weopqrst/agent"],
     # 这些场景在生态里**没有任何完整方案**，全是基础库：按需要挑，别指望有个骨架
-    # json 之外：regex / unicode / crypto / math / graphics / doc / time / img / ds / net / log
+    # regex / unicode / crypto / math / graphics / doc / time / img / ds / net / log
+    # ops  / fs / archive / tool
 }
 
 # 名字里带 "framework" 但实际只是基础库或接口规范的，禁止被兜底规则抬成方案
@@ -362,12 +413,17 @@ def relevance(mod, sc):
 
 
 def score(mod, sc):
+    """场景内排序分。
+
+    只用两项信号：与场景的关键词相关度、注册表里的下载量。不引入反向依赖数、
+    传递依赖数等派生指标——本索引只做导航，不替代 mooncakes 的选型判断，
+    派生指标既增加数据滞后面，也把「被依赖多」误当成「适合这个场景」。
+    """
     rel = relevance(mod, sc)
     if rel is None:
         return None
     s = (min(rel, 6) * 1.0
-         + math.log1p(mod["downloads"]) * 1.05
-         + math.log1p(mod["transitive"]) * 0.55)
+         + math.log1p(mod["downloads"]) * 1.35)
     if mod["name"] in sc.get("pin", ()):
         s += 1.2          # 少量人工置顶：算法排名不理想时兜底
     s += sc.get("boost", {}).get(mod["name"], 0.0)
@@ -413,10 +469,6 @@ def fmt_dl(n):
 
 def reason(mod):
     parts = [f"下载 {fmt_dl(mod['downloads'])}"]
-    if mod["direct"]:
-        parts.append(f"{mod['direct']} 个包直接依赖")
-    elif mod["transitive"]:
-        parts.append(f"传递依赖 {mod['transitive']}")
     if mod["description"]:
         d = re.sub(r"\s+", " ", mod["description"]).strip()
         parts.append(d[:90] + ("…" if len(d) > 90 else ""))
@@ -433,7 +485,6 @@ def write_db(mods, ranked, table_top=None):
     con.execute("""
         CREATE TABLE modules(
             name TEXT PRIMARY KEY, version TEXT, downloads INTEGER,
-            direct INTEGER, transitive INTEGER, owners INTEGER,
             license TEXT, repository TEXT, keywords TEXT, description TEXT,
             created_at TEXT, is_new INTEGER, yanked INTEGER)
     """)
@@ -443,10 +494,10 @@ def write_db(mods, ranked, table_top=None):
             score REAL, PRIMARY KEY(scenario, module))
     """)
     con.executemany(
-        "INSERT INTO modules VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
-        [(m["name"], m["version"], m["downloads"], m["direct"], m["transitive"],
-          m["owners"], m["license"], m["repository"], ",".join(m["keywords"]),
-          m["description"], m["created_at"], int(m["is_new"]), int(m["yanked"]))
+        "INSERT INTO modules VALUES (?,?,?,?,?,?,?,?,?,?)",
+        [(m["name"], m["version"], m["downloads"], m["license"], m["repository"],
+          ",".join(m["keywords"]), m["description"], m["created_at"],
+          int(m["is_new"]), int(m["yanked"]))
          for m in mods.values()],
     )
     for sc, rows in ranked:
@@ -466,16 +517,15 @@ def write_db(mods, ranked, table_top=None):
 # ---------------------------------------------------------------- 输出：Markdown
 
 def _md_table(lines, rows, limit):
-    lines.append("| # | 包 | 版本 | 下载 | 反向依赖 | 说明 |")
-    lines.append("|---|---|---|---|---|---|")
+    lines.append("| # | 包 | 版本 | 下载 | 说明 |")
+    lines.append("|---|---|---|---|---|")
     for i, (s, m) in enumerate(rows[:limit], 1):
-        repo = f"[{m['name']}]({m['repository']})" if m["repository"] else m["name"]
         desc = re.sub(r"\s+", " ", m["description"]).strip()
         if len(desc) > 80:
             desc = desc[:80] + "…"
         desc = desc.replace("|", "\\|") or "—"
-        lines.append(f"| {i} | {repo} | {m['version']} | {fmt_dl(m['downloads'])} "
-                     f"| {m['transitive']} | {desc} |")
+        lines.append(f"| {i} | [{m['name']}]({murl(m['name'])}) | {m['version']} "
+                     f"| {fmt_dl(m['downloads'])} | {desc} |")
     lines.append("")
 
 
@@ -484,10 +534,10 @@ def write_md(mods, ranked, top_n=8):
     lines.append("# MoonBit 生态：场景化选包指南\n")
     lines.append(f"> 覆盖 {len(mods)} 个已发布模块；仅为 **下载量 > {MIN_DOWNLOADS}** 的包做推荐，"
                  f"被 yanked 的包不计入推荐。\n")
-    lines.append("数据源：mooncakes.io 官方 API（模块元数据 + 下载量）、"
-                 "gaato/mooncakes-graph 每日依赖快照（反向依赖数）。\n")
-    lines.append(f"> **数据时效**　模块元数据与下载量采集于 {META_SNAPSHOT}，反向依赖数取自 "
-                 f"{GRAPH_SNAPSHOT} 的依赖图快照，两者相隔约半日，且均早于本报告的生成时间。"
+    lines.append("数据源：mooncakes.io 官方 API（模块元数据 + 下载量）。"
+                 "本索引仅做场景导航，不复制注册表能力：版本历史、完整 API 文档与"
+                 "依赖关系请到 mooncakes 包页查看，报告内包名均指向该页。\n")
+    lines.append(f"> **数据时效**　采集于 {COLLECTED_AT}，早于本报告的生成时间。"
                  f"本报告为离线生成的静态快照，不随注册表更新，不含此后的新增、版本变更与 "
                  f"yanked 标记；选型判断请以 mooncakes.io 及仓库实际状态为准。\n")
     lines.append("每个场景分两层：**完整方案**（能直接选型、定骨架的）与"
@@ -495,7 +545,7 @@ def write_md(mods, ranked, top_n=8):
                  "脚手架、ORM 均属「完整方案」的不同形态。「基础库」不等同于「依赖」："
                  "在 mooncakes 生态中，完整方案本身同样是依赖，分层的唯一标准是"
                  "该包能否接管程序结构。\n")
-    lines.append("打分 = 关键词匹配度 + 下载量 + 被依赖数；"
+    lines.append("场景内排序 = 关键词匹配度 + 下载量；"
                  "同义词已做词干归一（如 async/asynchronous），"
                  "并对易混淆场景做了排除（如 UI 场景排除 TUI）。\n")
     lines.append("## 目录\n")
@@ -510,7 +560,7 @@ def write_md(mods, ranked, top_n=8):
         lines.append(f"{sc['intro']}\n")
         if sc.get("curated"):
             lines.append("> 本场景为**人工圈定**：候选包与其顺序由人工确定，"
-                         "因为「跨端」在生态里还没有形成可靠的关键词信号。\n")
+                         "因为该领域在生态里还没有形成可靠的关键词信号。\n")
         if sol:
             lines.append(f"### 完整方案（{len(sol)}）\n")
             _md_table(lines, sol, sc.get("top", top_n))
@@ -535,287 +585,389 @@ def write_md(mods, ranked, top_n=8):
 # ---------------------------------------------------------------- 输出：静态站点
 # 站点为纯静态产物：dist/ 目录可直接交由 Cloudflare Pages、GitHub Pages 或任意
 # 静态托管服务发布。构建完全在本地完成，云端不需要 Python 运行时。
+#
+# 产物三层分离：
+#   dist/index.html          骨架（CSS 内联，不含任何数据）
+#   dist/assets/app.js       前端逻辑（路由、渲染、检索）
+#   dist/data/scenarios.json 全部数据（由 write_scenarios_json 生成）
+# 因此改样式不必碰数据，数据更新不必重写页面。
 
 HTML_CSS = """
   :root {
-    --bg:#f6f7f9; --panel:#fff; --ink:#171a1f; --muted:#666e7a;
-    --line:#e3e6ea; --accent:#2f5fe0; --accent-soft:#eef2fd; --warm:#a15a08;
-    --warn-bg:#fffaeb; --warn-line:#f2dfae; --warn-ink:#7a4b06;
+    --bg:#f6f7f9; --panel:#fff; --ink:#171a1f; --muted:#6b7280;
+    --line:#e4e7ec; --line-soft:#eef0f3; --accent:#2f5fe0; --accent-soft:#eef2fd;
+    --warm:#a15a08; --green:#0b6046; --green-soft:#d9f5e9;
+    --side-w:238px; --row-h:56px; --rows:5;
   }
   * { box-sizing:border-box; }
+  html, body { height:100%; }
   body { margin:0; background:var(--bg); color:var(--ink);
-    font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",
+    font:14.5px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",
     "Hiragino Sans GB","Microsoft YaHei",sans-serif;
     -webkit-font-smoothing:antialiased; }
-  .wrap { max-width:1140px; margin:0 auto; padding:44px 24px 72px; }
-  .masthead { border-bottom:1px solid var(--line); padding-bottom:20px; margin-bottom:24px; }
-  h1 { font-size:30px; margin:0 0 10px; letter-spacing:-.4px; font-weight:650; }
-  .sub { color:var(--muted); margin:0; max-width:74ch; }
-  .notice { background:var(--warn-bg); border:1px solid var(--warn-line);
-    border-left:3px solid #d99a2b; border-radius:8px; padding:16px 20px;
-    margin:0 0 26px; color:var(--warn-ink); }
-  .notice h2 { font-size:13px; margin:0 0 8px; letter-spacing:.04em;
-    text-transform:uppercase; font-weight:650; }
-  .notice ul { margin:0 0 8px; padding-left:20px; font-size:13px; }
-  .notice li { margin:2px 0; }
-  .notice p { margin:8px 0 0; font-size:13px; line-height:1.7; }
-  .notice a { color:var(--warn-ink); }
-  .stats { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:26px; }
-  .stat { background:var(--panel); border:1px solid var(--line); border-radius:9px;
-    padding:10px 16px; font-size:12.5px; color:var(--muted); }
-  .stat b { color:var(--ink); font-size:19px; display:block; line-height:1.35;
-    font-weight:650; }
-  .search { width:100%; padding:13px 16px; font-size:15px; border:1px solid var(--line);
-    border-radius:9px; background:var(--panel); margin-bottom:16px; outline:none;
-    font-family:inherit; }
-  .search:focus { border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft); }
-  nav { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:28px; }
-  nav a { font-size:12.5px; text-decoration:none; color:var(--muted); background:var(--panel);
-    border:1px solid var(--line); border-radius:999px; padding:4px 11px; }
-  nav a:hover { color:var(--accent); border-color:var(--accent); }
-  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(490px,1fr)); gap:18px; }
-  .card { background:var(--panel); border:1px solid var(--line); border-radius:12px;
-    padding:20px 22px; }
-  .card header { display:flex; gap:12px; align-items:flex-start; margin-bottom:4px; }
-  .ico { font-size:21px; line-height:1.25; }
-  .card h2 { font-size:16.5px; margin:0 0 3px; font-weight:650; }
-  .card header p { margin:0; color:var(--muted); font-size:12.5px; }
-  .cnt { margin-left:8px; color:var(--accent); white-space:nowrap; }
-  .tag { display:inline-block; margin-left:6px; font-size:10.5px; color:#5b46a8;
-    background:#efeafd; border-radius:4px; padding:1px 5px; vertical-align:1px; }
-  ol { list-style:none; margin:12px 0 0; padding:0; }
-  li { display:flex; gap:12px; padding:10px 0; border-top:1px solid var(--line); }
-  li:first-child { border-top:none; }
-  .rk { flex:0 0 22px; height:22px; border-radius:6px; background:var(--accent-soft);
-    color:var(--accent); font-size:12px; font-weight:600; display:flex;
-    align-items:center; justify-content:center; margin-top:1px; }
-  .rk.dim { background:#f2f3f5; color:var(--muted); font-weight:500; }
-  .note { margin:12px 0 0; padding:10px 13px; background:var(--warn-bg);
-    border:1px solid var(--warn-line); border-radius:7px; font-size:12.5px;
-    color:var(--warn-ink); line-height:1.7; }
-  details.more-libs { margin-top:12px; border-top:1px dashed var(--line); padding-top:9px; }
-  details.more-libs summary { cursor:pointer; font-size:12.5px; color:var(--accent);
-    list-style:none; user-select:none; }
-  details.more-libs summary::-webkit-details-marker { display:none; }
-  details.more-libs summary::before { content:"\\25B8\\00a0"; }
-  details.more-libs[open] summary::before { content:"\\25BE\\00a0"; }
-  details.more-libs summary:hover { text-decoration:underline; }
-  details.more-libs ol { margin-top:4px; }
-  .more { margin:7px 0 0; font-size:12px; color:var(--muted); }
-  .soltag { font-size:10.5px; color:#0b6046; background:#d9f5e9; border-radius:4px;
-    padding:1px 5px; margin-left:6px; vertical-align:1px; font-weight:500; }
-  .body { min-width:0; }
-  .nm { font-weight:600; font-size:14px; word-break:break-all; }
-  .nm a { color:var(--ink); text-decoration:none; border-bottom:1px solid transparent; }
-  .nm a:hover { color:var(--accent); border-bottom-color:var(--accent); }
-  .ver { font-weight:400; color:var(--muted); font-size:12px; margin-left:6px; }
-  .yank { font-size:10.5px; color:#8f3c16; background:#fdeede;
-    border-radius:4px; padding:1px 5px; margin-left:6px; vertical-align:1px; }
-  .meta { font-size:12px; color:var(--muted); }
-  .meta b { color:var(--warm); }
-  .dot { margin:0 4px; }
-  .desc { font-size:12.5px; color:var(--muted); margin-top:2px; }
-  #results { display:none; }
-  #results ol { display:grid; grid-template-columns:1fr 1fr; column-gap:34px; margin:0; }
-  footer { margin-top:52px; color:var(--muted); font-size:12.5px; line-height:1.85;
-    border-top:1px solid var(--line); padding-top:20px; }
-  footer p { margin:0 0 9px; max-width:96ch; }
+  a { color:inherit; }
+  .app { display:flex; height:100vh; }
+
+  /* ---------- 左侧分类：独立滚动 ---------- */
+  .side { width:var(--side-w); flex:0 0 var(--side-w); background:var(--panel);
+    border-right:1px solid var(--line); overflow-y:auto; overscroll-behavior:contain;
+    padding:18px 10px 32px; }
+  .side::-webkit-scrollbar { width:8px; }
+  .side::-webkit-scrollbar-thumb { background:#d8dce3; border-radius:4px; }
+  .side-home { display:block; margin:0 8px 14px; padding:9px 12px; border-radius:8px;
+    font-size:13.5px; font-weight:600; text-decoration:none; color:var(--ink); }
+  .side-home:hover { background:var(--accent-soft); color:var(--accent); }
+  .side-home.on { background:var(--accent-soft); color:var(--accent); }
+  .gt { margin:16px 12px 6px; font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    color:#9aa2ae; font-weight:600; }
+  .snav a { display:flex; align-items:center; gap:8px; padding:6px 12px; margin:1px 0;
+    border-radius:7px; font-size:13.5px; text-decoration:none; color:#3d444e; }
+  .snav a:hover { background:#f2f4f7; color:var(--ink); }
+  .snav a.on { background:var(--accent-soft); color:var(--accent); font-weight:600; }
+  .snav a .n { margin-left:auto; font-size:11px; color:#9aa2ae; font-variant-numeric:tabular-nums; }
+  .snav a.on .n { color:var(--accent); }
+
+  /* ---------- 主区：独立滚动 ---------- */
+  .main { flex:1; overflow-y:auto; overscroll-behavior:contain; padding:0 26px 64px; }
+  .top { position:sticky; top:0; z-index:10; display:flex; align-items:center; gap:14px;
+    padding:14px 0 12px; margin-bottom:18px; background:rgba(246,247,249,.93);
+    backdrop-filter:saturate(160%) blur(8px); border-bottom:1px solid var(--line); }
+  .brand { font-size:15px; font-weight:650; letter-spacing:-.2px; text-decoration:none;
+    white-space:nowrap; }
+  .ts { font-size:11.5px; color:#8b939f; font-variant-numeric:tabular-nums; }
+  .sbtn { margin-left:auto; font-size:12.5px; text-decoration:none; color:var(--muted);
+    border:1px solid var(--line); border-radius:7px; padding:5px 12px; background:var(--panel);
+    white-space:nowrap; }
+  .sbtn:hover { color:var(--accent); border-color:var(--accent); }
+
+  /* ---------- 首页卡片 ---------- */
+  .lede { color:var(--muted); font-size:13px; margin:0 0 18px; max-width:88ch; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(420px,100%),1fr));
+    gap:16px; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:11px;
+    padding:15px 17px 13px; display:flex; flex-direction:column; min-width:0; }
+  .hd { display:flex; align-items:center; gap:9px; flex-wrap:wrap; margin-bottom:3px; }
+  .ico { font-size:16px; line-height:1; }
+  .hd h2 { font-size:14.5px; margin:0; font-weight:650; white-space:nowrap; }
+  .tabs { display:flex; gap:2px; background:var(--line-soft); border-radius:7px; padding:2px; }
+  .tabs button { border:0; background:none; font:inherit; font-size:11.5px; color:var(--muted);
+    padding:2px 9px; border-radius:5px; cursor:pointer; font-variant-numeric:tabular-nums; }
+  .tabs button:hover { color:var(--ink); }
+  .tabs button.on { background:var(--panel); color:var(--accent); font-weight:600;
+    box-shadow:0 1px 2px rgba(16,24,40,.08); }
+  .intro { margin:0 0 9px; color:var(--muted); font-size:12px; line-height:1.55;
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+    min-height:37px; }
+
+  /* 固定 5 行高度：超出部分裁掉，完整清单去详情页 */
+  .pkglist { list-style:none; margin:0; padding:0; height:calc(var(--row-h) * var(--rows));
+    overflow:hidden; }
+  .pkglist.all { height:auto; overflow:visible; }
+  .pkglist li { height:var(--row-h); display:flex; gap:9px; align-items:center;
+    border-top:1px solid var(--line-soft); }
+  .pkglist li:first-child { border-top:0; }
+  .pkglist li.empty { color:var(--muted); font-size:12.5px; height:auto; padding:14px 0;
+    border-top:0; }
+  .rk { flex:0 0 19px; height:19px; border-radius:5px; background:var(--accent-soft);
+    color:var(--accent); font-size:11px; font-weight:600; display:flex; align-items:center;
+    justify-content:center; font-variant-numeric:tabular-nums; }
+  .rk.dim { background:#f3f4f6; color:#9aa2ae; font-weight:500; }
+  .b { min-width:0; flex:1; }
+  .n { font-size:13px; font-weight:600; white-space:nowrap; overflow:hidden;
+    text-overflow:ellipsis; }
+  .n a { text-decoration:none; }
+  .n a:hover { color:var(--accent); text-decoration:underline; text-underline-offset:2px; }
+  .v { font-weight:400; color:#9aa2ae; font-size:11px; margin-left:5px; }
+  .yk { font-size:10px; color:#8f3c16; background:#fdeede; border-radius:4px;
+    padding:0 4px; margin-left:5px; vertical-align:1px; }
+  .d { font-size:11.5px; color:var(--muted); white-space:nowrap; overflow:hidden;
+    text-overflow:ellipsis; line-height:1.4; }
+  .dl { flex:0 0 auto; font-size:11.5px; color:var(--warm); font-variant-numeric:tabular-nums;
+    font-weight:600; }
+  .more { margin-top:9px; padding-top:9px; border-top:1px dashed var(--line);
+    font-size:12px; color:var(--accent); text-decoration:none; }
+  .more:hover { text-decoration:underline; }
+
+  /* ---------- 场景详情页 ---------- */
+  .crumb { font-size:12.5px; color:var(--muted); margin:0 0 10px; }
+  .crumb a { text-decoration:none; color:var(--accent); }
+  .dhead h1 { font-size:22px; margin:0 0 6px; letter-spacing:-.3px; font-weight:650; }
+  .dhead p { margin:0 0 14px; color:var(--muted); font-size:13px; max-width:78ch; }
+  .sect { margin:22px 0 0; }
+  .sect h3 { font-size:13px; margin:0 0 8px; font-weight:650; display:flex;
+    align-items:center; gap:8px; }
+  .sect h3 .k { font-size:11px; font-weight:500; color:var(--muted); }
+  .panel { background:var(--panel); border:1px solid var(--line); border-radius:11px;
+    padding:4px 16px; }
+  .badge { font-size:10.5px; color:var(--green); background:var(--green-soft);
+    border-radius:4px; padding:1px 6px; font-weight:500; }
+  .note { margin:10px 0 0; padding:9px 13px; background:#fffaf0; border:1px solid #f2e3bd;
+    border-radius:7px; font-size:12.5px; color:var(--warm); }
+
+  /* ---------- 检索页 ---------- */
+  .sbox { width:100%; padding:12px 15px; font:inherit; font-size:14px; border:1px solid var(--line);
+    border-radius:9px; background:var(--panel); outline:none; }
+  .sbox:focus { border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft); }
+  .smeta { font-size:12px; color:var(--muted); margin:11px 0; }
+  .loading { color:var(--muted); font-size:13px; }
+
+  footer { margin-top:44px; padding-top:18px; border-top:1px solid var(--line);
+    color:var(--muted); font-size:12px; line-height:1.85; }
+  footer p { margin:0 0 7px; max-width:100ch; }
   footer b { color:var(--ink); font-weight:600; }
-  code { background:#eef0f3; padding:1px 5px; border-radius:4px; font-size:12px; }
-  @media (max-width:560px) {
-    #results ol { grid-template-columns:1fr; }
-    .grid { grid-template-columns:1fr; }
+  code { background:var(--line-soft); padding:1px 5px; border-radius:4px; font-size:11.5px; }
+
+  @media (max-width:880px) {
+    body { overflow:auto; }
+    .app { display:block; height:auto; }
+    .side { width:100%; flex:none; height:auto; max-height:none; overflow-x:auto;
+      overflow-y:hidden; white-space:nowrap; padding:8px 12px; display:flex;
+      align-items:center; gap:5px; border-right:0; border-bottom:1px solid var(--line);
+      position:sticky; top:0; z-index:12; }
+    .side-home, .snav a { display:inline-flex; margin:0; padding:5px 10px; }
+    .gt, .snav a .n { display:none; }
+    .snav { display:flex; gap:4px; }
+    .main { overflow:visible; height:auto; padding:0 14px 40px; }
+    .top { position:static; flex-wrap:wrap; gap:6px 12px; }
+    .ts { flex:1 1 100%; order:3; }
+    .grid { grid-template-columns:minmax(0,1fr); }
   }
 """
 
 HTML_JS = """
-const q = document.getElementById('q');
-const cards = document.getElementById('cards');
-const results = document.getElementById('results');
-const rlist = document.getElementById('rlist');
+'use strict';
+
+const ROOT = 'data/scenarios.json';
+const MK = n => 'https://mooncakes.io/docs/' + n;
+
+const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g,
-  c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const human = n => n >= 10000 ? (n / 10000).toFixed(1) + '\\u4e07'
   : n >= 1000 ? (n / 1000).toFixed(1) + 'k' : String(n);
 
-q.addEventListener('input', () => {
-  const t = q.value.trim().toLowerCase();
-  if (!t) { results.style.display = 'none'; cards.style.display = ''; return; }
-  cards.style.display = 'none'; results.style.display = 'block';
-  const hits = DATA.filter(r => r[0].toLowerCase().includes(t) ||
-      (r[4] || '').toLowerCase().includes(t))
-    .sort((a, b) => b[1] - a[1]).slice(0, 60);
-  document.getElementById('rtitle').textContent =
-    '\\u641c\\u7d22\\u7ed3\\u679c\\u00b7\\u300c' + q.value.trim() + '\\u300d\\u00b7' +
-    hits.length + ' \\u4e2a\\uff08\\u6309\\u4e0b\\u8f7d\\u91cf\\u964d\\u5e8f\\uff09';
-  rlist.innerHTML = hits.length ? hits.map(r => `
-    <li><div class="body">
-      <div class="nm">${r[5] ? `<a href="${esc(r[5])}" target="_blank" rel="noopener">${esc(r[0])}</a>` : esc(r[0])}
-        <span class="ver">v${esc(r[3])}</span>${r[6] ? '<span class="yank">yanked</span>' : ''}${r[7] ? `<span class="soltag">${r[7]} \\u4e2a\\u573a\\u666f\\u7684\\u5b8c\\u6574\\u65b9\\u6848</span>` : ''}</div>
-      <div class="meta"><b>${human(r[1])}</b> \\u4e0b\\u8f7d
-        <span class="dot">\\u00b7</span> ${r[2]} \\u53cd\\u5411\\u4f9d\\u8d56</div>
-      <div class="desc">${esc((r[4] || '').slice(0, 120))}</div>
-    </div></li>`).join('')
-    : '<li><div class="body">\\u6ca1\\u6709\\u5339\\u914d\\u7684\\u5305</div></li>';
+let D = null;          // 全部数据
+const SC = {};         // 场景索引
+const PREVIEW = 5;     // 首页每个场景固定展示的包数
+
+/* ---------------------------------------------------------------- 渲染片段 */
+
+function pkg(name, i) {
+  const m = D.modules[name] || [0, '', '', 0];
+  const ver = m[1] ? `<span class="v">v${esc(m[1])}</span>` : '';
+  const yk = m[3] ? '<span class="yk">yanked</span>' : '';
+  return `<li><span class="rk${i > 5 ? ' dim' : ''}">${i}</span>
+    <div class="b">
+      <div class="n"><a href="${MK(name)}" target="_blank" rel="noopener">${esc(name)}</a>${ver}${yk}</div>
+      <div class="d">${esc(m[2] || '\\u2014')}</div>
+    </div>
+    <span class="dl">${human(m[0])}</span></li>`;
+}
+
+function rows(list, n) {
+  if (!list.length) return '<li class="empty">\\u6682\\u65e0\\u5019\\u9009</li>';
+  return list.slice(0, n).map((x, i) => pkg(x, i + 1)).join('');
+}
+
+function card(sc) {
+  const ns = sc.sol.length, nl = sc.lib.length;
+  const def = ns > 0 ? 'sol' : 'lib';
+  const tab = (k, n, label) =>
+    `<button class="${def === k ? 'on' : ''}" data-t="${k}">${label} ${n}</button>`;
+  const pane = (k, list) =>
+    `<ul class="pkglist" data-tab="${k}"${def === k ? '' : ' hidden'}>${
+      k === 'sol' && !ns
+        ? '<li class="empty">\\u672c\\u573a\\u666f\\u5c1a\\u65e0\\u5b8c\\u6574\\u65b9\\u6848\\uff0c'
+          + '\\u9700\\u7531\\u57fa\\u7840\\u5e93\\u7ec4\\u5408\\u5b9e\\u73b0</li>'
+        : rows(list, PREVIEW)}</ul>`;
+  return `<section class="card" data-id="${sc.id}">
+    <div class="hd"><span class="ico">${sc.icon}</span><h2>${esc(sc.title)}</h2>
+      <div class="tabs">${tab('sol', ns, '\\u5b8c\\u6574\\u65b9\\u6848')}${tab('lib', nl, '\\u57fa\\u7840\\u5e93')}</div></div>
+    <p class="intro">${esc(sc.intro)}</p>
+    ${pane('sol', sc.sol)}
+    ${pane('lib', sc.lib)}
+    <a class="more" href="#/s/${sc.id}">\\u67e5\\u770b\\u5168\\u90e8 ${ns + nl} \\u4e2a \\u2192</a>
+  </section>`;
+}
+
+/* ---------------------------------------------------------------- 页面 */
+
+function viewHome() {
+  const m = D.meta;
+  return `<p class="lede">\\u6309\\u4f7f\\u7528\\u573a\\u666f\\u7ec4\\u7ec7\\u7684 MoonBit \\u5305\\u7d22\\u5f15\\uff0c\\u5171 ${D.groups.length}
+    \\u7ec4 ${m.scenarios} \\u4e2a\\u573a\\u666f\\u3002\\u6bcf\\u4e2a\\u573a\\u666f\\u5206\\u4e24\\u5c42\\uff1a<b>\\u5b8c\\u6574\\u65b9\\u6848</b>\\uff08\\u80fd\\u76f4\\u63a5\\u9009\\u578b\\u3001\\u5b9a\\u9aa8\\u67b6\\uff09\\u4e0e
+    <b>\\u57fa\\u7840\\u5e93</b>\\uff08\\u63d0\\u4f9b\\u5355\\u70b9\\u80fd\\u529b\\uff09\\u3002\\u9996\\u9875\\u6bcf\\u4e2a\\u573a\\u666f\\u53ea\\u5c55\\u793a\\u524d ${PREVIEW} \\u4e2a\\uff0c
+    \\u5b8c\\u6574\\u6e05\\u5355\\u5728\\u573a\\u666f\\u8be6\\u60c5\\u9875\\u3002</p>
+    <div class="grid">${D.scenarios.map(card).join('')}</div>${footer()}`;
+}
+
+function viewScene(id) {
+  const sc = SC[id];
+  if (!sc) return `<p class="loading">\\u672a\\u77e5\\u573a\\u666f\\uff1a${esc(id)}</p>`;
+  const sec = (k, list, title) => {
+    if (!list.length && k === 'lib') return '';
+    const body = list.length
+      ? `<ul class="pkglist all">${list.map((x, i) => pkg(x, i + 1)).join('')}</ul>`
+      : `<ul class="pkglist all"><li class="empty">\\u5c1a\\u65e0\\u5b8c\\u6574\\u65b9\\u6848\\uff0c\\u8be5\\u9700\\u6c42\\u76ee\\u524d\\u9700\\u7531\\u57fa\\u7840\\u5e93\\u7ec4\\u5408\\u5b9e\\u73b0</li></ul>`;
+    return `<div class="sect"><h3>${title}<span class="k">${list.length} \\u4e2a</span></h3>
+      <div class="panel">${body}</div></div>`;
+  };
+  return `<p class="crumb"><a href="#/">\\u9996\\u9875</a> \\u203a ${esc(sc.title)}</p>
+    <div class="dhead"><h1>${sc.icon} ${esc(sc.title)}</h1>
+      <p>${esc(sc.intro)}</p></div>
+    ${sc.curated ? '<p class="note">\\u672c\\u573a\\u666f\\u4e3a\\u4eba\\u5de5\\u56f4\\u5b9a\\uff1a\\u8be5\\u9886\\u57df\\u5728\\u751f\\u6001\\u4e2d\\u5c1a\\u672a\\u5f62\\u6210\\u53ef\\u9760\\u7684\\u5173\\u952e\\u8bcd\\u4fe1\\u53f7\\uff0c\\u5019\\u9009\\u5305\\u4e0e\\u5176\\u987a\\u5e8f\\u7531\\u4eba\\u5de5\\u786e\\u5b9a\\u3002</p>' : ''}
+    ${sec('sol', sc.sol, '\\u5b8c\\u6574\\u65b9\\u6848')}
+    ${sec('lib', sc.lib, '\\u57fa\\u7840\\u5e93')}
+    ${footer()}`;
+}
+
+function viewSearch(q) {
+  return `<p class="crumb"><a href="#/">\\u9996\\u9875</a> \\u203a \\u68c0\\u7d22</p>
+    <input class="sbox" id="q" autocomplete="off" placeholder="\\u68c0\\u7d22\\u5168\\u90e8 ${D.meta.modules} \\u4e2a\\u5305\\uff1a\\u540d\\u79f0\\u6216\\u63cf\\u8ff0\\uff0c\\u4f8b\\u5982 json\\u3001http\\u3001parser">
+    <div id="sout"><p class="smeta">\\u8f93\\u5165\\u5173\\u952e\\u8bcd\\u5f00\\u59cb\\u68c0\\u7d22\\u3002\\u6309\\u4e0b\\u8f7d\\u91cf\\u964d\\u5e8f\\u3002</p></div>`;
+}
+
+function doSearch(q) {
+  const out = $('#sout');
+  if (!out) return;
+  const t = q.trim().toLowerCase();
+  if (!t) {
+    out.innerHTML = '<p class="smeta">\\u8f93\\u5165\\u5173\\u952e\\u8bcd\\u5f00\\u59cb\\u68c0\\u7d22\\u3002\\u6309\\u4e0b\\u8f7d\\u91cf\\u964d\\u5e8f\\u3002</p>';
+    return;
+  }
+  const hit = [];
+  for (const [n, m] of Object.entries(D.modules)) {
+    if (n.toLowerCase().includes(t) || (m[2] || '').toLowerCase().includes(t)) hit.push(n);
+  }
+  hit.sort((a, b) => D.modules[b][0] - D.modules[a][0]);
+  const top = hit.slice(0, 200);
+  out.innerHTML = `<p class="smeta">\\u300c${esc(q.trim())}\\u300d\\uff1a\\u547d\\u4e2d ${hit.length} \\u4e2a${
+    hit.length > top.length ? '\\uff0c\\u4ec5\\u5217\\u524d ' + top.length + ' \\u4e2a' : ''}</p>
+    <div class="panel"><ul class="pkglist all">${
+      top.length ? top.map((n, i) => pkg(n, i + 1)).join('')
+        : '<li class="empty">\\u6ca1\\u6709\\u5339\\u914d\\u7684\\u5305</li>'}</ul></div>`;
+}
+
+function footer() {
+  const m = D.meta;
+  return `<footer>
+    <p><b>\\u6570\\u636e\\u6765\\u6e90</b>\\u3000mooncakes.io \\u5b98\\u65b9 API\\uff08\\u6a21\\u5757\\u5143\\u6570\\u636e\\u4e0e\\u4e0b\\u8f7d\\u91cf\\uff09\\u3002\\u672c\\u7ad9\\u4ec5\\u505a\\u573a\\u666f\\u5bfc\\u822a\\uff0c
+      \\u4e0d\\u590d\\u5236\\u6ce8\\u518c\\u8868\\u80fd\\u529b\\uff1a\\u7248\\u672c\\u5386\\u53f2\\u3001\\u5b8c\\u6574 API \\u6587\\u6863\\u4e0e\\u4f9d\\u8d56\\u5173\\u7cfb\\u8bf7\\u5230 mooncakes \\u5305\\u9875\\u67e5\\u770b\\uff0c
+      \\u9875\\u9762\\u5185\\u6bcf\\u4e2a\\u5305\\u540d\\u5747\\u6307\\u5411\\u8be5\\u9875\\u3002</p>
+    <p><b>\\u6570\\u636e\\u65f6\\u6548</b>\\u3000\\u91c7\\u96c6\\u4e8e ${m.collected_at}\\uff0c\\u6784\\u5efa\\u4e8e ${m.built_at}\\u3002\\u672c\\u7ad9\\u4e3a\\u79bb\\u7ebf\\u5feb\\u7167\\uff0c
+      \\u4e0d\\u968f\\u6ce8\\u518c\\u8868\\u5b9e\\u65f6\\u66f4\\u65b0\\uff0c\\u4e0d\\u542b\\u6b64\\u540e\\u7684\\u65b0\\u589e\\u3001\\u7248\\u672c\\u53d8\\u66f4\\u4e0e yanked \\u6807\\u8bb0\\u3002</p>
+    <p><b>\\u5206\\u5c42\\u6807\\u51c6</b>\\u3000\\u5b8c\\u6574\\u65b9\\u6848\\u6307\\u80fd\\u63a5\\u7ba1\\u7a0b\\u5e8f\\u7ed3\\u6784\\u3001\\u53ef\\u76f4\\u63a5\\u9009\\u578b\\u7684\\u5305\\uff08\\u6846\\u67b6\\u3001\\u5f15\\u64ce\\u3001\\u8fd0\\u884c\\u65f6\\u3001
+      \\u811a\\u624b\\u67b6\\u3001ORM\\uff09\\uff1b\\u57fa\\u7840\\u5e93\\u6307\\u63d0\\u4f9b\\u5355\\u70b9\\u80fd\\u529b\\u3001\\u7531\\u8c03\\u7528\\u65b9\\u7ec4\\u5408\\u7684\\u5305\\u3002\\u300c\\u57fa\\u7840\\u5e93\\u300d\\u4e0d\\u7b49\\u540c\\u4e8e
+      \\u300c\\u4f9d\\u8d56\\u300d\\uff1a\\u5728 mooncakes \\u751f\\u6001\\u4e2d\\u5b8c\\u6574\\u65b9\\u6848\\u672c\\u8eab\\u4ea6\\u4e3a\\u4f9d\\u8d56\\uff0c\\u5206\\u5c42\\u552f\\u4e00\\u6807\\u51c6\\u662f\\u80fd\\u5426\\u63a5\\u7ba1\\u7a0b\\u5e8f\\u7ed3\\u6784\\u3002
+      ${m.scenarios - m.with_solutions} \\u4e2a\\u573a\\u666f\\u5c1a\\u65e0\\u5b8c\\u6574\\u65b9\\u6848\\u3002</p>
+    <p><b>\\u6392\\u5e8f\\u65b9\\u6cd5</b>\\u3000\\u573a\\u666f\\u5185\\u6392\\u5e8f = \\u5173\\u952e\\u8bcd\\u5339\\u914d\\u5ea6 + \\u4e0b\\u8f7d\\u91cf\\uff1b\\u4e0d\\u5f15\\u5165\\u53cd\\u5411\\u4f9d\\u8d56\\u6570\\u7b49\\u6d3e\\u751f\\u6307\\u6807\\u3002
+      \\u684c\\u9762\\u4e0e\\u624b\\u673a\\u7b49\\u73af\\u5883\\u7531\\u4e8e\\u7f3a\\u4e4f\\u7a33\\u5b9a\\u5173\\u952e\\u8bcd\\uff0c\\u6539\\u4e3a\\u4eba\\u5de5\\u56f4\\u5b9a\\u3002</p>
+    <p><b>\\u6784\\u5efa</b>\\u3000<code>python3 pipeline/analyze.py</code>\\u3000\\u00b7\\u3000<b>\\u67e5\\u8be2</b>\\u3000<code>python3 pipeline/query.py json</code></p>
+  </footer>`;
+}
+
+/* ---------------------------------------------------------------- 路由 */
+
+function renderSide(active) {
+  let h = `<a class="side-home${active === 'home' ? ' on' : ''}" href="#/">\\u5168\\u90e8\\u573a\\u666f</a>`;
+  for (const [gid, gtitle] of D.groups) {
+    const list = D.scenarios.filter(s => s.group === gid);
+    if (!list.length) continue;
+    h += `<div class="gt">${esc(gtitle)}</div><div class="snav">`;
+    for (const s of list) {
+      const n = s.sol.length ? s.sol.length : s.lib.length;
+      h += `<a href="#/s/${s.id}" class="${active === s.id ? 'on' : ''}">${s.icon} ${esc(s.title)}<span class="n">${n}</span></a>`;
+    }
+    h += '</div>';
+  }
+  $('#snav').innerHTML = h;
+}
+
+function route() {
+  const h = location.hash || '#/';
+  const view = $('#view');
+  if (h.startsWith('#/s/')) {
+    const id = h.slice(4);
+    renderSide(id);
+    view.innerHTML = viewScene(id);
+    window.scrollTo(0, 0);
+    document.querySelector('.main').scrollTop = 0;
+  } else if (h.startsWith('#/search')) {
+    renderSide('search');
+    view.innerHTML = viewSearch();
+    const q = decodeURIComponent((h.split('?q=')[1] || ''));
+    const box = $('#q');
+    box.value = q;
+    if (q) doSearch(q);
+    box.addEventListener('input', () => doSearch(box.value));
+    box.focus();
+  } else {
+    renderSide('home');
+    view.innerHTML = viewHome();
+    document.querySelector('.main').scrollTop = 0;
+  }
+}
+
+/* tab 切换：完整方案 / 基础库 */
+document.addEventListener('click', e => {
+  const btn = e.target.closest('.tabs button');
+  if (!btn) return;
+  const cardEl = btn.closest('.card');
+  const t = btn.dataset.t;
+  cardEl.querySelectorAll('.tabs button').forEach(b => b.classList.toggle('on', b === btn));
+  cardEl.querySelectorAll('.pkglist').forEach(u => { u.hidden = u.dataset.tab !== t; });
 });
+
+window.addEventListener('hashchange', route);
+
+(async function boot() {
+  try {
+    const r = await fetch(ROOT);
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    D = await r.json();
+    D.scenarios.forEach(s => { SC[s.id] = s; });
+    $('#ts').textContent =
+      `\\u91c7\\u96c6\\uff1a${D.meta.collected_at}\\uff1b\\u6784\\u5efa\\uff1a${D.meta.built_at}`;
+    route();
+  } catch (err) {
+    $('#view').innerHTML = `<p class="loading">\\u6570\\u636e\\u52a0\\u8f7d\\u5931\\u8d25\\uff1a${esc(err.message)}\\u3002`
+      + `\\u8bf7\\u901a\\u8fc7 HTTP \\u6253\\u5f00\\u9875\\u9762\\uff08\\u5982 <code>python3 -m http.server</code>\\uff09\\uff0c`
+      + `\\u76f4\\u63a5\\u53cc\\u51fb file:// \\u65e0\\u6cd5\\u8bfb\\u53d6\\u6570\\u636e\\u3002</p>`;
+  }
+})();
 """
 
 
 def write_html(mods, ranked):
-    """渲染 dist/index.html。纯静态，运行时不需要任何后端。"""
-    sol_count = {}
-    for _sc, rows in ranked:
-        for _s, m, t in rows:
-            if t == "solution":
-                sol_count[m["name"]] = sol_count.get(m["name"], 0) + 1
-
-    payload = json.dumps(
-        [[m["name"], m["downloads"], m["transitive"], m["version"],
-          m["description"][:160], m["repository"], int(m["yanked"]),
-          sol_count.get(m["name"], 0)] for m in mods.values()],
-        ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
-
-    def item(i, m, dim=False):
-        name = html.escape(m["name"])
-        link = (f'<a href="{html.escape(m["repository"])}" target="_blank" rel="noopener">'
-                f'{name}</a>') if m["repository"] else name
-        desc = html.escape(re.sub(r"\s+", " ", m["description"])).strip()
-        if len(desc) > 108:
-            desc = desc[:108] + "…"
-        rk = f'<span class="rk{" dim" if dim else ""}">{i}</span>'
-        return (f'\n        <li>{rk}<div class="body">'
-                f'<div class="nm">{link}<span class="ver">v{html.escape(m["version"])}</span></div>'
-                f'<div class="meta"><b>{fmt_dl(m["downloads"])}</b> 下载'
-                f'<span class="dot">·</span>{m["transitive"]} 反向依赖</div>'
-                f'<div class="desc">{desc}</div></div></li>')
-
-    cards = []
-    for sc, rows in ranked:
-        sol, lib = split_tiers(rows)
-        cap = sc.get("top", 8)
-        parts = []
-        if sol:
-            parts.append('<ol>' + "".join(item(i, m) for i, (_s, m) in enumerate(sol[:cap], 1))
-                         + '</ol>')
-            if len(sol) > cap:
-                rest = "、".join(m["name"] for _s, m in sol[cap:])
-                parts.append(f'<p class="more">另有 {len(sol) - cap} 个完整方案：'
-                             f'{html.escape(rest)}</p>')
-            if len(sol) <= 2:
-                parts.append(f'<p class="note">本场景完整方案仅 {len(sol)} 个，'
-                             f'该类需求目前主要依靠基础库组合实现，展开下方基础库更具参考价值。</p>')
-        else:
-            parts.append('<p class="note">本场景<b>尚无完整方案</b>。该需求在生态中'
-                         '尚未形成可复用的骨架，需由开发者自行组合基础库；'
-                         '下方按用途列出可用基础库。</p>')
-            parts.append('<ol>' + "".join(item(i, m, dim=True)
-                                          for i, (_s, m) in enumerate(lib[:12], 1)) + '</ol>')
-        if lib and sol:
-            parts.append(
-                f'<details class="more-libs"><summary>展开 {len(lib)} 个基础库'
-                f'（配合上方完整方案使用）</summary><ol>'
-                + "".join(item(i, m, dim=True) for i, (_s, m) in enumerate(lib[:14], 1))
-                + '</ol>'
-                + (f'<p class="more">共 {len(lib)} 个，可用 '
-                   f'<code>python3 pipeline/query.py {sc["id"]} --libs --top 40</code>'
-                   f' 查看全部</p>' if len(lib) > 14 else '')
-                + '</details>')
-        elif lib and not sol:
-            if len(lib) > 12:
-                parts.append(
-                    f'<details class="more-libs"><summary>另外 {len(lib) - 12} 个基础库'
-                    f'（共 {len(lib)}）</summary><ol>'
-                    + "".join(item(i + 12, m, dim=True)
-                              for i, (_s, m) in enumerate(lib[12:26], 1))
-                    + '</ol></details>')
-        tag = '<span class="tag">人工圈定</span>' if sc.get("curated") else ''
-        cards.append(f"""
-    <section class="card" id="{sc['id']}">
-      <header><span class="ico">{sc['icon']}</span>
-        <div><h2>{html.escape(sc['title'])}{tag}</h2>
-        <p>{html.escape(sc['intro'])}
-          <span class="cnt">方案 {len(sol)} · 基础库 {len(lib)}</span></p></div>
-      </header>{''.join(parts)}
-    </section>""")
-
-    nav = "".join(f'<a href="#{sc["id"]}">{sc["icon"]} {html.escape(sc["title"])}</a>'
-                  for sc, _ in ranked)
-    n_sol_scene = sum(1 for _sc, rows in ranked if split_tiers(rows)[0])
-    n_sol_pkg = len({m["name"] for _sc, rows in ranked for _s, m, t in rows
-                     if t == "solution"})
-    n_active = sum(1 for m in mods.values() if m["downloads"] > MIN_DOWNLOADS)
-    n_yanked = sum(1 for m in mods.values() if m["yanked"])
-    built = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
-
-    body = f"""
-<div class="wrap">
-  <header class="masthead">
-    <h1>MoonBit 生态索引</h1>
-    <p class="sub">按使用场景组织的 MoonBit 包选型参考。每个场景先列<b>完整方案</b>
-      （可直接选型、承担程序骨架），<b>基础库</b>折叠于下方，按需展开。
-      仅纳入下载量大于 {MIN_DOWNLOADS} 的模块。</p>
-  </header>
-
-  <aside class="notice">
-    <h2>数据时效说明</h2>
-    <ul>
-      <li>模块元数据与下载量：采集于 <b>{META_SNAPSHOT}</b>（mooncakes.io 官方 API）</li>
-      <li>反向依赖数：<b>{GRAPH_SNAPSHOT}</b> 的依赖图快照（gaato/mooncakes-graph）</li>
-      <li>本页构建时间：<b>{built}</b></li>
-    </ul>
-    <p>本页为构建时生成的静态快照，不随 mooncakes 注册表实时更新。上述两批数据相隔约半日，
-      且均早于本页构建时间；此后新增、更新或被标记为 yanked 的包不会反映在本页。
-      选型前请以 <a href="https://mooncakes.io" target="_blank" rel="noopener">mooncakes.io</a>
-      及仓库实际状态为准。</p>
-  </aside>
-
-  <div class="stats">
-    <div class="stat"><b>{len(mods)}</b>已发布模块</div>
-    <div class="stat"><b>{n_active}</b>下载量 &gt; {MIN_DOWNLOADS}</div>
-    <div class="stat"><b>{len(SCENARIOS)}</b>使用场景</div>
-    <div class="stat"><b>{n_sol_pkg}</b>完整方案（覆盖 {n_sol_scene} 个场景）</div>
-    <div class="stat"><b>{n_yanked}</b>已标记 yanked</div>
-  </div>
-
-  <input class="search" id="q" autocomplete="off"
-    placeholder="检索全部 {len(mods)} 个模块：名称、描述或关键词，例如 json、http、parser">
-
-  <nav>{nav}</nav>
-
-  <section id="results"><h2 style="font-size:15px" id="rtitle">检索结果</h2>
-    <ol id="rlist"></ol></section>
-  <div class="grid" id="cards">{''.join(cards)}</div>
-
-  <footer>
-    <p><b>数据来源</b>　mooncakes.io 官方 API（模块元数据、下载量）；gaato/mooncakes-graph
-      依赖图快照（反向依赖数）。</p>
-    <p><b>数据滞后</b>　元数据与下载量为 {META_SNAPSHOT} 的抓取结果，依赖图为 {GRAPH_SNAPSHOT}
-      的快照，本页构建于 {built}，三者在时间上均非实时。mooncakes 注册表每日均有新增与更新，
-      本页不含此后的变动；对时效敏感的选型判断，请回到注册表与仓库核实。</p>
-    <p><b>分层标准</b>　完整方案指可直接选型、承担程序骨架的包，框架、引擎、运行时、脚手架、
-      ORM 均属此类；基础库指提供单点能力、由调用方组合的包。「基础库」不等同于「依赖」：
-      在 mooncakes 生态中完整方案本身亦为依赖，分层的唯一标准是该包能否接管程序结构。
-      因此 gtk、glfw、sqlite 等绑定归入基础库，完整方案位于其上层（giraffe 之于 GTK，
-      proton 之于 WebView）。共 {len(SCENARIOS) - n_sol_scene} 个场景尚无完整方案，卡片内已注明。</p>
-    <p><b>排序方法</b>　关键词匹配度 ×1.0（上限 6）+ log(下载量) ×1.05 + log(反向依赖数) ×0.55。
-      同义词已做词干归一，易混场景设有排除规则；db、ui、net、gui 含少量人工置顶。</p>
-    <p><b>特殊场景</b>　桌面 GUI 采用核心词门控，仅含 desktop 标签的外围插件不参与排名；
-      跨端 UI 因生态中尚无可靠关键词信号，为人工圈定的路线清单。</p>
-    <p><b>构建</b>　<code>python3 pipeline/analyze.py</code> ·
-      <b>查询</b>　<code>python3 pipeline/query.py "json"</code></p>
-  </footer>
-</div>"""
-
-    doc = ('<!DOCTYPE html>\n<html lang="zh-CN">\n<head>\n<meta charset="utf-8">\n'
-           '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
-           '<title>MoonBit 生态索引 · 场景化选型参考</title>\n'
-           '<meta name="description" content="按使用场景组织的 MoonBit 包选型参考，'
-           '区分完整方案与基础库，含下载量与反向依赖数据。">\n'
-           f'<style>{HTML_CSS}</style>\n</head>\n<body>{body}\n'
-           f'<script>\nconst DATA = {payload};\n{HTML_JS}</script>\n</body>\n</html>\n')
-
-    DIST.mkdir(parents=True, exist_ok=True)
+    """写出 dist/index.html —— 只有骨架，不含任何数据。"""
+    doc = f"""<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MoonBit 生态索引 · 场景化选型参考</title>
+<meta name="description" content="按使用场景组织的 MoonBit 包索引：{len(SCENARIOS)} 个场景，区分完整方案与基础库。">
+<style>{HTML_CSS}</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side"><div id="snav"></div></aside>
+  <main class="main">
+    <header class="top">
+      <a class="brand" href="#/">MoonBit 生态索引</a>
+      <span class="ts" id="ts"></span>
+      <a class="sbtn" href="#/search">检索</a>
+    </header>
+    <div id="view"><p class="loading">正在加载数据…</p></div>
+  </main>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>
+"""
+    (DIST / "assets").mkdir(parents=True, exist_ok=True)
     (DIST / "index.html").write_text(doc, encoding="utf-8")
+    (DIST / "assets" / "app.js").write_text(HTML_JS.lstrip(), encoding="utf-8")
     return DIST / "index.html"
 
 
@@ -823,64 +975,58 @@ def publish_site():
     """把分析产物同步到 dist/，该目录即静态托管发布目录。"""
     import shutil
     (DIST / "data").mkdir(parents=True, exist_ok=True)
-    for name in ("modules.json", "scenarios.json"):
-        shutil.copyfile(OUT / name, DIST / "data" / name)
+    (DIST / "assets").mkdir(parents=True, exist_ok=True)
+    # scenarios.json 内已含精简模块表，不再单独复制 modules.json，避免同一份数据两遍
+    shutil.copyfile(OUT / "scenarios.json", DIST / "data" / "scenarios.json")
     shutil.copyfile(ROOT / "scenarios.md", DIST / "scenarios.md")
     return DIST
 
 
 # ---------------------------------------------------------------- 输出：结构化 JSON
-# 供前端构建脚本（Node.js）消费。分析与渲染在此解耦，使静态站点的构建
-# 不依赖 Python 运行时。
+# 站点数据。与 index.html 完全分离：页面只是骨架，数据由前端 fetch 本文件后渲染。
+# 体积靠模块表共享控制——场景里只存包名，包的详情（下载量、版本、描述）统一
+# 在 modules 字典里查一次，因此场景内可以完整列出全部候选而不重复存储。
 
-def _row(m, s):
-    return {
-        "name": m["name"],
-        "version": m["version"],
-        "downloads": m["downloads"],
-        "direct": m["direct"],
-        "transitive": m["transitive"],
-        "description": re.sub(r"\s+", " ", m["description"]).strip(),
-        "repository": m["repository"],
-        "score": round(s, 3),
-    }
+def write_scenarios_json(mods, ranked):
+    n_sol_scene = sum(1 for _sc, rows in ranked if split_tiers(rows)[0])
+    n_sol_pkg = len({m["name"] for _sc, rows in ranked
+                     for _s, m, t in rows if t == "solution"})
+    built = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
 
+    modules = {}
+    for name, m in mods.items():
+        desc = re.sub(r"\s+", " ", m["description"]).strip()
+        modules[name] = [m["downloads"], m["version"], desc[:150], int(m["yanked"])]
 
-def write_scenarios_json(mods, ranked, lib_limit=40):
-    n_sol_scene = sum(1 for sc, rows in ranked if split_tiers(rows)[0])
-    n_sol_pkg = len({m["name"] for sc, rows in ranked for _, m, t in rows if t == "solution"})
     payload = {
-        "schema_version": 1,
-        "generated_at": datetime.datetime.now().astimezone().isoformat(timespec="seconds"),
-        "snapshots": {"metadata_and_downloads": META_SNAPSHOT,
-                      "dependency_graph": GRAPH_SNAPSHOT},
-        "min_downloads": MIN_DOWNLOADS,
-        "totals": {
+        "schema_version": 2,
+        "meta": {
+            "collected_at": COLLECTED_AT,
+            "built_at": built,
             "modules": len(mods),
-            "above_download_threshold":
+            "above_threshold":
                 sum(1 for m in mods.values() if m["downloads"] > MIN_DOWNLOADS),
             "yanked": sum(1 for m in mods.values() if m["yanked"]),
             "scenarios": len(SCENARIOS),
-            "scenarios_with_solutions": n_sol_scene,
+            "with_solutions": n_sol_scene,
             "solution_packages": n_sol_pkg,
+            "min_downloads": MIN_DOWNLOADS,
         },
-        "tiers": {
-            "solution": "可直接选型、承担程序骨架的包（框架、引擎、运行时、脚手架、ORM 等）",
-            "lib": "提供单点能力、由调用方组合的包（解析、编码、哈希、绑定、数据结构等）",
-        },
+        "groups": [[gid, gtitle] for gid, gtitle in GROUPS],
         "scenarios": [],
+        "modules": modules,
     }
     for sc, rows in ranked:
         sol, lib = split_tiers(rows)
         payload["scenarios"].append({
             "id": sc["id"],
+            "group": sc.get("group", "lang"),
             "title": sc["title"],
             "icon": sc["icon"],
             "intro": sc["intro"],
             "curated": bool(sc.get("curated")),
-            "counts": {"solutions": len(sol), "libs": len(lib)},
-            "solutions": [_row(m, s) for s, m in sol],
-            "libs": [_row(m, s) for s, m in lib[:lib_limit]],
+            "sol": [m["name"] for _s, m in sol],
+            "lib": [m["name"] for _s, m in lib],
         })
     path = OUT / "scenarios.json"
     path.write_text(json.dumps(payload, ensure_ascii=False, separators=(",", ":")),

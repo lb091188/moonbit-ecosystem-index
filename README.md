@@ -1,29 +1,31 @@
 # MoonBit 生态索引
 
-按使用场景组织的 MoonBit 包选型参考。本项目采集 mooncakes.io 注册表的公开数据，将包归入
-25 个常见技术场景，并把每个场景的候选划分为**完整方案**与**基础库**两个层级，生成一份
+按使用场景组织的 MoonBit 包索引。本项目采集 mooncakes.io 注册表的公开数据，将包归入
+29 个常见技术场景，并把每个场景的候选划分为**完整方案**与**基础库**两个层级，生成一份
 可在浏览器中检索的静态站点。
 
-站点为纯静态产物，构建在本地完成，可直接托管于 Cloudflare Pages、GitHub Pages 或任意
+本项目定位是**导航**，不是注册表的替代品。包的版本历史、完整 API 文档与依赖关系不在
+本站复制，页面内每个包名都直接指向 mooncakes 包页，需要细看时点过去即可。
+
+站点为纯静态产物，构建在本地完成，可托管于 Cloudflare Pages、GitHub Pages 或任意
 静态文件服务。
 
 ---
 
 ## 一、数据时效
 
-本索引是**离线快照，不随注册表实时更新**。各项数据的时间边界如下：
+本索引是**离线快照，不随注册表实时更新**。
 
 | 数据项 | 来源 | 快照时间 |
 | --- | --- | --- |
 | 模块元数据、下载量 | mooncakes.io 官方 API | 2026-11-02 |
-| 反向依赖数（直接 / 传递） | gaato/mooncakes-graph 每日快照 | 2026-11-01 |
 
-两批数据相隔约半日，且均早于站点构建时间。mooncakes 注册表每日均有新增、版本更新与
-yanked 标记，本索引**不包含**快照之后的任何变动，具体影响为：
+站点顶部与页脚均标注两项时间：**采集**（快照日期）与**构建**（页面生成时间）。所有数据
+均早于构建时间，注册表在此之后的变动不在本站范围内：
 
 - 快照之后发布的包不会出现在本站；
 - 已发布新版本的包，其版本号与描述可能滞后；
-- yanked 状态以快照时为准（当前 96 个），已在站内标注，并从推荐中排除。
+- yanked 状态以快照时为准（当前 96 个），检索页标注 `[yanked]`，且不进入场景推荐。
 
 对时效敏感的选型判断，应回到 mooncakes.io 与仓库实际状态核实。如需刷新，依照
 「五、数据更新」重新抓取并构建。
@@ -47,18 +49,39 @@ yanked 标记，本索引**不包含**快照之后的任何变动，具体影响
 分层的唯一标准是该包能否接管程序结构。由此可推出：所有 binding 均归入基础库，完整方案
 位于其上层（`giraffe` 之于 GTK，`proton` 之于 WebView）。
 
-完整方案的判定**采用人工白名单**（`pipeline/analyze.py` 中的 `SOLUTIONS`，当前 62 个包），
+完整方案的判定**采用人工白名单**（`pipeline/analyze.py` 中的 `SOLUTIONS`，当前 65 个包），
 不使用启发式推断。方案层是高精度区，宁可遗漏，也不将基础库纳入推荐位。构建脚本每次运行
 会输出「待确认的方案候选」，即自我描述含 `framework` 等字样、尚未收录白名单的包，供人工
 复核后补入。
 
-25 个场景中，14 个存在完整方案；其余 11 个（regex、unicode、crypto、math、graphics、doc、
-time、log、net、img、ds）在生态中尚无骨架级实现，站内已明确注明，并列出可用基础库。
-这属于生态现状，而非数据缺失。
+29 个场景中，14 个存在完整方案；其余 15 个（regex、unicode、crypto、math、graphics、doc、
+time、log、net、img、ds、archive、fs、ops、tool）在生态中尚无骨架级实现，站内已明确注明，
+并列出可用基础库。这属于生态现状，而非数据缺失。
 
 ---
 
-## 三、目录结构
+## 三、站点结构
+
+站点为单页应用，路由由 URL hash 承担，共三个视图：
+
+| 视图 | 地址 | 内容 |
+| --- | --- | --- |
+| 首页 | `#/` | 全部 29 个场景卡片，按「界面与应用 / 服务与数据 / 语言与工具」三组排列 |
+| 场景详情 | `#/s/<场景 id>` | 该场景的完整清单，完整方案与基础库全部列出，不截断 |
+| 检索 | `#/search` | 全量 3520 个模块的名称与描述检索 |
+
+首页每个场景卡片：
+
+- 标题后为**完整方案 / 基础库**切换标签，点击即切换，不再使用折叠展开；
+- 列表区**固定为 5 行的高度**，超出部分裁掉，卡片底部提供「查看全部 N 个」入口；
+- 卡片本身跳转到站内详情页，包名才跳转到 mooncakes 包页。
+
+左侧分类导航常驻，独立滚动，与右侧内容区互不影响；滚动时不随内容移动。窄屏下折叠为
+顶部横向滚动条。
+
+---
+
+## 四、目录结构
 
 ```
 .
@@ -68,21 +91,26 @@ time、log、net、img、ds）在生态中尚无骨架级实现，站内已明�
 ├── data/
 │   ├── raw/                  原始快照，只增不改，用于复现
 │   ├── modules.json          合并后的模块表（3520 条）
-│   ├── scenarios.json        场景与分层结果，站点的数据源
+│   ├── scenarios.json        站点数据源（含精简模块表与场景清单）
 │   └── moonbit_index.db      SQLite 索引（modules / scenarios 两表）
 ├── dist/                     静态发布目录（产物入库，便于直接部署与差异追溯）
-│   ├── index.html
-│   ├── scenarios.md
-│   └── data/
+│   ├── index.html            骨架，仅有样式与容器，不含数据
+│   ├── assets/app.js         前端逻辑（路由、渲染、检索）
+│   ├── data/scenarios.json   全部数据
+│   └── scenarios.md
 ├── scenarios.md              场景推荐报告（Markdown，便于引用于文档）
 └── README.md
 ```
 
 `dist/` 内文件均由 `pipeline/analyze.py` 生成，不应手动修改。
 
+页面与数据彻底分离：`index.html` 约 9 KB，只含 CSS 与挂载点；数据全部在
+`dist/data/scenarios.json`，由前端 `fetch` 加载。因此改样式不必重新生成数据，更新数据
+也不必重写页面。
+
 ---
 
-## 四、构建与部署
+## 五、构建与部署
 
 ### 构建
 
@@ -91,7 +119,7 @@ python3 pipeline/analyze.py
 ```
 
 脚本读取 `data/raw/` 与 `data/` 中的既有数据，输出四类产物：SQLite 索引、Markdown 报告、
-结构化 JSON，以及 `dist/` 站点。运行环境仅需 Python 3.9 及以上，无第三方依赖。
+站点数据 JSON，以及 `dist/` 站点。运行环境仅需 Python 3.9 及以上，无第三方依赖。
 
 ### 部署至 Cloudflare Pages
 
@@ -112,29 +140,30 @@ Python 可用性不作保证；而站点产物为纯静态文件，本地构建�
 python3 -m http.server 8000 --directory dist
 ```
 
-访问 `http://localhost:8000`。页面运行时不发起任何网络请求，全部数据在构建阶段内联，
-因此直接以 `file://` 打开 `dist/index.html` 亦可正常工作。
+访问 `http://localhost:8000`。
+
+**必须通过 HTTP 打开**：数据由前端 `fetch` 加载，直接双击以 `file://` 打开会被浏览器
+的同源策略拦截，页面会提示加载失败并给出上述命令。
 
 ---
 
-## 五、数据更新
+## 六、数据更新
 
 1. 抓取 `https://mooncakes.io/api/v0/modules`，写入 `data/raw/modules_api.json`；
 2. 通过 `https://mooncakes.io/api/v0/search?kw=<关键词>&limit=100` 补齐下载量，写入
    `data/raw/downloads.json`。该接口单次上限 100 条且不支持分页，需以「关键词并集」加
    「包名精确检索」两步合并，方可覆盖全量；
-3. 从 gaato/mooncakes-graph 取 `metrics.tsv` 与 `versions.jsonl`，存入 `data/raw/`；
-4. 修改 `pipeline/analyze.py` 顶部的 `META_SNAPSHOT` 与 `GRAPH_SNAPSHOT`；
-5. 运行 `python3 pipeline/analyze.py`。
+3. 修改 `pipeline/analyze.py` 顶部的 `COLLECTED_AT` 为本次采集日期；
+4. 运行 `python3 pipeline/analyze.py`。
 
 ---
 
-## 六、命令行查询
+## 七、命令行查询
 
 ```bash
 python3 pipeline/query.py --list                    # 场景清单与两层计数
 python3 pipeline/query.py http                      # 指定场景的完整方案
-python3 pipeline/query.py "数据库"                   # 支持中文场景名
+python3 pipeline/query.py "移动端"                   # 支持中文场景名
 python3 pipeline/query.py http --libs --top 20      # 连同基础库一并展开
 python3 pipeline/query.py --search websocket        # 全量检索模块
 python3 pipeline/query.py --sql "select name,downloads from modules order by downloads desc limit 10"
@@ -142,24 +171,27 @@ python3 pipeline/query.py --sql "select name,downloads from modules order by dow
 
 ---
 
-## 七、排序方法
+## 八、排序方法
 
 ```
 score = min(关键词匹配度, 6) × 1.0
-      + log(1 + 下载量) × 1.05
-      + log(1 + 反向依赖数) × 0.55
+      + log(1 + 下载量) × 1.35
 ```
+
+只使用两项信号：与场景的关键词相关度、注册表内的下载量。**不引入反向依赖数、传递依赖数
+等派生指标**——本站只做导航，派生指标既扩大数据滞后面，也容易把「被依赖得多」误当成
+「适合这个场景」。
 
 关键词匹配依据 `keywords`、包名词元与描述词元，并做词干前缀归一（使 `async` 命中
 "Asynchronous"、`argparse` 命中 `ArgParser`）。易混场景设有排除规则，例如 UI 场景排除
-TUI、文档场景排除 UI 框架。db、ui、net、gui 四个场景另有少量人工置顶，用于纠正「接口库
-排在使用库之前」的偏差。
+TUI、文档场景排除 UI 框架。db、net、gui、archive、fs、tool 等场景另有少量人工置顶，用于
+纠正「接口库排在使用库之前」的偏差。
 
 仅纳入下载量大于 20 的模块（3520 个中的 3341 个），yanked 包不进入推荐。
 
 ---
 
-## 八、已知局限
+## 九、已知局限
 
 1. **下载量为累计值**，不反映近期热度，发布较早的包天然占优。
 2. **约 386 个包无描述、680 个无关键词**，仅能依据包名匹配，存在遗漏可能。
@@ -167,20 +199,23 @@ TUI、文档场景排除 UI 框架。db、ui、net、gui 四个场景另有少�
 4. **完整方案判定为主观白名单**，边界情形（如 `mizchi/tui` 计入方案而 `tonyfettes/xml`
    不计入）存在判断空间。代价是新发布的方案需人工补入方可出现在方案层。
 5. **基础库层未再细分**，目前未区分完整工具（如 `cmark`）与底层原语（如 `sha256`）。
-6. **`moonbit-community/window` 在注册表中已不可用**，现行为 fork 版 `wzzc-dev/window`；
+6. **桌面与移动端两个场景为人工圈定**：生态中既没有 `desktop`/`mobile` 这种可靠关键词
+   （`mobile` 会被三端窗口库命中，`ios` 会命中 `versions`），也无法靠描述区分，因此候选
+   清单与顺序由人工确定，其 `score` 字段为优先级序号而非算法得分。
+7. **运维场景同样为人工圈定且无完整方案**：生态中的运维能力分散在伪终端、子进程、系统
+   指标等单点库里，尚无框架级实现，仅列出 9 个基础库供组合。
+8. **部分场景基础库候选偏多**（wasm 303、parser 286、cli 221），源于关键词宽泛，未做进一步
+   收敛；详情页完整列出，首页仅显示前 5 个。
+9. **`moonbit-community/window` 在注册表中已不可用**，现行为 fork 版 `wzzc-dev/window`；
    `Milky2018/window` 为另一条独立实现。
-7. **`Yoorkin/rabbit-tea` 已被 yanked**，TEA 路线的现行实现为 `moonbit-community/rabbita`。
-8. **新包在公式中系统性偏弱**：`log(下载量)` 权重最高，而下载量为累计值，刚发布的包难以
-   与老包比较。`created_at` 系注册表收录时间而非项目起始时间，无法据以计算增长速度，
-   因此只能对部分框架级包（`proton`、`moui`、`native-gui`）人工加权。
-9. **跨端 UI 场景为人工圈定**，其 `score` 字段为优先级序号而非算法得分。
-10. **Proton 系列配套模块下载量偏高**：`proton_clipboard`、`proton_tray`、
-    `proton_global_hotkey` 等集中在 2.4 万上下且反向依赖仅 1~2，疑为随脚手架整包拉取，
-    不宜视作独立采用度。
+10. **`Yoorkin/rabbit-tea` 已被 yanked**，TEA 路线的现行实现为 `moonbit-community/rabbita`。
+11. **新包在公式中系统性偏弱**：`log(下载量)` 权重最高，而下载量为累计值，刚发布的包难以
+    与老包比较。`created_at` 系注册表收录时间而非项目起始时间，无法据以计算增长速度，
+    因此只能对部分框架级包（`proton`、`moui`、`native-gui`）人工加权。
 
 ---
 
-## 九、许可与致谢
+## 十、许可与致谢
 
-数据来源为 mooncakes.io 公开 API 与 gaato/mooncakes-graph 的公开快照，版权归各原始项目所有。
-本项目仅做聚合、分层与呈现，不修改原始数据。
+数据来源为 mooncakes.io 公开 API，版权归各原始项目所有。本项目仅做聚合、分层与呈现，
+不修改原始数据。

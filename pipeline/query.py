@@ -1,22 +1,25 @@
 #!/usr/bin/env python3
 """
-MoonBit 生态索引 · 场景化推荐查询
+MoonBit 生态索引 · 场景化查询
 
 用法：
-  python3 recommend.py --list                列出所有场景
-  python3 recommend.py db                    按场景 id 查推荐
-  python3 recommend.py "数据库"               按场景标题模糊匹配
-  python3 recommend.py --search json         全量搜索模块（名字/描述/关键词）
-  python3 recommend.py --search http --top 15
-  python3 recommend.py --sql "select name,downloads from modules order by downloads desc limit 5"
-"""
+  python3 pipeline/query.py --list                 列出全部场景
+  python3 pipeline/query.py mobi                   按场景 id 查完整方案
+  python3 pipeline/query.py "移动端"               按场景标题模糊匹配
+  python3 pipeline/query.py gui --libs             连基础库一起看
+  python3 pipeline/query.py --search json          全量检索模块（名称/描述/关键词）
+  python3 pipeline/query.py --sql "select name,downloads from modules order by downloads desc limit 5"
 
+本工具只读索引库，不做任何写操作。包的版本历史、API 文档与依赖关系请到
+mooncakes 包页查看，输出里每个包都带有该页地址。
+"""
 import argparse
 import sqlite3
 import sys
 from pathlib import Path
 
 DB = Path(__file__).resolve().parent.parent / "data" / "moonbit_index.db"
+MK = "https://mooncakes.io/docs/"
 
 
 def fmt(n):
@@ -30,101 +33,102 @@ def fmt(n):
 
 def conn():
     if not DB.exists():
-        sys.exit(f"索引不存在：{DB}\n先运行：python3 build.py")
+        sys.exit(f"索引不存在：{DB}\n先运行：python3 pipeline/analyze.py")
     return sqlite3.connect(DB)
 
 
 def cmd_list(con):
     rows = con.execute("""
         SELECT s.scenario, s.title,
-               SUM(CASE WHEN s.tier='framework' THEN 1 ELSE 0 END) AS fw,
-               SUM(CASE WHEN s.tier='dep' THEN 1 ELSE 0 END) AS dep
+               SUM(CASE WHEN s.tier='solution' THEN 1 ELSE 0 END) AS sol,
+               SUM(CASE WHEN s.tier='lib' THEN 1 ELSE 0 END) AS lib
         FROM scenarios s GROUP BY s.scenario, s.title
         ORDER BY MIN(s.rowid)
     """).fetchall()
-    print(f"{'场景 id':<12}{'标题':<28}{'框架':>5}{'依赖':>6}")
-    print("-" * 54)
-    for sc, title, fw, dep in rows:
-        flag = "" if fw else "  ← 本场景无框架"
-        print(f"{sc:<12}{title:<28}{fw:>5}{dep:>6}{flag}")
-    print("\n用 `python3 recommend.py <场景 id>` 查看框架；加 `--deps` 一并看依赖。")
+    print(f"{'场景 id':<12}{'标题':<30}{'完整方案':>9}{'基础库':>8}")
+    print("-" * 59)
+    for sc, title, sol, lib in rows:
+        flag = "" if sol else "  ← 尚无完整方案"
+        print(f"{sc:<12}{title:<30}{sol:>9}{lib:>8}{flag}")
+    print(f"\n共 {len(rows)} 个场景。"
+          f"用 `python3 pipeline/query.py <场景 id>` 查看；加 `--libs` 一并看基础库。")
 
 
-def _print_rows(con, scenario, tier, top, header, indent=""):
+def _print_rows(con, scenario, tier, top, header):
     rows = con.execute("""
-        SELECT s.rank, s.module, m.version, m.downloads, m.transitive,
-               m.description, m.repository, ROUND(s.score, 2)
+        SELECT s.rank, s.module, m.version, m.downloads, m.description, ROUND(s.score, 2)
         FROM scenarios s JOIN modules m ON m.name = s.module
         WHERE s.scenario = ? AND s.tier = ? ORDER BY s.rank LIMIT ?
     """, (scenario, tier, top)).fetchall()
     total = con.execute("SELECT COUNT(*) FROM scenarios WHERE scenario=? AND tier=?",
                         (scenario, tier)).fetchone()[0]
-    print(f"{indent}{header}（{total}）\n")
+    print(f"{header}（{total}）\n")
     if not rows:
-        print(f"{indent}  —\n")
+        print("  —\n")
         return
-    for rank, name, ver, dl, tr, desc, repo, score in rows:
-        print(f"{indent}{rank:>2}. {name}  v{ver}")
-        print(f"{indent}    下载 {fmt(dl)} · {tr} 反向依赖 · 匹配分 {score}"
-              + (f" · {repo}" if repo else ""))
+    for rank, name, ver, dl, desc, score in rows:
+        print(f"  {rank:>2}. {name}  v{ver}   下载 {fmt(dl)}   匹配分 {score}")
+        print(f"      {MK}{name}")
         if desc:
-            print(f"{indent}    {desc[:150]}")
+            print(f"      {desc[:150]}")
         print()
     if total > len(rows):
-        print(f"{indent}  … 另有 {total - len(rows)} 个，用 --top {total} 看全\n")
+        print(f"  … 另有 {total - len(rows)} 个，用 --top {total} 看全\n")
 
 
-def show_scenario(con, scenario, top, deps=False):
-    row = con.execute("SELECT DISTINCT title FROM scenarios WHERE scenario=?", (scenario,)).fetchone()
+def show_scenario(con, scenario, top, libs=False):
+    row = con.execute("SELECT DISTINCT title FROM scenarios WHERE scenario=?",
+                      (scenario,)).fetchone()
     if not row:
         return False
-    print(f"\n{row[0]}  ({scenario})")
-    n_fw = con.execute("SELECT COUNT(*) FROM scenarios WHERE scenario=? AND tier='framework'",
-                       (scenario,)).fetchone()[0]
-    if n_fw:
-        _print_rows(con, scenario, "framework", top, "【框架】定义程序结构，可直接选型")
+    print(f"\n【{row[0]}】  ({scenario})")
+    n_sol = con.execute("SELECT COUNT(*) FROM scenarios WHERE scenario=? AND tier='solution'",
+                        (scenario,)).fetchone()[0]
+    if n_sol:
+        _print_rows(con, scenario, "solution", top, "完整方案 · 可直接选型、承担程序骨架")
     else:
-        print("【框架】无 —— 这个场景没有框架级方案，只能拿零件自己组装\n")
-    if deps:
-        _print_rows(con, scenario, "dep", top, "【依赖 / 零件】配合框架使用")
+        print("完整方案 · 无 —— 该场景尚无骨架，只能由基础库组合实现\n")
+    if libs:
+        _print_rows(con, scenario, "lib", top, "基础库 · 提供单点能力，由调用方组合")
     else:
-        n_dep = con.execute("SELECT COUNT(*) FROM scenarios WHERE scenario=? AND tier='dep'",
+        n_lib = con.execute("SELECT COUNT(*) FROM scenarios WHERE scenario=? AND tier='lib'",
                             (scenario,)).fetchone()[0]
-        print(f"【依赖 / 零件】共 {n_dep} 个，加 --deps 查看\n")
+        print(f"基础库 · 共 {n_lib} 个，加 --libs 查看\n")
     return True
 
 
 def search_scenarios(con, text):
-    rows = con.execute("""
+    return con.execute("""
         SELECT DISTINCT scenario, title FROM scenarios
         WHERE title LIKE ? OR scenario LIKE ?
     """, (f"%{text}%", f"%{text}%")).fetchall()
-    return rows
 
 
 def cmd_search(con, text, top):
     like = f"%{text}%"
     rows = con.execute("""
-        SELECT name, version, downloads, transitive, description, repository
+        SELECT name, version, downloads, description, yanked
         FROM modules
         WHERE name LIKE ? OR description LIKE ? OR keywords LIKE ?
         ORDER BY downloads DESC LIMIT ?
     """, (like, like, like, top)).fetchall()
-    print(f"\n搜索「{text}」：{len(rows)} 条（按下载量排序）\n")
-    for name, ver, dl, tr, desc, repo in rows:
-        print(f"  {name}  v{ver}  下载 {fmt(dl)} · {tr} 反向依赖")
+    print(f"\n检索「{text}」：共 {len(rows)} 条（按下载量降序）\n")
+    for name, ver, dl, desc, yanked in rows:
+        mark = "  [yanked]" if yanked else ""
+        print(f"  {name}  v{ver}   下载 {fmt(dl)}{mark}")
+        print(f"      {MK}{name}")
         if desc:
-            print(f"    {desc[:130]}")
+            print(f"      {desc[:130]}")
     if not rows:
         print("  没有匹配结果，试试更宽的关键词。")
 
 
 def main():
-    ap = argparse.ArgumentParser(add_help=True, description="MoonBit 生态场景化推荐")
-    ap.add_argument("query", nargs="?", help="场景 id / 标题关键词 / 搜索词")
-    ap.add_argument("--list", action="store_true", help="列出所有场景")
-    ap.add_argument("--search", metavar="TEXT", help="全量搜索模块")
-    ap.add_argument("--deps", action="store_true", help="同时显示依赖 / 零件层")
+    ap = argparse.ArgumentParser(description="MoonBit 生态场景化索引查询")
+    ap.add_argument("query", nargs="?", help="场景 id / 标题关键词 / 检索词")
+    ap.add_argument("--list", action="store_true", help="列出全部场景")
+    ap.add_argument("--search", metavar="TEXT", help="全量检索模块")
+    ap.add_argument("--libs", action="store_true", help="同时显示基础库层")
     ap.add_argument("--top", type=int, default=8, help="每层返回条数（默认 8）")
     ap.add_argument("--sql", help="直接执行 SQL（只读）")
     args = ap.parse_args()
@@ -156,12 +160,12 @@ def main():
         return
 
     q = args.query.strip()
-    if show_scenario(con, q, args.top, args.deps):
+    if show_scenario(con, q, args.top, args.libs):
         return
 
     hits = search_scenarios(con, q)
     if len(hits) == 1:
-        show_scenario(con, hits[0][0], args.top, args.deps)
+        show_scenario(con, hits[0][0], args.top, args.libs)
         return
     if len(hits) > 1:
         print(f"「{q}」匹配到多个场景：")
@@ -170,7 +174,6 @@ def main():
         print("\n请用场景 id 精确查询。")
         return
 
-    # 不是场景名 → 退化为模块搜索
     cmd_search(con, q, args.top)
 
 
