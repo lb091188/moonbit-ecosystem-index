@@ -129,7 +129,13 @@ SCENARIOS = [
          pin=["wzzc-dev/moui", "moonbit-community/proton"],
          # 框架级包（一事全包：窗口+控件+系统能力）优先于单一绑定，
          # 否则新发布的框架会被 2 万下载的老绑定压在十几名开外。
-         boost={"wzzc-dev/moui": 2.0, "NoahLiu/native-gui": 3.0}, top=10,
+         boost={"wzzc-dev/moui": 2.0, "NoahLiu/native-gui": 3.0,
+                "Nanaloveyuki/orbit": 1.3}, top=10,
+         # 漏收兜底：这几项的注册表元数据命不中 core 词，或被 ex_prefix 提前挡掉，
+         # 但它们确实是桌面能力包，按本层中位分安置（不因手工收录而占据前列）。
+         force=["f4ah6o/gpui",              # GPUI 模型的 MoonBit 实现：App/布局/事件/场景
+                "wzzc-dev/moui_webview",     # moui 的 WKWebView / WebKitGTK / WebView2 后端
+                "shiguri-01/webview"],       # webview/webview 低层绑定，与 justjavac/webview 同类
          ex_prefix=["wzzc-dev/moui_"]),
     # 移动端：关键词层面不可靠（"mobile" 会命中 window 的三端后端，"ios" 会命中
     # "scenarios" 这类词），候选以人工圈定为主。
@@ -468,8 +474,11 @@ SOLUTIONS = {
              "sssssurf/abyssal_chord", "firefly/firefly"],
     "ui": ["moonbit-community/rabbita", "mizchi/luna", "marianoguerra/tutuca",
            "Arcelyth/aitne", "lampclaw/minimoon", "vectie/bunnia"],
+    # orbit 是 Tauri 那一套的完整实现：原生窗口 + 系统 WebView + 策略授权 IPC
+    # + orbit-cli 脚手架与打包，前端不限框架（静态 HTML / React / Vue 都能嵌）。
+    # 它此前只在基础库里，看起来像"又一个绑定"，其实它能接管整个应用结构。
     "gui": ["moonbit-community/proton", "wzzc-dev/moui", "NoahLiu/native-gui",
-            "vectie/lepusa", "lepus-apps/webview", "tonyfettes/giraffe"],
+            "vectie/lepusa", "Nanaloveyuki/orbit", "lepus-apps/webview", "tonyfettes/giraffe"],
     # 移动端：小程序 / HarmonyOS / React Native 三条路线各有自己的运行时，
     # 全平台 GUI 框架（moui）同样覆盖移动端，一并计入
     "mobi": ["XiLaiTL/moobile", "wzzc-dev/moui", "lampclaw/minimoon",

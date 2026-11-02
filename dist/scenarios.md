@@ -14,7 +14,7 @@
 
 ## 目录
 
-- [桌面](#gui) — 方案 6 / 基础库 29
+- [桌面](#gui) — 方案 7 / 基础库 31
 - [移动端](#mobi) — 方案 7 / 基础库 8
 - [Web UI / 前端框架](#ui) — 方案 6 / 基础库 50
 - [终端 UI / TUI](#tui) — 方案 5 / 基础库 50
@@ -57,7 +57,7 @@
 
 原生桌面应用开发：窗口创建、事件循环、控件布局与渲染后端接入。Proton 的托盘、剪贴板、全局热键等配套模块不计入本表。
 
-### 完整方案（6）
+### 完整方案（7）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -65,10 +65,11 @@
 | 2 | [wzzc-dev/moui](https://mooncakes.io/docs/wzzc-dev/moui) | 0.2.6 | MoUI is a multi-platform MoonBit GUI framework |
 | 3 | [NoahLiu/native-gui](https://mooncakes.io/docs/NoahLiu/native-gui) | 0.3.1 | MoonBit 跨平台桌面 GUI 框架：一套代码直出 Windows / Linux / macOS 原生窗口，托盘/通知/快捷键/输入法/自启等系统能力开箱… |
 | 4 | [vectie/lepusa](https://mooncakes.io/docs/vectie/lepusa) | 0.1.6 | MoonBit-native desktop application framework research and implementation. |
-| 5 | [lepus-apps/webview](https://mooncakes.io/docs/lepus-apps/webview) | 0.1.15 | A modern desktop application framework based on web technologies. |
-| 6 | [tonyfettes/giraffe](https://mooncakes.io/docs/tonyfettes/giraffe) | 0.2.0 | Elm-style declarative UI framework for MoonBit, built on GTK4 |
+| 5 | [Nanaloveyuki/orbit](https://mooncakes.io/docs/Nanaloveyuki/orbit) | 0.2.0-alpha.1 | Composable desktop application foundations for MoonBit. |
+| 6 | [lepus-apps/webview](https://mooncakes.io/docs/lepus-apps/webview) | 0.1.15 | A modern desktop application framework based on web technologies. |
+| 7 | [tonyfettes/giraffe](https://mooncakes.io/docs/tonyfettes/giraffe) | 0.2.0 | Elm-style declarative UI framework for MoonBit, built on GTK4 |
 
-### 基础库（29）
+### 基础库（31）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
