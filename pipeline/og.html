@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>og card</title>
+<!-- 分享卡片源文件：1200×630，由 pipeline/make_assets.py 用 headless Chrome 截成 dist/og.png。
+     刻意不用外部字体与图片，任何机器上渲染结果一致。 -->
+<style>
+  * { box-sizing:border-box; }
+  html, body { margin:0; padding:0; }
+  body {
+    width:1200px; height:630px; overflow:hidden;
+    background:#f6f7f9; color:#171a1f;
+    font-family:-apple-system, "PingFang SC", "Noto Sans CJK SC", "Source Han Sans SC",
+      "Microsoft YaHei", system-ui, sans-serif;
+    display:flex; flex-direction:column; justify-content:space-between;
+    padding:64px 68px 56px;
+    border-top:8px solid #2f5fe0;
+  }
+  .top { display:flex; align-items:center; gap:14px; }
+  .mark { width:40px; height:40px; border-radius:10px; background:#2f5fe0;
+    display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr;
+    gap:3px; padding:8px; }
+  .mark i { background:#fff; border-radius:2px; }
+  .brand { font-size:22px; font-weight:650; letter-spacing:-.2px; }
+  .host { margin-left:auto; font-size:17px; color:#8b939f; }
+  h1 { margin:26px 0 0; font-size:60px; line-height:1.16; letter-spacing:-1.6px;
+    font-weight:700; }
+  h1 em { font-style:normal; color:#2f5fe0; }
+  .sub { margin:20px 0 0; font-size:23px; line-height:1.6; color:#4b5563;
+    max-width:1060px; }
+  .stats { display:flex; gap:56px; margin-top:40px; }
+  .stat b { display:block; font-size:44px; line-height:1.1; letter-spacing:-1px;
+    font-variant-numeric:tabular-nums; }
+  .stat span { display:block; margin-top:6px; font-size:17px; color:#6b7280; }
+  .foot { display:flex; align-items:center; gap:10px; font-size:17px; color:#8b939f;
+    border-top:1px solid #e4e7ec; padding-top:20px; }
+  .foot b { color:#4b5563; font-weight:600; }
+</style>
+</head>
+<body>
+  <div class="top">
+    <div class="mark"><i></i><i></i><i></i><i></i></div>
+    <div class="brand">MoonBit 生态索引</div>
+    <div class="host">moonbit-ecosystem-index.pages.dev</div>
+  </div>
+
+  <div>
+    <h1>选包，按场景来：<br>从 <em>3520</em> 个模块里，先看 <em>37</em> 个场景</h1>
+    <p class="sub">每个场景分两层：能直接定骨架的「完整方案」，与按需组合的「基础库」。<br>
+        没有完整方案的场景只说没有，不摆空的分层。</p>
+    <div class="stats">
+      <div class="stat"><b>3520</b><span>收录模块</span></div>
+      <div class="stat"><b>37</b><span>使用场景</span></div>
+      <div class="stat"><b>15</b><span>已有完整方案</span></div>
+      <div class="stat"><b>71</b><span>完整方案包</span></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <b>数据</b> mooncakes.io 官方 API · <b>页面</b> 中英双语 · <b>源码</b> github.com/lb091188/moonbit-ecosystem-index
+  </div>
+</body>
+</html>

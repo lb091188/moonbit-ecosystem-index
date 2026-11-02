@@ -36,6 +36,9 @@ DIST = ROOT / "dist"          # 静态发布目录（Cloudflare Pages / 任意�
 
 # 仓库地址：页首的 GitHub 入口与页脚的反馈段都由它生成，避免两处写死不同地址。
 REPO = "https://github.com/lb091188/moonbit-ecosystem-index"
+# 站点地址：og:url 与 og:image 必须是绝对 URL（抓取方不解析相对路径）。
+# 换域名时改这里，README 的部署一节也提到这一行。
+SITE = "https://moonbit-ecosystem-index.pages.dev"
 OUT.mkdir(parents=True, exist_ok=True)
 
 TOKEN = re.compile(r"[a-z0-9]+")
@@ -1462,6 +1465,27 @@ def write_html(mods, ranked):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MoonBit 生态索引 · 场景化选型参考</title>
 <meta name="description" content="按使用场景组织的 MoonBit 包索引：{len(SCENARIOS)} 个场景，区分完整方案与基础库。">
+<!-- 分享卡片：抓取方不执行 JS，所以这组标签是静态的中文默认值，
+     站内的语言切换只改 <title> 与 description，不影响这里。 -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MoonBit 生态索引">
+<meta property="og:title" content="MoonBit 生态索引 · 按场景选包">
+<meta property="og:description" content="把 {len(mods)} 个 MoonBit 包按 {len(SCENARIOS)} 个使用场景分开，每个场景分「完整方案」与「基础库」两层：前者能直接定骨架，后者提供单点能力。数据来自 mooncakes.io 官方 API。">
+<meta property="og:url" content="{SITE}/">
+<meta property="og:image" content="{SITE}/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="MoonBit 生态索引：按使用场景组织的包索引，区分完整方案与基础库">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MoonBit 生态索引 · 按场景选包">
+<meta name="twitter:description" content="把 {len(mods)} 个 MoonBit 包按 {len(SCENARIOS)} 个使用场景分开：完整方案与基础库两层。">
+<meta name="twitter:image" content="{SITE}/og.png">
+<meta name="theme-color" content="#2f5fe0">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="alternate icon" href="favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <style>{HTML_CSS}</style>
 </head>
 <body>

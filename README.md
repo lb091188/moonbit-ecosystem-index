@@ -153,7 +153,9 @@ time、log）在生态中尚无框架或引擎级实现。这些场景在站内�
 .
 ├── pipeline/
 │   ├── analyze.py            数据合并、场景打分、排序与产物生成
-│   └── query.py              命令行查询（场景 / 全量检索 / SQL）
+│   ├── query.py              命令行查询（场景 / 全量检索 / SQL）
+│   ├── og.html               分享卡片源文件（1200×630，headless 截图用）
+│   └── make_assets.py        生成分享卡片与站点图标（手动执行，不参与日常构建）
 ├── data/
 │   ├── raw/                  原始快照，只增不改，用于复现
 │   ├── i18n.json             场景与分组的英文译文（构建时校验完整性）
@@ -164,6 +166,9 @@ time、log）在生态中尚无框架或引擎级实现。这些场景在站内�
 │   ├── index.html            骨架，仅有样式与容器，不含数据
 │   ├── assets/app.js         前端逻辑（路由、渲染、检索）
 │   ├── data/scenarios.json   全部数据
+│   ├── og.png                分享卡片（og:image / twitter:image）
+│   ├── favicon.ico           16/32/48 图标（另见 assets/favicon.svg）
+│   ├── apple-touch-icon.png  180×180，iOS 添加到主屏
 │   └── scenarios.md
 ├── scenarios.md              场景推荐报告（Markdown，便于引用于文档）
 └── README.md
@@ -214,6 +219,30 @@ npx wrangler pages deploy dist --project-name moonbit-ecosystem-index
 Python 可用性不作保证；而站点产物为纯静态文件，本地构建后上传即可满足需求，无须为此
 引入额外的 Node 构建链。若确实需要云端重建（例如以后加定时抓取），把构建命令改为
 `python3 pipeline/analyze.py` 即可——`data/raw/` 已在仓库内，脚本无第三方依赖。
+
+### 分享卡片与站点图标
+
+链接被分享到微信、Discord、Slack、X 时显示成什么样，由 `<head>` 里的 `og:` 一组标签决定。
+抓取方不执行 JavaScript，所以这组标签是**静态中文默认值**，站内的语言切换不会改动它们。
+
+```bash
+python3 pipeline/make_assets.py     # 仅在改配色、改文案或换域名后需要重跑
+```
+
+| 产物 | 用途 |
+| --- | --- |
+| `dist/og.png` | 1200×630 分享卡片，`og:image` 与 `twitter:image` |
+| `dist/assets/favicon.svg` | 矢量图标，现代浏览器优先使用 |
+| `dist/favicon.ico` | 16/32/48 三档，兜住旧客户端与对 `/favicon.ico` 的硬请求 |
+| `dist/apple-touch-icon.png` | 180×180，iOS 添加到主屏 |
+
+`make_assets.py` 不参与日常构建，也不在 `analyze.py` 的调用链里：这些产物已入库，只有内容
+变了才需要重跑。它依赖 Pillow（画图标）与本机 Chrome（把 `pipeline/og.html` 截成卡片）；
+缺 Chrome 时只更新图标、卡片保持原样，不会留下半张图。卡片本身是 `pipeline/og.html`，
+改文案直接改这个文件，比改 Python 里的字符串直观。
+
+换域名时要改 `pipeline/analyze.py` 顶部的 `SITE`：`og:url` 与 `og:image` 必须是绝对 URL，
+抓取方不解析相对路径，改漏了分享出去的卡片就是空白。
 
 ### 本地预览
 
