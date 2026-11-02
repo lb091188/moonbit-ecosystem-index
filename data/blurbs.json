@@ -7,16 +7,16 @@
     "Desktop runtime rendering through a built-in browser, compatible with existing frontend stacks, with tray, clipboard and global hotkey modules."
   ],
   "wzzc-dev/moui": [
-    "自带渲染引擎的跨端 GUI 框架，不依赖系统 WebView，桌面与移动共用一套代码。",
-    "Cross-platform GUI framework with a built-in renderer, independent of system WebView; one codebase for desktop and mobile."
+    "自带渲染引擎的跨端 GUI 框架，不依赖系统 WebView 与系统渲染，桌面与移动共用一套代码。",
+    "Cross-platform GUI framework with a built-in renderer, independent of system WebView and system rendering; one codebase for desktop and mobile."
   ],
   "NoahLiu/native-gui": [
-    "原生桌面 GUI 框架，一套代码生成 Windows、Linux、macOS 窗口，内置托盘、通知与快捷键。",
-    "Native desktop GUI framework; one codebase yields native windows on Windows, Linux and macOS, with tray, notifications, hotkeys, IME and autostart built in."
+    "原生桌面 GUI 框架，界面由系统渲染引擎绘制，一套代码生成 Windows、Linux、macOS 窗口，内置托盘与通知。",
+    "Native desktop GUI framework rendering through the system renderer; one codebase yields native windows on Windows, Linux and macOS, with tray and notifications built in."
   ],
   "vectie/lepusa": [
-    "MoonBit 原生桌面框架的研究性实现，适合作为架构参考，尚不适用于生产环境。",
-    "A research implementation of a MoonBit-native desktop framework; suitable as an architectural reference rather than for production use."
+    "MoonBit 原生桌面框架的研究性实现，可作为架构参考。",
+    "A research implementation of a MoonBit-native desktop framework, usable as an architectural reference."
   ],
   "Nanaloveyuki/orbit": [
     "组合式桌面应用基座，原生窗口配系统 WebView，IPC 支持策略授权，附 orbit-cli 工具链。",
@@ -27,8 +27,8 @@
     "Desktop application framework built on web technologies: the interface is implemented in HTML/CSS while MoonBit handles windows, events and system calls."
   ],
   "tonyfettes/giraffe": [
-    "基于 GTK4 的声明式 UI 框架，采用 Elm 架构与原生控件，Linux 桌面支持最完整。",
-    "Declarative UI framework bound to GTK4, using the Elm architecture with native widgets; most complete on Linux."
+    "基于 GTK4 的声明式 UI 框架，采用 Elm 架构，界面由 GTK 原生控件构成。",
+    "Declarative UI framework bound to GTK4, using the Elm architecture with native GTK widgets."
 
   ],
 
@@ -146,12 +146,12 @@
     "Hono-style web framework with trie routing, middleware and SSE, built on mizchi/x HTTP for both native and Node.js."
   ],
   "oboard/mocket": [
-    "通用 Web 框架，提供路由与中间件，接口风格接近 Express。",
-    "General web framework offering routing and middleware in an Express-like style."
+    "通用 Web 框架，提供路由与中间件等基础能力。",
+    "General web framework providing routing and middleware."
   ],
   "bobzhang/crescent": [
-    "Web 框架，由 MoonBit 语言作者实现，具有探索性质，宜作参考而非直接用于生产。",
-    "A web framework by MoonBit's language author; exploratory in nature, better read as reference than deployed in production."
+    "Web 框架，由 MoonBit 语言作者实现，目前公开文档较少。",
+    "A web framework by MoonBit's language author; public documentation is still limited."
   ],
   "jaredzhou/pony": [
     "轻量 HTTP 框架与路由器，采用 Go 的 Chi 风格，适用于仅需路由与中间件的服务。",
@@ -182,8 +182,8 @@
     "Django-style backend framework built on moonback with conventions for project structure."
   ],
   "moonbitstack/moonzero": [
-    "服务框架，面向多服务拆分而非单机 HTTP 应用，抽象层次高于 Web 框架。",
-    "Service framework aimed at multi-service decomposition rather than a single HTTP app, one level above a web framework."
+    "服务框架，面向服务化场景，与 Web 框架定位不同。",
+    "Service framework for service-oriented scenarios, positioned differently from a web framework."
   ],
   "anccnuer/onho": [
     "Hono 风格轻量 Web 框架，提供基础的路由与中间件。",

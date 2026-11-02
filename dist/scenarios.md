@@ -64,12 +64,12 @@
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
 | 1 | [moonbit-community/proton](https://mooncakes.io/docs/moonbit-community/proton) | 0.6.0 | 基于内置浏览器渲染的桌面运行时，兼容现有前端技术栈，并提供托盘、剪贴板、全局热键等系统模块。 |
-| 2 | [wzzc-dev/moui](https://mooncakes.io/docs/wzzc-dev/moui) | 0.2.6 | 自带渲染引擎的跨端 GUI 框架，不依赖系统 WebView，桌面与移动共用一套代码。 |
-| 3 | [NoahLiu/native-gui](https://mooncakes.io/docs/NoahLiu/native-gui) | 0.3.1 | 原生桌面 GUI 框架，一套代码生成 Windows、Linux、macOS 窗口，内置托盘、通知与快捷键。 |
-| 4 | [vectie/lepusa](https://mooncakes.io/docs/vectie/lepusa) | 0.1.6 | MoonBit 原生桌面框架的研究性实现，适合作为架构参考，尚不适用于生产环境。 |
+| 2 | [wzzc-dev/moui](https://mooncakes.io/docs/wzzc-dev/moui) | 0.2.6 | 自带渲染引擎的跨端 GUI 框架，不依赖系统 WebView 与系统渲染，桌面与移动共用一套代码。 |
+| 3 | [NoahLiu/native-gui](https://mooncakes.io/docs/NoahLiu/native-gui) | 0.3.1 | 原生桌面 GUI 框架，界面由系统渲染引擎绘制，一套代码生成 Windows、Linux、macOS 窗口，内置托盘与通知。 |
+| 4 | [vectie/lepusa](https://mooncakes.io/docs/vectie/lepusa) | 0.1.6 | MoonBit 原生桌面框架的研究性实现，可作为架构参考。 |
 | 5 | [Nanaloveyuki/orbit](https://mooncakes.io/docs/Nanaloveyuki/orbit) | 0.2.0-alpha.1 | 组合式桌面应用基座，原生窗口配系统 WebView，IPC 支持策略授权，附 orbit-cli 工具链。 |
 | 6 | [lepus-apps/webview](https://mooncakes.io/docs/lepus-apps/webview) | 0.1.15 | 以 Web 技术构建桌面应用的框架，界面层由 HTML/CSS 实现，MoonBit 负责窗口与系统调用。 |
-| 7 | [tonyfettes/giraffe](https://mooncakes.io/docs/tonyfettes/giraffe) | 0.2.0 | 基于 GTK4 的声明式 UI 框架，采用 Elm 架构与原生控件，Linux 桌面支持最完整。 |
+| 7 | [tonyfettes/giraffe](https://mooncakes.io/docs/tonyfettes/giraffe) | 0.2.0 | 基于 GTK4 的声明式 UI 框架，采用 Elm 架构，界面由 GTK 原生控件构成。 |
 
 ### 基础库（30）
 
@@ -98,7 +98,7 @@ Android、iOS、HarmonyOS 与微信小程序上的应用开发。生态中尚无
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
 | 1 | [XiLaiTL/moobile](https://mooncakes.io/docs/XiLaiTL/moobile) | 0.6.0 | Rabbita（TEA）移动端方案，一套代码输出 Android、iOS 与 Web，React Native 渲染。 |
-| 2 | [wzzc-dev/moui](https://mooncakes.io/docs/wzzc-dev/moui) | 0.2.6 | 自带渲染引擎的跨端 GUI 框架，不依赖系统 WebView，桌面与移动共用一套代码。 |
+| 2 | [wzzc-dev/moui](https://mooncakes.io/docs/wzzc-dev/moui) | 0.2.6 | 自带渲染引擎的跨端 GUI 框架，不依赖系统 WebView 与系统渲染，桌面与移动共用一套代码。 |
 | 3 | [lampclaw/minimoon](https://mooncakes.io/docs/lampclaw/minimoon) | 0.3.2 | 面向微信小程序 Skyline 渲染引擎的 UI 运行时，采用 Elm 状态机，局部状态更新具备事务性。 |
 | 4 | [Magic486/moon-miniprogram](https://mooncakes.io/docs/Magic486/moon-miniprogram) | 0.6.1 | 微信小程序开发框架，提供类型安全运行时、状态自动 diff、跨页 store 与声明式路由。 |
 | 5 | [shop1111/moonohos](https://mooncakes.io/docs/shop1111/moonohos) | 0.6.0 | HarmonyOS 原生模块框架，支持异步任务、平台模块调用与 HAR 打包。 |
@@ -312,8 +312,8 @@ HTTP 服务、路由、中间件与后端 API 开发。
 |---|---|---|---|
 | 1 | [moonbitlang/moonback](https://mooncakes.io/docs/moonbitlang/moonback) | 0.8.10 | 官方 Web 后端框架，提供路由、中间件与请求响应抽象，是生态项目的常用基础。 |
 | 2 | [mizchi/mars](https://mooncakes.io/docs/mizchi/mars) | 0.3.13 | Hono 风格 Web 框架，提供 trie 路由、中间件与 SSE，可运行于原生与 Node.js。 |
-| 3 | [oboard/mocket](https://mooncakes.io/docs/oboard/mocket) | 0.10.2 | 通用 Web 框架，提供路由与中间件，接口风格接近 Express。 |
-| 4 | [bobzhang/crescent](https://mooncakes.io/docs/bobzhang/crescent) | 0.11.2 | Web 框架，由 MoonBit 语言作者实现，具有探索性质，宜作参考而非直接用于生产。 |
+| 3 | [oboard/mocket](https://mooncakes.io/docs/oboard/mocket) | 0.10.2 | 通用 Web 框架，提供路由与中间件等基础能力。 |
+| 4 | [bobzhang/crescent](https://mooncakes.io/docs/bobzhang/crescent) | 0.11.2 | Web 框架，由 MoonBit 语言作者实现，目前公开文档较少。 |
 | 5 | [jaredzhou/pony](https://mooncakes.io/docs/jaredzhou/pony) | 0.5.0 | 轻量 HTTP 框架与路由器，采用 Go 的 Chi 风格，适用于仅需路由与中间件的服务。 |
 | 6 | [RabitLogic/mbit](https://mooncakes.io/docs/RabitLogic/mbit) | 0.3.0 | Gin 风格 Web 框架，API 设计与 Go 生态一致，迁移成本低。 |
 | 7 | [moonbitstack/moonapi](https://mooncakes.io/docs/moonbitstack/moonapi) | 0.17.7 | 类型化 Web 框架，路由、参数与响应均纳入类型检查，错误在编译期暴露。 |
