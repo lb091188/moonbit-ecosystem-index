@@ -221,12 +221,15 @@ function setLang(next) {
 
 function pkg(name, i) {
   const m = D.modules[name] || ['', '', 0];   // [版本, 描述, yanked]
+  // 「完整方案」有编辑过的一句话简介（data/blurbs.json 里那条），基础库没有，退回注册表原描述
+  const bl = (D.blurbs || {})[name];
+  const desc = bl ? L(bl) : (m[1] || '\u2014');
   const ver = m[0] ? `<span class="v">v${esc(m[0])}</span>` : '';
   const yk = m[2] ? '<span class="yk">yanked</span>' : '';
   return `<li><span class="rk${i > 5 ? ' dim' : ''}">${i}</span>
     <div class="b">
       <div class="n"><a href="${MK(name)}" target="_blank" rel="noopener">${esc(name)}</a>${ver}${yk}</div>
-      <div class="d">${esc(m[1] || '\u2014')}</div>
+      <div class="d${bl ? ' bl' : ''}">${esc(desc)}</div>
     </div></li>`;
 }
 

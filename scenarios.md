@@ -12,6 +12,8 @@
 
 清单顺序在构建时确定，序号表示该场景内的推荐次序，不是下载量排行；同义词已做词干归一（如 async/asynchronous），并对易混淆场景做了排除（如 UI 场景排除 TUI）。
 
+「完整方案」的说明为人工撰写（`data/blurbs.json`），回答的是「它替你做了哪些决定、什么情况下该选它」；基础库的说明取自注册表原描述。
+
 ## 目录
 
 - [桌面](#gui) — 方案 7 / 基础库 30
@@ -61,13 +63,13 @@
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
-| 1 | [moonbit-community/proton](https://mooncakes.io/docs/moonbit-community/proton) | 0.6.0 | MoonBit bindings for the Proton native desktop runtime. |
-| 2 | [wzzc-dev/moui](https://mooncakes.io/docs/wzzc-dev/moui) | 0.2.6 | MoUI is a multi-platform MoonBit GUI framework |
-| 3 | [NoahLiu/native-gui](https://mooncakes.io/docs/NoahLiu/native-gui) | 0.3.1 | MoonBit 跨平台桌面 GUI 框架：一套代码直出 Windows / Linux / macOS 原生窗口，托盘/通知/快捷键/输入法/自启等系统能力开箱… |
-| 4 | [vectie/lepusa](https://mooncakes.io/docs/vectie/lepusa) | 0.1.6 | MoonBit-native desktop application framework research and implementation. |
-| 5 | [Nanaloveyuki/orbit](https://mooncakes.io/docs/Nanaloveyuki/orbit) | 0.2.0-alpha.1 | Composable desktop application foundations for MoonBit. |
-| 6 | [lepus-apps/webview](https://mooncakes.io/docs/lepus-apps/webview) | 0.1.15 | A modern desktop application framework based on web technologies. |
-| 7 | [tonyfettes/giraffe](https://mooncakes.io/docs/tonyfettes/giraffe) | 0.2.0 | Elm-style declarative UI framework for MoonBit, built on GTK4 |
+| 1 | [moonbit-community/proton](https://mooncakes.io/docs/moonbit-community/proton) | 0.6.0 | 类 Electron 的桌面运行时：界面交给内置浏览器承载，可直接复用现有前端生态，托盘、剪贴板、全局热键等系统模块配套齐全。 |
+| 2 | [wzzc-dev/moui](https://mooncakes.io/docs/wzzc-dev/moui) | 0.2.6 | 自带渲染引擎的跨端 GUI 框架：不依赖系统 WebView，桌面与移动共用一套代码，能覆盖到没有浏览器内核的设备。 |
+| 3 | [NoahLiu/native-gui](https://mooncakes.io/docs/NoahLiu/native-gui) | 0.3.1 | 纯原生桌面方案：一套代码直出 Windows / Linux / macOS 原生窗口，托盘、通知、快捷键、输入法、开机自启等系统能力开箱即用。 |
+| 4 | [vectie/lepusa](https://mooncakes.io/docs/vectie/lepusa) | 0.1.6 | MoonBit 原生桌面框架的研究性实现，更适合当参考读，而不是直接拿来做产品。 |
+| 5 | [Nanaloveyuki/orbit](https://mooncakes.io/docs/Nanaloveyuki/orbit) | 0.2.0-alpha.1 | 组合式桌面基座：原生窗口配系统 WebView，IPC 带策略授权，另附 orbit-cli 工具链，能力按需拼装而不是一次给全。 |
+| 6 | [lepus-apps/webview](https://mooncakes.io/docs/lepus-apps/webview) | 0.1.15 | 以 Web 技术构建桌面的应用框架：界面层完全交给 HTML / CSS，MoonBit 负责窗口、事件和系统调用。 |
+| 7 | [tonyfettes/giraffe](https://mooncakes.io/docs/tonyfettes/giraffe) | 0.2.0 | Elm 架构的声明式 UI 框架，底层绑定 GTK4，走原生控件路线，Linux 桌面上完成度最高。 |
 
 ### 基础库（30）
 
@@ -95,13 +97,13 @@ Android、iOS、HarmonyOS 与微信小程序上的应用开发。生态中尚无
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
-| 1 | [XiLaiTL/moobile](https://mooncakes.io/docs/XiLaiTL/moobile) | 0.6.0 | MoonBit UI for mobile: Android, iOS and Web from one rabbita (TEA) app, rendered… |
-| 2 | [wzzc-dev/moui](https://mooncakes.io/docs/wzzc-dev/moui) | 0.2.6 | MoUI is a multi-platform MoonBit GUI framework |
-| 3 | [lampclaw/minimoon](https://mooncakes.io/docs/lampclaw/minimoon) | 0.3.2 | A MoonBit UI runtime for WeChat MiniApp Skyline with Elm-style state machines, V… |
-| 4 | [Magic486/moon-miniprogram](https://mooncakes.io/docs/Magic486/moon-miniprogram) | 0.6.1 | MoonBit 微信小程序开发框架：类型安全运行时、状态自动 diff、跨页 store、声明式路由与无头测试基建 |
-| 5 | [shop1111/moonohos](https://mooncakes.io/docs/shop1111/moonohos) | 0.6.0 | HarmonyOS Native module framework for MoonBit: async tasks, platform modules and… |
-| 6 | [lampclaw/lampo](https://mooncakes.io/docs/lampclaw/lampo) | 0.1.0 | A MoonBit UI runtime for WeChat MiniApp Skyline with pure Elm-style authoring, c… |
-| 7 | [vectie/bunnia](https://mooncakes.io/docs/vectie/bunnia) | 0.1.0 | MoonBit mini-app UI framework with Rabbita-style authoring and modular platform … |
+| 1 | [XiLaiTL/moobile](https://mooncakes.io/docs/XiLaiTL/moobile) | 0.6.0 | 一套 Rabbita（TEA）代码同时出 Android / iOS / Web，渲染交给 React Native，前端团队迁移成本最低。 |
+| 2 | [wzzc-dev/moui](https://mooncakes.io/docs/wzzc-dev/moui) | 0.2.6 | 自带渲染引擎的跨端 GUI 框架：不依赖系统 WebView，桌面与移动共用一套代码，能覆盖到没有浏览器内核的设备。 |
+| 3 | [lampclaw/minimoon](https://mooncakes.io/docs/lampclaw/minimoon) | 0.3.2 | 面向微信小程序 Skyline 渲染引擎的 UI 运行时：Elm 状态机驱动，局部状态更新是事务性的，宿主命令自动生成。 |
+| 4 | [Magic486/moon-miniprogram](https://mooncakes.io/docs/Magic486/moon-miniprogram) | 0.6.1 | 微信小程序开发框架：类型安全运行时、状态自动 diff、跨页 store、声明式路由，连无头测试基建都带了。 |
+| 5 | [shop1111/moonohos](https://mooncakes.io/docs/shop1111/moonohos) | 0.6.0 | HarmonyOS 原生模块框架：异步任务、平台模块调用、HAR 打包三件事一次解决。 |
+| 6 | [lampclaw/lampo](https://mooncakes.io/docs/lampclaw/lampo) | 0.1.0 | 小程序 Skyline 的另一条路线：纯 Elm 风格书写，状态按组件隔离，不共享全局 store。 |
+| 7 | [vectie/bunnia](https://mooncakes.io/docs/vectie/bunnia) | 0.1.0 | 小程序 UI 框架，按 Rabbita 风格书写，靠可插拔的平台适配层支持多端。 |
 
 ### 基础库（8）
 
@@ -125,12 +127,12 @@ Android、iOS、HarmonyOS 与微信小程序上的应用开发。生态中尚无
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
-| 1 | [moonbit-community/rabbita](https://mooncakes.io/docs/moonbit-community/rabbita) | 0.17.0 | functional Web UI framework for MoonBit |
-| 2 | [mizchi/luna](https://mooncakes.io/docs/mizchi/luna) | 0.25.2 | Fine-grained reactive UI library for Moonbit/JS |
-| 3 | [marianoguerra/tutuca](https://mooncakes.io/docs/marianoguerra/tutuca) | 0.57.1 | MoonBit port of the tutuca UI framework (value language, templates, vdom, compon… |
-| 4 | [lampclaw/minimoon](https://mooncakes.io/docs/lampclaw/minimoon) | 0.3.2 | A MoonBit UI runtime for WeChat MiniApp Skyline with Elm-style state machines, V… |
-| 5 | [Arcelyth/aitne](https://mooncakes.io/docs/Arcelyth/aitne) | 0.4.20 | A lightweight and high-performance reactive web framework. |
-| 6 | [vectie/bunnia](https://mooncakes.io/docs/vectie/bunnia) | 0.1.0 | MoonBit mini-app UI framework with Rabbita-style authoring and modular platform … |
+| 1 | [moonbit-community/rabbita](https://mooncakes.io/docs/moonbit-community/rabbita) | 0.17.0 | 官方函数式 Web UI 框架，Elm 架构（Model-Update-View），生态配套最全，拿不准时选它。 |
+| 2 | [mizchi/luna](https://mooncakes.io/docs/mizchi/luna) | 0.25.2 | 细粒度响应式 UI 库：信号驱动、无虚拟 DOM diff，更新粒度和产物体积都更可控。 |
+| 3 | [marianoguerra/tutuca](https://mooncakes.io/docs/marianoguerra/tutuca) | 0.57.1 | 工具链最齐的一套：模板语言、虚拟 DOM、组件、运行时、lint、CLI 都在一个包里。 |
+| 4 | [lampclaw/minimoon](https://mooncakes.io/docs/lampclaw/minimoon) | 0.3.2 | 面向微信小程序 Skyline 渲染引擎的 UI 运行时：Elm 状态机驱动，局部状态更新是事务性的，宿主命令自动生成。 |
+| 5 | [Arcelyth/aitne](https://mooncakes.io/docs/Arcelyth/aitne) | 0.4.20 | 轻量响应式 Web 框架，主打运行时开销小，适合内容型页面而不是重交互应用。 |
+| 6 | [vectie/bunnia](https://mooncakes.io/docs/vectie/bunnia) | 0.1.0 | 小程序 UI 框架，按 Rabbita 风格书写，靠可插拔的平台适配层支持多端。 |
 
 ### 基础库（55）
 
@@ -154,11 +156,11 @@ Android、iOS、HarmonyOS 与微信小程序上的应用开发。生态中尚无
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
-| 1 | [mizchi/tui](https://mooncakes.io/docs/mizchi/tui) | 0.10.2 | Terminal UI library for MoonBit with reactive signals |
-| 2 | [moonbit-community/rabbita_tui](https://mooncakes.io/docs/moonbit-community/rabbita_tui) | 0.1.3 | Native terminal UI toolkit built around The Elm Architecture |
-| 3 | [Frank-III/onebit-tui](https://mooncakes.io/docs/Frank-III/onebit-tui) | 0.1.3 | Modern terminal UI library with Yoga flexbox layout and native performance |
-| 4 | [moonbitstack/moonetui](https://mooncakes.io/docs/moonbitstack/moonetui) | 0.3.1 | A terminal UI toolkit for MoonBit: cell buffer, differential ANSI renderer, incr… |
-| 5 | [brickfrog/pippa](https://mooncakes.io/docs/brickfrog/pippa) | 0.1.0 | A terminal UI framework for MoonBit, inspired by bubbletea (Go) and Elm architec… |
+| 1 | [mizchi/tui](https://mooncakes.io/docs/mizchi/tui) | 0.10.2 | 信号驱动的 TUI 库，状态一变自动重绘，适合已经习惯响应式写法的项目。 |
+| 2 | [moonbit-community/rabbita_tui](https://mooncakes.io/docs/moonbit-community/rabbita_tui) | 0.1.3 | 官方 Elm 架构终端工具包，和 Rabbita 共用一套心智模型，Web 与终端能沿用同一种组织方式。 |
+| 3 | [Frank-III/onebit-tui](https://mooncakes.io/docs/Frank-III/onebit-tui) | 0.1.3 | 带 Yoga flexbox 布局引擎的 TUI 库，用 CSS 式的盒模型排版终端界面。 |
+| 4 | [moonbitstack/moonetui](https://mooncakes.io/docs/moonbitstack/moonetui) | 0.3.1 | 重工业 TUI 工具包：单元格缓冲加差分 ANSI 渲染、增量按键解析、五十个组件和一套类 CSS 设计系统。 |
+| 5 | [brickfrog/pippa](https://mooncakes.io/docs/brickfrog/pippa) | 0.1.0 | Bubble Tea 风格的 TUI 框架，Model-Update-View 加类型化消息，从 Go 生态迁过来最顺手。 |
 
 ### 基础库（52）
 
@@ -182,10 +184,10 @@ Android、iOS、HarmonyOS 与微信小程序上的应用开发。生态中尚无
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
-| 1 | [Yoorkin/ArgParser](https://mooncakes.io/docs/Yoorkin/ArgParser) | 0.2.1 | command line argument parser |
-| 2 | [mizchi/admiral](https://mooncakes.io/docs/mizchi/admiral) | 0.1.1 | Declarative CLI builder for MoonBit, inspired by gunshi |
-| 3 | [TheWaWaR/clap](https://mooncakes.io/docs/TheWaWaR/clap) | 0.2.6 | Command Line Argument Parser |
-| 4 | [totto2727/admiral](https://mooncakes.io/docs/totto2727/admiral) | 0.6.5 | Async-first declarative CLI builder for MoonBit, inspired by gunshi |
+| 1 | [Yoorkin/ArgParser](https://mooncakes.io/docs/Yoorkin/ArgParser) | 0.2.1 | 最轻的一个：定义命令、选项、子命令就够用，不引入额外依赖。 |
+| 2 | [mizchi/admiral](https://mooncakes.io/docs/mizchi/admiral) | 0.1.1 | 声明式 CLI 构建器（gunshi 风格），把命令结构写成数据，帮助文本和补全自动生成。 |
+| 3 | [TheWaWaR/clap](https://mooncakes.io/docs/TheWaWaR/clap) | 0.2.6 | Rust clap 的移植，用法基本对应，写过 clap 的话迁移成本接近零。 |
+| 4 | [totto2727/admiral](https://mooncakes.io/docs/totto2727/admiral) | 0.6.5 | admiral 的异步优先分支，命令处理可以直接返回异步结果。 |
 
 ### 基础库（6）
 
@@ -207,12 +209,12 @@ Android、iOS、HarmonyOS 与微信小程序上的应用开发。生态中尚无
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
-| 1 | [Milky2018/selene](https://mooncakes.io/docs/Milky2018/selene) | 0.38.0 | ECS game engine in MoonBit |
-| 2 | [mizchi/kagura](https://mooncakes.io/docs/mizchi/kagura) | 0.6.0 | 2D-first game engine for MoonBit inspired by Ebiten |
-| 3 | [sssssurf/abyssal_chord](https://mooncakes.io/docs/sssssurf/abyssal_chord) | 0.1.0 | 深渊协奏 (Abyssal Chord) - A MoonBit card battle game engine with CLI demo |
-| 4 | [sacckey/moon8bit](https://mooncakes.io/docs/sacckey/moon8bit) | 0.1.0 | A minimal retro 2D game engine for MoonBit with text-first assets, deterministic… |
-| 5 | [firefly/firefly](https://mooncakes.io/docs/firefly/firefly) | 0.10.0 | MoonBit SDK for making Firefly Zero games |
-| 6 | [sennenki/reisen](https://mooncakes.io/docs/sennenki/reisen) | 0.3.2 | A visual novel engine in MoonBit |
+| 1 | [Milky2018/selene](https://mooncakes.io/docs/Milky2018/selene) | 0.38.0 | ECS 架构的游戏引擎，实体-组件-系统分层清晰，适合逻辑复杂、要长期加内容量的项目。 |
+| 2 | [mizchi/kagura](https://mooncakes.io/docs/mizchi/kagura) | 0.6.0 | 2D 优先的游戏引擎（Ebiten 风格），简单循环加精灵绘制，做小游戏上手最快。 |
+| 3 | [sssssurf/abyssal_chord](https://mooncakes.io/docs/sssssurf/abyssal_chord) | 0.1.0 | 卡牌对战专用引擎，回合、牌库、结算流程都内置了，附带 CLI 演示。 |
+| 4 | [sacckey/moon8bit](https://mooncakes.io/docs/sacckey/moon8bit) | 0.1.0 | 复古 2D 引擎：资源用文本描述、运行时确定性可复现，适合快速迭代和人机协作生成内容。 |
+| 5 | [firefly/firefly](https://mooncakes.io/docs/firefly/firefly) | 0.10.0 | Firefly Zero 掌机的游戏 SDK，目标平台是那台小设备，不是通用桌面。 |
+| 6 | [sennenki/reisen](https://mooncakes.io/docs/sennenki/reisen) | 0.3.2 | 视觉小说引擎，按剧本、立绘、分支推进，不是通用游戏框架。 |
 
 ### 基础库（44）
 
@@ -308,14 +310,14 @@ HTTP 服务、路由、中间件与后端 API 开发。
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
-| 1 | [moonbitlang/moonback](https://mooncakes.io/docs/moonbitlang/moonback) | 0.8.10 | A web backend framework for MoonBit |
-| 2 | [mizchi/mars](https://mooncakes.io/docs/mizchi/mars) | 0.3.13 | Hono-inspired MoonBit web framework with trie routing, middleware, SSE, and mizc… |
-| 3 | [oboard/mocket](https://mooncakes.io/docs/oboard/mocket) | 0.10.2 | A web framework for MoonBit. |
-| 4 | [bobzhang/crescent](https://mooncakes.io/docs/bobzhang/crescent) | 0.11.2 | Crescent: A web framework for MoonBit. |
-| 5 | [jaredzhou/pony](https://mooncakes.io/docs/jaredzhou/pony) | 0.5.0 | Lightweight HTTP web framework and router for MoonBit, inspired by Chi |
-| 6 | [RabitLogic/mbit](https://mooncakes.io/docs/RabitLogic/mbit) | 0.3.0 | A Gin-inspired web framework for MoonBit — fast, lightweight, idiomatic. |
-| 7 | [moonbitstack/moonapi](https://mooncakes.io/docs/moonbitstack/moonapi) | 0.17.7 | A typed web framework for MoonBit. |
-| 8 | [daqing/moonway](https://mooncakes.io/docs/daqing/moonway) | 0.11.9 | A full-stack web framework for MoonBit |
+| 1 | [moonbitlang/moonback](https://mooncakes.io/docs/moonbitlang/moonback) | 0.8.10 | 官方 Web 后端框架，路由、中间件、请求响应抽象齐备，生态项目默认拿它当底座。 |
+| 2 | [mizchi/mars](https://mooncakes.io/docs/mizchi/mars) | 0.3.13 | Hono 风格的 Web 框架：trie 路由、中间件、SSE，HTTP 后端走 mizchi/x，原生和 Node.js 都能跑。 |
+| 3 | [oboard/mocket](https://mooncakes.io/docs/oboard/mocket) | 0.10.2 | 通用 Web 框架，路由与中间件齐备，接口风格接近 Express。 |
+| 4 | [bobzhang/crescent](https://mooncakes.io/docs/bobzhang/crescent) | 0.11.2 | Web 框架，出自 MoonBit 语言作者之手，实现偏探索性质，适合读代码而不是直接上生产。 |
+| 5 | [jaredzhou/pony](https://mooncakes.io/docs/jaredzhou/pony) | 0.5.0 | 轻量 HTTP 框架与路由器（Go 的 Chi 风格），只需要路由和中间件时用它。 |
+| 6 | [RabitLogic/mbit](https://mooncakes.io/docs/RabitLogic/mbit) | 0.3.0 | Gin 风格的 Web 框架，API 设计和 Go 生态高度对应，从 Gin 迁过来几乎不用重新学。 |
+| 7 | [moonbitstack/moonapi](https://mooncakes.io/docs/moonbitstack/moonapi) | 0.17.7 | 类型化 Web 框架：路由、参数、响应都纳入类型检查，把错误挡在编译期。 |
+| 8 | [daqing/moonway](https://mooncakes.io/docs/daqing/moonway) | 0.11.9 | 全栈 Web 框架，前后端在同一个工程里组织，不用拆两套构建。 |
 
 ### 基础库（71）
 
@@ -391,7 +393,7 @@ WebSocket、MQTT、gRPC、SSE 等应用层协议与 RPC 通信。
 |---|---|---|---|
 | 1 | [moonbitstack/moonhttp](https://mooncakes.io/docs/moonbitstack/moonhttp) | 0.15.4 | HTTP formats for MoonBit with no I/O: HTTP/1 to HTTP/3, WebSocket, SSE and multi… |
 | 2 | [moonbitstack/moonrpc](https://mooncakes.io/docs/moonbitstack/moonrpc) | 0.21.7 | gRPC for MoonBit. |
-| 3 | [mizchi/mars](https://mooncakes.io/docs/mizchi/mars) | 0.3.13 | Hono-inspired MoonBit web framework with trie routing, middleware, SSE, and mizc… |
+| 3 | [mizchi/mars](https://mooncakes.io/docs/mizchi/mars) | 0.3.13 | Hono 风格的 Web 框架：trie 路由、中间件、SSE，HTTP 后端走 mizchi/x，原生和 Node.js 都能跑。 |
 | 4 | [gaato/http](https://mooncakes.io/docs/gaato/http) | 0.5.0 | Sans-IO HTTP vocabulary for MoonBit SDKs: request/response types, a Transport tr… |
 | 5 | [f4ah6o/direct_sdk](https://mooncakes.io/docs/f4ah6o/direct_sdk) | 0.11.2 | MoonBit SDK for Direct4B WebSocket API with MessagePack RPC |
 | 6 | [zbhzs1/moonbit-mqtt](https://mooncakes.io/docs/zbhzs1/moonbit-mqtt) | 0.1.0 | MQTT 3.1.1 packet codec helpers for MoonBit without transport or client runtime |
@@ -411,11 +413,11 @@ SQLite 绑定、ORM、KV 存储、迁移工具。
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
-| 1 | [moonbitstack/moondb](https://mooncakes.io/docs/moonbitstack/moondb) | 0.2.4 | The standard database-access interface for MoonBit — the driver↔query-layer cont… |
-| 2 | [oboard/morm](https://mooncakes.io/docs/oboard/morm) | 0.5.0 | A lightweight MoonBit ORM with typed queries, code generation, and multi-databas… |
-| 3 | [moonbitstack/moonorm](https://mooncakes.io/docs/moonbitstack/moonorm) | 0.11.5 | An ORM and SQL toolkit for MoonBit. |
-| 4 | [wflixu/Orion](https://mooncakes.io/docs/wflixu/Orion) | 0.2.0 | Derive + Codegen ORM for MoonBit. Schema DSL, type-safe CRUD, Query Builder. |
-| 5 | [zen314/shadow](https://mooncakes.io/docs/zen314/shadow) | 0.1.0 | Simple ORM Framework |
+| 1 | [moonbitstack/moondb](https://mooncakes.io/docs/moonbitstack/moondb) | 0.2.4 | 数据库访问的标准接口层：定义驱动与查询层的契约，本身不实现任何数据库。对应 Go 的 database/sql、Python 的 DB-API，想让上层代码不绑死某个数据库时用它。 |
+| 2 | [oboard/morm](https://mooncakes.io/docs/oboard/morm) | 0.5.0 | 轻量 ORM：类型化查询加代码生成，支持多种数据库引擎，接口克制。 |
+| 3 | [moonbitstack/moonorm](https://mooncakes.io/docs/moonbitstack/moonorm) | 0.11.5 | ORM 与 SQL 工具包，模型映射和查询构建都在同一套里。 |
+| 4 | [wflixu/Orion](https://mooncakes.io/docs/wflixu/Orion) | 0.2.0 | Derive 加代码生成的 ORM：用 Schema DSL 描述表，自动产出类型安全 CRUD 和查询构建器。 |
+| 5 | [zen314/shadow](https://mooncakes.io/docs/zen314/shadow) | 0.1.0 | 简单 ORM，接口直白，中小项目起步够用。 |
 
 ### 基础库（95）
 
@@ -439,17 +441,17 @@ async 运行时、协程、并发原语、任务调度。
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
-| 1 | [moonbitlang/async](https://mooncakes.io/docs/moonbitlang/async) | 0.22.7 | Asynchronous programming library for MoonBit |
-| 2 | [peter-jerry-ye/async](https://mooncakes.io/docs/peter-jerry-ye/async) | 0.2.1 | Async library: promise, event loop, i/o |
-| 3 | [didiLjf/moonorbit](https://mooncakes.io/docs/didiLjf/moonorbit) | 0.2.1 | A lightweight, high-performance Actor concurrency framework for MoonBit |
-| 4 | [kalculos/miao](https://mooncakes.io/docs/kalculos/miao) | 0.1.0-M2 | Another async I/O for moonbit, with libuv served as the default async runtime im… |
+| 1 | [moonbitlang/async](https://mooncakes.io/docs/moonbitlang/async) | 0.22.7 | 官方异步库，协程调度加 IO 抽象，生态里的默认底座，其他库大多兼容它。 |
+| 2 | [peter-jerry-ye/async](https://mooncakes.io/docs/peter-jerry-ye/async) | 0.2.1 | Promise、事件循环、IO 三件套的异步库，接口偏 JS 习惯。 |
+| 3 | [didiLjf/moonorbit](https://mooncakes.io/docs/didiLjf/moonorbit) | 0.2.1 | Actor 并发框架，用消息传递代替共享状态，适合状态多、并发写冲突多的服务。 |
+| 4 | [kalculos/miao](https://mooncakes.io/docs/kalculos/miao) | 0.1.0-M2 | 以 libuv 为默认运行时的异步 IO 库，行为和 Node 生态最接近。 |
 
 ### 基础库（43）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
 | 1 | [mizchi/x](https://mooncakes.io/docs/mizchi/x) | 0.6.1 | Cross-platform MoonBit compatibility facades with native delegation and accelera… |
-| 2 | [moonbitlang/moonback](https://mooncakes.io/docs/moonbitlang/moonback) | 0.8.10 | A web backend framework for MoonBit |
+| 2 | [moonbitlang/moonback](https://mooncakes.io/docs/moonbitlang/moonback) | 0.8.10 | 官方 Web 后端框架，路由、中间件、请求响应抽象齐备，生态项目默认拿它当底座。 |
 | 3 | [colmugx/fuwaroid](https://mooncakes.io/docs/colmugx/fuwaroid) | 0.3.2 | Lightweight single-writer concurrency |
 | 4 | [moonbit-community/pty](https://mooncakes.io/docs/moonbit-community/pty) | 0.4.4 | Cross-platform PTY (pseudo-terminal) spawning for MoonBit native targets, integr… |
 | 5 | [moonbit-community/tty](https://mooncakes.io/docs/moonbit-community/tty) | 0.6.2 | Low-level terminal primitives for MoonBit native and wasm targets: a sidecar-hel… |
@@ -490,7 +492,7 @@ YAML、TOML、XML、CSV、INI、Ion 等配置与标记语言的解析与生成�
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
-| 1 | [Yu-zh/data](https://mooncakes.io/docs/Yu-zh/data) | 0.2.1 | A serde-shaped serialization framework: one data model, many formats |
+| 1 | [Yu-zh/data](https://mooncakes.io/docs/Yu-zh/data) | 0.2.1 | serde 形态的序列化框架：一套数据模型，多种格式共用同一套序列化逻辑，换格式不用重写。 |
 
 > 完整方案仅 1 个，说明该类需求目前在生态中主要依靠基础库组合实现，下方基础库清单的实用价值更高。
 
@@ -568,10 +570,10 @@ CBOR、Protocol Buffers、MessagePack、ASN.1 等二进制序列化格式。
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
-| 1 | [chensuiyi/bm2](https://mooncakes.io/docs/chensuiyi/bm2) | 0.8.0 | A lightweight Linux process manager for Bun and Node.js applications, written in… |
-| 2 | [mizchi/actrun](https://mooncakes.io/docs/mizchi/actrun) | 0.32.0 | MVP GitHub Actions-compatible push CI runner with bitflow lowering, native execu… |
-| 3 | [kupas/pm3](https://mooncakes.io/docs/kupas/pm3) | 0.1.8 | A language-agnostic process manager (PM2-like) with built-in log rotation |
-| 4 | [tiye/redstart](https://mooncakes.io/docs/tiye/redstart) | 0.1.4 | Lightweight process manager for local development |
+| 1 | [chensuiyi/bm2](https://mooncakes.io/docs/chensuiyi/bm2) | 0.8.0 | 给 Bun / Node.js 应用用的 Linux 进程管理器，本身用 MoonBit 写。 |
+| 2 | [mizchi/actrun](https://mooncakes.io/docs/mizchi/actrun) | 0.32.0 | 兼容 GitHub Actions 的本地 CI runner，workflow 能在自己机器上跑，不必等远端。 |
+| 3 | [kupas/pm3](https://mooncakes.io/docs/kupas/pm3) | 0.1.8 | PM2 式的语言无关进程管理器，内置日志轮转，跑什么语言的进程都行。 |
+| 4 | [tiye/redstart](https://mooncakes.io/docs/tiye/redstart) | 0.1.4 | 面向本地开发的轻量进程管理器，一次起停一组服务。 |
 
 ### 基础库（8）
 
@@ -595,11 +597,11 @@ CBOR、Protocol Buffers、MessagePack、ASN.1 等二进制序列化格式。
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
-| 1 | [colmugx/posoco](https://mooncakes.io/docs/colmugx/posoco) | 0.23.2 | LLM Agent framework with hexagonal (ports-and-adapters) architecture. Defines ex… |
-| 2 | [colmugx/mcp](https://mooncakes.io/docs/colmugx/mcp) | 0.18.2 | Type-safe MCP SDK in MoonBit with server/client support and dual transport (STDI… |
-| 3 | [golemcloud/golem_sdk](https://mooncakes.io/docs/golemcloud/golem_sdk) | 0.6.2 | Golem SDK for MoonBit — build durable, fault-tolerant agents on the Golem platfo… |
-| 4 | [weopqrst/agent](https://mooncakes.io/docs/weopqrst/agent) | 0.5.1 | MoonBit version of LangChain core library — type-safe, composable, embeddable AI… |
-| 5 | [soehi/moonlm](https://mooncakes.io/docs/soehi/moonlm) | 0.1.2 | Local LLM inference engine and strongly-typed agent runtime, in MoonBit |
+| 1 | [colmugx/posoco](https://mooncakes.io/docs/colmugx/posoco) | 0.23.2 | 六边形架构（端口-适配器）的 Agent 框架：定义扩展端口和 Agent 循环，LLM 供应商与工具都可替换。 |
+| 2 | [colmugx/mcp](https://mooncakes.io/docs/colmugx/mcp) | 0.18.2 | 类型安全的 MCP SDK，服务端客户端都有，STDIO 和 HTTP 两种传输都支持。 |
+| 3 | [golemcloud/golem_sdk](https://mooncakes.io/docs/golemcloud/golem_sdk) | 0.6.2 | Golem 平台的 SDK，用来构建可持久化、故障自恢复的 agent，代价是绑定到这个托管平台。 |
+| 4 | [weopqrst/agent](https://mooncakes.io/docs/weopqrst/agent) | 0.5.1 | LangChain 核心库的 MoonBit 版：类型安全、可组合、可嵌入，LLM 客户端走 mizchi/llm。 |
+| 5 | [soehi/moonlm](https://mooncakes.io/docs/soehi/moonlm) | 0.1.2 | 本地 LLM 推理引擎加强类型 agent 运行时，不依赖外部 API 也能跑模型。 |
 
 ### 基础库（117）
 
@@ -623,8 +625,8 @@ CBOR、Protocol Buffers、MessagePack、ASN.1 等二进制序列化格式。
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
-| 1 | [moonbitlang/yacc](https://mooncakes.io/docs/moonbitlang/yacc) | 0.7.25 | A LR(1) parser generator for MoonBit programming language. |
-| 2 | [cogna-dev/parkit](https://mooncakes.io/docs/cogna-dev/parkit) | 0.1.1 | A nom-like parser combinator framework for MoonBit |
+| 1 | [moonbitlang/yacc](https://mooncakes.io/docs/moonbitlang/yacc) | 0.7.25 | 官方 LR(1) 语法分析器生成器，写文法出解析器，适合整门语言的完整语法。 |
+| 2 | [cogna-dev/parkit](https://mooncakes.io/docs/cogna-dev/parkit) | 0.1.1 | nom 风格的解析器组合子框架，用函数组合拼解析逻辑，适合局部格式而不是整门语言。 |
 
 > 完整方案仅 2 个，说明该类需求目前在生态中主要依靠基础库组合实现，下方基础库清单的实用价值更高。
 
@@ -888,10 +890,10 @@ DEFLATE / zlib / gzip / ZIP 的压缩与解压实现。
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
-| 1 | [moonbitlang/quickcheck](https://mooncakes.io/docs/moonbitlang/quickcheck) | 0.15.1 | Automatic testing of MoonBit programs |
-| 2 | [moonrockz/moonspec](https://mooncakes.io/docs/moonrockz/moonspec) | 0.11.0 | BDD test framework for MoonBit with Gherkin and Cucumber Expressions |
-| 3 | [aspnmy/moonitest](https://mooncakes.io/docs/aspnmy/moonitest) | 0.2.1 | MoonBit integration test framework - real Docker/TCP/HTTP API via fangyinc/socke… |
-| 4 | [Duckweed/moon-proof](https://mooncakes.io/docs/Duckweed/moon-proof) | 0.1.3 | MoonProof：MoonBit 文档与教程示例的持续验证框架——把文档里的代码块抽出来，隔离编译运行，回答“我们文档里的例子还都对吗” |
+| 1 | [moonbitlang/quickcheck](https://mooncakes.io/docs/moonbitlang/quickcheck) | 0.15.1 | 官方 QuickCheck 实现：用属性描述行为，自动生成输入去找反例。 |
+| 2 | [moonrockz/moonspec](https://mooncakes.io/docs/moonrockz/moonspec) | 0.11.0 | BDD 测试框架，支持 Gherkin 语法和 Cucumber 表达式，需求文档可以直接变成测试。 |
+| 3 | [aspnmy/moonitest](https://mooncakes.io/docs/aspnmy/moonitest) | 0.2.1 | 集成测试框架，通过真实 Docker / TCP / HTTP 打后端接口，是单元测试的补充而不是替代。 |
+| 4 | [Duckweed/moon-proof](https://mooncakes.io/docs/Duckweed/moon-proof) | 0.1.3 | 文档示例的持续验证框架：把文档里的代码块抽出来隔离编译运行，回答「文档里的例子还都对吗」。 |
 
 ### 基础库（63）
 
@@ -987,7 +989,7 @@ Wasm 组件模型、WASI、FFI、JS 绑定。
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
-| 1 | [Milky2018/wasmoon](https://mooncakes.io/docs/Milky2018/wasmoon) | 0.18.0 | WebAssembly runtime with native JIT, interpreter, WASI and Component Model suppo… |
+| 1 | [Milky2018/wasmoon](https://mooncakes.io/docs/Milky2018/wasmoon) | 0.18.0 | WebAssembly 运行时：自带 JIT 和解释器，支持 WASI 与 Component Model，可以在 MoonBit 里加载并执行 wasm 模块。 |
 
 > 完整方案仅 1 个，说明该类需求目前在生态中主要依靠基础库组合实现，下方基础库清单的实用价值更高。
 

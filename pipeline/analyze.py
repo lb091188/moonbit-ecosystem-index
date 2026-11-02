@@ -459,6 +459,45 @@ def i18n():
     return _I18N
 
 
+BLURBS_PATH = OUT / "blurbs.json"
+_BLURBS = None
+
+
+def blurbs():
+    """读「完整方案」的一句话简介（data/blurbs.json，人工维护）。
+
+    与 i18n() 的处理相反：英文缺失会拦住构建，简介缺失不会。原因是简介是人工
+    判断性文字，写得全不全取决于这一轮有没有人看；缺的条目退回注册表原描述，
+    不至于让站点开不出来。缺口由 main() 打进构建日志，避免长期没人补。
+
+    值是 [中文, 英文] 两条非空字符串，与 title / intro 的取法保持一致。
+    """
+    global _BLURBS
+    if _BLURBS is not None:
+        return _BLURBS
+
+    raw = json.loads(BLURBS_PATH.read_text(encoding="utf-8")) \
+        if BLURBS_PATH.exists() else {}
+
+    out, bad = {}, []
+    for name, val in raw.items():
+        if name.startswith("_"):      # 下划线开头的键当注释用
+            continue
+        if not (isinstance(val, list) and len(val) == 2
+                and all(isinstance(x, str) and x.strip() for x in val)):
+            bad.append(name)
+            continue
+        out[name] = [val[0].strip(), val[1].strip()]
+
+    if bad:
+        raise SystemExit(
+            "data/blurbs.json 里这些条目不是 [中文, 英文] 两条非空字符串：\n  "
+            + "\n  ".join(bad))
+
+    _BLURBS = out
+    return _BLURBS
+
+
 # 构建期门槛：下载量低于此值的包不予收录。它只影响「收不收」，不对外输出。
 # 该门槛实际只挡掉约 120 个包，作用是把刚发布、尚未被使用的占位包从清单里剔除。
 MIN_DOWNLOADS = 20
@@ -728,10 +767,14 @@ def write_db(mods, ranked, table_top=None):
 def _md_table(lines, rows, limit):
     lines.append("| # | 包 | 版本 | 说明 |")
     lines.append("|---|---|---|---|")
+    bl = blurbs()
     for i, (s, m) in enumerate(rows[:limit], 1):
-        desc = re.sub(r"\s+", " ", m["description"]).strip()
-        if len(desc) > 80:
-            desc = desc[:80] + "…"
+        # 完整方案用编辑过的一句话简介，基础库退回注册表原描述
+        zh = (bl.get(m["name"]) or [""])[0]
+        desc = zh or re.sub(r"\s+", " ", m["description"]).strip()
+        cut = 110 if zh else 80
+        if len(desc) > cut:
+            desc = desc[:cut] + "…"
         desc = desc.replace("|", "\\|") or "—"
         lines.append(f"| {i} | [{m['name']}]({murl(m['name'])}) | {m['version']} "
                      f"| {desc} |")
@@ -760,6 +803,8 @@ def write_md(mods, ranked, top_n=8):
     lines.append("清单顺序在构建时确定，序号表示该场景内的推荐次序，不是下载量排行；"
                  "同义词已做词干归一（如 async/asynchronous），"
                  "并对易混淆场景做了排除（如 UI 场景排除 TUI）。\n")
+    lines.append("「完整方案」的说明为人工撰写（`data/blurbs.json`），回答的是「它替你做了"
+                 "哪些决定、什么情况下该选它」；基础库的说明取自注册表原描述。\n")
     lines.append("## 目录\n")
     for sc, rows in ranked:
         sol, lib = split_tiers(rows)
@@ -900,6 +945,11 @@ HTML_CSS = """
   .pkglist { list-style:none; margin:0; padding:0; height:calc(var(--row-h) * var(--rows));
     overflow:hidden; }
   .pkglist.all { height:auto; overflow:visible; }
+  /* 详情页不裁断：一句话简介截成一行就失去意义，让它按句子折行 */
+  .pkglist.all li { height:auto; min-height:var(--row-h); padding:7px 0;
+    align-items:flex-start; }
+  .pkglist.all li .rk { margin-top:1px; }
+  .pkglist.all .d { white-space:normal; line-height:1.5; }
   .pkglist li { height:var(--row-h); display:flex; gap:9px; align-items:center;
     border-top:1px solid var(--line-soft); }
   .pkglist li:first-child { border-top:0; }
@@ -919,6 +969,7 @@ HTML_CSS = """
     padding:0 4px; margin-left:5px; vertical-align:1px; }
   .d { font-size:11.5px; color:var(--muted); white-space:nowrap; overflow:hidden;
     text-overflow:ellipsis; line-height:1.4; }
+  .d.bl { color:#5a6572; }
   .more { margin-top:9px; padding-top:9px; border-top:1px dashed var(--line);
     font-size:12px; color:var(--accent); text-decoration:none; }
   .more:hover { text-decoration:underline; }
@@ -1221,12 +1272,15 @@ function setLang(next) {
 
 function pkg(name, i) {
   const m = D.modules[name] || ['', '', 0];   // [版本, 描述, yanked]
+  // 「完整方案」有编辑过的一句话简介（data/blurbs.json 里那条），基础库没有，退回注册表原描述
+  const bl = (D.blurbs || {})[name];
+  const desc = bl ? L(bl) : (m[1] || '\\u2014');
   const ver = m[0] ? `<span class="v">v${esc(m[0])}</span>` : '';
   const yk = m[2] ? '<span class="yk">yanked</span>' : '';
   return `<li><span class="rk${i > 5 ? ' dim' : ''}">${i}</span>
     <div class="b">
       <div class="n"><a href="${MK(name)}" target="_blank" rel="noopener">${esc(name)}</a>${ver}${yk}</div>
-      <div class="d">${esc(m[1] || '\\u2014')}</div>
+      <div class="d${bl ? ' bl' : ''}">${esc(desc)}</div>
     </div></li>`;
 }
 
@@ -1547,9 +1601,10 @@ def publish_site():
 # 在 modules 字典里查一次，因此场景内可以完整列出全部候选而不重复存储。
 
 def write_scenarios_json(mods, ranked):
+    sol_names = {m["name"] for _sc, rows in ranked
+                 for _s, m, t in rows if t == "solution"}
     n_sol_scene = sum(1 for _sc, rows in ranked if split_tiers(rows)[0])
-    n_sol_pkg = len({m["name"] for _sc, rows in ranked
-                     for _s, m, t in rows if t == "solution"})
+    n_sol_pkg = len(sol_names)
     built = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
 
     # [版本, 描述, 是否 yanked]。下载量不在此列：排序在构建期已固化成数组顺序，
@@ -1576,6 +1631,8 @@ def write_scenarios_json(mods, ranked):
         "groups": [[gid, [gzh, en["groups"][gid]]] for gid, gzh in GROUPS],
         "scenarios": [],
         "modules": modules,
+        # 只带场景里真的用得到的简介：包被规则挡掉之后，它的简介不该继续留在产物里
+        "blurbs": {n: v for n, v in blurbs().items() if n in sol_names},
     }
     for sc, rows in ranked:
         sol, lib = split_tiers(rows)
@@ -1622,6 +1679,19 @@ def main():
     print(f"json -> {sj}")
     print(f"site -> {page}  ({page.stat().st_size/1024:.0f} KB)")
     print(f"dist -> {DIST}")
+
+    # 简介覆盖：只要求「完整方案」有。缺失不拦构建，但要一直在日志里出现，
+    # 否则补简介这件事会无声无息地烂掉。
+    sol_names = {m["name"] for _sc, rows in ranked
+                 for _s, m, t in rows if t == "solution"}
+    have = blurbs()
+    miss = sorted(sol_names - set(have))
+    extra = sorted(set(have) - sol_names)
+    print(f"简介 -> data/blurbs.json  {len(sol_names) - len(miss)}/{len(sol_names)} 个完整方案有简介")
+    if miss:
+        print("  缺简介：" + ", ".join(miss))
+    if extra:
+        print("  对不上（不在本轮完整方案里，可能被规则挡掉了）：" + ", ".join(extra))
     print("\n每个场景候选数（完整方案 / 基础库）：")
     for sc, rows in ranked:
         sol, lib = split_tiers(rows)

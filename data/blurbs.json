@@ -1,0 +1,303 @@
+{
+  "_关于本文件": "完整方案的一句话简介。键是 mooncakes 包名，值是 [中文, 英文]。只有「完整方案」需要写，基础库沿用注册表原描述。改完运行 python3 pipeline/analyze.py 重新构建即可，构建日志会列出缺失或对不上的条目。以 _ 开头的键会被忽略，可以当注释用。",
+  "_写法约定": "回答三件事：这是什么形态的方案、它替你做了什么决定、什么情况下该选它。不要写「高性能」「强大」这类空话，也不要重复注册表里的描述。",
+
+  "moonbit-community/proton": [
+    "类 Electron 的桌面运行时：界面交给内置浏览器承载，可直接复用现有前端生态，托盘、剪贴板、全局热键等系统模块配套齐全。",
+    "Electron-style desktop runtime: the UI lives in a built-in webview, so existing frontend code carries over, with tray, clipboard and global-hotkey modules alongside."
+  ],
+  "wzzc-dev/moui": [
+    "自带渲染引擎的跨端 GUI 框架：不依赖系统 WebView，桌面与移动共用一套代码，能覆盖到没有浏览器内核的设备。",
+    "Cross-platform GUI framework with its own renderer — no system WebView, one codebase for desktop and mobile, and it reaches devices that have no browser engine."
+  ],
+  "NoahLiu/native-gui": [
+    "纯原生桌面方案：一套代码直出 Windows / Linux / macOS 原生窗口，托盘、通知、快捷键、输入法、开机自启等系统能力开箱即用。",
+    "Fully native desktop framework: one codebase produces real Windows / Linux / macOS windows, with tray, notifications, hotkeys, IME and autostart built in."
+  ],
+  "vectie/lepusa": [
+    "MoonBit 原生桌面框架的研究性实现，更适合当参考读，而不是直接拿来做产品。",
+    "A research implementation of a MoonBit-native desktop framework — better read as a reference than shipped as a product."
+  ],
+  "Nanaloveyuki/orbit": [
+    "组合式桌面基座：原生窗口配系统 WebView，IPC 带策略授权，另附 orbit-cli 工具链，能力按需拼装而不是一次给全。",
+    "Composable desktop foundations: native windows plus the system WebView, policy-gated IPC, and an orbit-cli toolchain — capabilities are assembled on demand."
+  ],
+  "lepus-apps/webview": [
+    "以 Web 技术构建桌面的应用框架：界面层完全交给 HTML / CSS，MoonBit 负责窗口、事件和系统调用。",
+    "A desktop framework built on web technologies: the UI layer is plain HTML / CSS, while MoonBit owns windows, events and system calls."
+  ],
+  "tonyfettes/giraffe": [
+    "Elm 架构的声明式 UI 框架，底层绑定 GTK4，走原生控件路线，Linux 桌面上完成度最高。",
+    "Declarative Elm-style UI framework bound to GTK4 — native widgets rather than a webview, most complete on Linux desktops."
+  ],
+
+  "XiLaiTL/moobile": [
+    "一套 Rabbita（TEA）代码同时出 Android / iOS / Web，渲染交给 React Native，前端团队迁移成本最低。",
+    "One Rabbita (TEA) codebase targeting Android / iOS / Web, rendered by React Native — the cheapest path for teams already on React."
+  ],
+  "lampclaw/minimoon": [
+    "面向微信小程序 Skyline 渲染引擎的 UI 运行时：Elm 状态机驱动，局部状态更新是事务性的，宿主命令自动生成。",
+    "A UI runtime for WeChat MiniApp's Skyline renderer: Elm-style state machines, transactional local state, and generated host commands."
+  ],
+  "Magic486/moon-miniprogram": [
+    "微信小程序开发框架：类型安全运行时、状态自动 diff、跨页 store、声明式路由，连无头测试基建都带了。",
+    "WeChat MiniProgram framework: a type-safe runtime, automatic state diffing, a cross-page store, declarative routing, and headless test infrastructure."
+  ],
+  "shop1111/moonohos": [
+    "HarmonyOS 原生模块框架：异步任务、平台模块调用、HAR 打包三件事一次解决。",
+    "HarmonyOS native module framework covering async tasks, platform module calls and HAR packaging."
+  ],
+  "lampclaw/lampo": [
+    "小程序 Skyline 的另一条路线：纯 Elm 风格书写，状态按组件隔离，不共享全局 store。",
+    "The other Skyline route: purely Elm-style authoring with component-scoped state instead of a global store."
+  ],
+  "vectie/bunnia": [
+    "小程序 UI 框架，按 Rabbita 风格书写，靠可插拔的平台适配层支持多端。",
+    "Mini-app UI framework in Rabbita style, using pluggable platform adapters to reach multiple hosts."
+  ],
+
+  "moonbit-community/rabbita": [
+    "官方函数式 Web UI 框架，Elm 架构（Model-Update-View），生态配套最全，拿不准时选它。",
+    "The official functional web UI framework, Elm architecture (Model-Update-View), with the deepest ecosystem — the safe default."
+  ],
+  "mizchi/luna": [
+    "细粒度响应式 UI 库：信号驱动、无虚拟 DOM diff，更新粒度和产物体积都更可控。",
+    "Fine-grained reactive UI library: signal-driven with no virtual-DOM diffing, giving you control over update granularity and bundle size."
+  ],
+  "marianoguerra/tutuca": [
+    "工具链最齐的一套：模板语言、虚拟 DOM、组件、运行时、lint、CLI 都在一个包里。",
+    "The most complete toolkit of the bunch: template language, virtual DOM, components, runtime, lint and CLI in one package."
+  ],
+  "Arcelyth/aitne": [
+    "轻量响应式 Web 框架，主打运行时开销小，适合内容型页面而不是重交互应用。",
+    "A lightweight reactive web framework focused on low runtime cost — good for content pages rather than heavy interaction."
+  ],
+
+  "mizchi/tui": [
+    "信号驱动的 TUI 库，状态一变自动重绘，适合已经习惯响应式写法的项目。",
+    "Signal-driven TUI library that repaints on state change — a natural fit if you already write reactive code."
+  ],
+  "moonbit-community/rabbita_tui": [
+    "官方 Elm 架构终端工具包，和 Rabbita 共用一套心智模型，Web 与终端能沿用同一种组织方式。",
+    "The official Elm-architecture terminal toolkit, sharing Rabbita's mental model so web and terminal code stay organized the same way."
+  ],
+  "Frank-III/onebit-tui": [
+    "带 Yoga flexbox 布局引擎的 TUI 库，用 CSS 式的盒模型排版终端界面。",
+    "TUI library with a Yoga flexbox engine — lay out terminal UIs with CSS-style box model rules."
+  ],
+  "moonbitstack/moonetui": [
+    "重工业 TUI 工具包：单元格缓冲加差分 ANSI 渲染、增量按键解析、五十个组件和一套类 CSS 设计系统。",
+    "A heavy-duty TUI toolkit: cell buffer with differential ANSI rendering, incremental key parsing, fifty widgets and a CSS-like design system."
+  ],
+  "brickfrog/pippa": [
+    "Bubble Tea 风格的 TUI 框架，Model-Update-View 加类型化消息，从 Go 生态迁过来最顺手。",
+    "Bubble Tea-style TUI framework with Model-Update-View and typed messages — the smoothest transition from Go."
+  ],
+
+  "Yoorkin/ArgParser": [
+    "最轻的一个：定义命令、选项、子命令就够用，不引入额外依赖。",
+    "The lightest option: declare commands, options and subcommands, with no extra dependencies."
+  ],
+  "mizchi/admiral": [
+    "声明式 CLI 构建器（gunshi 风格），把命令结构写成数据，帮助文本和补全自动生成。",
+    "Declarative CLI builder in gunshi style: describe the command tree as data and get help text and completion generated."
+  ],
+  "TheWaWaR/clap": [
+    "Rust clap 的移植，用法基本对应，写过 clap 的话迁移成本接近零。",
+    "A port of Rust's clap with near-identical usage — almost zero migration cost if you've written clap before."
+  ],
+  "totto2727/admiral": [
+    "admiral 的异步优先分支，命令处理可以直接返回异步结果。",
+    "The async-first fork of admiral, where command handlers can return async results directly."
+  ],
+
+  "Milky2018/selene": [
+    "ECS 架构的游戏引擎，实体-组件-系统分层清晰，适合逻辑复杂、要长期加内容量的项目。",
+    "An ECS game engine with a clean entity-component-system split — suited to projects with complex logic and long content roadmaps."
+  ],
+  "mizchi/kagura": [
+    "2D 优先的游戏引擎（Ebiten 风格），简单循环加精灵绘制，做小游戏上手最快。",
+    "A 2D-first engine in Ebiten style: a simple loop plus sprite drawing, the quickest start for small games."
+  ],
+  "sssssurf/abyssal_chord": [
+    "卡牌对战专用引擎，回合、牌库、结算流程都内置了，附带 CLI 演示。",
+    "A card-battle engine with turns, deck and resolution flow built in, plus a CLI demo."
+  ],
+  "sacckey/moon8bit": [
+    "复古 2D 引擎：资源用文本描述、运行时确定性可复现，适合快速迭代和人机协作生成内容。",
+    "Retro 2D engine with text-authored assets and a deterministic runtime — built for fast iteration and machine-assisted content."
+  ],
+  "firefly/firefly": [
+    "Firefly Zero 掌机的游戏 SDK，目标平台是那台小设备，不是通用桌面。",
+    "The SDK for Firefly Zero handhelds — the target is that specific device, not general desktop."
+  ],
+  "sennenki/reisen": [
+    "视觉小说引擎，按剧本、立绘、分支推进，不是通用游戏框架。",
+    "A visual novel engine driven by script, artwork and branching — not a general-purpose game framework."
+  ],
+
+  "moonbitlang/moonback": [
+    "官方 Web 后端框架，路由、中间件、请求响应抽象齐备，生态项目默认拿它当底座。",
+    "The official web backend framework with routing, middleware and request/response abstractions — the default base for ecosystem projects."
+  ],
+  "mizchi/mars": [
+    "Hono 风格的 Web 框架：trie 路由、中间件、SSE，HTTP 后端走 mizchi/x，原生和 Node.js 都能跑。",
+    "Hono-style framework with trie routing, middleware and SSE, running on mizchi/x HTTP for both native and Node.js."
+  ],
+  "oboard/mocket": [
+    "通用 Web 框架，路由与中间件齐备，接口风格接近 Express。",
+    "A general web framework with routing and middleware, in an Express-like style."
+  ],
+  "bobzhang/crescent": [
+    "Web 框架，出自 MoonBit 语言作者之手，实现偏探索性质，适合读代码而不是直接上生产。",
+    "A web framework from MoonBit's own author — more exploratory than production-ready, worth reading as much as using."
+  ],
+  "jaredzhou/pony": [
+    "轻量 HTTP 框架与路由器（Go 的 Chi 风格），只需要路由和中间件时用它。",
+    "Lightweight HTTP framework and router in Chi style — reach for it when all you need is routing and middleware."
+  ],
+  "RabitLogic/mbit": [
+    "Gin 风格的 Web 框架，API 设计和 Go 生态高度对应，从 Gin 迁过来几乎不用重新学。",
+    "Gin-style web framework whose API maps closely to Go's ecosystem — almost no relearning from Gin."
+  ],
+  "moonbitstack/moonapi": [
+    "类型化 Web 框架：路由、参数、响应都纳入类型检查，把错误挡在编译期。",
+    "A typed web framework that puts routes, params and responses under type checking, moving errors to compile time."
+  ],
+  "daqing/moonway": [
+    "全栈 Web 框架，前后端在同一个工程里组织，不用拆两套构建。",
+    "A full-stack framework keeping frontend and backend in one project instead of two build pipelines."
+  ],
+  "wflixu/Halo": [
+    "Koa 洋葱模型的中间件框架，支持结构化并发和流式响应，重中间件编排的服务适合它。",
+    "Koa-style onion middleware with structured concurrency and streaming responses — good for services built around middleware composition."
+  ],
+  "kupas/express": [
+    "Express 兼容的 Web 框架，底层走 uWebSockets，从 Node 迁过来改动最小。",
+    "Express-compatible framework backed by uWebSockets — the smallest diff when porting from Node."
+  ],
+  "KKKIIO/moondark": [
+    "Django 风格的后端框架，建在 moonback 之上，自带工程结构的约定。",
+    "Django-inspired backend framework built on moonback, with opinions about project structure."
+  ],
+  "moonbitstack/moonzero": [
+    "服务框架，面向服务拆分而不是单机 HTTP 应用，边界比 Web 框架高一层。",
+    "A service framework aimed at splitting services rather than serving a single HTTP app — one level above a web framework."
+  ],
+  "anccnuer/onho": [
+    "Hono 风格的轻量 Web 框架，路由和中间件刚好够用。",
+    "A lightweight Hono-style web framework with just enough routing and middleware."
+  ],
+
+  "moonbitstack/moondb": [
+    "数据库访问的标准接口层：定义驱动与查询层的契约，本身不实现任何数据库。对应 Go 的 database/sql、Python 的 DB-API，想让上层代码不绑死某个数据库时用它。",
+    "The standard database access interface: it defines the driver/query-layer contract without implementing any database. MoonBit's counterpart to Go's database/sql or Python's DB-API — use it to keep upper layers from binding to one engine."
+  ],
+  "oboard/morm": [
+    "轻量 ORM：类型化查询加代码生成，支持多种数据库引擎，接口克制。",
+    "Lightweight ORM with typed queries and code generation across several engines, keeping the API small."
+  ],
+  "moonbitstack/moonorm": [
+    "ORM 与 SQL 工具包，模型映射和查询构建都在同一套里。",
+    "An ORM plus SQL toolkit covering both model mapping and query building."
+  ],
+  "wflixu/Orion": [
+    "Derive 加代码生成的 ORM：用 Schema DSL 描述表，自动产出类型安全 CRUD 和查询构建器。",
+    "A derive-and-codegen ORM: describe tables in a schema DSL and get type-safe CRUD plus a query builder generated."
+  ],
+  "zen314/shadow": [
+    "简单 ORM，接口直白，中小项目起步够用。",
+    "A simple ORM with a straightforward API — enough to get a small project moving."
+  ],
+
+  "moonbitlang/async": [
+    "官方异步库，协程调度加 IO 抽象，生态里的默认底座，其他库大多兼容它。",
+    "The official async library with coroutine scheduling and IO abstractions — the ecosystem default that most other libraries build on."
+  ],
+  "peter-jerry-ye/async": [
+    "Promise、事件循环、IO 三件套的异步库，接口偏 JS 习惯。",
+    "Async library offering promises, an event loop and IO, with an API shaped like JavaScript."
+  ],
+  "didiLjf/moonorbit": [
+    "Actor 并发框架，用消息传递代替共享状态，适合状态多、并发写冲突多的服务。",
+    "An actor concurrency framework that replaces shared state with message passing — useful where concurrent writes contend."
+  ],
+  "kalculos/miao": [
+    "以 libuv 为默认运行时的异步 IO 库，行为和 Node 生态最接近。",
+    "Async IO library backed by libuv as its default runtime, behaving closest to the Node ecosystem."
+  ],
+
+  "Yu-zh/data": [
+    "serde 形态的序列化框架：一套数据模型，多种格式共用同一套序列化逻辑，换格式不用重写。",
+    "A serde-shaped serialization framework: one data model shared across formats, so switching format doesn't mean rewriting."
+  ],
+
+  "chensuiyi/bm2": [
+    "给 Bun / Node.js 应用用的 Linux 进程管理器，本身用 MoonBit 写。",
+    "A Linux process manager for Bun / Node.js apps, itself written in MoonBit."
+  ],
+  "mizchi/actrun": [
+    "兼容 GitHub Actions 的本地 CI runner，workflow 能在自己机器上跑，不必等远端。",
+    "A local CI runner compatible with GitHub Actions, so workflows run on your own machine instead of waiting on a remote."
+  ],
+  "kupas/pm3": [
+    "PM2 式的语言无关进程管理器，内置日志轮转，跑什么语言的进程都行。",
+    "A PM2-like, language-agnostic process manager with built-in log rotation."
+  ],
+  "tiye/redstart": [
+    "面向本地开发的轻量进程管理器，一次起停一组服务。",
+    "A lightweight process manager for local development that starts and stops a group of services together."
+  ],
+
+  "colmugx/posoco": [
+    "六边形架构（端口-适配器）的 Agent 框架：定义扩展端口和 Agent 循环，LLM 供应商与工具都可替换。",
+    "A hexagonal (ports-and-adapters) agent framework: extension ports and an agent loop, with LLM providers and tools swappable."
+  ],
+  "colmugx/mcp": [
+    "类型安全的 MCP SDK，服务端客户端都有，STDIO 和 HTTP 两种传输都支持。",
+    "A type-safe MCP SDK covering both server and client, over STDIO or HTTP transports."
+  ],
+  "golemcloud/golem_sdk": [
+    "Golem 平台的 SDK，用来构建可持久化、故障自恢复的 agent，代价是绑定到这个托管平台。",
+    "The SDK for the Golem platform, for durable and fault-tolerant agents — at the cost of depending on that hosted platform."
+  ],
+  "weopqrst/agent": [
+    "LangChain 核心库的 MoonBit 版：类型安全、可组合、可嵌入，LLM 客户端走 mizchi/llm。",
+    "The MoonBit take on LangChain's core: type-safe, composable and embeddable, with LLM clients coming from mizchi/llm."
+  ],
+  "soehi/moonlm": [
+    "本地 LLM 推理引擎加强类型 agent 运行时，不依赖外部 API 也能跑模型。",
+    "A local LLM inference engine plus a strongly-typed agent runtime — models run without calling an external API."
+  ],
+
+  "moonbitlang/yacc": [
+    "官方 LR(1) 语法分析器生成器，写文法出解析器，适合整门语言的完整语法。",
+    "The official LR(1) parser generator: write a grammar, get a parser — suited to a full language grammar."
+  ],
+  "cogna-dev/parkit": [
+    "nom 风格的解析器组合子框架，用函数组合拼解析逻辑，适合局部格式而不是整门语言。",
+    "A nom-style parser combinator framework that assembles parsing from composed functions — for local formats rather than whole languages."
+  ],
+
+  "moonbitlang/quickcheck": [
+    "官方 QuickCheck 实现：用属性描述行为，自动生成输入去找反例。",
+    "The official QuickCheck: describe behavior as properties and let generated inputs hunt for counterexamples."
+  ],
+  "moonrockz/moonspec": [
+    "BDD 测试框架，支持 Gherkin 语法和 Cucumber 表达式，需求文档可以直接变成测试。",
+    "A BDD framework supporting Gherkin and Cucumber expressions, so requirement documents can turn into tests."
+  ],
+  "aspnmy/moonitest": [
+    "集成测试框架，通过真实 Docker / TCP / HTTP 打后端接口，是单元测试的补充而不是替代。",
+    "An integration testing framework that hits real Docker / TCP / HTTP backends — a complement to unit tests, not a replacement."
+  ],
+  "Duckweed/moon-proof": [
+    "文档示例的持续验证框架：把文档里的代码块抽出来隔离编译运行，回答「文档里的例子还都对吗」。",
+    "Continuous verification for documentation examples: extract code blocks, compile and run them in isolation, and answer whether the docs still work."
+  ],
+
+  "Milky2018/wasmoon": [
+    "WebAssembly 运行时：自带 JIT 和解释器，支持 WASI 与 Component Model，可以在 MoonBit 里加载并执行 wasm 模块。",
+    "A WebAssembly runtime with its own JIT and interpreter, supporting WASI and the Component Model — load and execute wasm modules from MoonBit."
+  ]
+}

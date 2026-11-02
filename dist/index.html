@@ -121,6 +121,11 @@
   .pkglist { list-style:none; margin:0; padding:0; height:calc(var(--row-h) * var(--rows));
     overflow:hidden; }
   .pkglist.all { height:auto; overflow:visible; }
+  /* 详情页不裁断：一句话简介截成一行就失去意义，让它按句子折行 */
+  .pkglist.all li { height:auto; min-height:var(--row-h); padding:7px 0;
+    align-items:flex-start; }
+  .pkglist.all li .rk { margin-top:1px; }
+  .pkglist.all .d { white-space:normal; line-height:1.5; }
   .pkglist li { height:var(--row-h); display:flex; gap:9px; align-items:center;
     border-top:1px solid var(--line-soft); }
   .pkglist li:first-child { border-top:0; }
@@ -140,6 +145,7 @@
     padding:0 4px; margin-left:5px; vertical-align:1px; }
   .d { font-size:11.5px; color:var(--muted); white-space:nowrap; overflow:hidden;
     text-overflow:ellipsis; line-height:1.4; }
+  .d.bl { color:#5a6572; }
   .more { margin-top:9px; padding-top:9px; border-top:1px dashed var(--line);
     font-size:12px; color:var(--accent); text-decoration:none; }
   .more:hover { text-decoration:underline; }
