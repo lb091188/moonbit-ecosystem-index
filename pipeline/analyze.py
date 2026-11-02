@@ -486,6 +486,10 @@ def write_md(mods, ranked, top_n=8):
                  f"被 yanked 的包不计入推荐。\n")
     lines.append("数据源：mooncakes.io 官方 API（模块元数据 + 下载量）、"
                  "gaato/mooncakes-graph 每日依赖快照（反向依赖数）。\n")
+    lines.append(f"> **数据时效**　模块元数据与下载量采集于 {META_SNAPSHOT}，反向依赖数取自 "
+                 f"{GRAPH_SNAPSHOT} 的依赖图快照，两者相隔约半日，且均早于本报告的生成时间。"
+                 f"本报告为离线生成的静态快照，不随注册表更新，不含此后的新增、版本变更与 "
+                 f"yanked 标记；选型判断请以 mooncakes.io 及仓库实际状态为准。\n")
     lines.append("每个场景分两层：**完整方案**（能直接选型、定骨架的）与"
                  "**基础库**（提供单点能力，由调用方组合）。框架、引擎、运行时、"
                  "脚手架、ORM 均属「完整方案」的不同形态。「基础库」不等同于「依赖」："
