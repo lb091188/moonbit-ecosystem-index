@@ -379,6 +379,53 @@ SCENARIOS = [
          desc=["webassembly", "component model"], ex=[]),
 ]
 
+# ---------------------------------------------------------------- 双语
+# 场景标题 / 简介 / 补充说明的英文版放在 data/i18n.json，不塞进 SCENARIOS：
+# 中英分开维护，构建时按 id 对齐，缺一条就构建失败，避免漏译悄悄上线。
+# 界面文案（按钮、页脚、提示语）在 HTML_JS 的 T 表里，与数据无关。
+
+I18N_PATH = OUT / "i18n.json"
+_I18N = None
+
+
+def i18n():
+    """读英文文案，并校验与 SCENARIOS / GROUPS 一一对应。"""
+    global _I18N
+    if _I18N is not None:
+        return _I18N
+    if not I18N_PATH.exists():
+        raise SystemExit(f"缺少 {I18N_PATH}，英文版没有文案来源")
+    raw = json.loads(I18N_PATH.read_text(encoding="utf-8"))
+    groups = raw.get("groups") or {}
+    scenes = {k: v for k, v in (raw.get("scenarios") or {}).items()
+              if not k.startswith("_")}
+
+    miss_g = [gid for gid, _ in GROUPS if not groups.get(gid)]
+    miss_s = []
+    for sc in SCENARIOS:
+        en = scenes.get(sc["id"]) or {}
+        lack = [k for k in ("title", "intro") if not (en.get(k) or "").strip()]
+        if (sc.get("note") or "").strip() and not (en.get("note") or "").strip():
+            lack.append("note")
+        if lack:
+            miss_s.append(f"{sc['id']}（缺 {'/'.join(lack)}）")
+    ids = {sc["id"] for sc in SCENARIOS}
+    extra = [k for k in scenes if k not in ids]
+
+    if miss_g or miss_s or extra:
+        msg = ["data/i18n.json 与场景定义不一致："]
+        if miss_g:
+            msg.append("  分组缺英文：" + ", ".join(miss_g))
+        if miss_s:
+            msg.append("  场景缺英文：" + "；".join(miss_s))
+        if extra:
+            msg.append("  多余键（SCENARIOS 里没有这个 id）：" + ", ".join(extra))
+        raise SystemExit("\n".join(msg))
+
+    _I18N = raw
+    return _I18N
+
+
 # 构建期门槛：下载量低于此值的包不予收录。它只影响「收不收」，不对外输出。
 # 该门槛实际只挡掉约 120 个包，作用是把刚发布、尚未被使用的占位包从清单里剔除。
 MIN_DOWNLOADS = 20
@@ -732,7 +779,8 @@ HTML_CSS = """
     border-radius:7px; font-size:13.5px; text-decoration:none; color:#3d444e; }
   .snav a:hover { background:#f2f4f7; color:var(--ink); }
   .snav a.on { background:var(--accent-soft); color:var(--accent); font-weight:600; }
-  .snav a .n { margin-left:auto; font-size:11px; color:#9aa2ae; font-variant-numeric:tabular-nums; }
+  .snav a .n { margin-left:auto; flex:0 0 auto; font-size:11px; color:#9aa2ae;
+    font-variant-numeric:tabular-nums; }
   .snav a.on .n { color:var(--accent); }
 
   /* 抽屉组件在宽屏不出现：侧栏本身常驻，无需菜单入口与遮罩 */
@@ -764,8 +812,10 @@ HTML_CSS = """
     padding:15px 17px 13px; display:flex; flex-direction:column; min-width:0; }
   .hd { display:flex; align-items:center; gap:9px; flex-wrap:wrap; margin-bottom:3px; }
   .ico { font-size:16px; line-height:1; }
-  .hd h2 { font-size:14.5px; margin:0; font-weight:650; white-space:nowrap; }
-  .tabs { display:flex; gap:2px; background:var(--line-soft); border-radius:7px; padding:2px; }
+  .hd h2 { font-size:14.5px; margin:0; font-weight:650; min-width:0;
+    overflow-wrap:anywhere; line-height:1.35; }
+  .tabs { display:flex; gap:2px; background:var(--line-soft); border-radius:7px; padding:2px;
+    flex:0 0 auto; }
   .tabs button { border:0; background:none; font:inherit; font-size:11.5px; color:var(--muted);
     padding:2px 9px; border-radius:5px; cursor:pointer; font-variant-numeric:tabular-nums; }
   .tabs button:hover { color:var(--ink); }
@@ -888,6 +938,167 @@ let D = null;          // 全部数据
 const SC = {};         // 场景索引
 const PREVIEW = 5;     // 首页每个场景固定展示的包数
 
+/* ---------------------------------------------------------------- 双语
+   语言只判定一次：浏览器首选语言是中文就中文，否则英文。
+   URL 加 ?lang=zh 或 ?lang=en 可强制指定（便于分享链接与自查）。
+   数据里的标题 / 简介 / 说明是 [中文, 英文] 两元数组，用 L() 取值；
+   界面文案在下面的 T 表里，中英各一份，不存在第三种来源。 */
+
+const LANG = (() => {
+  const p = new URLSearchParams(location.search).get('lang');
+  if (p === 'zh' || p === 'en') return p;
+  const list = navigator.languages && navigator.languages.length
+    ? navigator.languages : [navigator.language || ''];
+  for (const l of list) if (l) return l.toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en';
+  return 'en';
+})();
+const ZH = LANG === 'zh';
+const L = x => Array.isArray(x) ? (x[ZH ? 0 : 1] || x[0]) : x;
+
+function fill(s, o) {
+  let r = s;
+  for (const k in o) r = r.split('{' + k + '}').join(o[k]);
+  return r;
+}
+
+const T = {
+  zh: {
+    docTitle: 'MoonBit 生态索引 · 场景化选型参考',
+    docDesc: '按使用场景组织的 MoonBit 包索引：{n} 个场景，区分完整方案与基础库。',
+    brand: 'MoonBit 生态索引',
+    search: '检索',
+    navGroups: '场景分类',
+    navClose: '关闭场景导航',
+    navOpen: '打开场景导航',
+    loading: '正在加载数据…',
+    allScenes: '全部场景',
+    ts: '采集：{c}；构建：{b}',
+    sol: '完整方案',
+    lib: '基础库',
+    libOnly: '基础库 {n}',
+    empty: '暂无候选',
+    solNone: '本场景尚无完整方案，需由基础库组合实现',
+    more: '查看全部 {n} 个 →',
+    count: '{n} 个',
+    home: '首页',
+    unknown: '未知场景：{id}',
+    noSol: '本场景在生态中尚无完整方案（无框架或引擎级实现），下列均为基础库，需要按需组合。',
+    curated: '本场景为人工圈定：该领域在生态中尚未形成可靠的关键词信号，候选包与其顺序由人工确定。',
+    ph: '检索全部 {n} 个包：名称或描述，例如 json、http、parser',
+    sHint: '输入关键词开始检索。按匹配程度排序，同一程度按名称排列。',
+    sHit: '「{q}」：命中 {n} 个',
+    sMore: '，仅列前 {k} 个',
+    sEmpty: '没有匹配的包',
+    errTitle: '数据加载失败：{e}。',
+    errHint: '请通过 HTTP 打开页面（如 <code>python3 -m http.server</code>），直接双击 file:// 无法读取数据。',
+    lede: '按使用场景组织的 MoonBit 包索引，共 {g} 组 {s} 个场景。有完整方案的场景分两层：'
+      + '<b>完整方案</b>（能直接选型、定骨架）与 <b>基础库</b>（提供单点能力）；'
+      + '{x} 个场景尚无完整方案，全部归为基础库。首页每个场景只展示前 {p} 个，完整清单在场景详情页。',
+    foot: [
+      { h: '数据来源',
+        p: 'mooncakes.io 官方 API（模块元数据）。本索引仅做场景导航，不做注册表镜像：'
+          + '版本历史、完整 API 文档与依赖关系请到 mooncakes 包页查看，页面内每个包名均指向该页。' },
+      { h: '数据时效',
+        p: '采集于 {c}，构建于 {b}。本站为离线快照，不随注册表实时更新，'
+          + '不含此后的新增、版本变更与 yanked 标记。' },
+      { h: '分层标准',
+        p: '完整方案指能接管程序结构、可直接选型的包（框架、引擎、运行时、脚手架、ORM）；'
+          + '基础库指提供单点能力、由调用方组合的包。「基础库」不等同于「依赖」：'
+          + '在 mooncakes 生态中完整方案本身亦为依赖，分层唯一标准是能否接管程序结构。'
+          + '{x} 个场景尚无完整方案。' },
+      { h: '排序方法',
+        p: '不设名次宣称。清单顺序在构建时确定：关键词相关度为主，注册表的下载量级参与排序但不对外呈现'
+          + '——它是累计计数，快照必然滞后，且一旦与名次并排显示，就会被读成「下载多的更适合」。'
+          + '选型要看 API 形态与维护状态，这两项请到包页自行核对。'
+          + '桌面、手机、运维等缺乏稳定关键词的场景为人工圈定的顺序。' },
+    ],
+    buildLabel: '构建',
+    queryLabel: '查询',
+  },
+  en: {
+    docTitle: 'MoonBit Ecosystem Index · Choosing packages by use case',
+    docDesc: 'A MoonBit package index organized by use case: {n} scenarios, split into complete solutions and libraries.',
+    brand: 'MoonBit Ecosystem Index',
+    search: 'Search',
+    navGroups: 'Scenario groups',
+    navClose: 'Close scenario navigation',
+    navOpen: 'Open scenario navigation',
+    loading: 'Loading data…',
+    allScenes: 'All scenarios',
+    ts: 'collected {c} · built {b}',
+    sol: 'Solutions',
+    lib: 'Libraries',
+    libOnly: 'Libraries {n}',
+    empty: 'No candidates yet',
+    solNone: 'No complete solution yet; assemble one from these libraries',
+    more: 'View all {n} →',
+    count: '{n} packages',
+    home: 'Home',
+    unknown: 'Unknown scenario: {id}',
+    noSol: 'This scenario has no complete solution in the ecosystem (no framework or engine-level '
+      + 'implementation). Everything below is a library, to be composed as needed.',
+    curated: 'This list is hand-curated: the domain has no reliable keyword signal yet, so the '
+      + 'candidates and their order were chosen by hand.',
+    ph: 'Search all {n} packages by name or description, e.g. json, http, parser',
+    sHint: 'Type a keyword to search. Results are ordered by match strength, then by name.',
+    sHit: '“{q}”: {n} matches',
+    sMore: ', showing the first {k}',
+    sEmpty: 'No matching packages',
+    errTitle: 'Failed to load data: {e}.',
+    errHint: 'Serve the page over HTTP (e.g. <code>python3 -m http.server</code>); '
+      + 'opening file:// directly cannot read the data.',
+    lede: 'A MoonBit package index organized by use case: {s} scenarios in {g} groups. '
+      + 'Scenarios that have complete solutions are split in two layers: <b>complete solutions</b> '
+      + '(pick one and the project skeleton is set) and <b>libraries</b> (single capabilities). '
+      + '{x} scenarios have no complete solution yet and list libraries only. '
+      + 'Each card shows the first {p} packages; the full list is on the scenario page.',
+    foot: [
+      { h: 'Data source',
+        p: 'The official mooncakes.io API (module metadata). This index only navigates by use case; '
+          + 'it is not a registry mirror. Version history, full API docs, and dependency information '
+          + 'live on the mooncakes package page — every package name here links to it.' },
+      { h: 'Data freshness',
+        p: 'Collected {c}, built {b}. This is an offline snapshot: it does not follow the registry '
+          + 'in real time and does not include later additions, version changes, or yanked flags.' },
+      { h: 'Layering',
+        p: 'A complete solution is a package that takes over the structure of your program and can be '
+          + 'chosen outright (framework, engine, runtime, scaffolding tool, ORM). A library provides a '
+          + 'single capability that the caller composes. "Library" is not a synonym for "dependency": '
+          + 'complete solutions are dependencies too, so the only criterion is whether a package takes '
+          + 'over program structure. {x} scenarios still have no complete solution.' },
+      { h: 'Ordering',
+        p: 'No ranking is claimed. Order is fixed at build time: keyword relevance dominates, and the '
+          + 'registry download magnitude participates in sorting but is never shown — it is a cumulative '
+          + 'count that a snapshot necessarily lags behind, and shown next to a position it would be read '
+          + 'as "most downloaded fits best". Judge by API shape and maintenance status, both checkable on '
+          + 'the package page. Desktop, mobile, and ops lack a stable keyword signal, so their order is '
+          + 'hand-set.' },
+    ],
+    buildLabel: 'build',
+    queryLabel: 'query',
+  },
+};
+
+const t = T[LANG];
+
+/* 静态骨架里的文案（品牌名、按钮、aria-label）按 data-i18n 键填充；
+   放在 fetch 之前执行，避免中文闪一下再变英文。 */
+function applyStatic() {
+  const el = document.documentElement;
+  el.lang = ZH ? 'zh-CN' : 'en';
+  document.title = t.docTitle;
+  const desc = document.querySelector('meta[name="description"]');
+  if (desc) desc.setAttribute('content', fill(t.docDesc, { n: D ? D.meta.scenarios : '' }));
+  document.querySelectorAll('[data-i18n]').forEach(n => {
+    const v = t[n.dataset.i18n];
+    if (typeof v === 'string') n.textContent = v;
+  });
+  document.querySelectorAll('[data-i18n-aria]').forEach(n => {
+    const v = t[n.dataset.i18nAria];
+    if (typeof v === 'string') n.setAttribute('aria-label', v);
+  });
+}
+
 /* ---------------------------------------------------------------- 渲染片段 */
 
 function pkg(name, i) {
@@ -902,38 +1113,38 @@ function pkg(name, i) {
 }
 
 function rows(list, n) {
-  if (!list.length) return '<li class="empty">\\u6682\\u65e0\\u5019\\u9009</li>';
+  if (!list.length) return `<li class="empty">${t.empty}</li>`;
   return list.slice(0, n).map((x, i) => pkg(x, i + 1)).join('');
 }
 
 function card(sc) {
   const ns = sc.sol.length, nl = sc.lib.length;
   const def = ns > 0 ? 'sol' : 'lib';
+  const title = L(sc.title), intro = L(sc.intro);
   const tab = (k, n, label) =>
     `<button class="${def === k ? 'on' : ''}" data-t="${k}">${label} ${n}</button>`;
   const pane = (k, list) =>
     `<ul class="pkglist" data-tab="${k}"${def === k ? '' : ' hidden'}>${
       k === 'sol' && !ns
-        ? '<li class="empty">\\u672c\\u573a\\u666f\\u5c1a\\u65e0\\u5b8c\\u6574\\u65b9\\u6848\\uff0c'
-          + '\\u9700\\u7531\\u57fa\\u7840\\u5e93\\u7ec4\\u5408\\u5b9e\\u73b0</li>'
+        ? `<li class="empty">${t.solNone}</li>`
         : rows(list, PREVIEW)}</ul>`;
   // 没有完整方案的场景：不设两组标签，候选全部只是基础库
   if (!ns) {
     return `<section class="card" data-id="${sc.id}">
-      <div class="hd"><span class="ico">${sc.icon}</span><h2>${esc(sc.title)}</h2>
-        <span class="tag">\u57fa\u7840\u5e93 ${nl}</span></div>
-      <p class="intro">${esc(sc.intro)}</p>
+      <div class="hd"><span class="ico">${sc.icon}</span><h2>${esc(title)}</h2>
+        <span class="tag">${fill(t.libOnly, { n: nl })}</span></div>
+      <p class="intro">${esc(intro)}</p>
       <ul class="pkglist">${rows(sc.lib, PREVIEW)}</ul>
-      <a class="more" href="#/s/${sc.id}">\u67e5\u770b\u5168\u90e8 ${nl} \u4e2a \u2192</a>
+      <a class="more" href="#/s/${sc.id}">${fill(t.more, { n: nl })}</a>
     </section>`;
   }
   return `<section class="card" data-id="${sc.id}">
-    <div class="hd"><span class="ico">${sc.icon}</span><h2>${esc(sc.title)}</h2>
-      <div class="tabs">${tab('sol', ns, '\\u5b8c\\u6574\\u65b9\\u6848')}${tab('lib', nl, '\\u57fa\\u7840\\u5e93')}</div></div>
-    <p class="intro">${esc(sc.intro)}</p>
+    <div class="hd"><span class="ico">${sc.icon}</span><h2>${esc(title)}</h2>
+      <div class="tabs">${tab('sol', ns, t.sol)}${tab('lib', nl, t.lib)}</div></div>
+    <p class="intro">${esc(intro)}</p>
     ${pane('sol', sc.sol)}
     ${pane('lib', sc.lib)}
-    <a class="more" href="#/s/${sc.id}">\\u67e5\\u770b\\u5168\\u90e8 ${ns + nl} \\u4e2a \\u2192</a>
+    <a class="more" href="#/s/${sc.id}">${fill(t.more, { n: ns + nl })}</a>
   </section>`;
 }
 
@@ -941,63 +1152,64 @@ function card(sc) {
 
 function viewHome() {
   const m = D.meta;
-  return `<p class="lede">\\u6309\\u4f7f\\u7528\\u573a\\u666f\\u7ec4\\u7ec7\\u7684 MoonBit \\u5305\\u7d22\\u5f15\\uff0c\\u5171 ${D.groups.length}
-    \\u7ec4 ${m.scenarios} \\u4e2a\\u573a\\u666f\\u3002\u6709\u5b8c\u6574\u65b9\u6848\u7684\u573a\u666f\u5206\u4e24\u5c42\uff1a<b>\\u5b8c\\u6574\\u65b9\\u6848</b>\\uff08\\u80fd\\u76f4\\u63a5\\u9009\\u578b\\u3001\\u5b9a\\u9aa8\\u67b6\\uff09\\u4e0e
-    <b>\\u57fa\\u7840\\u5e93</b>\\uff08\u63d0\u4f9b\u5355\u70b9\u80fd\u529b\uff09\uff1b${m.scenarios - m.with_solutions} \u4e2a\u573a\u666f\u5c1a\u65e0\u5b8c\u6574\u65b9\u6848\uff0c\u5168\u90e8\u5f52\u4e3a\u57fa\u7840\u5e93\u3002\\u9996\\u9875\\u6bcf\\u4e2a\\u573a\\u666f\\u53ea\\u5c55\\u793a\\u524d ${PREVIEW} \\u4e2a\\uff0c
-    \\u5b8c\\u6574\\u6e05\\u5355\\u5728\\u573a\\u666f\\u8be6\\u60c5\\u9875\\u3002</p>
+  return `<p class="lede">${fill(t.lede, {
+    g: D.groups.length, s: m.scenarios, x: m.scenarios - m.with_solutions, p: PREVIEW })}
+    </p>
     <div class="grid">${D.scenarios.map(card).join('')}</div>${footer()}`;
 }
 
 function sceneNote(sc) {
-  const base = sc.curated
-    ? '\\u672c\\u573a\\u666f\\u4e3a\\u4eba\\u5de5\\u56f4\\u5b9a\\uff1a\\u8be5\\u9886\\u57df\\u5728\\u751f\\u6001\\u4e2d\\u5c1a\\u672a\\u5f62\\u6210\\u53ef\\u9760\\u7684\\u5173\\u952e\\u8bcd\\u4fe1\\u53f7\\uff0c\\u5019\\u9009\\u5305\\u4e0e\\u5176\\u987a\\u5e8f\\u7531\\u4eba\\u5de5\\u786e\\u5b9a\\u3002'
-    : '';
-  const t = (base + ' ' + (sc.note || '')).trim();
-  return t ? `<p class="note">${esc(t)}</p>` : '';
+  const base = sc.curated ? t.curated : '';
+  const extra = L(sc.note) || '';
+  const txt = (base + ' ' + extra).trim();
+  return txt ? `<p class="note">${esc(txt)}</p>` : '';
 }
 
 function viewScene(id) {
   const sc = SC[id];
-  if (!sc) return `<p class="loading">\\u672a\\u77e5\\u573a\\u666f\\uff1a${esc(id)}</p>`;
+  if (!sc) return `<p class="loading">${esc(fill(t.unknown, { id }))}</p>`;
   const hasSol = sc.sol.length > 0;
-  const sec = (k, list, title) => {
+  const title = L(sc.title), intro = L(sc.intro);
+  const sec = (k, list, head) => {
     if (!list.length && k === 'lib') return '';
     const body = `<ul class="pkglist all">${list.map((x, i) => pkg(x, i + 1)).join('')}</ul>`;
-    return `<div class="sect"><h3>${title}<span class="k">${list.length} \\u4e2a</span></h3>
+    return `<div class="sect"><h3>${head}<span class="k">${
+      fill(t.count, { n: list.length })}</span></h3>
       <div class="panel">${body}</div></div>`;
   };
-  return `<p class="crumb"><a href="#/">\\u9996\\u9875</a> \\u203a ${esc(sc.title)}</p>
-    <div class="dhead"><h1>${sc.icon} ${esc(sc.title)}</h1>
-      <p>${esc(sc.intro)}</p></div>
+  return `<p class="crumb"><a href="#/">${t.home}</a> › ${esc(title)}</p>
+    <div class="dhead"><h1>${sc.icon} ${esc(title)}</h1>
+      <p>${esc(intro)}</p></div>
     ${sceneNote(sc)}
-    ${hasSol ? sec('sol', sc.sol, '\\u5b8c\\u6574\\u65b9\\u6848') : ''}
-    ${hasSol ? '' : `<p class="soless">\u672c\u573a\u666f\u5728\u751f\u6001\u4e2d\u5c1a\u65e0\u5b8c\u6574\u65b9\u6848\uff08\u65e0\u6846\u67b6\u6216\u5f15\u64ce\u7ea7\u5b9e\u73b0\uff09\uff0c\u4e0b\u5217\u5747\u4e3a\u57fa\u7840\u5e93\uff0c\u9700\u8981\u6309\u9700\u7ec4\u5408\u3002</p>`}
-    ${sec('lib', sc.lib, '\\u57fa\\u7840\\u5e93')}
+    ${hasSol ? sec('sol', sc.sol, t.sol) : ''}
+    ${hasSol ? '' : `<p class="soless">${esc(t.noSol)}</p>`}
+    ${sec('lib', sc.lib, t.lib)}
     ${footer()}`;
 }
 
 function viewSearch(q) {
-  return `<p class="crumb"><a href="#/">\\u9996\\u9875</a> \\u203a \\u68c0\\u7d22</p>
-    <input class="sbox" id="q" autocomplete="off" placeholder="\\u68c0\\u7d22\\u5168\\u90e8 ${D.meta.modules} \\u4e2a\\u5305\\uff1a\\u540d\\u79f0\\u6216\\u63cf\\u8ff0\\uff0c\\u4f8b\\u5982 json\\u3001http\\u3001parser">
-    <div id="sout"><p class="smeta">\\u8f93\\u5165\\u5173\\u952e\\u8bcd\\u5f00\\u59cb\\u68c0\\u7d22\\u3002\\u6309\\u5339\\u914d\\u7a0b\\u5ea6\\u6392\\u5e8f\\uff0c\\u540c\\u4e00\\u7a0b\\u5ea6\\u6309\\u540d\\u79f0\\u6392\\u5217\\u3002</p></div>`;
+  return `<p class="crumb"><a href="#/">${t.home}</a> › ${t.search}</p>
+    <input class="sbox" id="q" autocomplete="off"
+      placeholder="${esc(fill(t.ph, { n: D.meta.modules }))}">
+    <div id="sout"><p class="smeta">${t.sHint}</p></div>`;
 }
 
 function doSearch(q) {
   const out = $('#sout');
   if (!out) return;
-  const t = q.trim().toLowerCase();
-  if (!t) {
-    out.innerHTML = '<p class="smeta">\\u8f93\\u5165\\u5173\\u952e\\u8bcd\\u5f00\\u59cb\\u68c0\\u7d22\\u3002\\u6309\\u5339\\u914d\\u7a0b\\u5ea6\\u6392\\u5e8f\\uff0c\\u540c\\u4e00\\u7a0b\\u5ea6\\u6309\\u540d\\u79f0\\u6392\\u5217\\u3002</p>';
+  const t0 = q.trim().toLowerCase();
+  if (!t0) {
+    out.innerHTML = `<p class="smeta">${t.sHint}</p>`;
     return;
   }
   // 检索不再按下载量排序：命中程度优先（包名全等 > 包名开头 > 包名包含 > 描述包含），
   // 同程度按名称排列，顺序可复现，不需要读者相信任何隐藏权重。
   const score = n => {
     const full = n.toLowerCase(), seg = full.split('/').pop(), d = (D.modules[n][1] || '').toLowerCase();
-    if (full === t || seg === t) return 4;
-    if (seg.startsWith(t)) return 3;
-    if (full.includes(t)) return 2;
-    if (d.includes(t)) return 1;
+    if (full === t0 || seg === t0) return 4;
+    if (seg.startsWith(t0)) return 3;
+    if (full.includes(t0)) return 2;
+    if (d.includes(t0)) return 1;
     return 0;
   };
   const hit = [];
@@ -1007,43 +1219,35 @@ function doSearch(q) {
   }
   hit.sort((a, b) => b[0] - a[0] || a[1].localeCompare(b[1]));
   const top = hit.slice(0, 200).map(x => x[1]);
-  out.innerHTML = `<p class="smeta">\\u300c${esc(q.trim())}\\u300d\\uff1a\\u547d\\u4e2d ${hit.length} \\u4e2a${
-    hit.length > top.length ? '\\uff0c\\u4ec5\\u5217\\u524d ' + top.length + ' \\u4e2a' : ''}</p>
+  const head = fill(t.sHit, { q: q.trim(), n: hit.length })
+    + (hit.length > top.length ? fill(t.sMore, { k: top.length }) : '');
+  out.innerHTML = `<p class="smeta">${esc(head)}</p>
     <div class="panel"><ul class="pkglist all">${
       top.length ? top.map((n, i) => pkg(n, i + 1)).join('')
-        : '<li class="empty">\\u6ca1\\u6709\\u5339\\u914d\\u7684\\u5305</li>'}</ul></div>`;
+        : `<li class="empty">${t.sEmpty}</li>`}</ul></div>`;
 }
 
 function footer() {
   const m = D.meta;
-  return `<footer>
-    <p><b>数据来源</b>　mooncakes.io 官方 API（模块元数据）。本索引仅做场景导航，不做注册表镜像：
-      版本历史、完整 API 文档与依赖关系请到 mooncakes 包页查看，页面内每个包名均指向该页。</p>
-    <p><b>数据时效</b>　采集于 ${m.collected_at}，构建于 ${m.built_at}。本站为离线快照，
-      不随注册表实时更新，不含此后的新增、版本变更与 yanked 标记。</p>
-    <p><b>分层标准</b>　完整方案指能接管程序结构、可直接选型的包（框架、引擎、运行时、
-      脚手架、ORM）；基础库指提供单点能力、由调用方组合的包。「基础库」不等同于
-      「依赖」：在 mooncakes 生态中完整方案本身亦为依赖，分层唯一标准是能否接管程序结构。
-      ${m.scenarios - m.with_solutions} 个场景尚无完整方案。</p>
-    <p><b>排序方法</b>　不设名次宣称。清单顺序在构建时确定：关键词相关度为主，注册表的下载量级
-      参与排序但不对外呈现——它是累计计数，快照必然滞后，且一旦与名次并排显示，就会被
-      读成「下载多的更适合」。选型要看 API 形态与维护状态，这两项请到包页自行核对。
-      桌面、手机、运维等缺乏稳定关键词的场景为人工圈定的顺序。</p>
-    <p><b>构建</b>　<code>python3 pipeline/analyze.py</code>　·　<b>查询</b>　<code>python3 pipeline/query.py json</code></p>
+  const sep = ZH ? '\u3000' : ': ';
+  const vars = { c: m.collected_at, b: m.built_at, x: m.scenarios - m.with_solutions };
+  const ps = t.foot.map(f => `<p><b>${f.h}</b>${sep}${fill(f.p, vars)}</p>`).join('');
+  return `<footer>${ps}
+    <p><b>${t.buildLabel}</b>${sep}<code>python3 pipeline/analyze.py</code> · <b>${t.queryLabel}</b>${sep}<code>python3 pipeline/query.py json</code></p>
   </footer>`;
 }
 
 /* ---------------------------------------------------------------- 路由 */
 
 function renderSide(active) {
-  let h = `<a class="side-home${active === 'home' ? ' on' : ''}" href="#/">\\u5168\\u90e8\\u573a\\u666f</a>`;
-  for (const [gid, gtitle] of D.groups) {
+  let h = `<a class="side-home${active === 'home' ? ' on' : ''}" href="#/">${t.allScenes}</a>`;
+  for (const [gid, gname] of D.groups) {
     const list = D.scenarios.filter(s => s.group === gid);
     if (!list.length) continue;
-    h += `<div class="gt">${esc(gtitle)}</div><div class="snav">`;
+    h += `<div class="gt">${esc(L(gname))}</div><div class="snav">`;
     for (const s of list) {
       const n = s.sol.length ? s.sol.length : s.lib.length;
-      h += `<a href="#/s/${s.id}" class="${active === s.id ? 'on' : ''}">${s.icon} ${esc(s.title)}<span class="n">${n}</span></a>`;
+      h += `<a href="#/s/${s.id}" class="${active === s.id ? 'on' : ''}">${s.icon} ${esc(L(s.title))}<span class="n">${n}</span></a>`;
     }
     h += '</div>';
   }
@@ -1091,9 +1295,9 @@ document.addEventListener('click', e => {
   const btn = e.target.closest('.tabs button');
   if (!btn) return;
   const cardEl = btn.closest('.card');
-  const t = btn.dataset.t;
+  const tabKey = btn.dataset.t;
   cardEl.querySelectorAll('.tabs button').forEach(b => b.classList.toggle('on', b === btn));
-  cardEl.querySelectorAll('.pkglist').forEach(u => { u.hidden = u.dataset.tab !== t; });
+  cardEl.querySelectorAll('.pkglist').forEach(u => { u.hidden = u.dataset.tab !== tabKey; });
 });
 
 window.addEventListener('hashchange', route);
@@ -1107,18 +1311,18 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') setDrawer(fa
 window.addEventListener('resize', () => { if (window.innerWidth > 880) setDrawer(false); });
 
 (async function boot() {
+  applyStatic();                      // 骨架文案先切到目标语言，避免中文闪一下
   try {
     const r = await fetch(ROOT);
     if (!r.ok) throw new Error('HTTP ' + r.status);
     D = await r.json();
     D.scenarios.forEach(s => { SC[s.id] = s; });
-    $('#ts').textContent =
-      `\\u91c7\\u96c6\\uff1a${D.meta.collected_at}\\uff1b\\u6784\\u5efa\\uff1a${D.meta.built_at}`;
+    $('#ts').textContent = fill(t.ts, { c: D.meta.collected_at, b: D.meta.built_at });
+    applyStatic();                    // 场景数已就绪，补一次 meta description
     route();
   } catch (err) {
-    $('#view').innerHTML = `<p class="loading">\\u6570\\u636e\\u52a0\\u8f7d\\u5931\\u8d25\\uff1a${esc(err.message)}\\u3002`
-      + `\\u8bf7\\u901a\\u8fc7 HTTP \\u6253\\u5f00\\u9875\\u9762\\uff08\\u5982 <code>python3 -m http.server</code>\\uff09\\uff0c`
-      + `\\u76f4\\u63a5\\u53cc\\u51fb file:// \\u65e0\\u6cd5\\u8bfb\\u53d6\\u6570\\u636e\\u3002</p>`;
+    $('#view').innerHTML = `<p class="loading">${
+      esc(fill(t.errTitle, { e: err.message }))} ${t.errHint}</p>`;
   }
 })();
 """
@@ -1138,21 +1342,22 @@ def write_html(mods, ranked):
 <body>
 <div class="app">
   <aside class="side" id="side">
-    <div class="drw-head"><span>场景分类</span>
-      <button type="button" id="drwClose" aria-label="关闭场景导航">&#10005;</button></div>
+    <div class="drw-head"><span data-i18n="navGroups">场景分类</span>
+      <button type="button" id="drwClose" data-i18n-aria="navClose"
+              aria-label="关闭场景导航">&#10005;</button></div>
     <div id="snav"></div>
   </aside>
   <div class="scrim" id="scrim"></div>
   <main class="main">
     <header class="top">
-      <button type="button" class="menu-btn" id="menuBtn"
+      <button type="button" class="menu-btn" id="menuBtn" data-i18n-aria="navOpen"
               aria-label="打开场景导航" aria-controls="side" aria-expanded="false">
         <i></i><i></i><i></i></button>
-      <a class="brand" href="#/">MoonBit 生态索引</a>
+      <a class="brand" href="#/" data-i18n="brand">MoonBit 生态索引</a>
       <span class="ts" id="ts"></span>
-      <a class="sbtn" href="#/search">检索</a>
+      <a class="sbtn" href="#/search" data-i18n="search">检索</a>
     </header>
-    <div id="view"><p class="loading">正在加载数据…</p></div>
+    <div id="view"><p class="loading" data-i18n="loading">正在加载数据…</p></div>
   </main>
 </div>
 <script src="assets/app.js"></script>
@@ -1194,6 +1399,9 @@ def write_scenarios_json(mods, ranked):
         desc = re.sub(r"\s+", " ", m["description"]).strip()
         modules[name] = [m["version"], desc[:150], int(m["yanked"])]
 
+    # 双语：文本字段统一为 [中文, 英文]，前端按浏览器语言取下标，
+    # 不在页面里再做一次翻译映射（数据只有一份来源）。
+    en = i18n()
     payload = {
         "schema_version": 2,
         "meta": {
@@ -1205,20 +1413,21 @@ def write_scenarios_json(mods, ranked):
             "with_solutions": n_sol_scene,
             "solution_packages": n_sol_pkg,
         },
-        "groups": [[gid, gtitle] for gid, gtitle in GROUPS],
+        "groups": [[gid, [gzh, en["groups"][gid]]] for gid, gzh in GROUPS],
         "scenarios": [],
         "modules": modules,
     }
     for sc, rows in ranked:
         sol, lib = split_tiers(rows)
+        en_sc = en["scenarios"][sc["id"]]
         payload["scenarios"].append({
             "id": sc["id"],
             "group": sc.get("group", "lang"),
-            "title": sc["title"],
+            "title": [sc["title"], en_sc["title"]],
             "icon": sc["icon"],
-            "intro": sc["intro"],
+            "intro": [sc["intro"], en_sc["intro"]],
             "curated": bool(sc.get("curated")),
-            "note": sc.get("note", ""),
+            "note": [sc.get("note", ""), en_sc.get("note", "")],
             "sol": [m["name"] for _s, m in sol],
             "lib": [m["name"] for _s, m in lib],
         })

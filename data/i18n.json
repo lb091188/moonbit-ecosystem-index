@@ -1,0 +1,161 @@
+{
+  "_comment": "非中文文案的唯一来源。analyze.py 构建时按 id 合并进 scenarios.json，缺键直接构建失败。键必须与 SCENARIOS 的 id / GROUPS 的 gid 一致。",
+
+  "groups": {
+    "app": "Interface & Apps",
+    "svc": "Services & Data",
+    "lang": "Language & Tooling"
+  },
+
+  "scenarios": {
+    "gui": {
+      "title": "Desktop",
+      "intro": "Native desktop app development: window creation, event loops, widget layout, and rendering backends. Proton's companion modules (tray, clipboard, global hotkeys) are not listed here."
+    },
+    "mobi": {
+      "title": "Mobile",
+      "intro": "App development on Android, iOS, HarmonyOS, and WeChat mini programs. The registry has no consistent mobile keyword signal, so this list is hand-curated: cross-platform UI frameworks, mini-program runtimes and component libraries, native bridges, and mini-program hosts."
+    },
+    "ui": {
+      "title": "Web UI / Frontend",
+      "intro": "In-browser UI frameworks, reactive state, components, layout, and CSS."
+    },
+    "tui": {
+      "title": "Terminal UI / TUI",
+      "intro": "Terminal interfaces, character canvases, ANSI control, and PTYs."
+    },
+    "cli": {
+      "title": "CLI Argument Parsing",
+      "intro": "Parsing arguments, subcommands, and help text for command-line tools."
+    },
+    "game": {
+      "title": "Game Engines / ECS",
+      "intro": "Game engines, ECS architectures, procedural generation, and game backends."
+    },
+    "graphics": {
+      "title": "Graphics / Charts / Rendering",
+      "intro": "Vector graphics, SVG, scene graphs, charting and graph layout, drawing primitives."
+    },
+    "img": {
+      "title": "Image Codecs",
+      "intro": "Encoding, decoding, and pixel handling for image formats: PNG / JPEG / GIF / BMP / QOI / WebP."
+    },
+    "media": {
+      "title": "Audio / Video",
+      "intro": "Audio capture and playback, audio codecs, MIDI, microphones, and device interfaces."
+    },
+    "http": {
+      "title": "Web Backends / HTTP Servers",
+      "intro": "HTTP servers, routing, middleware, and backend API development."
+    },
+    "httpc": {
+      "title": "HTTP Clients",
+      "intro": "Making HTTP requests: request building, connection reuse, redirects, and streaming reads over SSE."
+    },
+    "net": {
+      "title": "Networking / Sockets",
+      "intro": "Transport-layer capabilities: TCP / UDP, sockets, DNS, and TLS."
+    },
+    "proto": {
+      "title": "Application Protocols / RPC",
+      "intro": "Application-layer protocols and RPC: WebSocket, MQTT, gRPC, and SSE."
+    },
+    "db": {
+      "title": "Databases / Storage",
+      "intro": "SQLite bindings, ORMs, key-value stores, and migration tools."
+    },
+    "async": {
+      "title": "Async / Concurrency",
+      "intro": "Async runtimes, coroutines, concurrency primitives, and task scheduling."
+    },
+    "json": {
+      "title": "JSON Parsing",
+      "intro": "Parsing and generating JSON, JSON Lines, and JSON5, plus JSON Schema validation."
+    },
+    "datafmt": {
+      "title": "Config / Markup Formats",
+      "intro": "Parsing and generating configuration and markup languages: YAML, TOML, XML, CSV, INI, Ion."
+    },
+    "binfmt": {
+      "title": "Binary Encoding",
+      "intro": "Binary serialization formats: CBOR, Protocol Buffers, MessagePack, ASN.1."
+    },
+    "log": {
+      "title": "Logging / Tracing",
+      "intro": "Structured logging, tracing, OpenTelemetry, and metrics."
+    },
+    "ops": {
+      "title": "Ops / System Administration",
+      "intro": "Process supervision and inspection, subprocesses and command execution, pseudo-terminal control, and CI job runners. The registry has no ops framework yet, but it does have deployable tools alongside composable libraries.",
+      "note": "Process managers and CI runners are ready-to-use products and count as complete solutions; the rest are single-capability libraries you assemble yourself."
+    },
+    "llm": {
+      "title": "LLM / Agent / MCP",
+      "intro": "LLM clients, agent frameworks, MCP servers and clients, and prompting."
+    },
+    "parser": {
+      "title": "Parsers / Grammars",
+      "intro": "Lexing, parsing, parser combinators, ASTs, tree-sitter, and parser generators."
+    },
+    "compiler": {
+      "title": "Compilers / Codegen",
+      "intro": "Compilers, bytecode and VMs, code generation, type checking, LLVM and native backends."
+    },
+    "regex": {
+      "title": "Regular Expressions",
+      "intro": "Regex engines and matching."
+    },
+    "unicode": {
+      "title": "Unicode / Text",
+      "intro": "Unicode categories, grapheme clusters, width calculation, and string utilities."
+    },
+    "hash": {
+      "title": "Hashing / Checksums",
+      "intro": "Hash functions, message digests, HMAC, and checksums (CRC / FNV)."
+    },
+    "cipher": {
+      "title": "Encryption / Signing",
+      "intro": "Symmetric and asymmetric encryption, digital signatures, key exchange, and certificates."
+    },
+    "encode": {
+      "title": "Encoding / Escaping",
+      "intro": "Base64 / Base32 / Hex encoding, URL percent-encoding, escaping, and varints."
+    },
+    "archive": {
+      "title": "Compression / Archives",
+      "intro": "Compression and decompression for DEFLATE / zlib / gzip / ZIP."
+    },
+    "fs": {
+      "title": "Files / Paths / IO",
+      "intro": "Filesystem access, paths and environment variables, temp files, general IO abstractions, and file watching."
+    },
+    "math": {
+      "title": "Math / Numerics",
+      "intro": "Arbitrary-precision math, linear algebra, matrices, BLAS, and statistics."
+    },
+    "ds": {
+      "title": "Data Structures / Algorithms",
+      "intro": "Ordered maps, B-trees, heaps, graph algorithms, and sets."
+    },
+    "test": {
+      "title": "Testing / Assertions / Property Testing",
+      "intro": "Unit tests, property testing (quickcheck), assertion libraries, BDD, and benchmarks."
+    },
+    "tool": {
+      "title": "Dev Tooling / Code Quality",
+      "intro": "Code formatting, static analysis, linting, structural search and refactoring, codegen, and scaffolding."
+    },
+    "doc": {
+      "title": "Markdown / Document Conversion",
+      "intro": "Markdown parsing, HTML/PDF/DOCX conversion, and document layout."
+    },
+    "time": {
+      "title": "Time / Dates",
+      "intro": "Date and time, time zones, RFC3339, and cron."
+    },
+    "wasm": {
+      "title": "WebAssembly / JS Interop",
+      "intro": "The Wasm component model, WASI, FFI, and JS bindings."
+    }
+  }
+}
