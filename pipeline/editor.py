@@ -178,7 +178,11 @@ def save(payload):
                 item["note"] = en["note"].strip()
             scenes_en[sc["id"]] = item
         new_i18n = {k: v for k, v in old_i18n.items() if k.startswith("_")}
-        new_i18n["groups"] = {g["id"]: (g.get("title_en") or "").strip()
+        # 分组的英文以 payload 里的 i18n.groups 为准：scenarios.src.json 只存中文，
+        # 英文单独维护，两处都读一遍是为了兼容手工只改了其中一个文件的情况
+        en_groups = (payload.get("i18n", {}).get("groups") or {})
+        new_i18n["groups"] = {g["id"]: (en_groups.get(g["id"])
+                                        or g.get("title_en") or "").strip()
                               for g in src["groups"]}
         new_i18n["scenarios"] = scenes_en
         write_json(I18N, new_i18n)

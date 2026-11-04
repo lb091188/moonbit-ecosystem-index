@@ -356,7 +356,7 @@ function footer() {
     `<a href="${href}" target="_blank" rel="noopener noreferrer">${esc(text)}</a>`;
   const vars = {
     c: m.collected_at, b: m.built_at, x: m.scenarios - m.with_solutions,
-    repo: link(REPO, REPO.replace(/^https:\/\//, '')),
+    repo: link(REPO, REPO.replace(/^https:[/][/]/, '')),
     issue: link(ISSUE, t.issueLink),
   };
   const ps = t.foot.map(f => `<p><b>${f.h}</b>${sep}${fill(f.p, vars)}</p>`).join('');

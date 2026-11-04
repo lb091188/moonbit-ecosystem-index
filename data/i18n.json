@@ -1,12 +1,10 @@
 {
   "_comment": "非中文文案的唯一来源。analyze.py 构建时按 id 合并进 scenarios.json，缺键直接构建失败。键必须与 SCENARIOS 的 id / GROUPS 的 gid 一致。",
-
   "groups": {
     "app": "Interface & Apps",
     "svc": "Services & Data",
     "lang": "Language & Tooling"
   },
-
   "scenarios": {
     "gui": {
       "title": "Desktop",
