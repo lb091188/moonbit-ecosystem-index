@@ -59,7 +59,7 @@ MoonBit 这两年长得比很多人以为的快。
 
 其余十二个有意思的地方在于，它们几乎覆盖了当下所有主流框架的设计思路：`kupas/express` 直接对标 Express，底层走 uWebSockets；`mizchi/mars` 和 `anccnuer/onho` 是 Hono 风格，trie 路由加 SSE；`RabitLogic/mbit` 学 Gin；`KKKIIO/moondark` 学 Django，建在 moonback 上还带工程结构约定；`wflixu/Halo` 用 Koa 的洋葱模型；`jaredzhou/pony` 是 Go 的 Chi 那一路。
 
-另外五个各占一个位置：把路由、参数、响应都纳入类型检查的 `moonapi`，同工程组织前后端的 `moonway`，面向多服务拆分的 `moonzero`，接口接近 Express 的 `mocket`，以及出自 MoonBit 语言作者之手、偏探索性质的 `crescent`。
+另外五个各占一个位置：把路由、参数、响应都纳入类型检查的 `moonapi`，同工程组织前后端的 `moonway`，面向多服务拆分的 `moonzero`，可跑在 js、wasm、native 三种后端的 `mocket`，以及从 `mocket` 硬分叉出来、重写为类型安全实现的 `crescent`。
 
 从 Web 转过来的人基本能找到自己熟的那一套，迁移成本主要不在框架，在语言本身。
 

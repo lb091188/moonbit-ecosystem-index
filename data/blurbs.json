@@ -3,16 +3,16 @@
   "_写法约定": "说明形态与能力，必要时补充适用边界。不使用营销性形容词，不重复注册表已有的描述。中文以 50 字上下为宜，英文不超过 30 词，通篇使用陈述句。",
 
   "moonbit-community/proton": [
-    "基于内置浏览器渲染的桌面运行时，兼容现有前端技术栈，并提供托盘、剪贴板、全局热键等系统模块。",
-    "Desktop runtime rendering through a built-in browser, compatible with existing frontend stacks, with tray, clipboard and global hotkey modules."
+    "以 Web 前端构建原生桌面的框架，经 CEF 内嵌 Chromium，系统能力经扩展按权限开放。",
+    "Native desktop framework for web frontends: Chromium is embedded via CEF and bundled with the app, with system capabilities exposed through permissioned extensions."
   ],
   "wzzc-dev/moui": [
     "自带渲染引擎的跨端 GUI 框架，不依赖系统 WebView 与系统渲染，桌面与移动共用一套代码。",
     "Cross-platform GUI framework with a built-in renderer, independent of system WebView and system rendering; one codebase for desktop and mobile."
   ],
   "NoahLiu/native-gui": [
-    "原生桌面 GUI 框架，界面由系统渲染引擎绘制，一套代码生成 Windows、Linux、macOS 窗口，内置托盘与通知。",
-    "Native desktop GUI framework rendering through the system renderer; one codebase yields native windows on Windows, Linux and macOS, with tray and notifications built in."
+    "原生桌面 GUI 框架，界面由系统渲染引擎绘制，一套代码生成三平台窗口，托盘、通知、快捷键、输入法、自启内置。",
+    "Native desktop GUI framework rendering through the system renderer; one codebase yields native windows on Windows, Linux and macOS, with tray, notifications, hotkeys, IME and autostart built in."
   ],
   "vectie/lepusa": [
     "MoonBit 原生桌面框架的研究性实现，可作为架构参考。",
@@ -70,8 +70,8 @@
     "A complete UI framework bundling a template language, virtual DOM, components, runtime, lint and CLI."
   ],
   "Arcelyth/aitne": [
-    "轻量响应式 Web 框架，运行时开销低，适用于内容型页面。",
-    "Lightweight reactive web framework with low runtime overhead, intended for content-oriented pages."
+    "响应式前端框架，采用细粒度更新与 JSX 风格组件语法，参照 Leptos 与 SolidJS 设计。",
+    "Reactive frontend framework with fine-grained updates and JSX-like components, modelled on Leptos and SolidJS."
   ],
 
   "mizchi/tui": [
@@ -100,12 +100,12 @@
     "Lightweight argument parser supporting commands, options and subcommands, with no additional dependencies."
   ],
   "mizchi/admiral": [
-    "声明式 CLI 构建器，采用 gunshi 风格，以数据描述命令结构，自动生成帮助文本与补全。",
-    "Declarative CLI builder in the gunshi style: the command tree is described as data, with help text and completion generated."
+    "声明式 CLI 构建器，提供类型化选项与子命令回调，生成 shell 补全与 --help 输出。",
+    "Declarative CLI builder with typed options, subcommand callbacks, shell completion and generated --help."
   ],
   "TheWaWaR/clap": [
-    "Rust clap 的移植版本，接口与用法基本一致，迁移成本低。",
-    "A port of Rust's clap with an essentially identical interface, keeping migration cost low."
+    "命令行参数解析库，支持选项、位置参数与多层子命令，帮助输出沿用 clap-rs 风格。",
+    "Command-line parser supporting options, positional arguments and nested subcommands, with clap-rs style help output."
   ],
   "totto2727/admiral": [
     "admiral 的异步优先分支，命令处理可直接返回异步结果。",
@@ -146,12 +146,12 @@
     "Hono-style web framework with trie routing, middleware and SSE, built on mizchi/x HTTP for both native and Node.js."
   ],
   "oboard/mocket": [
-    "通用 Web 框架，提供路由与中间件等基础能力。",
-    "General web framework providing routing and middleware."
+    "Web 框架，提供路由与应用入口，可运行于 js、wasm 与 native 三种后端。",
+    "Web framework with routing and an app entry point, runnable on js, wasm and native backends."
   ],
   "bobzhang/crescent": [
-    "Web 框架，由 MoonBit 语言作者实现，目前公开文档较少。",
-    "A web framework by MoonBit's language author; public documentation is still limited."
+    "mocket 的硬分叉，类型安全实现，目标 native 与 wasm，不支持 JS 与 wasm-gc。",
+    "Hard fork of mocket rewritten as a type-safe framework; targets native and wasm, without JS or wasm-gc."
   ],
   "jaredzhou/pony": [
     "轻量 HTTP 框架与路由器，采用 Go 的 Chi 风格，适用于仅需路由与中间件的服务。",
@@ -162,8 +162,8 @@
     "Gin-style web framework whose API mirrors the Go ecosystem, keeping migration cost low."
   ],
   "moonbitstack/moonapi": [
-    "类型化 Web 框架，路由、参数与响应均纳入类型检查，错误在编译期暴露。",
-    "Typed web framework that brings routes, parameters and responses under type checking, surfacing errors at compile time."
+    "类型化 Web 框架，由类型化路由构建服务端并生成 OpenAPI 文档，可编译为原生或 wasm。",
+    "Typed web framework that builds a server from typed routes and emits its own OpenAPI document; compiles to native or WebAssembly."
   ],
   "daqing/moonway": [
     "全栈 Web 框架，前后端在同一工程内组织，无需拆分构建流程。",
@@ -191,8 +191,8 @@
   ],
 
   "moonbitstack/moondb": [
-    "数据库访问的标准接口层，定义驱动与查询层之间的契约，本身不实现具体数据库。用于避免上层代码绑定特定数据库。",
-    "Standard database access interface defining the contract between drivers and the query layer, without implementing any database; keeps upper layers engine-agnostic."
+    "数据库驱动与查询层之间的接口层，定义驱动需实现的契约，本身无依赖，不绑定具体数据库。",
+    "Interface layer between database drivers and query layers: a dependency-free contract that binds to no specific engine."
   ],
   "oboard/morm": [
     "轻量 ORM，提供类型化查询与代码生成，支持多种数据库引擎。",
@@ -246,8 +246,8 @@
     "Language-agnostic process manager modeled on PM2, with built-in log rotation."
   ],
   "tiye/redstart": [
-    "面向本地开发的轻量进程管理器，支持一组服务的批量启动与停止。",
-    "Lightweight process manager for local development, starting and stopping groups of services."
+    "面向本地开发的轻量进程管理器。",
+    "Lightweight process manager for local development."
   ],
 
   "colmugx/posoco": [

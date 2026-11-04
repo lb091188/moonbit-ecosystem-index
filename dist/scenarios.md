@@ -63,9 +63,9 @@
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
-| 1 | [moonbit-community/proton](https://mooncakes.io/docs/moonbit-community/proton) | 0.6.0 | 基于内置浏览器渲染的桌面运行时，兼容现有前端技术栈，并提供托盘、剪贴板、全局热键等系统模块。 |
+| 1 | [moonbit-community/proton](https://mooncakes.io/docs/moonbit-community/proton) | 0.6.0 | 以 Web 前端构建原生桌面的框架，经 CEF 内嵌 Chromium，系统能力经扩展按权限开放。 |
 | 2 | [wzzc-dev/moui](https://mooncakes.io/docs/wzzc-dev/moui) | 0.2.6 | 自带渲染引擎的跨端 GUI 框架，不依赖系统 WebView 与系统渲染，桌面与移动共用一套代码。 |
-| 3 | [NoahLiu/native-gui](https://mooncakes.io/docs/NoahLiu/native-gui) | 0.3.1 | 原生桌面 GUI 框架，界面由系统渲染引擎绘制，一套代码生成 Windows、Linux、macOS 窗口，内置托盘与通知。 |
+| 3 | [NoahLiu/native-gui](https://mooncakes.io/docs/NoahLiu/native-gui) | 0.3.1 | 原生桌面 GUI 框架，界面由系统渲染引擎绘制，一套代码生成三平台窗口，托盘、通知、快捷键、输入法、自启内置。 |
 | 4 | [vectie/lepusa](https://mooncakes.io/docs/vectie/lepusa) | 0.1.6 | MoonBit 原生桌面框架的研究性实现，可作为架构参考。 |
 | 5 | [Nanaloveyuki/orbit](https://mooncakes.io/docs/Nanaloveyuki/orbit) | 0.2.0-alpha.1 | 组合式桌面应用基座，原生窗口配系统 WebView，IPC 支持策略授权，附 orbit-cli 工具链。 |
 | 6 | [lepus-apps/webview](https://mooncakes.io/docs/lepus-apps/webview) | 0.1.15 | 以 Web 技术构建桌面应用的框架，界面层由 HTML/CSS 实现，MoonBit 负责窗口与系统调用。 |
@@ -131,7 +131,7 @@ Android、iOS、HarmonyOS 与微信小程序上的应用开发。生态中尚无
 | 2 | [mizchi/luna](https://mooncakes.io/docs/mizchi/luna) | 0.25.2 | 细粒度响应式 UI 库，基于信号驱动，不使用虚拟 DOM diff，更新粒度与产物体积可控。 |
 | 3 | [marianoguerra/tutuca](https://mooncakes.io/docs/marianoguerra/tutuca) | 0.57.1 | 完整 UI 框架，集成模板语言、虚拟 DOM、组件、运行时、lint 与 CLI。 |
 | 4 | [lampclaw/minimoon](https://mooncakes.io/docs/lampclaw/minimoon) | 0.3.2 | 面向微信小程序 Skyline 渲染引擎的 UI 运行时，采用 Elm 状态机，局部状态更新具备事务性。 |
-| 5 | [Arcelyth/aitne](https://mooncakes.io/docs/Arcelyth/aitne) | 0.4.20 | 轻量响应式 Web 框架，运行时开销低，适用于内容型页面。 |
+| 5 | [Arcelyth/aitne](https://mooncakes.io/docs/Arcelyth/aitne) | 0.4.20 | 响应式前端框架，采用细粒度更新与 JSX 风格组件语法，参照 Leptos 与 SolidJS 设计。 |
 | 6 | [vectie/bunnia](https://mooncakes.io/docs/vectie/bunnia) | 0.1.0 | 小程序 UI 框架，采用 Rabbita 风格，通过可插拔的平台适配层支持多端。 |
 
 ### 基础库（55）
@@ -185,8 +185,8 @@ Android、iOS、HarmonyOS 与微信小程序上的应用开发。生态中尚无
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
 | 1 | [Yoorkin/ArgParser](https://mooncakes.io/docs/Yoorkin/ArgParser) | 0.2.1 | 轻量参数解析库，支持命令、选项与子命令定义，无额外依赖。 |
-| 2 | [mizchi/admiral](https://mooncakes.io/docs/mizchi/admiral) | 0.1.1 | 声明式 CLI 构建器，采用 gunshi 风格，以数据描述命令结构，自动生成帮助文本与补全。 |
-| 3 | [TheWaWaR/clap](https://mooncakes.io/docs/TheWaWaR/clap) | 0.2.6 | Rust clap 的移植版本，接口与用法基本一致，迁移成本低。 |
+| 2 | [mizchi/admiral](https://mooncakes.io/docs/mizchi/admiral) | 0.1.1 | 声明式 CLI 构建器，提供类型化选项与子命令回调，生成 shell 补全与 --help 输出。 |
+| 3 | [TheWaWaR/clap](https://mooncakes.io/docs/TheWaWaR/clap) | 0.2.6 | 命令行参数解析库，支持选项、位置参数与多层子命令，帮助输出沿用 clap-rs 风格。 |
 | 4 | [totto2727/admiral](https://mooncakes.io/docs/totto2727/admiral) | 0.6.5 | admiral 的异步优先分支，命令处理可直接返回异步结果。 |
 
 ### 基础库（6）
@@ -312,11 +312,11 @@ HTTP 服务、路由、中间件与后端 API 开发。
 |---|---|---|---|
 | 1 | [moonbitlang/moonback](https://mooncakes.io/docs/moonbitlang/moonback) | 0.8.10 | 官方 Web 后端框架，提供路由、中间件与请求响应抽象，是生态项目的常用基础。 |
 | 2 | [mizchi/mars](https://mooncakes.io/docs/mizchi/mars) | 0.3.13 | Hono 风格 Web 框架，提供 trie 路由、中间件与 SSE，可运行于原生与 Node.js。 |
-| 3 | [oboard/mocket](https://mooncakes.io/docs/oboard/mocket) | 0.10.2 | 通用 Web 框架，提供路由与中间件等基础能力。 |
-| 4 | [bobzhang/crescent](https://mooncakes.io/docs/bobzhang/crescent) | 0.11.2 | Web 框架，由 MoonBit 语言作者实现，目前公开文档较少。 |
+| 3 | [oboard/mocket](https://mooncakes.io/docs/oboard/mocket) | 0.10.2 | Web 框架，提供路由与应用入口，可运行于 js、wasm 与 native 三种后端。 |
+| 4 | [bobzhang/crescent](https://mooncakes.io/docs/bobzhang/crescent) | 0.11.2 | mocket 的硬分叉，类型安全实现，目标 native 与 wasm，不支持 JS 与 wasm-gc。 |
 | 5 | [jaredzhou/pony](https://mooncakes.io/docs/jaredzhou/pony) | 0.5.0 | 轻量 HTTP 框架与路由器，采用 Go 的 Chi 风格，适用于仅需路由与中间件的服务。 |
 | 6 | [RabitLogic/mbit](https://mooncakes.io/docs/RabitLogic/mbit) | 0.3.0 | Gin 风格 Web 框架，API 设计与 Go 生态一致，迁移成本低。 |
-| 7 | [moonbitstack/moonapi](https://mooncakes.io/docs/moonbitstack/moonapi) | 0.17.7 | 类型化 Web 框架，路由、参数与响应均纳入类型检查，错误在编译期暴露。 |
+| 7 | [moonbitstack/moonapi](https://mooncakes.io/docs/moonbitstack/moonapi) | 0.17.7 | 类型化 Web 框架，由类型化路由构建服务端并生成 OpenAPI 文档，可编译为原生或 wasm。 |
 | 8 | [daqing/moonway](https://mooncakes.io/docs/daqing/moonway) | 0.11.9 | 全栈 Web 框架，前后端在同一工程内组织，无需拆分构建流程。 |
 
 ### 基础库（71）
@@ -413,7 +413,7 @@ SQLite 绑定、ORM、KV 存储、迁移工具。
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
-| 1 | [moonbitstack/moondb](https://mooncakes.io/docs/moonbitstack/moondb) | 0.2.4 | 数据库访问的标准接口层，定义驱动与查询层之间的契约，本身不实现具体数据库。用于避免上层代码绑定特定数据库。 |
+| 1 | [moonbitstack/moondb](https://mooncakes.io/docs/moonbitstack/moondb) | 0.2.4 | 数据库驱动与查询层之间的接口层，定义驱动需实现的契约，本身无依赖，不绑定具体数据库。 |
 | 2 | [oboard/morm](https://mooncakes.io/docs/oboard/morm) | 0.5.0 | 轻量 ORM，提供类型化查询与代码生成，支持多种数据库引擎。 |
 | 3 | [moonbitstack/moonorm](https://mooncakes.io/docs/moonbitstack/moonorm) | 0.11.5 | ORM 与 SQL 工具包，模型映射与查询构建由同一套接口提供。 |
 | 4 | [wflixu/Orion](https://mooncakes.io/docs/wflixu/Orion) | 0.2.0 | Derive 与代码生成 ORM，以 Schema DSL 描述表结构，生成类型安全 CRUD 与查询构建器。 |
@@ -573,7 +573,7 @@ CBOR、Protocol Buffers、MessagePack、ASN.1 等二进制序列化格式。
 | 1 | [chensuiyi/bm2](https://mooncakes.io/docs/chensuiyi/bm2) | 0.8.0 | 面向 Bun 与 Node.js 应用的 Linux 进程管理器，以 MoonBit 实现。 |
 | 2 | [mizchi/actrun](https://mooncakes.io/docs/mizchi/actrun) | 0.32.0 | 兼容 GitHub Actions 的本地 CI 运行器，工作流可在本机执行，不依赖远端。 |
 | 3 | [kupas/pm3](https://mooncakes.io/docs/kupas/pm3) | 0.1.8 | 语言无关的进程管理器，参照 PM2 设计，内置日志轮转。 |
-| 4 | [tiye/redstart](https://mooncakes.io/docs/tiye/redstart) | 0.1.4 | 面向本地开发的轻量进程管理器，支持一组服务的批量启动与停止。 |
+| 4 | [tiye/redstart](https://mooncakes.io/docs/tiye/redstart) | 0.1.4 | 面向本地开发的轻量进程管理器。 |
 
 ### 基础库（8）
 

@@ -179,8 +179,10 @@ time、log）在生态中尚无框架或引擎级实现。这些场景在站内�
 ```
 .
 ├── pipeline/
+│   ├── fetch.py              采集注册表数据（模块元数据 + 下载量），可重跑
 │   ├── analyze.py            数据合并、场景打分、排序与产物生成
 │   ├── query.py              命令行查询（场景 / 全量检索 / SQL）
+│   ├── build_skill.py        导出选型 skill 的数据快照（见「七、选型 skill」）
 │   ├── og.html               分享卡片源文件（1200×630，headless 截图用）
 │   └── make_assets.py        生成分享卡片与站点图标（手动执行，不参与日常构建）
 ├── data/
@@ -287,18 +289,51 @@ python3 -m http.server 8000 --directory dist
 
 ## 六、数据更新
 
-1. 抓取 `https://mooncakes.io/api/v0/modules`，写入 `data/raw/modules_api.json`；
-2. 通过 `https://mooncakes.io/api/v0/search?kw=<关键词>&limit=100` 补齐下载量，写入
-   `data/raw/downloads.json`。该接口单次上限 100 条且不支持分页，需以「关键词并集」加
-   「包名精确检索」两步合并，方可覆盖全量。**该文件只用于构建期排序，不复制进 `dist/`，
-   也不写入站点数据**；若跳过此步，构建会退化为仅按关键词排序，清单质量明显下降
-   （`moonback`、`rabbita` 等会掉出前六），不建议省略；
-3. 修改 `pipeline/analyze.py` 顶部的 `COLLECTED_AT` 为本次采集日期；
-4. 运行 `python3 pipeline/analyze.py`。
+```bash
+python3 pipeline/fetch.py        # ① 模块元数据 + ② 下载量，约 10 分钟
+python3 pipeline/analyze.py      # ③ 重新构建站点与报告
+```
+
+`fetch.py` 做两件事：
+
+1. 抓 `https://mooncakes.io/api/v0/modules`，写入 `data/raw/modules_api.json`；
+2. 用 `https://mooncakes.io/api/v0/search?kw=<关键词>&limit=100` 补下载量，写入
+   `data/raw/downloads.json`。该接口单次上限 100 条且**不支持分页**，所以按「owner 前缀」
+   批量取（同一 owner 下的包通常不足 100 个），超过 100 个的 owner 再按包名逐个补，
+   仍未覆盖的最后精确检索一次。并发默认 8，`--workers` 可调。
+
+**`downloads.json` 只用于构建期排序，不复制进 `dist/`，也不写入站点数据**。若跳过这一步，
+构建会退化为仅按关键词排序，清单质量明显下降（`moonback`、`rabbita` 等会掉出前六）。
+
+采集完成后别忘了把 `pipeline/analyze.py` 顶部的 `COLLECTED_AT` 改成当天日期——站点上的
+「采集」时间取自这里，漏改会让快照日期停在旧值。
 
 ---
 
-## 七、命令行查询
+## 七、选型 skill
+
+索引可以打包成一个 skill，供 AI 助手在应用开发时直接查选型：
+
+```bash
+python3 pipeline/build_skill.py                       # 写到 ~/.workbuddy/skills/moonbit-stack-selection
+python3 pipeline/build_skill.py --out /path/to/skill  # 或指定目录
+```
+
+产物两份：`data/index.json`（机器可读快照）与 `references/scenarios.md`（人读速查表）。
+`SKILL.md` 与 `scripts/query.py` 是手写部分，不会被覆盖；数据更新后重跑一次即可刷新。
+
+skill 自身的工作方式是「先落场景、再查表、最后给候选并标注边界」，硬规则包括不按下载量
+推荐、先确认 target、研究性实现要标出来。查询脚本离线运行：
+
+```bash
+python3 scripts/query.py list
+python3 scripts/query.py gui --libs
+python3 scripts/query.py --search orm
+```
+
+---
+
+## 八、命令行查询
 
 ```bash
 python3 pipeline/query.py --list                    # 场景清单与两层计数
@@ -314,7 +349,7 @@ python3 pipeline/query.py --sql "select name,downloads from modules order by dow
 
 ---
 
-## 八、排序方法
+## 九、排序方法
 
 ```
 score = min(关键词匹配度, 6) × 1.0
@@ -367,7 +402,7 @@ TUI、文档场景排除 UI 框架。db、net、gui、archive、fs、tool 等场
 
 ---
 
-## 九、已知局限
+## 十、已知局限
 
 1. **排序含有一个本站不展示的量级因子**：下载量为累计值，不反映近期热度，发布较早的包
    在同等相关度下天然占优。该因子只影响顺序、不出现在页面上，读者无法逐行核验，
@@ -396,7 +431,7 @@ TUI、文档场景排除 UI 框架。db、net、gui、archive、fs、tool 等场
 
 ---
 
-## 十、许可与致谢
+## 十一、许可与致谢
 
 数据来源为 mooncakes.io 公开 API，版权归各原始项目所有。本项目仅做聚合、分层与呈现，
 不修改原始数据。
