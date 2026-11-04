@@ -98,319 +98,73 @@ def load_modules():
 
 
 # ---------------------------------------------------------------- 场景定义
-# kw   : 命中 keywords / 模块名的词（权重最高）
-# desc : 需要出现在描述里的短语
-# ex   : 命中即排除的词（用于压掉同名不同义的噪声）
+# 分组与场景规则放在 data/scenarios.src.json，构建时读取，不再内联在代码里：
+# 那份文件由 pipeline/editor.py 提供图形化编辑（改标题、简介、候选清单），
+# 也可以直接改 JSON。场景的中英文分两处：中文在源文件，英文在 data/i18n.json。
+#
+# 字段含义：
+#   kw        命中 keywords / 模块名的词（权重最高）
+#   desc      需要出现在描述里的短语
+#   core      门控词：必须命中其一才进入候选
+#   ex        命中即排除的词（压掉同名不同义的噪声）
+#   ex_desc   描述里出现即排除的短语
+#   ex_prefix 整族排除的包名前缀（如 cli/ 一条命令一个包）
+#   pick      人工圈定的候选清单（生态里没有可靠关键词信号时使用）
+#   pin       人工置顶
+#   force     元数据命不中规则但仍要收录的包
+#   boost     排序加权系数
+#   top       该场景展示的包数量上限
+#   audit     复核词：构建时扫描全量，命中却未收录的包会被打印，防漏收
+#   skip      audit 命中但确认不收的包及理由（写清楚才能长期维护）
+#   note      场景详情页的补充说明（解释分层口径等）
+#   _why      原内联定义里的取舍说明，仅供阅读，不参与构建
+SCENARIOS_SRC = OUT / "scenarios.src.json"
+_DICT_FIELDS = ("boost", "skip")
 
-# 场景分组：左侧导航按组渲染，组内按下列顺序
-GROUPS = [
-    ("app", "界面与应用"),
-    ("svc", "服务与数据"),
-    ("lang", "语言与工具"),
-]
 
-# kw   : 命中 keywords / 模块名的词（权重最高）
-# desc : 需要出现在描述里的短语
-# ex   : 命中即排除的词（用于压掉同名不同义的噪声）
-# pick : 人工圈定的候选清单（生态里没有可靠关键词信号时使用）
-# audit: 人工场景的复核词。build 时扫描全量模块，命中这些词却不在 pick 里的包会被打印
-#        出来，防止「覆盖了某个场景却没出现在该场景」的漏收悄悄发生
-# skip : audit 命中但确认不收的包及其理由（写清楚才能长期维护）
-# note : 场景详情页的补充说明（用于解释分层口径等）
-SCENARIOS = [
-    # ---------------------------------------------------------------- 界面与应用
-    # 桌面：生态里没有统一的 "desktop gui" 关键词，靠 core 门控——
-    # 必须命中真正的窗口/渲染/控件绑定词，光有 desktop/native 的插件包不算。
-    dict(id="gui", group="app", title="桌面", icon="🖥️",
-         intro="原生桌面应用开发：窗口创建、事件循环、控件布局与渲染后端接入。"
-               "Proton 的托盘、剪贴板、全局热键等配套模块不计入本表。",
-         kw=["gui", "windowing", "window", "renderer", "widget", "native-gui", "desktop", "tray"],
-         desc=["desktop", "native window", "window system", "windowing", "gui framework",
-               "cross-platform gui"],
-         core=["gui", "windowing", "winit", "webview", "gtk", "qt", "sdl", "sdl3", "glfw",
-               "skia", "immediate-mode", "imgui", "egui", "native-gui", "appkit", "webgpu",
-               "wgpu", "wayland", "cocoa", "framebuffer"],
-         ex=["graphql", "game engine"],
-         ex_desc=["event-time", "watermark", "graphql", "audit", "cucumber", "kagura"],
-         pin=["wzzc-dev/moui", "moonbit-community/proton"],
-         # 框架级包（一事全包：窗口+控件+系统能力）优先于单一绑定，
-         # 否则新发布的框架会被 2 万下载的老绑定压在十几名开外。
-         boost={"wzzc-dev/moui": 2.0, "NoahLiu/native-gui": 3.0,
-                "Nanaloveyuki/orbit": 1.3}, top=10,
-         # 漏收兜底：这几项的注册表元数据命不中 core 词，或被 ex_prefix 提前挡掉，
-         # 但它们确实是桌面能力包，按本层中位分安置（不因手工收录而占据前列）。
-         force=["f4ah6o/gpui",              # GPUI 模型的 MoonBit 实现：App/布局/事件/场景
-                "wzzc-dev/moui_webview",     # moui 的 WKWebView / WebKitGTK / WebView2 后端
-                "shiguri-01/webview"],       # webview/webview 低层绑定，与 justjavac/webview 同类
-         ex_prefix=["wzzc-dev/moui_"]),
-    # 移动端：关键词层面不可靠（"mobile" 会命中 window 的三端后端，"ios" 会命中
-    # "scenarios" 这类词），候选以人工圈定为主。
-    # 收录原则：**覆盖即出现**。一个包只要支持移动端，就必须在这里列出，哪怕它主要
-    # 归类在别的场景（如 MoUI 的桌面主线）。清单是封闭集合，靠人维护，因此 build 时
-    # 会用 audit 词扫描一遍全量模块，把「有覆盖迹象却没进清单」的包打印出来复核。
-    dict(id="mobi", group="app", title="移动端", icon="📱",
-         intro="Android、iOS、HarmonyOS 与微信小程序上的应用开发。生态中尚无统一的"
-               "移动端关键词信号，候选清单为人工圈定，涵盖全平台 UI 框架、小程序运行时与"
-               "组件库、原生桥接、小程序宿主。",
-         curated=True, top=10,
-         pick=[
-             "XiLaiTL/moobile",           # Android / iOS / Web 一套 rabbita，React Native 渲染
-             "wzzc-dev/moui",             # 全平台 GUI：HarmonyOS 已承诺，Android / iOS 实验性
-             "lampclaw/minimoon",         # 微信小程序 Skyline UI 运行时
-             "Magic486/moon-miniprogram", # 微信小程序框架：类型安全运行时 + 声明式路由
-             "shop1111/moonohos",         # HarmonyOS 原生模块框架（async / 平台模块 / HAR）
-             "lampclaw/lampo",            # 小程序 Skyline，纯 Elm 风格编写
-             "vectie/bunnia",             # 小程序 UI 框架：微信 / 支付宝 / 抖音适配层
-             "wzzc-dev/window",           # 窗口层，含 desktop / Web / mobile 三后端
-             "Nanaloveyuki/ajni",         # Android JNI 双向桥
-             "Nanaloveyuki/moonview",     # 原生 WebView 嵌入
-             "lampclaw/minimoon_ui",      # 小程序 Skyline 组件库
-             "shop1111/moonohos_ohos",    # HarmonyOS 平台包（HiLog / RawFile / deviceinfo）
-             "Nanaloveyuki/madk",         # Android Open Accessory 协议
-             "Nanaloveyuki/wasee-moon",   # Android 上的 WASI host
-             "wzzc-dev/moui_cli",         # MoUI 的工程生成器与环境检查，含 --platform 移动端
-         ],
-         audit=["miniapp", "miniprogram", "skyline", "android", "ios", "harmonyos",
-                "mobile", "wechat"],
-         skip={"daqing/moon-pay-sdk": "微信支付 SDK，服务端为主，不属移动端 UI 或运行时",
-               "kupas/imrelay": "消息网关，与移动端开发无关",
-               "tonyfettes/create-moonbit-raylib-android-app":
-                   "模板仓库，注册表无描述与关键词，无法判断可用性"}),
-    dict(id="ui", group="app", title="Web UI / 前端框架", icon="🌐",
-         intro="浏览器里的 UI 框架、响应式状态、组件、布局与 CSS。",
-         kw=["ui", "component", "dom", "frontend", "css", "reactive", "signals"],
-         desc=["user interface", "component", "frontend"],
-         ex=["terminal", "tui", "component-model", "wit"],   # 前者是 wasm 组件模型，后者是 WIT 解析
-         # tree-sitter 语法包属于"解析器"，只是恰好解析的是 CSS
-         ex_desc=["for tree-sitter", "tree-sitter grammar"],
-         pin=["moonbit-community/rabbita"]),
-    dict(id="tui", group="app", title="终端 UI / TUI", icon="⌨️",
-         intro="终端界面、字符画布、ANSI 控制、PTY。",
-         kw=["tui", "terminal", "ansi", "console", "pty", "curses"],
-         desc=["terminal ui", "terminal"], ex=[]),
-    # CLI：关键词 "cli" 本身极宽（任何命令行程序都带），故加 core 门控，
-    # 必须命中参数解析器本身的词，把「带 CLI 的应用」挡在外面。
-    dict(id="cli", group="app", title="CLI 参数解析", icon="🧰",
-         intro="命令行工具的参数、子命令、帮助信息解析。",
-         kw=["cli", "argparse", "command-line", "args", "argument-parser", "docopt", "argv",
-             "clap", "subcommand"],
-         desc=["command line", "argument parser", "argument-parser"],
-         core=["argparse", "argv", "command-line", "subcommand", "argument-parser", "docopt",
-               "clap", "argument", "args"],
-         ex=["tui", "terminal", "browser"],
-         # 描述自称 "xxx command-line application" 的是应用本身，不是解析库
-         ex_desc=["command-line application", "command line application", "command set"],
-         force=["Milky2018/options"]),
-    dict(id="game", group="app", title="游戏引擎 / ECS", icon="🎮",
-         intro="游戏引擎、ECS 架构、程序化生成、游戏后端。",
-         # "engine" 不进关键词：它会命中模板引擎、工程计算引擎、时区引擎等一切 xxx engine，
-         # 游戏引擎改用描述短语 "game engine" 命中。
-         kw=["game", "ecs", "gamedev", "sprite", "raylib", "gamepad"],
-         desc=["game engine", "game"], ex=[]),
-    dict(id="graphics", group="app", title="图形 / 图表 / 渲染", icon="🎨",
-         intro="矢量图形、SVG、场景图、图表与图形布局、绘图原语。",
-         kw=["graphics", "rendering", "svg", "canvas", "scene-graph", "vector", "drawing",
-             "diagram", "chart"],
-         desc=["rendering", "vector graphics", "scene graph", "diagram"],
-         ex=["vector database", "ann"],
-         force=["wzzc-dev/moui_skia"],      # Skia 绑定本身，与 moui 的渲染器实现无关
-         ex_prefix=["wzzc-dev/moui_"]),
-    dict(id="img", group="app", title="图像编解码", icon="🖼️",
-         intro="图像格式的编解码与像素处理：PNG / JPEG / GIF / BMP / QOI / WebP。",
-         kw=["image", "png", "jpeg", "jpg", "gif", "bmp", "webp", "qoi", "ico", "tiff",
-             "pixel", "pixmap"],
-         desc=["image", "pixel"]),
-    dict(id="media", group="app", title="音频 / 视频", icon="🔊",
-         intro="音频采集与播放、音频编码、MIDI、麦克风与设备接口。",
-         kw=["audio", "video", "wav", "mp3", "midi", "opus", "ffmpeg", "mp4", "flac",
-             "playback", "microphone", "speech"],
-         desc=["audio", "video", "media"]),
+def load_catalog():
+    """读 data/scenarios.src.json，返回 (GROUPS, SCENARIOS)。
 
-    # ---------------------------------------------------------------- 服务与数据
-    # HTTP 服务端：只收服务端框架与路由/中间件，客户端另立 httpc
-    dict(id="http", group="svc", title="Web 后端 / HTTP 服务", icon="🚀",
-         intro="HTTP 服务、路由、中间件与后端 API 开发。",
-         kw=["http", "router", "rest", "middleware", "backend", "web-framework", "endpoint"],
-         desc=["http server", "web framework", "router", "rest api"],
-         ex=["compatibility", "ui", "frontend", "tea", "desktop-app", "gui",
-             "client", "http-client", "fetch"],      # 客户端归 httpc，不混进服务端
-         ex_desc=["api client", "client for", "client library", "http client"],
-         pin=["moonbitlang/moonback"],
-         core=["http", "router", "rest", "middleware", "backend"],
-         # 注册表元数据只有 web + framework 两个泛词，命不中本场景关键词，单独补入
-         force=["moonbitstack/moonapi", "daqing/moonway"]),
-    dict(id="httpc", group="svc", title="HTTP 客户端", icon="📡",
-         intro="发起 HTTP 请求：请求构造、连接复用、重定向、SSE 流式读取。",
-         kw=["http-client", "httpc", "fetch", "axios", "client", "request"],
-         desc=["http client"], core=["http"]),
-    dict(id="net", group="svc", title="网络传输 / 套接字", icon="🔌",
-         intro="TCP / UDP、套接字、DNS、TLS 等传输层能力。",
-         kw=["network", "tcp", "udp", "socket", "dns", "tls", "ip-address", "net"],
-         desc=["network", "socket", "tcp"],
-         ex=["compatibility", "git"],
-         force=["BigOrangeQWQ/wasi-sockets", "tonyfettes/socket"],
-         pin=["moonbitstack/moonnet"]),
-    dict(id="proto", group="svc", title="应用协议 / RPC", icon="🛰️",
-         intro="WebSocket、MQTT、gRPC、SSE 等应用层协议与 RPC 通信。",
-         kw=["websocket", "mqtt", "sse", "grpc", "amqp", "http2", "rpc", "socket.io"],
-         desc=["websocket", "rpc", "messaging protocol"],
-         ex=["compatibility", "git"]),
-    dict(id="db", group="svc", title="数据库 / 存储", icon="🗄️",
-         intro="SQLite 绑定、ORM、KV 存储、迁移工具。",
-         kw=["database", "sqlite", "sqlite3", "sql", "storage", "kv", "orm", "postgres",
-             "mysql", "migration"],
-         desc=["database", "storage engine", "key-value"],
-         pin=["mizchi/sqlite", "moonbitstack/moonsqlite"]),
-    dict(id="async", group="svc", title="异步 / 并发", icon="⚡",
-         intro="async 运行时、协程、并发原语、任务调度。",
-         kw=["async", "concurrency", "coroutine", "future", "promise", "thread", "parallel"],
-         desc=["asynchronous", "concurren"], ex=[]),
-    # 序列化按「文本格式 / 配置格式 / 二进制格式」三分，原先一个场景混装 184 个包
-    dict(id="json", group="svc", title="JSON 解析", icon="🧾",
-         intro="JSON、JSON Lines、JSON5 的解析、生成与 JSON Schema 校验。",
-         kw=["json", "jsonl", "ndjson", "json5", "json-schema"],
-         desc=["json"], ex=["jsonrpc"]),
-    dict(id="datafmt", group="svc", title="配置 / 标记格式", icon="📋",
-         intro="YAML、TOML、XML、CSV、INI、Ion 等配置与标记语言的解析与生成。",
-         kw=["yaml", "toml", "xml", "csv", "ini", "hcl", "ion", "properties"],
-         desc=["data format", "configuration file"], ex=["toml-config-ui"],
-         # 只带 serialization / serde 关键词，命不中具体格式名，按「多格式框架」补入
-         force=["Yu-zh/data"]),
-    dict(id="binfmt", group="svc", title="二进制编码", icon="🔢",
-         intro="CBOR、Protocol Buffers、MessagePack、ASN.1 等二进制序列化格式。",
-         kw=["cbor", "protobuf", "msgpack", "bencode", "asn1", "avro", "thrift", "capnp",
-             "binary format"],
-         desc=["binary format", "binary encoding"],
-         force=["oilleelssq-wq/moonua"]),
-    dict(id="log", group="svc", title="日志 / 追踪", icon="📝",
-         intro="结构化日志、tracing、OpenTelemetry、指标。",
-         kw=["logging", "tracing", "log", "telemetry", "otel", "metrics", "observability"],
-         desc=["logging", "tracing", "observability"], ex=["font"]),
-    # 运维：生态里没有运维框架，但有可整件部署的成品工具（进程管理器、CI 运行器），
-    # 这些按「完整方案」计；其余是可组合的基础库。
-    # process 类关键词会被 "processing" 命中，因此整段人工圈定，同样用 audit 词复核缺口。
-    dict(id="ops", group="svc", title="运维 / 系统管理", icon="🛠️",
-         intro="进程守护与进程检查、子进程与命令执行、伪终端控制、CI 任务运行。"
-               "生态中尚无运维框架，但已有可直接部署的成品工具，与若干可组合的基础库。",
-         note="进程管理器与 CI 运行器本身就是可用成品，计入「完整方案」；"
-              "其余为单点能力的基础库，需要自行组装。",
-         curated=True, top=10,
-         pick=[
-             "chensuiyi/bm2",                    # 进程管理器：守护 Bun / Node 应用（类 PM2）
-             "mizchi/actrun",                    # GitHub Actions 兼容的 CI 运行器
-             "kupas/pm3",                        # 语言无关的进程管理器，自带日志轮转
-             "tiye/redstart",                    # 轻量进程管理器，面向本地开发
-             "moonbit-community/pty",            # 跨平台伪终端，接 async
-             "moonbit-community/tty",            # 底层终端原语：raw 模式、尺寸与 resize 事件
-             "Milky2018/sysinfo",                # 系统指标与进程检查
-             "mizchi/process_pool",              # 进程池
-             "moonbit-community/proton_process", # 原生子进程（Win/Linux/macOS）
-             "trkbt10/subprocess",               # Node child_process 风格子进程管理
-             "trkbt10/osenv",                    # 环境变量、XDG 目录、平台路径
-             "mizchi/tempfile",                  # 临时文件与目录
-         ],
-         audit=["process manager", "process-manager", "supervisor", "daemon",
-                "systemd", "sysinfo", "subprocess", "pty"],
-         skip={"moonbit-community/proton_cefsetup": "Proton 的 CEF 运行时装包器，不是运维工具",
-               "Milky2018/selene_editor_service": "编辑器配套的本地服务，非通用运维",
-               "mst-mkt/clipboard": "剪贴板绑定，只是实现里用了子进程",
-               "chensuiyi/dcipc": "守护进程的控制通道库，粒度低于本场景定位",
-               "tonyfettes/pty": "与 moonbit-community/pty 同一实现，只保留下载量高的那个"}),
-    dict(id="llm", group="svc", title="LLM / Agent / MCP", icon="🤖",
-         intro="大模型客户端、Agent 框架、MCP 服务端/客户端、提示词。",
-         kw=["llm", "agent", "mcp", "openai", "embedding", "prompt"],
-         desc=["language model", "llm", "agent"], ex=["wasi", "io"]),
+    只校验那些「错了会静默出错」的地方：id 重复、group 不存在、字典型字段
+    写成了列表。至于某个包该不该进某个场景，无法自动判定，交给编辑器预览
+    与构建日志里的复核提示。
+    """
+    if not SCENARIOS_SRC.exists():
+        raise SystemExit(f"缺少 {SCENARIOS_SRC}，场景定义没有来源")
 
-    # ---------------------------------------------------------------- 语言与工具
-    # 解析器与编译器分开：前者是「把文本读成结构」，后者是「把结构变成可执行物」
-    dict(id="parser", group="lang", title="解析器 / 语法", icon="🌳",
-         intro="词法、语法、parser combinator、AST、tree-sitter、parser generator。",
-         kw=["parser", "lexer", "grammar", "ast", "tree-sitter", "parser-combinator",
-             "tokenizer"],
-         desc=["parser", "lexer"],
-         ex=["argparse", "cli", "command-line", "docopt"]),
-    dict(id="compiler", group="lang", title="编译器 / 代码生成", icon="⚙️",
-         intro="编译器、字节码与虚拟机、代码生成、类型检查、LLVM 与原生后端。",
-         kw=["compiler", "codegen", "interpreter", "type-checker", "bytecode", "llvm",
-             "virtual-machine"],
-         desc=["compiler", "code generation", "interpreter"]),
-    dict(id="regex", group="lang", title="正则匹配", icon="🔍",
-         intro="正则表达式引擎与匹配。",
-         kw=["regex", "regexp", "regular-expression"],
-         desc=["regular expression"], ex=[]),
-    dict(id="unicode", group="lang", title="Unicode / 文本处理", icon="🔤",
-         intro="Unicode 分类、字素簇、宽度计算、字符串工具。",
-         kw=["unicode", "grapheme", "string", "text", "width", "collation"],
-         desc=["unicode", "grapheme"], ex=[]),
-    # 密码学按能力三分：哈希只管校验、cipher 管机密性与身份、encode 管字节到文本
-    dict(id="hash", group="lang", title="哈希 / 校验", icon="#️⃣",
-         intro="哈希函数、消息摘要、HMAC 与校验和（CRC / FNV）。",
-         kw=["hash", "sha256", "sha512", "sha1", "md5", "blake2", "blake3", "crc",
-             "checksum", "digest", "hmac", "xxhash", "fnv"],
-         desc=["hashing", "hash function", "checksum"], ex=["simd"]),
-    dict(id="cipher", group="lang", title="加密 / 签名", icon="🔐",
-         intro="对称与非对称加密、数字签名、密钥交换、证书。",
-         kw=["aes", "rsa", "ed25519", "x25519", "chacha", "cipher", "encrypt", "cryptography",
-             "signature", "ecdsa", "pkcs", "curve25519"],
-         desc=["encryption", "cryptography", "signing"], ex=["simd"]),
-    dict(id="encode", group="lang", title="编码 / 转义", icon="🔡",
-         intro="Base64 / Base32 / Hex 等编码、URL 百分号编码、转义与变长整数。",
-         kw=["base64", "base32", "base58", "hex", "percent-encoding", "encoding", "escape",
-             "urlencode", "varint"],
-         desc=["encoding", "escape"]),
-    dict(id="archive", group="lang", title="压缩 / 归档", icon="🗜️",
-         intro="DEFLATE / zlib / gzip / ZIP 的压缩与解压实现。",
-         kw=["zip", "gzip", "zlib", "deflate", "compression", "compress", "archive", "tar",
-             "brotli", "inflate", "lz4"],
-         desc=["compression", "deflate", "gzip", "zip archive"],
-         pin=["mizchi/zlib", "moonbit-community/flate"]),
-    dict(id="fs", group="lang", title="文件 / 路径 / IO", icon="📁",
-         intro="文件系统访问、路径与环境变量、临时文件、通用 IO 抽象与文件监听。",
-         # 'stream' 太泛（流式编解码器全被拉进来），去掉；'path' 保留——目录/路径类库
-         # 靠它才能进来，图算法那类改由 ex 里的 graph 挡掉
-         kw=["filesystem", "file", "path", "directory", "tempfile", "io", "watch", "fswatch"],
-         desc=["file system", "filesystem", "temporary file", "path", "io abstraction"],
-         ex=["git", "svg", "graph", "graphql", "graphics"],
-         ex_desc=["ldap"],                          # "directory" 在 LDAP 里是目录服务
+    raw = json.loads(SCENARIOS_SRC.read_text(encoding="utf-8"))
+    groups = [(g["id"], g["title"]) for g in raw.get("groups") or []]
+    gids = [g for g, _ in groups]
+    if not groups:
+        raise SystemExit("scenarios.src.json 里没有 groups")
 
-         ex_prefix=["moonbit-community/proton_"],   # 桌面框架的内部扩展包，不单列
-         pin=["mizchi/tempfile", "gmlewis/io"]),
-    dict(id="math", group="lang", title="数学 / 数值计算", icon="📐",
-         intro="高精度数学、线性代数、矩阵、BLAS、统计。",
-         kw=["math", "numeric", "linear-algebra", "matrix", "statistics", "bigint", "blas", "arithmetic"],
-         desc=["linear algebra", "numeric", "arbitrary precision"], ex=[]),
-    dict(id="ds", group="lang", title="数据结构 / 算法", icon="🧱",
-         intro="有序映射、B 树、堆、图算法、集合。",
-         kw=["data-structure", "collection", "map", "set", "heap", "graph", "queue", "btree", "indexmap"],
-         desc=["data structure", "algorithm"],
-         # graphics / graphql 会被 'graph' 前缀命中（Skia 绑定、GitHub 客户端）
-         ex=["syntax", "svg", "compatibility", "grapheme", "graphics", "graphql"]),
-    dict(id="test", group="lang", title="测试 / 断言 / 属性测试", icon="🧪",
-         intro="单元测试、属性测试（quickcheck）、断言库、BDD、基准。",
-         kw=["testing", "test", "property", "benchmark", "quickcheck", "fuzz", "assert", "mock"],
-         desc=["test framework", "property-based", "assertion"], ex=["image", "pixel"]),
-    dict(id="tool", group="lang", title="开发工具 / 代码质量", icon="🧭",
-         intro="代码格式化、静态分析、lint、结构化搜索与重构、代码生成与脚手架。",
-         kw=["formatter", "linter", "lint", "static-analysis", "prettifier", "refactor",
-             "codegen", "scaffold"],
-         desc=["static analysis", "code formatter", "linter", "code generation"],
-         ex=["toml", "hcl", "json"],   # 数据格式的格式化 CLI 属于对应格式领域
-         pin=["moonbitlang/formatter", "riantr/moonbit_static_analysis"]),
-    dict(id="doc", group="lang", title="Markdown / 文档转换", icon="📄",
-         intro="Markdown 解析、HTML/PDF/DOCX 转换、文档排版。",
-         kw=["markdown", "html", "pdf", "document", "epub", "asciidoc", "docx", "latex"],
-         desc=["markdown", "pdf", "document"],
-         ex=["font", "ui", "framework", "tea"],
-         ex_desc=["template engine"]),
-    dict(id="time", group="lang", title="时间 / 日期", icon="🕒",
-         intro="日期时间、时区、RFC3339、cron。",
-         kw=["time", "date", "datetime", "timezone", "tzif", "cron", "duration"],
-         desc=["timezone", "date and time"], ex=[]),
-    dict(id="wasm", group="lang", title="WebAssembly / JS 互操作", icon="🧩",
-         intro="Wasm 组件模型、WASI、FFI、JS 绑定。",
-         kw=["wasm", "wasi", "ffi", "javascript", "webassembly", "component-model"],
-         desc=["webassembly", "component model"], ex=[]),
-]
+    scenes, seen, bad = [], set(), []
+    for sc in raw.get("scenarios") or []:
+        sid = sc.get("id")
+        if not sid:
+            bad.append("有场景缺少 id")
+            continue
+        if sid in seen:
+            bad.append(f"场景 id 重复：{sid}")
+            continue
+        seen.add(sid)
+        if sc.get("group") not in gids:
+            bad.append(f"{sid} 的 group「{sc.get('group')}」不在 groups 里")
+        if not (sc.get("title") or "").strip():
+            bad.append(f"{sid} 缺 title")
+        for k in _DICT_FIELDS:
+            if k in sc and not isinstance(sc[k], dict):
+                bad.append(f"{sid} 的 {k} 应为对象")
+        # 下划线开头的键是注释，不进构建
+        scenes.append({k: v for k, v in sc.items() if not k.startswith("_")})
+
+    if bad:
+        raise SystemExit("data/scenarios.src.json 有问题：\n  " + "\n  ".join(bad))
+    return groups, scenes
+
+
+GROUPS, SCENARIOS = load_catalog()
+
 
 # ---------------------------------------------------------------- 双语
 # 场景标题 / 简介 / 补充说明的英文版放在 data/i18n.json，不塞进 SCENARIOS：

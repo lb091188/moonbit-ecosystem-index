@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>场景与简介编辑 · MoonBit 生态索引</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --bg:#f6f7f9; --panel:#fff; --ink:#171a1f; --muted:#6b7280;
+    --line:#e4e7ec; --line-soft:#eef0f3; --accent:#2f5fe0; --accent-soft:#eef2fd;
+    --warm:#a15a08; --warm-soft:#fdf3e3; --red:#b3261e; --red-soft:#fbeceb;
+    --green:#0b6046; --green-soft:#d9f5e9;
+  }
+  * { box-sizing:border-box; }
+  html, body { height:100%; margin:0; }
+  body { background:var(--bg); color:var(--ink);
+    font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",
+    "Hiragino Sans GB","Microsoft YaHei",sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:var(--accent); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  button { font:inherit; cursor:pointer; }
+  input, textarea, select { font:inherit; color:inherit; }
+
+  /* ---------- 顶栏 ---------- */
+  .top { display:flex; align-items:center; gap:10px; height:54px; padding:0 16px;
+    background:var(--panel); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:20; }
+  .brand { font-size:14.5px; font-weight:650; letter-spacing:.2px; }
+  .brand span { font-weight:400; color:var(--muted); margin-left:8px; font-size:12.5px; }
+  .grow { flex:1; }
+  .status { font-size:12.5px; color:var(--muted); display:flex; align-items:center; gap:6px; }
+  .dot { width:7px; height:7px; border-radius:50%; background:var(--green); }
+  .dot.dirty { background:var(--warm); }
+  .dot.err { background:var(--red); }
+  .btn { border:1px solid var(--line); background:var(--panel); color:var(--ink);
+    border-radius:7px; padding:6px 13px; font-size:13px; }
+  .btn:hover { border-color:var(--accent); color:var(--accent); }
+  .btn.primary { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .btn.primary:hover { filter:brightness(1.06); color:#fff; }
+  .btn:disabled { opacity:.5; cursor:default; }
+  .btn.small { padding:4px 9px; font-size:12px; }
+  .btn.ghost { border-color:transparent; color:var(--muted); }
+  .btn.ghost:hover { background:var(--red-soft); color:var(--red); border-color:transparent; }
+
+  /* ---------- 布局 ---------- */
+  .app { display:flex; height:calc(100vh - 54px); }
+  .side { width:242px; flex:0 0 242px; background:var(--panel); border-right:1px solid var(--line);
+    display:flex; flex-direction:column; }
+  .side-top { padding:10px 10px 6px; }
+  .side-top input { width:100%; padding:7px 10px; border:1px solid var(--line);
+    border-radius:7px; background:#fafbfc; font-size:13px; outline:none; }
+  .side-top input:focus { border-color:var(--accent); background:#fff; }
+  .list { flex:1; overflow-y:auto; padding:4px 8px 16px; }
+  .list::-webkit-scrollbar { width:8px; }
+  .list::-webkit-scrollbar-thumb { background:#dde1e7; border-radius:4px; }
+  .grp { font-size:11.5px; color:var(--muted); letter-spacing:.4px; padding:12px 8px 4px;
+    text-transform:uppercase; }
+  .item { display:flex; align-items:center; gap:7px; padding:6px 9px; border-radius:7px;
+    font-size:13px; cursor:pointer; color:var(--ink); }
+  .item:hover { background:var(--line-soft); }
+  .item.on { background:var(--accent-soft); color:var(--accent); font-weight:600; }
+  .item .ic { width:18px; text-align:center; flex:0 0 18px; font-size:13px; }
+  .item .nm { flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .item .n { font-size:11px; color:var(--muted); font-variant-numeric:tabular-nums; }
+  .item.on .n { color:var(--accent); }
+  .item .warn { color:var(--warm); }
+  .side-foot { border-top:1px solid var(--line); padding:8px 10px; }
+
+  main { flex:1; overflow-y:auto; padding:22px 26px 80px; }
+  main::-webkit-scrollbar { width:9px; }
+  main::-webkit-scrollbar-thumb { background:#dde1e7; border-radius:5px; }
+
+  .hd { display:flex; align-items:flex-start; gap:12px; margin-bottom:14px; }
+  .hd h1 { font-size:20px; margin:0 0 2px; letter-spacing:.2px; }
+  .hd .sub { font-size:12.5px; color:var(--muted); display:flex; align-items:center; gap:8px; }
+  .tag { display:inline-block; padding:1px 7px; border-radius:5px; background:var(--line-soft);
+    color:var(--muted); font-size:11.5px; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
+
+  .tabs { display:flex; gap:2px; border-bottom:1px solid var(--line); margin-bottom:18px; }
+  .tabs button { border:0; background:none; padding:9px 13px; font-size:13.5px; color:var(--muted);
+    border-bottom:2px solid transparent; margin-bottom:-1px; }
+  .tabs button:hover { color:var(--ink); }
+  .tabs button.on { color:var(--accent); border-bottom-color:var(--accent); font-weight:600; }
+  .tabs b { font-weight:600; font-size:12px; color:inherit; }
+
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width: 980px) { .grid2 { grid-template-columns:1fr; } }
+
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:14px 16px; }
+  .card h3 { margin:0 0 10px; font-size:12.5px; color:var(--muted); font-weight:600;
+    letter-spacing:.4px; text-transform:uppercase; }
+  .field { margin-bottom:12px; }
+  .field:last-child { margin-bottom:0; }
+  .field label { display:block; font-size:12px; color:var(--muted); margin-bottom:4px; }
+  .field input[type=text], .field textarea, .field select {
+    width:100%; border:1px solid var(--line); border-radius:7px; padding:7px 10px;
+    background:#fafbfc; outline:none; resize:vertical; line-height:1.6; }
+  .field input[type=text]:focus, .field textarea:focus, .field select:focus {
+    border-color:var(--accent); background:#fff; box-shadow:0 0 0 3px rgba(47,95,224,.08); }
+  .field textarea { min-height:64px; }
+  .field .hint { font-size:11.5px; color:var(--muted); margin-top:4px; }
+  .field.inline { display:flex; gap:10px; }
+  .field.inline > div { flex:1; }
+
+  /* ---------- 简介 ---------- */
+  .pkg { background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding:13px 16px 15px; margin-bottom:12px; }
+  .pkg.miss { border-color:#e8c8a0; background:#fffdf8; }
+  .pkg-hd { display:flex; align-items:center; gap:9px; flex-wrap:wrap; margin-bottom:3px; }
+  .pkg-name { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:13px;
+    font-weight:600; color:var(--ink); }
+  .pkg-name:hover { color:var(--accent); }
+  .pkg .ver { font-size:11px; color:var(--muted); font-family:ui-monospace,monospace; }
+  .pkg .reg { font-size:12px; color:var(--muted); margin:0 0 9px; line-height:1.5; }
+  .pkg .cnt { font-size:11px; color:var(--muted); margin-top:3px; text-align:right; }
+  .pkg .cnt.over { color:var(--red); }
+  .pkg textarea { min-height:58px; width:100%; }
+  .pkg textarea.bad { border-color:#e0b184; background:#fffdf8; }
+  .flag { display:inline-flex; align-items:center; gap:5px; font-size:11.5px; padding:1px 7px;
+    border-radius:5px; background:var(--warm-soft); color:var(--warm); }
+  .banner { display:block; padding:10px 14px; border-radius:9px; line-height:1.75;
+    background:var(--accent-soft); color:#20389a; font-size:12.5px; margin-bottom:14px; }
+  .banner.warn { background:var(--warm-soft); color:var(--warm); }
+  .banner code { background:rgba(255,255,255,.6); padding:0 4px; border-radius:3px; }
+
+  .rules textarea { width:100%; min-height:420px; font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:12.5px; line-height:1.7; border:1px solid var(--line); border-radius:9px;
+    padding:12px 14px; background:#fbfcfd; outline:none; resize:vertical; }
+  .rules textarea:focus { border-color:var(--accent); background:#fff; }
+  .rules textarea.bad { border-color:var(--red); background:#fffafa; }
+  .ruleerr { color:var(--red); font-size:12.5px; margin-top:6px; }
+
+  .why { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:16px 20px; }
+  .why li { font-size:13px; color:#414855; margin-bottom:6px; }
+  .why ul { padding-left:20px; margin:0; }
+
+  /* ---------- 弹层 / 提示 ---------- */
+  .mask { position:fixed; inset:0; background:rgba(16,20,28,.34); display:none;
+    align-items:center; justify-content:center; z-index:50; }
+  .mask.on { display:flex; }
+  .modal { background:var(--panel); border-radius:12px; width:min(560px, 92vw);
+    max-height:84vh; display:flex; flex-direction:column; box-shadow:0 18px 48px rgba(16,24,40,.22); }
+  .modal h2 { margin:0; font-size:15px; padding:16px 20px 12px; border-bottom:1px solid var(--line); }
+  .modal .body { padding:16px 20px; overflow-y:auto; }
+  .modal .foot { padding:12px 20px 16px; display:flex; justify-content:flex-end; gap:8px;
+    border-top:1px solid var(--line); }
+  .modal pre { background:#0f1522; color:#d7e0ef; border-radius:9px; padding:14px;
+    font-size:12px; line-height:1.65; overflow:auto; max-height:46vh; margin:0;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace; white-space:pre-wrap; }
+
+  #toast { position:fixed; left:50%; bottom:26px; transform:translate(-50%, 14px);
+    background:#171a1f; color:#fff; font-size:13px; padding:9px 16px; border-radius:8px;
+    opacity:0; pointer-events:none; transition:.22s; z-index:80; }
+  #toast.on { opacity:1; transform:translate(-50%, 0); }
+  #toast.err { background:var(--red); }
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="brand">MoonBit 生态索引<span>数据编辑</span></div>
+  <div class="grow"></div>
+  <div class="status"><i class="dot" id="dot"></i><span id="stat">加载中…</span></div>
+  <button class="btn" id="buildBtn" title="运行 pipeline/analyze.py 重新生成站点">重建站点</button>
+  <button class="btn primary" id="saveBtn" title="Ctrl/Cmd + S">保存</button>
+</div>
+
+<div class="app">
+  <aside class="side">
+    <div class="side-top"><input id="q" placeholder="搜索场景 / 包名 / id"></div>
+    <div class="list" id="list"></div>
+    <div class="side-foot"><button class="btn small" id="addBtn">+ 新增场景</button></div>
+  </aside>
+  <main id="main"></main>
+</div>
+
+<div class="mask" id="mask"><div class="modal" id="modal"></div></div>
+<div id="toast"></div>
+
+<script>
+'use strict';
+
+let S = null;              // 后端返回的全量数据
+let cur = null;            // 当前场景 id
+let tab = 'text';
+let dirty = false;
+let ruleDraft = null;      // 规则面板里未提交的文本
+
+const $ = (s, r) => (r || document).querySelector(s);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c =>
+  ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+function scene(id) { return S.scenarios.find(s => s.id === id); }
+function sceneIdx(id) { return S.scenarios.findIndex(s => s.id === id); }
+function en(id) {
+  S.i18n.scenarios[id] = S.i18n.scenarios[id] || { title: '', intro: '', note: '' };
+  return S.i18n.scenarios[id];
+}
+function blurb(name) {
+  if (!S.blurbs[name]) S.blurbs[name] = ['', ''];
+  return S.blurbs[name];
+}
+
+/* ---------------------------------------------------------------- 脏标记 */
+function mark(set) {
+  dirty = set !== false;
+  $('#dot').className = 'dot' + (dirty ? ' dirty' : '');
+  $('#stat').textContent = dirty ? '有未保存的修改' : savedText();
+}
+function savedText() {
+  const m = S && S.meta || {};
+  return '已保存 · ' + (m.modules || '?') + ' 个模块 · 构建于 ' + (m.built_at || '—');
+}
+function toast(msg, isErr) {
+  const t = $('#toast');
+  t.textContent = msg;
+  t.className = 'on' + (isErr ? ' err' : '');
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => { t.className = isErr ? 'err' : ''; }, 2600);
+}
+
+/* ---------------------------------------------------------------- 侧栏 */
+function renderList() {
+  const q = ($('#q').value || '').trim().toLowerCase();
+  const hit = s => !q || s.id.toLowerCase().includes(q) || (s.title || '').toLowerCase().includes(q)
+    || (s.title || '').includes(q)
+    || (S.sols[s.id] || []).some(n => n.toLowerCase().includes(q));
+  let html = '';
+  for (const g of S.groups) {
+    const list = S.scenarios.filter(s => s.group === g.id && hit(s));
+    if (!list.length) continue;
+    html += `<div class="grp">${esc(g.title)}</div>`;
+    for (const s of list) {
+      const sol = (S.sols[s.id] || []).length;
+      const lack = (S.sols[s.id] || []).filter(n => !(S.blurbs[n] && S.blurbs[n][0].trim())).length;
+      html += `<div class="item${s.id === cur ? ' on' : ''}" data-id="${esc(s.id)}">
+        <span class="ic">${esc(s.icon || '·')}</span>
+        <span class="nm">${esc(s.title)}</span>
+        ${lack ? `<span class="n warn" title="${lack} 个方案还没写简介">${lack}</span>` : ''}
+        <span class="n">${sol || ''}</span>
+      </div>`;
+    }
+  }
+  if (!html) html = `<div class="grp">没有匹配的场景</div>`;
+  $('#list').innerHTML = html;
+  $('#list').querySelectorAll('.item').forEach(el =>
+    el.onclick = () => { if (dirtyRules()) return; cur = el.dataset.id; tab = 'text'; renderAll(); });
+}
+
+/* ---------------------------------------------------------------- 主区 */
+function renderAll() {
+  renderList();
+  const s = scene(cur);
+  if (!s) { $('#main').innerHTML = ''; return; }
+  const sol = S.sols[s.id] || [];
+  const lack = sol.filter(n => !(S.blurbs[n] && S.blurbs[n][0].trim())).length;
+  $('#main').innerHTML = `
+    <div class="hd">
+      <div>
+        <h1>${esc(s.title)}</h1>
+        <div class="sub">
+          <span class="tag">${esc(s.id)}</span>
+          <span>${sol.length} 个完整方案 · ${(S.libs[s.id] || []).length} 个基础库</span>
+        </div>
+      </div>
+      <div class="grow"></div>
+      <button class="btn small" id="upBtn" title="上移">↑</button>
+      <button class="btn small" id="downBtn" title="下移">↓</button>
+      <button class="btn small ghost" id="delBtn">删除场景</button>
+    </div>
+    <nav class="tabs">
+      <button data-t="text" class="${tab === 'text' ? 'on' : ''}">场景文案</button>
+      <button data-t="pkg" class="${tab === 'pkg' ? 'on' : ''}">方案简介 ${lack ? `<b>· ${lack} 待补</b>` : `<b>· ${sol.length}</b>`}</button>
+      <button data-t="rule" class="${tab === 'rule' ? 'on' : ''}">筛选规则</button>
+      <button data-t="why" class="${tab === 'why' ? 'on' : ''}">取舍说明</button>
+    </nav>
+    <section id="pane"></section>`;
+
+  $('#main').querySelectorAll('.tabs button').forEach(b => b.onclick = () => {
+    if (dirtyRules()) return;
+    tab = b.dataset.t; renderAll();
+  });
+  $('#upBtn').onclick = () => move(-1);
+  $('#downBtn').onclick = () => move(1);
+  $('#delBtn').onclick = delScene;
+  renderPane();
+  history.replaceState(null, '', '#/s/' + cur + '/' + tab);
+}
+
+function dirtyRules() {
+  // 切换场景/标签前把规则面板的草稿解析掉，避免静默丢失
+  if (tab !== 'rule' || ruleDraft == null) return false;
+  try { applyRules(ruleDraft); ruleDraft = null; return false; }
+  catch (e) { toast('规则 JSON 有错，先修正或撤销修改', true); return true; }
+}
+
+function move(d) {
+  const i = sceneIdx(cur), j = i + d;
+  if (j < 0 || j >= S.scenarios.length) return;
+  const a = S.scenarios;
+  [a[i], a[j]] = [a[j], a[i]];
+  mark(); renderAll();
+}
+
+/* ---------------------------------------------------------------- 面板：文案 */
+function renderText() {
+  const s = scene(cur), e = en(cur), g = S.groups.find(x => x.id === s.group) || {};
+  $('#pane').innerHTML = `
+    <div class="card" style="margin-bottom:16px">
+      <h3 style="display:flex;align-items:center">
+        <span>场景标识</span><span class="grow"></span>
+        <button class="btn small" id="grpBtn" style="text-transform:none;letter-spacing:0">分组…</button>
+      </h3>
+      <div class="field inline">
+        <div><label>id（页面路由 #/s/id，改了旧链接会失效）</label>
+          <input type="text" id="f-id" value="${esc(s.id)}"></div>
+        <div style="flex:0 0 76px"><label>图标</label>
+          <input type="text" id="f-icon" value="${esc(s.icon || '')}" style="text-align:center"></div>
+        <div style="flex:0 0 170px"><label>所属分组</label>
+          <select id="f-group">${S.groups.map(x =>
+            `<option value="${esc(x.id)}"${x.id === s.group ? ' selected' : ''}>${esc(x.title)}</option>`).join('')}</select></div>
+      </div>
+      <div class="hint" style="font-size:11.5px;color:var(--muted)">
+        当前分组「${esc(g.title || '')}」/ ${esc(g.title_en || '缺英文')}。
+        改 id 会同时改页面路由与报告里的锚点，外部链接会失效。</div>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>中文</h3>
+        <div class="field"><label>标题</label>
+          <input type="text" id="f-title" value="${esc(s.title || '')}"></div>
+        <div class="field"><label>简介（一句话说明这个场景包含什么）</label>
+          <textarea id="f-intro">${esc(s.intro || '')}</textarea></div>
+        <div class="field"><label>补充说明（显示在详情页，可留空）</label>
+          <textarea id="f-note">${esc(s.note || '')}</textarea></div>
+      </div>
+      <div class="card">
+        <h3>English</h3>
+        <div class="field"><label>Title</label>
+          <input type="text" id="e-title" value="${esc(e.title || '')}"></div>
+        <div class="field"><label>Intro</label>
+          <textarea id="e-intro">${esc(e.intro || '')}</textarea></div>
+        <div class="field"><label>Note（中文写了就必须填，否则构建失败）</label>
+          <textarea id="e-note">${esc(e.note || '')}</textarea></div>
+      </div>
+    </div>`;
+
+  const bind = (sel, fn) => $(sel).addEventListener('input', ev => { fn(ev.target.value); mark(); });
+  bind('#f-title', v => { s.title = v; });
+  bind('#f-intro', v => { s.intro = v; });
+  bind('#f-note', v => { s.note = v; });
+  bind('#e-title', v => { e.title = v; });
+  bind('#e-intro', v => { e.intro = v; });
+  bind('#e-note', v => { e.note = v; });
+  bind('#f-icon', v => { s.icon = v; });
+
+  $('#f-id').addEventListener('change', ev => {
+    const v = ev.target.value.trim();
+    if (!v || v === s.id) return;
+    if (S.scenarios.some(x => x.id === v)) { toast('这个 id 已被占用', true); ev.target.value = s.id; return; }
+    S.i18n.scenarios[v] = S.i18n.scenarios[s.id] || { title: '', intro: '', note: '' };
+    delete S.i18n.scenarios[s.id];
+    S.sols[v] = S.sols[s.id]; S.libs[v] = S.libs[s.id];
+    s.id = v; cur = v; mark(); renderAll();
+  });
+  $('#f-group').addEventListener('change', ev => { s.group = ev.target.value; mark(); renderAll(); });
+  $('#grpBtn').onclick = editGroups;
+}
+
+/* ---------------------------------------------------------------- 分组管理 */
+function editGroups() {
+  const draft = S.groups.map(g => ({ ...g, __old: g.id }));
+  const draw = () => {
+    $('#g-list').innerHTML = draft.map((g, i) => `
+      <div class="field inline" style="align-items:flex-end">
+        <div style="flex:0 0 100px"><label>id</label>
+          <input type="text" class="g-id" data-i="${i}" value="${esc(g.id)}"></div>
+        <div><label>中文名</label>
+          <input type="text" class="g-zh" data-i="${i}" value="${esc(g.title)}"></div>
+        <div><label>English</label>
+          <input type="text" class="g-en" data-i="${i}" value="${esc(g.title_en || '')}"></div>
+        <div style="flex:0 0 30px">
+          <button class="btn small ghost g-del" data-i="${i}" title="删除分组">×</button></div>
+      </div>`).join('');
+    $('#g-list').querySelectorAll('input').forEach(inp => {
+      inp.addEventListener('input', () => {
+        const g = draft[+inp.dataset.i];
+        if (inp.classList.contains('g-id')) g.id = inp.value.trim();
+        else if (inp.classList.contains('g-zh')) g.title = inp.value;
+        else g.title_en = inp.value;
+      });
+    });
+    $('#g-list').querySelectorAll('.g-del').forEach(b => {
+      b.onclick = () => {
+        const g = draft[+b.dataset.i];
+        const used = S.scenarios.filter(s => s.group === g.id).length;
+        if (used) return toast(`「${g.title}」下还有 ${used} 个场景，先把它们移到别的分组`, true);
+        draft.splice(+b.dataset.i, 1); draw();
+      };
+    });
+  };
+
+  openModal('分组', `
+    <p style="margin:0 0 14px;font-size:12.5px;color:var(--muted)">
+      分组决定左侧导航的分段与顺序。id 改动会写到所属场景的 group 字段，无需手工同步。</p>
+    <div id="g-list"></div>
+    <button class="btn small" id="g-add" style="margin-top:4px">+ 新增分组</button>`,
+    `<button class="btn" onclick="closeModal()">取消</button>
+     <button class="btn primary" id="g-ok">确定</button>`);
+  draw();
+
+  $('#g-add').onclick = () => { draft.push({ id: '', title: '', title_en: '', __old: null }); draw(); };
+  $('#g-ok').onclick = () => {
+    if (draft.some(g => !g.id || !g.title)) return toast('分组的 id 与中文名不能为空', true);
+    const ids = draft.map(g => g.id);
+    if (new Set(ids).size !== ids.length) return toast('分组 id 不能重复', true);
+    // id 变更时把场景的 group 一起改过去
+    draft.forEach(g => {
+      if (g.__old && g.__old !== g.id) {
+        S.scenarios.forEach(s => { if (s.group === g.__old) s.group = g.id; });
+      }
+    });
+    S.groups = draft.map(g => ({ id: g.id, title: g.title, title_en: g.title_en || '' }));
+    mark(); closeModal(); renderAll();
+  };
+}
+
+/* ---------------------------------------------------------------- 面板：简介 */
+function renderPkg() {
+  const s = scene(cur), sol = S.sols[s.id] || [];
+  if (!sol.length) {
+    $('#pane').innerHTML = `<div class="banner">这个场景没有「完整方案」，只有基础库。
+      简介只给完整方案写；基础库沿用注册表的英文描述。</div>`;
+    return;
+  }
+  const lack = sol.filter(n => !(S.blurbs[n] && S.blurbs[n][0].trim())).length;
+  let html = '';
+  if (lack) html += `<div class="banner warn">本场景 ${sol.length} 个方案里有 ${lack} 个还没写中文简介，
+      站点会退回注册表的英文描述。补完这 ${lack} 条，详情页读起来才一致。</div>`;
+  else html += `<div class="banner">本场景 ${sol.length} 个方案都已撰写简介。
+      中文建议 50 字以内，英文 30 词以内；句式用陈述句，写形态、能力与边界，不写评价。</div>`;
+
+  sol.forEach((name, i) => {
+    const b = blurb(name), d = S.desc[name] || ['', '', false];
+    const miss = !b[0].trim();
+    html += `<div class="pkg${miss ? ' miss' : ''}" data-name="${esc(name)}">
+      <div class="pkg-hd">
+        <span class="tag">${i + 1}</span>
+        <a class="pkg-name" href="https://mooncakes.io/docs/${esc(name)}" target="_blank"
+           rel="noopener">${esc(name)}</a>
+        ${d[1] ? `<span class="ver">v${esc(d[1])}</span>` : ''}
+        ${d[2] ? '<span class="flag">yanked</span>' : ''}
+        ${miss ? '<span class="flag">缺中文简介</span>' : ''}
+        <span class="grow"></span>
+        <a href="https://mooncakes.io/docs/${esc(name)}" target="_blank" rel="noopener"
+           style="font-size:12px">mooncakes ↗</a>
+      </div>
+      ${d[0] ? `<p class="reg">注册表：${esc(d[0])}</p>` : ''}
+      <div class="grid2" style="align-items:start">
+        <div class="field" style="margin:0"><textarea data-f="zh" placeholder="中文简介">${esc(b[0])}</textarea>
+          <div class="cnt">${b[0].length} 字</div></div>
+        <div class="field" style="margin:0"><textarea data-f="en" placeholder="English blurb">${esc(b[1])}</textarea>
+          <div class="cnt">${b[1].split(/\s+/).filter(Boolean).length} 词</div></div>
+      </div>
+    </div>`;
+  });
+  $('#pane').innerHTML = html;
+
+  $('#pane').querySelectorAll('.pkg').forEach(box => {
+    const name = box.dataset.name;
+    box.querySelectorAll('textarea').forEach(ta => {
+      ta.style.height = Math.max(58, ta.scrollHeight) + 'px';
+      ta.addEventListener('input', () => {
+        const v = ta.value;
+        if (ta.dataset.f === 'zh') blurb(name)[0] = v; else blurb(name)[1] = v;
+        ta.style.height = 'auto';
+        ta.style.height = Math.max(58, ta.scrollHeight) + 'px';
+        const cnt = ta.parentElement.querySelector('.cnt');
+        const isZh = ta.dataset.f === 'zh';
+        const n = isZh ? v.length : v.split(/\s+/).filter(Boolean).length;
+        cnt.textContent = isZh ? n + ' 字' : n + ' 词';
+        cnt.classList.toggle('over', isZh ? n > 60 : n > 34);
+        box.classList.toggle('miss', !(blurb(name)[0] || '').trim());
+        mark();
+      });
+    });
+  });
+}
+
+/* ---------------------------------------------------------------- 面板：规则 */
+const TEXT_KEYS = ['id', 'group', 'icon', 'title', 'intro', 'note', '_why'];
+
+function rulesOf(s) {
+  const o = {};
+  for (const k of Object.keys(s)) if (!TEXT_KEYS.includes(k)) o[k] = s[k];
+  return o;
+}
+function applyRules(text) {
+  const o = JSON.parse(text);
+  if (o == null || typeof o !== 'object' || Array.isArray(o))
+    throw new Error('顶层必须是对象');
+  const s = scene(cur);
+  for (const k of Object.keys(s)) if (!TEXT_KEYS.includes(k)) delete s[k];
+  Object.assign(s, o);
+  mark();
+}
+
+function renderRule() {
+  const s = scene(cur);
+  ruleDraft = null;
+  $('#pane').innerHTML = `
+    <div class="banner warn">
+      这里是收录规则，改动会直接影响「哪些包会出现在这个场景」。字段含义见
+      <code>data/scenarios.src.json</code> 开头的 _字段 说明；不确定就先别动。
+      常见操作：把包名加进 <code>pin</code> 让它排到前面，加进 <code>force</code> 让元数据命不中的包也被收录，
+      加进 <code>ex</code> 把误收的包挡掉。
+    </div>
+    <div class="rules">
+      <textarea id="rules" spellcheck="false">${esc(JSON.stringify(rulesOf(s), null, 2))}</textarea>
+      <div class="ruleerr" id="ruleerr"></div>
+    </div>`;
+
+  const ta = $('#rules');
+  ta.style.height = Math.max(420, ta.scrollHeight + 20) + 'px';
+  ta.addEventListener('input', () => {
+    ruleDraft = ta.value;
+    try { JSON.parse(ta.value); ta.classList.remove('bad'); $('#ruleerr').textContent = ''; }
+    catch (e) { ta.classList.add('bad'); $('#ruleerr').textContent = 'JSON 错误：' + e.message; }
+  });
+}
+
+/* ---------------------------------------------------------------- 面板：说明 */
+function renderWhy() {
+  const s = scene(cur), w = s._why || [];
+  $('#pane').innerHTML = w.length
+    ? `<div class="why"><h3 style="margin:0 0 10px;font-size:12.5px;color:var(--muted);
+         text-transform:uppercase;letter-spacing:.4px">当初为什么这样划</h3>
+       <ul>${w.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
+       <p style="font-size:12px;color:var(--muted);margin:12px 0 0">
+         这段文字来自早期写在 analyze.py 里的行内注释，迁移到 JSON 时保留下来，只供阅读，不参与构建。</p></div>`
+    : `<div class="banner">这个场景没有留下取舍说明。想补的话，在
+       <code>data/scenarios.src.json</code> 里给该场景加 <code>"_why": ["…"]</code>，会显示在这里。</div>`;
+}
+
+function renderPane() {
+  if (tab === 'text') renderText();
+  else if (tab === 'pkg') renderPkg();
+  else if (tab === 'rule') renderRule();
+  else renderWhy();
+}
+
+/* ---------------------------------------------------------------- 弹层 */
+function openModal(title, bodyHtml, footHtml) {
+  $('#modal').innerHTML = `<h2>${esc(title)}</h2><div class="body">${bodyHtml}</div>
+    <div class="foot">${footHtml}</div>`;
+  $('#mask').classList.add('on');
+}
+function closeModal() { $('#mask').classList.remove('on'); $('#modal').innerHTML = ''; }
+$('#mask').addEventListener('click', e => { if (e.target === $('#mask')) closeModal(); });
+
+/* ---------------------------------------------------------------- 场景增删 */
+$('#addBtn').onclick = () => {
+  openModal('新增场景', `
+    <div class="field"><label>id（英文小写，用于路由与文件名，例如 desktop）</label>
+      <input type="text" id="n-id"></div>
+    <div class="field"><label>分组</label>
+      <select id="n-group">${S.groups.map(g =>
+        `<option value="${esc(g.id)}">${esc(g.title)}</option>`).join('')}</select></div>
+    <div class="grid2">
+      <div class="field"><label>中文标题</label><input type="text" id="n-title"></div>
+      <div class="field"><label>English title</label><input type="text" id="n-title-en"></div>
+    </div>
+    <div class="field"><label>图标（emoji，可留空）</label>
+      <input type="text" id="n-icon" style="width:90px"></div>
+    <div class="field"><label>规则初始值</label>
+      <select id="n-tpl">
+        <option value="empty">空规则（只靠人工 pin 维护）</option>
+        <option value="kw">关键词模板（kw / desc / ex）</option>
+      </select></div>`,
+    `<button class="btn" onclick="closeModal()">取消</button>
+     <button class="btn primary" id="n-ok">创建</button>`);
+  $('#n-ok').onclick = () => {
+    const id = ($('#n-id').value || '').trim();
+    const title = ($('#n-title').value || '').trim();
+    const tpl = $('#n-tpl').value;
+    if (!/^[a-z][a-z0-9_-]*$/.test(id)) return toast('id 只能用小写字母、数字、- 和 _', true);
+    if (!title) return toast('中文标题不能为空', true);
+    if (S.scenarios.some(s => s.id === id)) return toast('这个 id 已存在', true);
+    const s = { id, group: $('#n-group').value, icon: ($('#n-icon').value || '').trim(),
+                title, intro: '', note: '' };
+    if (tpl === 'kw') { s.kw = []; s.desc = []; s.ex = []; }
+    s.pin = [];
+    S.scenarios.push(s);
+    S.i18n.scenarios[id] = { title: ($('#n-title-en').value || '').trim(), intro: '', note: '' };
+    S.sols[id] = []; S.libs[id] = [];
+    cur = id; tab = 'text'; mark(); closeModal(); renderAll();
+    toast('已创建，补完简介与规则后记得保存');
+  };
+};
+
+function delScene() {
+  const s = scene(cur);
+  const sol = (S.sols[s.id] || []).length;
+  openModal('删除场景', `
+    <p style="margin:0 0 10px">确认删除「${esc(s.title)}」？</p>
+    <p style="margin:0;color:var(--muted);font-size:13px">
+      该场景下有 ${sol} 个完整方案。删除只会把这个场景从导航里去掉，
+      它的包简介仍保留在 blurbs.json 里，重新加回来时还能用。
+      保存前的旧文件会备份在 data/.backup/，可以还原。</p>`,
+    `<button class="btn" onclick="closeModal()">取消</button>
+     <button class="btn primary" id="d-ok" style="background:var(--red);border-color:var(--red)">删除</button>`);
+  $('#d-ok').onclick = () => {
+    S.scenarios = S.scenarios.filter(x => x.id !== cur);
+    delete S.i18n.scenarios[cur];
+    cur = S.scenarios.length ? S.scenarios[0].id : null;
+    mark(); closeModal(); renderAll();
+  };
+}
+
+/* ---------------------------------------------------------------- 保存 / 重建 */
+function payload() {
+  if (ruleDraft != null) applyRules(ruleDraft);
+  ruleDraft = null;
+  return {
+    groups: S.groups.map(g => ({ id: g.id, title: g.title, title_en: g.title_en || '' })),
+    scenarios: S.scenarios,
+    i18n: { groups: Object.fromEntries(S.groups.map(g => [g.id, g.title_en || ''])),
+            scenarios: S.i18n.scenarios },
+    blurbs: S.blurbs,
+  };
+}
+
+async function post(url, body) {
+  const r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body || {}) });
+  return r.json();
+}
+
+async function save() {
+  const btn = $('#saveBtn');
+  btn.disabled = true; btn.textContent = '保存中…';
+  try {
+    const res = await post('/api/save', payload());
+    if (!res.ok) { toast(res.error || '保存失败', true); return; }
+    dirty = false;
+    $('#dot').className = 'dot';
+    $('#stat').textContent = savedText();
+    toast(`已保存：${res.counts.scenarios} 个场景 / ${res.counts.blurbs} 条简介（备份 ${res.backup}）`);
+    renderAll();
+  } catch (e) {
+    toast('保存失败：' + e.message, true);
+  } finally {
+    btn.disabled = false; btn.textContent = '保存';
+  }
+}
+
+async function rebuild() {
+  if (dirty && !confirm('有未保存的修改，重建会用磁盘上的旧数据。先保存？')) return;
+  const btn = $('#buildBtn');
+  btn.disabled = true; btn.textContent = '构建中…';
+  openModal('重建站点', '<p style="margin:0;color:var(--muted)">正在运行 pipeline/analyze.py…</p>', '');
+  try {
+    const res = await post('/api/build');
+    $('#modal').innerHTML = `<h2>${res.ok ? '构建成功' : '构建失败'}</h2>
+      <div class="body"><p style="margin:0 0 10px;font-size:13px;color:var(--muted)">
+        ${res.ok ? `用时 ${res.secs} 秒，站点已生成到 dist/。` : '看下面的日志定位问题。'}</p>
+        <pre>${esc(res.log || '(无输出)')}</pre></div>
+      <div class="foot"><button class="btn primary" onclick="closeModal()">知道了</button></div>`;
+    if (res.ok) {
+      S.meta = res.meta || S.meta;
+      $('#stat').textContent = savedText();
+      // 场景的 sol / lib 可能变了，重新取一次数据
+      const fresh = await (await fetch('/api/data')).json();
+      const keep = cur, keepTab = tab;
+      S = fresh; cur = keep; tab = keepTab;
+      renderAll();
+    }
+  } catch (e) {
+    toast('构建请求失败：' + e.message, true);
+  } finally {
+    btn.disabled = false; btn.textContent = '重建站点';
+  }
+}
+
+$('#saveBtn').onclick = save;
+$('#buildBtn').onclick = rebuild;
+$('#q').addEventListener('input', renderList);
+
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') { e.preventDefault(); save(); }
+  if (e.key === 'Escape') closeModal();
+});
+window.addEventListener('beforeunload', e => {
+  if (dirty) { e.preventDefault(); e.returnValue = ''; }
+});
+
+/* ---------------------------------------------------------------- 启动 */
+(async function boot() {
+  try {
+    S = await (await fetch('/api/data')).json();
+    if (S.error) throw new Error(S.error);
+    cur = (S.scenarios[0] || {}).id || null;
+    // 支持直接打开某个场景 / 标签页：#/s/gui/pkg
+    const m = (location.hash || '').match(/^#\/s\/([^\/]+)(?:\/(\w+))?/);
+    if (m && S.scenarios.some(s => s.id === m[1])) {
+      cur = m[1];
+      if (['text', 'pkg', 'rule', 'why'].includes(m[2])) tab = m[2];
+    }
+    $('#stat').textContent = savedText();
+    renderAll();
+  } catch (e) {
+    $('#main').innerHTML = `<div class="banner warn">读取数据失败：${esc(e.message)}。
+      确认 pipeline/editor.py 还开着，数据文件没被写坏。</div>`;
+    $('#dot').className = 'dot err';
+    $('#stat').textContent = '加载失败';
+  }
+})();
+</script>
+</body>
+</html>

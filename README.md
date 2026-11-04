@@ -165,9 +165,9 @@ time、log）在生态中尚无框架或引擎级实现。这些场景在站内�
 双语不是两套页面：
 
 - 场景的 `title` / `intro` / `note` 在 `dist/data/scenarios.json` 中为 `[中文, 英文]`
-  二元数组，前端按语言取下标；中文原文仍写在 `pipeline/analyze.py` 的 `SCENARIOS` 里。
+  二元数组，前端按语言取下标；中文原文写在 `data/scenarios.src.json` 里。
 - 英文译文集中在 `data/i18n.json`，构建时按场景 id 合并。少一条译文、或留下一个
-  `SCENARIOS` 里不存在的 id，`analyze.py` 会直接构建失败——不会带着漏译上线。
+  `scenarios.src.json` 里不存在的 id，`analyze.py` 会直接构建失败——不会带着漏译上线。
 - 界面文案（按钮、页脚、检索提示）在 `dist/assets/app.js` 的 `T` 表，中英各一份，
   静态骨架通过 `data-i18n` 属性填充，`<html lang>` 与 `<title>` 同步切换。
 - 包描述来自注册表原文（多数为英文），不翻译：它是元数据，不是本站的表述。
@@ -181,12 +181,15 @@ time、log）在生态中尚无框架或引擎级实现。这些场景在站内�
 ├── pipeline/
 │   ├── fetch.py              采集注册表数据（模块元数据 + 下载量），可重跑
 │   ├── analyze.py            数据合并、场景打分、排序与产物生成
+│   ├── editor.py             本地数据编辑器（浏览器里改场景与简介）
+│   ├── editor.html           编辑器前端（配色与站点一致）
 │   ├── query.py              命令行查询（场景 / 全量检索 / SQL）
 │   ├── build_skill.py        导出选型 skill 的数据快照（见「七、选型 skill」）
 │   ├── og.html               分享卡片源文件（1200×630，headless 截图用）
 │   └── make_assets.py        生成分享卡片与站点图标（手动执行，不参与日常构建）
 ├── data/
 │   ├── raw/                  原始快照，只增不改，用于复现
+│   ├── scenarios.src.json    场景定义源文件（分组、标题、简介、筛选规则）
 │   ├── i18n.json             场景与分组的英文译文（构建时校验完整性）
 │   ├── blurbs.json           「完整方案」的一句话简介（人工维护，见下节）
 │   ├── modules.json          合并后的模块表（3520 条）
@@ -307,6 +310,32 @@ python3 pipeline/analyze.py      # ③ 重新构建站点与报告
 
 采集完成后别忘了把 `pipeline/analyze.py` 顶部的 `COLLECTED_AT` 改成当天日期——站点上的
 「采集」时间取自这里，漏改会让快照日期停在旧值。
+
+### 图形化编辑
+
+场景与简介不必改代码，用本地编辑器：
+
+```bash
+python3 pipeline/editor.py            # 自动打开 http://127.0.0.1:8770
+python3 pipeline/editor.py --port 9000 --no-open
+```
+
+| 能改什么 | 落在哪个文件 |
+| --- | --- |
+| 场景标题、简介、补充说明（中英）、图标、分组、顺序 | `data/scenarios.src.json` + `data/i18n.json` |
+| 每个「完整方案」的中英文简介 | `data/blurbs.json` |
+| 收录规则（`pin` / `force` / `ex` / `kw` / `top` 等） | `data/scenarios.src.json` |
+| 新增、删除场景，调整分组 | 同上 |
+
+编辑器只写文件，不跑构建：点「保存」落盘，点「重建站点」才执行 `analyze.py`。保存前会把
+三份文件备份到 `data/.backup/<时间戳>/`（保留最近 20 份），改坏了可以直接拷回来。左侧列表
+上的橙色数字是该场景里还没写中文简介的包数，切到「方案简介」页逐条补即可。
+
+规则页允许直接编辑 JSON，其中 `kw` / `desc` / `ex` 决定「哪些包会被收进这个场景」；
+不确定时优先用 `pin`（置顶）和 `force`（强制收录），这两项只影响个别包，不会连带改变整张表。
+
+**为什么不做成线上编辑**：站点是纯静态托管，没有可写的后端；而选包清单的每次改动都应该
+留在 git 里，本地改完再提交，比从浏览器直接推仓库更可控。
 
 ---
 
