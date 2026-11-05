@@ -1,0 +1,78 @@
+# 数据结构 / 算法（`ds`）· 基础库全量
+
+> 快照 2026-11-05｜按推荐次序列出｜返回 [ds.md](ds.md)｜在线版 <https://moonbit-ecosystem-index.pages.dev/#/s/ds>
+
+单点能力，需自行组合；没有骨架级实现，不要当成框架推荐。
+
+- **`dowdiness/btree`** v0.2.0 — Generic counted B-tree with O(log n) indexed access, insert, delete, and range operations
+- **`dowdiness/order-tree`** v0.1.2 — Order-statistic B-tree with O(log n) position-indexed operations
+- **`dowdiness/alga`** v0.4.0 — Algebraic graphs for MoonBit — directed graph trait and algorithm library inspired by Haskell's alga
+- **`dowdiness/event-graph-walker`** v0.8.0 — Implementation of the eg-walker CRDT algorithm with FugueMax sequence CRDT
+- **`dowdiness/rle`** v0.2.3 — Generic run-length encoded sequence with O(log n) position lookup
+- **`moonbit-community/diago`** v0.4.1 — A diagram toolkit for MoonBit with Dagre, ELK, and Railway layout engines, rendering SVG, ASCII, and Unicode o…
+- **`wedarp/moongraph`** v0.2.2 — Pure MoonBit generic graph data structures and algorithms
+- **`totto2727/any-collection`** v0.2.2 — Typed references over mutable and immutable maps of dynamically typed values
+- **`bobzhang/loop_invariants`** v0.9.0 — Comprehensive collection of algorithms and data structures with well-documented loop invariants for correctnes…
+- **`aurasuisui/indexmap`** v0.4.0 — A hash map that preserves insertion order - MoonBit port of Rust's indexmap
+- **`BigOrangeQWQ/unification_table`** v0.1.2 — A module for unification table operations in data structures and algorithms.
+- **`morning-start/mbtgraph`** v0.1.3 — MoonBit 图算法库 - 完整的图数据结构和算法实现
+- **`kesmeey/IndexSet`** v0.1.6 — Implementing the IndexSet Data Structure Using MoonBit
+- **`smallbearrr/NetworkX`** v0.1.4
+- **`Juwan-Hwang/moon-certified`** v0.1.1 — Core algorithms and data structures for MoonBit — partially formally verified
+- **`HCHogan/btree`** v0.2.1 — An ordered map backed by a B-tree
+- **`wqbcs/moon_collections`** v0.2.4 — DETERMINISTIC × VERIFIABLE × COMPOSABLE collections for MoonBit/WASM — 12 ordered structures, FNV-1a fingerpri…
+- **`aurasuisui/multiindex`** v0.2.2 — A record store with N secondary indexes (unique / non-unique / sorted) over stable generational IDs - the N-in…
+- **`I3eg1nner/petgraph`** v0.2.0 — A MoonBit port of petgraph: graph data structures and algorithms.
+- **`Teddy-Yangjiale/rope`** v0.1.0 — A B-tree rope data structure for efficient text manipulation in MoonBit
+- **`OldPigxjk/moon_toolkit`** v0.1.2 — MoonBit general graph algorithm toolkit
+- **`bobzhang/loop_invariants_graph`** v0.18.0 — Graph and tree algorithms with loop-invariant explanations
+- **`jhshuai/moonlarder`** v0.15.0 — A generic in-memory cache with LRU/LFU/ARC/WindowTinyLfu eviction, TTL expiry, and a memoizing get-or-insert h…
+- **`bobzhang/loop_invariants_data_structures`** v0.12.0 — Data structures with loop-invariant explanations
+- **`Yoorkin/slotmap`** v0.2.4 — A small typed slot map with opaque handles and reusable slots for MoonBit.
+- **`Hhsqoo/moon-collections`** v0.4.1 — High-performance collection data structures for MoonBit, including ordered maps and sets, bitsets, deques, cac…
+- **`0Ayachi0/elk`** v0.1.0 — ELK graph auto-layout implementation in Moonbit, supporting layered/fixed/force algorithms.
+- **`Suquster/moonbit-pathfinding`** v0.2.0 — A MoonBit pathfinding and graph algorithms library with executable documentation, runtime-checked proof predic…
+- **`Milky2018/metis`** v0.1.3 — MoonBit bindings to METIS
+- **`Zongzuixi114514/mooncollections`** v0.1.5 — A comprehensive data structure library for MoonBit: IndexMap, OrderedSet, BitSet, BitVec, BloomFilter, LRU Cac…
+- **`BigOrangeQWQ/immut_multiset`** v0.1.5 — data structure for immutable multiset (bag).
+- **`BigOrangeQWQ/immunt_multiset`** v0.1.2 — data structure for immutable multiset
+- **`CAIMEOX/zipper`** v0.1.0 — The zipper data structure
+- **`hiroyannnn/sketch`** v0.2.0 — MoonBit probabilistic data structures library (HyperLogLog, Count-Min Sketch, Cuckoo Filter)
+- **`kesmeey/IndexMap`** v0.1.9 — Implementing the IndexMap Data Structure Using MoonBit
+- **`sennenki/immutable`** v0.1.4 — Immutable data structures for MoonBit
+- **`aurasuisui/bimap`** v0.3.0 — A bidirectional map (bijection) with reverse lookup, insertion order, index access, and a sorted BiBTreeMap va…
+- **`illusory0x0/immut_deque`** v0.3.4 — immutable double ended queue
+- **`hzc-666-ai/moonpathfinding`** v0.1.3 — A pure MoonBit pathfinding library with 9 algorithms, graph and grid support, path smoothing, and visualizatio…
+- **`totto2727/workgraph-core`** v0.1.4 — Runtime-independent asynchronous graph compiler and runtime
+- **`BigOrangeQWQ/Bits`** v0.1.0 — Moonbit implementations for binary-related data structures, algorithms, and constant collections.
+- **`bob/hashbrown`** v0.1.0 — MoonBit port of Google's SwissTable hash map - a high-performance drop-in replacement for standard hash maps
+- **`totto2727/workgraph-agent-cli`** v0.2.1 — Coding-agent nodes for workgraph
+- **`wzx2007/moonpath`** v0.31.0 — A MoonBit graph algorithms and tile-grid pathfinding library for reusable open-source ecosystem building.
+- **`CAIMEOX/graph-algebra`** v0.1.5 — A minimalistic and elegant approach to working algebraically with graphs
+- **`CAIMEOX/diet`** v0.1.3 — Discrete Interval Encoding Trees
+- **`CAIMEOX/fenwick`** v0.1.1 — Fenwick tree implementation in MoonBit
+- **`totto2727/workgraph-opencode-cli`** v0.2.1 — OpenCode CLI integration for workgraph
+- **`gaato/mooncakes-graph`** v0.1.1 — The mooncakes.io registry as a dependency graph: what depends on what, ranked by direct, transitive and other-…
+- **`illusory0x0/graphviz`** v0.1.2
+- **`usersD609/moonqueuelab`** v0.1.2 — Analytical queueing networks, service-level capacity sizing and exact integer server planning
+- **`totto2727/workgraph-codex-cli`** v0.2.1 — Codex CLI integration for workgraph
+- **`kesmeey/immut_IntervalTree`** v0.1.0 — Experimenting with implementing an immutable interval tree in Moonbit
+- **`cn-cheems/moonnavkit`** v0.3.0 — Weighted path planning, multi-goal flow fields, and search visualization for MoonBit.
+- **`cauchyQ/moonbit-roaring`** v0.2.0 — Pure MoonBit 32-bit Roaring Bitmap indexes
+- **`wcx789ll/moonsim`** v0.1.2 — A high-performance deterministic discrete-event and multi-agent systems simulation framework in MoonBit
+- **`haol-05/moondatalog`** v0.1.1 — A pure MoonBit Datalog query engine with stratified negation, aggregation, static checks and moon prove formal…
+- **`tc-adventureking/ipset`** v0.3.1 — Pure MoonBit IPv4/IPv6 addresses, networks, interfaces and address sets
+- **`totto2727/workgraph-visualization`** v0.1.4 — Runtime-independent workgraph visualization
+- **`totto2727/workgraph-llm`** v0.1.4 — Runtime-independent typed LLM nodes for workgraph
+- **`qyt1234567/moongraphlearn`** v0.1.2 — MoonGraphLearn: Graph Machine Learning Preprocessing and Message Passing Experimental Library in MoonBit
+- **`Bobojy00/moonbit_factory_graph`** v0.2.1 — Industrial plant topology, multi-layer material/control/energy flow modeling and failure propagation graph eng…
+- **`FikaRomantic/moongraphml`** v0.2.0 — Typed, bounded GraphML interchange with atomic relabeling and edge subgraphs
+- **`forey217/moonged`** v0.2.0 — GEDCOM 7 data interchange, relationship queries and audit tools for MoonBit
+- **`NBB2006/routeweave`** v0.2.0 — MoonBit-native route encoding, GeoJSON export, route metrics, simplification, and Web Mercator tile coverage t…
+- **`totto2727/moon-agent-graph`** v0.1.2 — Native asynchronous agent graph runtime with Mermaid visualization
+- **`Deviaana/pathforge`** v0.1.0 — A MoonBit graph search and grid pathfinding toolkit with BFS, Dijkstra and A*.
+- **`yyqdbngt/moon_graphdesk`** v0.2.0 — Property graph import, indexing, query and impact analysis
+- **`clhhhhhh/moon-hprof`** v0.2.0 — Experimental HPROF heap dump parser for MoonBit.
+- **`xcc-ordinary/moonbit-roaring`** v0.1.0 — Interoperability-focused RoaringBitmap with automatic run compression and portable serialization
+- **`Rz-coder8848/moon-neo4j`** v0.1.0 — A pure-MoonBit Neo4j client: Bolt protocol, PackStream codec, HTTP transactional endpoint, and a typed Cypher …
+- **`code3055/moon_graph`** v0.1.0 — A native MoonBit graph layout and SVG rendering toolkit

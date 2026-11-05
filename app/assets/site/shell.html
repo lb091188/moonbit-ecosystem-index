@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MoonBit 生态索引 · 场景化选型参考</title>
+<meta name="description" content="按使用场景组织的 MoonBit 包索引，区分完整方案与基础库。">
+<!-- 分享卡片：抓取方不执行 JS，所以这组标签是静态的中文默认值，
+     站内的语言切换只改 <title> 与 description，不影响这里。
+     这里不写包数、场景数：数量随每次采集变动，页面读 data/scenarios.json 得知。 -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MoonBit 生态索引">
+<meta property="og:title" content="MoonBit 生态索引 · 按场景选包">
+<meta property="og:description" content="把 MoonBit 包按使用场景分开，每个场景分「完整方案」与「基础库」两层：前者能直接定骨架，后者提供单点能力。数据来自 mooncakes.io 官方 API。">
+<meta property="og:url" content="@@SITE@@/">
+<meta property="og:image" content="@@SITE@@/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="MoonBit 生态索引：按使用场景组织的包索引，区分完整方案与基础库">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MoonBit 生态索引 · 按场景选包">
+<meta name="twitter:description" content="把 MoonBit 包按使用场景分开：完整方案与基础库两层。">
+<meta name="twitter:image" content="@@SITE@@/og.png">
+<meta name="theme-color" content="#2f5fe0">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="alternate icon" href="favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>@@CSS@@</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side" id="side">
+    <div class="drw-head"><span data-i18n="navGroups">场景分类</span>
+      <button type="button" id="drwClose" data-i18n-aria="navClose"
+              aria-label="关闭场景导航">&#10005;</button></div>
+    <div id="snav"></div>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+  <main class="main">
+    <header class="top">
+      <button type="button" class="menu-btn" id="menuBtn" data-i18n-aria="navOpen"
+              aria-label="打开场景导航" aria-controls="side" aria-expanded="false">
+        <i></i><i></i><i></i></button>
+      <a class="brand" href="#/" data-i18n="brand">MoonBit 生态索引</a>
+      <span class="ts" id="ts"></span>
+      <div class="tools">
+        <a class="icon-btn" href="@@REPO@@" target="_blank" rel="noopener noreferrer"
+           data-i18n-aria="ghAria" data-i18n-title="ghAria"
+           aria-label="在 GitHub 上查看源码或反馈问题" title="在 GitHub 上查看源码或反馈问题">
+          <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.6-.17 1.28-.27 2-.27.72 0 1.4.1 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+        <button type="button" class="lang-btn" id="langBtn" data-i18n="langBtn"
+                data-i18n-aria="langAria" data-i18n-title="langAria"
+                aria-label="切换到英文" title="切换到英文">EN</button>
+        <a class="sbtn" href="#/search" data-i18n="search">检索</a>
+      </div>
+    </header>
+    <div id="view"><p class="loading" data-i18n="loading">正在加载数据…</p></div>
+  </main>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

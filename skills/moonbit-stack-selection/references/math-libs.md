@@ -1,0 +1,72 @@
+# 数学 / 数值计算（`math`）· 基础库全量
+
+> 快照 2026-11-05｜按推荐次序列出｜返回 [math.md](math.md)｜在线版 <https://moonbit-ecosystem-index.pages.dev/#/s/math>
+
+单点能力，需自行组合；没有骨架级实现，不要当成框架推荐。
+
+- **`Kaida-Amethyst/math`** v0.1.21 — High-precision Math library Implemented By Pure Moonbit
+- **`Luna-Flow/luna-generic`** v0.4.0 — Algebraic traits and default numeric instances that define the generic foundation for LunaFlow math packages.
+- **`Luna-Flow/linear-algebra`** v0.5.2 — Trait-oriented linear algebra foundations for MoonBit, with checked APIs, backend wrappers, and mutable/immuta…
+- **`mizchi/blas`** v0.1.3 — BLAS bindings for MoonBit (Accelerate/OpenBLAS)
+- **`mizchi/numbt`** v0.2.4 — NumPy-style numerical computing library for MoonBit
+- **`Luna-Flow/luna-utils`** v0.3.0 — Backend-independent numeric base with floating-point classification, canonical NaN and bit operations.
+- **`Luna-Flow/calculus-numerical`** v0.3.1 — A numerical calculus library, a part of LunaFlow.
+- **`Luna-Flow/arithmetic`** v0.5.1 — Arithmetic capability traits and checked analytic operations for LunaFlow numeric types, with default real-val…
+- **`applejag/micromath`** v0.3.0 — Embedded math arithmetic, optimized for small code size at the cost of precision
+- **`CAIMEOX/moon_floating`** v0.3.1 — Arbitrary-precision real, complex, interval, and numerical computing for MoonBit
+- **`Luna-Flow/luna-poly`** v0.4.0 — Immutable and mutable polynomial libraries for MoonBit with canonical dense, sparse, and context-aware represe…
+- **`bobzhang/loop_invariants_math`** v0.17.0 — Mathematical algorithms with loop-invariant explanations
+- **`oboard/numoon`** v0.4.1 — MoonBit Mathematical Operation
+- **`Kaida-Amethyst/openblas`** v0.1.3 — Use OpenBlas in MoonBit
+- **`qjgqjg/moon-causal`** v0.2.5 — A practical MoonBit causal-inference toolkit with propensity modeling, weighting, matching, diagnostics, uncer…
+- **`Kaida-Amethyst/moonbit-math`** v0.1.14 — High-precision Math library
+- **`AdUhTkJm/nummoon`** v0.2.3 — A high-speed native numerical library.
+- **`KCN-judu/calculus-numerical`** v0.3.1 — This repo is no longer maintaining here, it is maintained by Luna-Flow now.
+- **`justjoheinz/complex`** v0.4.2 — Complex number arithmetics
+- **`Luna-Flow/mare_mark`** v0.4.1 — Reproducible benchmarking, statistical comparison, tuning, and self-contained reports for MoonBit payloads.
+- **`wcx789ll/moon-reliability`** v0.3.3 — A practical MoonBit reliability engineering library with lifetime distributions, censored survival analysis, M…
+- **`pla678889/moon-experiment`** v0.2.3 — A mature A/B testing analysis library for MoonBit, supporting sample size estimation, sequential testing, metr…
+- **`amor2025/biginteger`** v0.2.0 — 一个MoonBit 综合大整数库，支持算术运算、幂运算、平方根等更多功能
+- **`hxiuzheng/robust_stats`** v0.2.2 — Production-oriented robust statistics, streaming analytics, anomaly detection, and risk toolkit for MoonBit.
+- **`noweizongqing/numsolve`** v0.6.0 — Pure MoonBit ODE suite with dense output, events, direct/iterative/banded linear systems, root finding, and in…
+- **`lhw153766-ctrl/sparse-linalg`** v0.1.3 — Numeric sparse matrix storage (COO/CSR/CSC), sparse kernels, and iterative/direct solvers for MoonBit.
+- **`moonbitstack/moonnum`** v0.2.3 — Python's numbers for MoonBit.
+- **`hp0200/moonbit-sparse-math`** v0.2.1 — A sparse matrix and numerical diagnostic library for data science.
+- **`Luna-Flow/floating`** v0.10.1 — Arbitrary-precision binary, decimal, and ball arithmetic for MoonBit, with checked operations and explicit num…
+- **`CAIMEOX/symbit`** v0.5.10 — A symbolic mathematics library for Moonbit.
+- **`xunyoyo/linalg`** v0.2.7 — Linear Algebra Library
+- **`kokic/katex-parser`** v0.6.0 — A port of the KaTeX parser: lexing and parsing LaTeX math expressions with macro expansion into a typed AST, p…
+- **`Luna-Flow/autodiff`** v0.3.2 — Forward-mode automatic differentiation over Luna Flow algebraic and arithmetic structures.
+- **`mohongquan0630/moonbit-plasma`** v0.2.2 — A MoonBit plasma numerics toolkit for teaching, research prototypes, and lightweight engineering calculations.
+- **`emadurandal/rhodonite_core`** v0.1.8 — Core utilities: vector math, JS bridge helpers, and little-endian binary writes into buffers for RhodoniteMBT.
+- **`illusory0x0/lexer`** v0.2.0 — A MoonBit tokenization library for parsing Token payloads from strings and bytes. Provides efficient tokenizat…
+- **`Luna-Flow/geometry3d`** v0.5.3 — A small MoonBit 3D geometry foundation with core, view, frontend, TUI, Canvas, and GSAP SVG backend packages b…
+- **`marianoguerra/html`** v0.1.1 — A semantic markup tree for MoonBit: HTML, SVG and MathML, with a tolerant parser, a printer with pretty, compa…
+- **`Luna-Flow/luna-complex`** v0.3.1 — Generic complex-number types and algebraic operations for LunaFlow, with floating analytic backend functions i…
+- **`tiye/quaternion`** v0.1.3 — Quaternion math library
+- **`0Ayachi0/math`** v0.1.0 — 数学计算工具库，包含几何算法与组合数学函数
+- **`Luna-Flow/quaternion`** v0.2.0 — MoonBit Quaternion Library
+- **`JunJunTnT/moonchart`** v0.1.2 — A statistical chart SVG generation library for MoonBit. Supports bar charts, line charts, scatter plots with e…
+- **`CMoonBack/computational-geometry`** v0.2.3 — computational geometry library in moonbit
+- **`hxiuzheng/moon_diffusion_lab`** v0.1.6 — A 1D/2D toy diffusion model experimentation and visualization lab in MoonBit
+- **`jqlssg/moonmultigrid`** v0.1.0 — Matrix-free geometric multigrid for rectangular 2D diffusion-reaction problems
+- **`enanandesu/special-mathematical-functions`** v0.1.2
+- **`sa2360/moonbench`** v0.3.0 — A tiny MoonBit benchmark statistics toolkit for stopwatch-style measurements.
+- **`Lyl66655/moon-survival`** v0.2.4 — Survival analysis toolkit for MoonBit
+- **`Wchwch777/moonbit-thermal-vision`** v0.2.1 — Thermal infrared matrix analysis toolkit for MoonBit.
+- **`CMoonBack/Binary-Exponentiation`** v0.1.0 — Binary Exponentiation in moonbit
+- **`Kilig/MATH`** v0.1.1 — 实现加减乘除
+- **`structuraBlock/MoonStats`** v0.3.0
+- **`GreyIcesea/isprime`** v0.1.0 — A lightweight prime number detection library for MoonBit
+- **`yyyt0807/curvefit`** v0.2.1 — Pure MoonBit bounded residual optimization and nonlinear fitting with auditable diagnostics
+- **`walkzzz/owl_mbt`** v0.1.1 — Owl - OCaml Scientific Computing, pure MoonBit port (no C FFI)
+- **`LL124-Arch/moonbit-reactor`** v0.3.0 — Chemical reactor design toolkit for CSTR, PFR, and batch calculations in MoonBit.
+- **`xubowen1234/moonot`** v0.1.3 — Finite-support regularized optimal transport solvers in MoonBit
+- **`mwqcodex/moonbitSPC`** v0.2.0 — Statistical process control primitives for manufacturing quality data.
+- **`pzl-love/Introsort`** v0.1.1
+- **`sombozone/moon_expr`** v0.1.0 — A high-performance, extensible mathematical and logical expression evaluation engine for MoonBit.
+- **`clhhhhhh/moonbit-seqkit`** v0.1.1 — Small, dependency-free sequence analytics toolkit for MoonBit.
+- **`zdu881/DataProc`** v0.1.0 — Some functions for data statistics.
+- **`Lmy271828/moonim`** v0.2.1 — A mathematical animation engine kernel: bezier geometry, mobject scene graph, typed animation combinators and …
+- **`wjhsb1/time-series-forecasting`** v0.1.0 — Deterministic time series forecasting and backtesting for MoonBit
+- **`moonbit-community/maxima`** v0.1.0 — A port of the Maxima computer algebra system to MoonBit

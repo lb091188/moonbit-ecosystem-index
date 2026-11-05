@@ -1,0 +1,107 @@
+# 图形 / 图表 / 渲染（`graphics`）· 基础库全量
+
+> 快照 2026-11-05｜按推荐次序列出｜返回 [graphics.md](graphics.md)｜在线版 <https://moonbit-ecosystem-index.pages.dev/#/s/graphics>
+
+单点能力，需自行组合；没有骨架级实现，不要当成框架推荐。
+
+- **`mizchi/svg`** v0.2.3 — Standalone SVG scene graph and renderer
+- **`dowdiness/svg-dsl`** v0.1.0 — SVG DSL for programmatic SVG generation in MoonBit
+- **`bobzhang/beautiful_mermaid`** v0.2.1 — MoonBit port of beautiful-mermaid: render Mermaid diagrams to SVG and ASCII/Unicode text.
+- **`mizchi/moomaid`** v0.4.0 — Mermaid diagram renderer for MoonBit (ASCII and SVG output)
+- **`Milky2018/svg`** v0.6.1 — Standalone SVG scene graph and renderer
+- **`moonbit-community/diago`** v0.4.1 — A diagram toolkit for MoonBit with Dagre, ELK, and Railway layout engines, rendering SVG, ASCII, and Unicode o…
+- **`dowdiness/graphviz`** v0.1.0 — Parser, layout engine, and SVG renderer for Graphviz DOT graphs
+- **`bobzhang/vg`** v0.4.1 — Declarative 2D vector graphics library for MoonBit
+- **`moonbitlang/pagelayout`** v0.8.1 — Paginated document layout engine: format-neutral page-model IR with SVG/PDF backends.
+- **`gmlewis/fonts`** v0.19.19 — Experimental package to manipulate open source font data.
+- **`justjavac/template`** v0.1.2 — A small and fast precompiled template engine for MoonBit.
+- **`Lampese/mathplotlib`** v0.18.0 — A MoonBit plotting library with SVG output.
+- **`cg-zhou/moon_lottie`** v0.3.0 — MoonBit 原生高性能 Lottie 动画引擎 | High-performance Lottie animation engine in native MoonBit
+- **`Luna-Flow/geometry3d`** v0.5.3 — A small MoonBit 3D geometry foundation with core, view, frontend, TUI, Canvas, and GSAP SVG backend packages b…
+- **`moonrockz/diagrams-svg`** v0.4.0 — Standalone SVG rendering for diagrams.mbt models, in the visual style of archify
+- **`Xpeng/mooncharts`** v0.8.0 — Lightweight native SVG charting library for MoonBit — bar, line, pie/donut and scatter charts.
+- **`Kai-Junhan/moon-ray`** v0.5.0 — A Monte Carlo path tracing renderer in pure MoonBit — OSC 2026
+- **`JunJunTnT/moonchart`** v0.1.2 — A statistical chart SVG generation library for MoonBit. Supports bar charts, line charts, scatter plots with e…
+- **`bikallem/webapi`** v0.5.0 — Moonbit browser WebApi - dom, fetch, html, xhr, url, svg, uievents and more
+- **`Mitsuha11zz/MoonChartSVG`** v0.1.5 — 纯 MoonBit 实现的 SVG 图表生成库，支持柱状图、折线图、饼图、散点图、雷达图、面积图、堆叠柱状图、水平柱状图、环形图共9种图表类型，零依赖，Builder API 设计。
+- **`dgmxjj/moonbit-posterkit`** v0.1.4 — Typed, data-driven SVG poster and cover generation for MoonBit.
+- **`wccerty/moonbit-artboard`** v0.1.2 — A high-performance vector artboard data model and operation kernel for Web/WASM built in MoonBit.
+- **`colmugx/ai-passport`** v0.2.6 — MoonBit application SDK and host toolchain for supported embedded devices and the Web host.
+- **`668xin/moonbit-chart`** v0.2.0 — A native MoonBit SVG chart library with light/dark theme, CLI tool and Markdown to HTML converter
+- **`moonbitstack/moonegui`** v0.2.1 — Immediate-mode graphical interfaces for MoonBit.
+- **`0717lee/pixelforge`** v0.19.0 — Pure MoonBit image processing library with filters, morphology, color-space operations, affine transforms, dra…
+- **`NoahLiu/three-native`** v0.1.2 — three.js for MoonBit on WebGPU: scene graph, cameras, lights, materials, geometries, loaders — embeddable in m…
+- **`cg-zhou/drawille`** v0.1.2 — MoonBit port of drawille for terminal graphics with Unicode Braille characters
+- **`Xiao-li-He/MoonMarkMind`** v0.1.0 — Markdown mind-map toolkit and browser application built with MoonBit
+- **`moonbit-community/mermaid`** v0.2.0 — A port of Mermaid (text-to-diagram toolkit) to MoonBit
+- **`fan-ere/moon-pdf417-core`** v0.2.1 — Pure MoonBit PDF417 encoder: Text / Byte / Numeric compaction, the annex P mode selector, GF(929) Reed-Solomon…
+- **`sayoi7799/moon_vegalite`** v0.2.0 — Spec-driven Vega-Lite renderer: Vega-Lite JSON in, backend-neutral scenegraph and SVG out.
+- **`peter-jerry-ye/canvas`** v0.7.0 — (WIP) A Canvas binding library that allows you to draw without writing any JS code
+- **`ky678/renky`** v0.1.3 — renky: system/graph (zero-dependency coordinate systems for rendering), system/algorithms/omniring, and system…
+- **`moonbit-community/uml_cli`** v0.1.0 — Command-line tool to render PlantUML diagrams as SVG
+- **`Milky2018/svgdiff`** v0.10.6 — Deterministic visual-semantic SVG comparison with typed reports for programs and text-only agents.
+- **`heyq02/moomem`** v0.8.4
+- **`Milky2018/meshopt_mbt`** v0.1.2 — MoonBit bindings for meshoptimizer
+- **`sayoi7799/moon_rough`** v0.2.1 — A MoonBit port of rough.js 4.6.6: hand-drawn, sketchy shapes rendered to backend-agnostic op sets and SVG.
+- **`Milky2018/moonplant`** v0.3.2 — A ascii diagram painting library for MoonBit.
+- **`emadurandal/rhodonite_core`** v0.1.8 — Core utilities: vector math, JS bridge helpers, and little-endian binary writes into buffers for RhodoniteMBT.
+- **`tonyfettes/pangocairo`** v0.2.0 — MoonBit bindings for rendering Pango layouts with Cairo
+- **`moonrockz/diagrams`** v0.4.0 — Diagramming for MoonBit: Mermaid, PlantUML, Draw.io, Graphviz DOT and more
+- **`colmugx/sqlite-vec`** v0.2.4 — SQLite3 binding with sqlite-vec vector search extension.
+- **`mik1e80/dxfkit`** v0.1.1 — MoonBit ASCII DXF 读取与二维轮廓辅助检查库：七类核心轮廓、普通块展开、SVG预览与流式统计
+- **`marianoguerra/html`** v0.1.1 — A semantic markup tree for MoonBit: HTML, SVG and MathML, with a tolerant parser, a printer with pretty, compa…
+- **`emadurandal/rhodonite`** v0.1.8 — Public facade over RhodoniteMBT modules with high-level app/runtime helpers.
+- **`joanna/minitpl`** v0.1.2 — A lightweight MoonBit template toolkit for rendering, variable extraction, and template validation.
+- **`Lmy271828/moonim`** v0.2.1 — A mathematical animation engine kernel: bezier geometry, mobject scene graph, typed animation combinators and …
+- **`shunge/image`** v0.2.1 — 纯 MoonBit 图像解码库，支持 BMP/QOI/TGA/PNG/GIF/JPEG 六种格式、渐进式 JPEG、Adam7 PNG 和 GIF 动画，内置 DEFLATE/LZW/RLE 解压及资源边界检查。
+- **`wzzc-dev/moui_skia`** v0.3.0 — MoonBit bindings for the Skia Graphics Library
+- **`mizchi/canvas`** v0.9.1 — Pure-MoonBit headless 2D canvas rasterizer with PNG output.
+- **`yuzhiblue/moon-qdrant`** v0.5.0 — A MoonBit client for the Qdrant vector database REST API.
+- **`bobzhang/colors`** v0.8.2 — A pure MoonBit library for manipulating colors in different color spaces (RGB, LinearRGB, XYZ, LUV)
+- **`bobzhang/prawn`** v0.2.2 — Prawn's layout behaviour for MoonBit on moonbitlang/pagelayout: the document cursor and bounds, formatted text…
+- **`zhtzht12345678/moonbit-ats-timetable`** v0.1.1 — A MoonBit library for railway ATS timetable modelling, real-time monitoring, conflict detection, dispatch advi…
+- **`kaashyapan/html_dsl`** v0.7.0 — Type safe HTML & SVG DSL to build html for server rendered HTML. Modelled after Rabbita and Luna
+- **`megemini/millow`** v0.3.1 — A zero-FFI, cross-platform image-processing library for MoonBit.
+- **`LING71671/moon-egui`** v0.6.0 — High-performance, pure MoonBit Immediate-Mode GUI library for WebAssembly, Canvas, and Games.
+- **`CAIMEOX/cairoon`** v0.2.0 — MoonBit native bindings for the Cairo graphics library.
+- **`moonrockz/diagrams-mermaid`** v0.4.0 — Mermaid for diagrams.mbt: lossless CST, parser, AST, printer and conversion to diagram models
+- **`PerfectPan/svgo`** v0.3.2 — SVG optimizer in pure MoonBit: svgo-compatible plugin pipeline with path data optimization, colour and number …
+- **`CAIMEOX/svg`** v0.1.2 — MoonBit SVG eDSL
+- **`gywcs101/moonflame`** v0.2.0 — Render folded stack profiles into interactive SVG flame graphs.
+- **`AdUhTkJm/nummoon`** v0.2.3 — A high-speed native numerical library.
+- **`hmyhmyhmyss/generative_patterns`** v0.6.2 — A practical, dependency-light MoonBit engine for procedural patterns, geometry, SVG export, noise fields, pale…
+- **`weopqrst/moonphys`** v0.2.2 — A deterministic 2D rigid body physics engine in pure MoonBit: SAT collision detection, sequential impulse solv…
+- **`tonyfettes/cairo`** v0.2.0 — MoonBit bindings for the Cairo 2D graphics library
+- **`ZSeanYves/moonjinja`** v0.2.1 — A Jinja-style runtime template engine for MoonBit
+- **`klaseca/skia-sys`** v0.2.0 — Low-level MoonBit bindings for Skia C API
+- **`wzzc-dev/skia_mbt`** v0.1.2 — MoonBit bindings for the Skia Graphics Library
+- **`illusory0x0/qpainter`** v0.3.1 — Moonbit FFI Bindings for Qt's QPainter
+- **`kaashyapan/html_dsl_converter`** v0.4.0 — Contains functions to convert raw html to MoonBit code (HTML DSL)
+- **`fan-ere/moonbarcode`** v0.2.0 — 纯 MoonBit 原生的一维条码（1D barcode）生成、校验与渲染工具库：EAN-13 / EAN-8 / UPC-A / Code 39 / Code 93 / Code 128 / ITF-14 编码、ISB…
+- **`klaseca/skia`** v0.2.0 — MoonBit bindings for Skia
+- **`CAIMEOX/Motiva`** v0.3.0 — A MoonBit animation engine inspired by Manim.
+- **`moonrockz/diagrams-animated`** v0.4.0 — Standalone illustrative diagram playback for diagrams.mbt
+- **`moonrockz/diagrams-bpmn`** v0.4.0 — BPMN document adapter for diagrams.mbt
+- **`asdshuaishuai/moonviz`** v0.1.11 — Agent-Native 原型绘制引擎：.mbt.md 唯一事实源，人类画布与 Agent 声明共同演化，MoonBit 不崩谓词护航
+- **`ywz1314/vector`** v0.1.3 — A lightweight, zero-dependency vector similarity search and index engine (Vector Database) in MoonBit.
+- **`wskwsk68/MoonEmbed`** v0.1.6 — MoonBit-native word embedding loader and lightweight semantic retrieval library
+- **`cosettese/moonchartkit`** v0.2.0 — Accessible SVG and Markdown report artifacts for MoonBit.
+- **`zgfzgf899/moonbit-vector-trace-plan`** v0.2.2 — A bitmap vector tracing and path planning library in MoonBit.
+- **`bellesz0611/moon-mustache`** v0.2.0
+- **`SundayT1998/chroma-client`** v0.1.1 — A Chroma vector database HTTP client for MoonBit: collections, records, queries and embeddings.
+- **`xlh123jjj/moonbit-visual-debug`** v0.2.2 — Visual algorithm debugging overlays and SVG/HTML report generation for MoonBit.
+- **`btlqql/moon_tera`** v0.3.0 — A deterministic Tera-style template engine for MoonBit
+- **`gmlewis/ray-tracer`** v0.10.44
+- **`chen333w/moon-element`** v0.2.0 — Web Components runtime for MoonBit, with an offscreen layout engine: the same view tree renders to custom elem…
+- **`yyyt0807/moonmvt`** v0.1.1 — Pure MoonBit Mapbox Vector Tile 2.1 codec and tile builder
+- **`weedmind-6812/moonbit-color`** v0.1.2 — Comprehensive color manipulation library for MoonBit - color space conversions, interpolation, contrast calcul…
+- **`moonrockz/diagrams-plantuml`** v0.4.0 — PlantUML for diagrams.mbt: native state, activity, regex, EBNF, JSON and YAML readers, writers and conversion …
+- **`17731189258/sbs`** v0.1.0 — Deterministic indoor evacuation plan validation and drill simulation engine
+- **`allenli178/moon-qrcode`** v0.2.0 — Pure-MoonBit QR Code Model 2 encoder with optimal segmentation, ASCII/SVG renderers, payload templates, a nati…
+- **`SCL-NN/moontracekit`** v0.2.0 — Logical clocks, vector clocks, happens-before analysis, and causal buffers for MoonBit.
+- **`Lxxbv/moon_typst`** v0.2.1 — A lightweight MoonBit implementation of a supported Typst-style markup subset with parser, layout engine, and …
+- **`code3055/moon_graph`** v0.1.0 — A native MoonBit graph layout and SVG rendering toolkit
+- **`lexchb/moon_vector`** v0.1.1 — Type-safe vector search client (Qdrant REST) and in-memory backend for MoonBit
+- **`moonbitstack/moonxml`** v0.1.4 — HTML, XML and SVG for MoonBit: parse, query and edit.
+- **`hua1104/moonlayout`** v0.2.0 — A deterministic MoonBit graph layout quality audit and regression library.
+- **`nuskey8/raylib`** v0.1.0 — High-level raylib bindings for MoonBit.

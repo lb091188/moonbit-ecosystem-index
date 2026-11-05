@@ -4,13 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MoonBit 生态索引 · 场景化选型参考</title>
-<meta name="description" content="按使用场景组织的 MoonBit 包索引：37 个场景，区分完整方案与基础库。">
+<meta name="description" content="按使用场景组织的 MoonBit 包索引，区分完整方案与基础库。">
 <!-- 分享卡片：抓取方不执行 JS，所以这组标签是静态的中文默认值，
-     站内的语言切换只改 <title> 与 description，不影响这里。 -->
+     站内的语言切换只改 <title> 与 description，不影响这里。
+     这里不写包数、场景数：数量随每次采集变动，页面读 data/scenarios.json 得知。 -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MoonBit 生态索引">
 <meta property="og:title" content="MoonBit 生态索引 · 按场景选包">
-<meta property="og:description" content="把 3520 个 MoonBit 包按 37 个使用场景分开，每个场景分「完整方案」与「基础库」两层：前者能直接定骨架，后者提供单点能力。数据来自 mooncakes.io 官方 API。">
+<meta property="og:description" content="把 MoonBit 包按使用场景分开，每个场景分「完整方案」与「基础库」两层：前者能直接定骨架，后者提供单点能力。数据来自 mooncakes.io 官方 API。">
 <meta property="og:url" content="https://moonbit-ecosystem-index.pages.dev/">
 <meta property="og:image" content="https://moonbit-ecosystem-index.pages.dev/og.png">
 <meta property="og:image:width" content="1200">
@@ -20,14 +21,13 @@
 <meta property="og:locale:alternate" content="en">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="MoonBit 生态索引 · 按场景选包">
-<meta name="twitter:description" content="把 3520 个 MoonBit 包按 37 个使用场景分开：完整方案与基础库两层。">
+<meta name="twitter:description" content="把 MoonBit 包按使用场景分开：完整方案与基础库两层。">
 <meta name="twitter:image" content="https://moonbit-ecosystem-index.pages.dev/og.png">
 <meta name="theme-color" content="#2f5fe0">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="alternate icon" href="favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<style>
-  :root {
+<style>:root {
     --bg:#f6f7f9; --panel:#fff; --ink:#171a1f; --muted:#6b7280;
     --line:#e4e7ec; --line-soft:#eef0f3; --accent:#2f5fe0; --accent-soft:#eef2fd;
     --warm:#a15a08; --green:#0b6046; --green-soft:#d9f5e9;
@@ -149,6 +149,55 @@
   .more { margin-top:9px; padding-top:9px; border-top:1px dashed var(--line);
     font-size:12px; color:var(--accent); text-decoration:none; }
   .more:hover { text-decoration:underline; }
+
+  /* ---------- 首页生态增长趋势 ---------- */
+  .trend { background:var(--panel); border:1px solid var(--line); border-radius:11px;
+    padding:13px 17px 11px; margin:0 0 16px; }
+  .tr-hd { display:flex; align-items:baseline; gap:6px 10px; flex-wrap:wrap; }
+  .tr-hd h2 { font-size:14px; margin:0; font-weight:650; letter-spacing:-.1px; }
+  .tr-span { font-size:11.5px; color:#9aa2ae; font-variant-numeric:tabular-nums; }
+  .tr-lg { margin-left:auto; display:flex; gap:16px; flex-wrap:wrap; }
+  .tr-k { display:inline-flex; align-items:center; gap:6px; font-size:11.5px;
+    color:var(--muted); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .tr-k i { width:9px; height:3px; border-radius:2px; display:inline-block; }
+  .tr-k i.pkg { background:var(--accent); }
+  .tr-k i.dl { background:var(--green); }
+  .tr-k b { color:var(--ink); font-weight:650; font-size:12.5px; }
+  .tr-k em { font-style:normal; font-size:11px; color:var(--green); }
+  .tr-k em.dn { color:#8f3c16; }
+  .tr-wrap { position:relative; margin:6px 0 0; }
+  /* 窄屏下滑动应当滚页面，不该被图表吃掉：touch-action 限定成纵向平移 */
+  .tr-wrap svg { display:block; width:100%; height:auto; touch-action:pan-y; }
+  .tr-grid { stroke:var(--line-soft); stroke-width:1; }
+  .tr-axis { fill:#9aa2ae; font-size:10px; font-variant-numeric:tabular-nums; }
+  .tr-line { fill:none; stroke-width:2; stroke-linejoin:round; stroke-linecap:round; }
+  .tr-line.pkg { stroke:var(--accent); }
+  .tr-line.dl { stroke:var(--green); }
+  .tr-area { fill:var(--green); opacity:.09; }
+  .tr-dot { stroke:var(--panel); stroke-width:1.5; }
+  .tr-dot.pkg { fill:var(--accent); }
+  .tr-dot.dl { fill:var(--green); }
+  .tr-focus { opacity:0; transition:opacity .12s; }
+  .tr-focus.on { opacity:1; }
+  .tr-focus line { stroke:#c8cdd6; stroke-width:1; stroke-dasharray:3 3; }
+  .tr-note { margin:7px 0 0; font-size:11.5px; color:#8b939f; line-height:1.6; }
+  .tr-tip { position:absolute; z-index:2; pointer-events:none; transform:translate(-50%,0);
+    background:#171a1f; color:#fff; border-radius:8px; padding:7px 10px; font-size:11.5px;
+    line-height:1.6; white-space:nowrap; box-shadow:0 8px 22px rgba(16,24,40,.22); }
+  .tr-tip b { font-size:11.5px; color:#fff; font-weight:600; }
+  .tr-tip div { display:flex; align-items:center; gap:6px; color:#d7dbe2; }
+  .tr-tip i { width:7px; height:3px; border-radius:2px; display:inline-block; }
+  .tr-tip i.pkg { background:#7d9bf0; }
+  .tr-tip i.dl { background:#4fbf96; }
+  .tr-tip em { font-style:normal; color:#8fe3bf; }
+  .tr-tip em.dn { color:#f0a98a; }
+  @media (max-width:620px) {
+    /* 紧凑画布里刻度字号按 viewBox 单位给，配合 app.js 的 trendModel */
+    .tr-axis { font-size:9px; }
+    .tr-hd { align-items:center; }
+    .tr-lg { margin-left:0; gap:6px 14px; }
+    .trend { padding:12px 12px 10px; }
+  }
 
   /* ---------- 场景详情页 ---------- */
   .crumb { font-size:12.5px; color:var(--muted); margin:0 0 10px; }

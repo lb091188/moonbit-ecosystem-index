@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""数据编辑器：在浏览器里改场景与包简介，保存后直接落盘。
+"""【旧版工具链，仅留档】当前编辑由 app/ 的 MoonBit 工作台完成，见 docs/maintenance.md。
+
+数据编辑器：在浏览器里改场景与包简介，保存后直接落盘。
 
     python3 pipeline/editor.py            # 打开 http://127.0.0.1:8770
     python3 pipeline/editor.py --port 9000

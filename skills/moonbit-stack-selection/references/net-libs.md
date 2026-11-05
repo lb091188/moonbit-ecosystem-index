@@ -1,0 +1,74 @@
+# 网络传输 / 套接字（`net`）· 基础库全量
+
+> 快照 2026-11-05｜按推荐次序列出｜返回 [net.md](net.md)｜在线版 <https://moonbit-ecosystem-index.pages.dev/#/s/net>
+
+单点能力，需自行组合；没有骨架级实现，不要当成框架推荐。
+
+- **`moonbitstack/moonnet`** v0.1.10 — Networking for MoonBit: connections, listeners and dialers over TCP, TLS and QUIC.
+- **`mizchi/crater-network`** v0.19.0 — WebDriver BiDi synthetic network state and byte/query encoding helpers for crater adapters
+- **`ShellWen/sw_socket`** v0.2.0 — A experimental *nix socket binding for MoonBit.
+- **`fangyinc/socket`** v0.1.2-rc2 — A socket binding for MoonBit
+- **`moonbitstack/moontls`** v0.9.14 — TLS 1.3 and DTLS 1.3 for MoonBit.
+- **`ZSeanYves/MoonbitHTTP`** v0.7.0 — Streaming HTTP protocol suite for MoonBit with HTTP/1.1, HTTP/2, HTTP/3, QUIC, TLS integration, and policy-dri…
+- **`oboard/mio`** v0.5.4 — Best async http library for Moonbit
+- **`moonbitstack/moonquic`** v0.3.11 — QUIC transport for MoonBit.
+- **`moonbitstack/moonrpc`** v0.21.12 — gRPC for MoonBit.
+- **`moonbitstack/mooncat`** v0.19.5 — A native ASGI server for MoonBit.
+- **`moonbitstack/moonfetch`** v0.1.5 — An HTTP client for MoonBit, synchronous or asynchronous.
+- **`cghyyrrt/moonbit-pcap`** v0.1.2 — Pure MoonBit network packet capture (PCAP / PCAPNG) parser, stream reassembly, and multi-protocol analyzer lib…
+- **`moonbitstack/moonmysql`** v0.7.9 — Pure-MoonBit MySQL wire-protocol driver implementing @moondb.Driver — no C, like PyMySQL.
+- **`chensuiyi/packet`** v0.1.1 — MoonBit 协议解析层：Ethernet/IPv4/IPv6/TCP/UDP 头解析
+- **`PaiGack/ftp`** v0.2.5 — FTP/FTPS client library for MoonBit with passive EPSV/PASV data connections, MLSD/LIST parsing, resume, direct…
+- **`jinshengmeng46/moon-dns-stub`** v0.1.0 — Native DNS wire format codec and async stub resolver. Supports A/AAAA/MX/SRV/TXT/CNAME/NS/PTR/SOA with name co…
+- **`aspnmy/moodtcpcli`** v0.1.0 — Zero-dependency TCP network primitives for MoonBit - ported from rstcpcli
+- **`Ljh684/moonnet-lab`** v0.1.0 — Deterministic packet-level network simulator and TCP congestion-control lab for MoonBit
+- **`usagi-star/mooncap`** v0.1.0 — Pure MoonBit offline PCAP/PCAPNG parsing and protocol decoding
+- **`chgttyyr/moon_dns`** v0.1.0 — Pure MoonBit authoritative DNS server (RFC 1035/6891) with robust pointer compression security
+- **`moonbitstack/moonpostgres`** v0.6.9 — Pure-MoonBit PostgreSQL wire-protocol driver implementing @moondb.AsyncDriver — no C, like asyncpg.
+- **`wcj12314/moon-flow-guard`** v0.1.0 — MoonFlowGuard: a MoonBit traffic-flow security audit and policy gate with PASS/REVIEW/FAIL verdicts, risk scor…
+- **`q2316367743/moonhttp`** v0.6.1 — axios 风格的 MoonBit HTTP 客户端：实例与配置合并、四种请求体形态、流式与 SSE、自动重定向
+- **`sujy123456/mooncoap`** v0.1.1 — Bounded, deterministic unicast CoAP protocol core for MoonBit
+- **`aspnmy/moonitest`** v0.2.1 — MoonBit integration test framework - real Docker/TCP/HTTP API via fangyinc/socket + C FFI
+- **`BeiLaDuo/cidr-audit`** v0.1.2 — Audit IPv4 CIDR allow/deny rules for overlap, shadowing, and risky network ranges in pure MoonBit
+- **`fangyinc/net`** v0.1.1-rc1 — Cross-target network abstractions (TcpStream, TcpListener, UdpSocket) unifying WASM, JS, and native targets fo…
+- **`bobzhang/loop_invariants_graph`** v0.18.0 — Graph and tree algorithms with loop-invariant explanations
+- **`chensuiyi/dcipc`** v0.3.0 — Local daemon control channel for MoonBit: length-prefixed frames, token auth over loopback TCP, contact files …
+- **`qyt1234567/moonbit-modbus`** v0.2.2 — A portable Modbus RTU, ASCII, and TCP protocol stack with device simulation and gateway primitives for MoonBit…
+- **`tc-adventureking/ipset`** v0.3.1 — Pure MoonBit IPv4/IPv6 addresses, networks, interfaces and address sets
+- **`Strangelight-Merser/async-tls`** v0.1.1 — Native TLS client with PEM mTLS identity support, derived from moonbitlang/async 0.21.3
+- **`moonbit-community/rtc`** v0.0.1 — Experimental Sans-I/O WebRTC stack for MoonBit
+- **`DDD12345-D/moon-snmp`** v0.3.1 — Pure MoonBit SNMP protocol library: client and notification receiver (v1, v2c, v3)
+- **`BigOrangeQWQ/wasi-sockets`** v0.2.6
+- **`eisem/moonnetlink`** v0.1.1 — A typed RTNetlink SDK and declarative Linux network state toolkit for MoonBit
+- **`Magic486/moonnetlink`** v0.2.0 — MoonBit Netlink codec, typed Linux network observation and replay
+- **`thy1016/vox1000`** v0.5.1 — Vox1000 —— 六边形 p2p 连接框架(KCP 独苗 + secchan 上座;core 零依赖,wire 全自研,层界即开源界)
+- **`bobzhang/ipaddr`** v0.1.2 — A library for manipulation of IP (IPv4/IPv6) and MAC address representations
+- **`geniuszby/moonzoneguard`** v0.3.0 — Bounded DNS delegation and DS/DNSKEY digest rollout analysis
+- **`oboard/moonetx`** v0.1.8 — MoonBit网络分析扩展
+- **`PaiGack/tftp`** v0.1.5 — TFTP (RFC 1350/2347/2348/2349) client and server in pure MoonBit.
+- **`lzh123411/mooncidr`** v0.1.0 — MoonCIDR provides IP address parsing, CIDR matching, and network range utilities for MoonBit.
+- **`Camilotk/stuntmaster`** v0.2.4 — Production-grade RFC 8489 STUN for MoonBit — RFC 5769 proven
+- **`prowk/mrtkit`** v0.2.2 — BGP MRT parser and route change analyzer in MoonBit
+- **`thy1016/moonrelay`** v0.2.0 — MoonRelay —— DERP 形包级加密中继(assume a malicious relay;限速+每端缓冲+优雅疏散,线全自研)
+- **`tonyfettes/socket`** v0.1.2
+- **`niuniu513-ask/moon-netcalculus`** v0.1.2 — Deterministic network calculus: traffic contracts, min-plus curves, feed-forward bounds and capacity planning
+- **`thy1016/moonnat`** v0.1.2 — MoonnaT —— NAT 画像与打洞编排纯核(RFC 8489 报文自实现,决策面纯函数,时间注入,autonat v2 纪律)
+- **`yhsrtty/moontls-parser`** v0.1.2 — TLS ClientHello parser and JA3/JA4-style fingerprint toolkit for MoonBit traffic-audit probes.
+- **`youyong5/moonmqtt`** v0.1.1 — MQTT 3.1.1 client library for MoonBit with TCP and TLS transports
+- **`thy1016/moonkcp`** v0.2.0 — MoonKCP — KCP 协议 MoonBit 纯实现（零 IO 零时钟纯状态机 ARQ 核心 + 会话壳 + async UDP adapter + 多会话服务端;C 参照差分对拍逐字节等价）
+- **`1726914517-spec/moonproxy`** v0.2.1 — A native L7 reverse proxy / load balancer runtime: host/path routing, five balancing policies, forwarding head…
+- **`GuoXBQ-Q/moon-boofuzz`** v0.1.3 — Deterministic protocol fuzzing core with native TCP/UDP execution and portable JSONL replay
+- **`le065-tc/moonredis`** v0.1.3 — A lightweight Redis-protocol compatible server implemented in MoonBit.
+- **`ZJH-666-ZJH/moonrecoder`** v0.1.1 — Bounded GF256 packet innovation, decoding and incomplete-relay recoding in pure MoonBit
+- **`oyjh0381/moonipfix`** v0.1.0 — Template-driven IPFIX flow telemetry decoding and auditing for MoonBit
+- **`Ryan-1125/moonstatsd`** v0.2.0 — Bounded StatsD/DogStatsD codec and native async UDP client
+- **`oboard/reqbest`** v0.6.0 — Best async http library for Moonbit
+- **`shangwuxi/moonradius`** v0.1.1 — A transport-independent RADIUS packet and attribute toolkit for MoonBit.
+- **`wang-chen89/amqp`** v0.25.0 — AMQP 0-9-1 编解码、会话状态机与 Node TCP/TLS 消息客户端
+- **`JM-ai-nb/mailshield`** v0.1.0 — MoonBit-native DMARC and SPF policy parser with mail-domain risk scoring
+- **`oboard/reqmest`** v0.5.4 — Best async http library for Moonbit
+- **`lmclmc1/dns-zone-toolkit`** v0.1.0 — Validated DNS zone file parser and analysis toolkit for MoonBit
+- **`CYang-dep/moonsmb`** v0.1.1 — SMB2 and SMB3 protocol message codec for MoonBit
+- **`apoloe4/moonacme`** v0.1.0 — Transport-neutral ACME certificate automation for MoonBit
+- **`wjcoomk/moondns`** v0.1.0 — Pure MoonBit authoritative DNS server (RFC 1035) with robust compression pointer defense.
+- **`Wyh123456559/moonrouteguard`** v0.1.0 — Explainable RPKI route origin validation for MoonBit.

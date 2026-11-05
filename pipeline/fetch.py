@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """
+【旧版工具链，仅留档】当前采集由 app/fetch.mbt 完成，见 docs/data.md。
+
 MoonBit 生态索引 · 数据采集
 
-两步，对应 README「六、数据更新」：
+两步，对应 docs/data.md「采集链路」：
 
   1. GET /api/v0/modules                    全量模块元数据 -> data/raw/modules_api.json
   2. GET /api/v0/search?kw=&limit=100       下载量           -> data/raw/downloads.json

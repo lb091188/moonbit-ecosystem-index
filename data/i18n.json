@@ -1,5 +1,5 @@
 {
-  "_comment": "非中文文案的唯一来源。analyze.py 构建时按 id 合并进 scenarios.json，缺键直接构建失败。键必须与 SCENARIOS 的 id / GROUPS 的 gid 一致。",
+  "_comment": "非中文文案的唯一来源。构建时（app/build.mbt）按 id 合并进 scenarios.json，缺键直接构建失败。键必须与 SCENARIOS 的 id / GROUPS 的 gid 一致。",
   "groups": {
     "app": "Interface & Apps",
     "svc": "Services & Data",
@@ -15,11 +15,11 @@
       "intro": "App development on Android, iOS, HarmonyOS, and WeChat mini programs. The registry has no consistent mobile keyword signal, so this list is hand-curated: cross-platform UI frameworks, mini-program runtimes and component libraries, native bridges, and mini-program hosts."
     },
     "ui": {
-      "title": "Web UI / Frontend",
+      "title": "Web Frontend",
       "intro": "In-browser UI frameworks, reactive state, components, layout, and CSS."
     },
     "tui": {
-      "title": "Terminal UI / TUI",
+      "title": "Terminal / TUI",
       "intro": "Terminal interfaces, character canvases, ANSI control, and PTYs."
     },
     "cli": {

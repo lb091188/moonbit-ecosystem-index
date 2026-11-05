@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 """
+【旧版工具链，仅留档】当前数据请查工作台「包数据」页或 data/scenarios.json，见 docs/maintenance.md。
+
 MoonBit 生态索引 · 场景化查询
 
 用法：

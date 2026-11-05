@@ -4,3 +4,12 @@ __pycache__/
 node_modules/
 .wrangler/
 data/.backup/
+
+# MoonBit 工作台：依赖与构建产物由 moon 自行生成，不入库
+app/_build/
+app/.mooncakes/
+app/*.exe
+app/pkg.generated.mbti
+
+# 采集运行日志（每次执行重写，属于本地运行痕迹）
+data/raw/fetch.log

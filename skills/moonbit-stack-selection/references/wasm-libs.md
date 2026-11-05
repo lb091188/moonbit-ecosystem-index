@@ -1,0 +1,257 @@
+# WebAssembly / JS 互操作（`wasm`）· 基础库全量
+
+> 快照 2026-11-05｜按推荐次序列出｜返回 [wasm.md](wasm.md)｜在线版 <https://moonbit-ecosystem-index.pages.dev/#/s/wasm>
+
+单点能力，需自行组合；没有骨架级实现，不要当成框架推荐。
+
+- **`mizchi/mwac`** v0.2.2 — WAC (WebAssembly Compositions) composer for the Component Model
+- **`mizchi/wite`** v0.11.3 — Component-model-aware WebAssembly analyzer, optimizer, and profiler
+- **`mizchi/oci_wasm`** v0.5.1 — WebAssembly package registry client
+- **`mizchi/x`** v0.6.1 — Cross-platform MoonBit compatibility facades with native delegation and accelerated JS implementations for asy…
+- **`mizchi/wit`** v0.3.3 — WIT parser and resolver in MoonBit
+- **`mizchi/js`** v0.13.0 — js bindings for MoonBit: re-exports mizchi/js_core + mizchi/js_builtin (web/node/browser/deno/bun split into m…
+- **`moonbit-community/proton_ffi`** v0.7.0 — MoonBit Foreign Function Interface.
+- **`justjavac/ffi`** v0.2.6 — MoonBit Foreign Function Interface.
+- **`Milky2018/wasm_core`** v0.18.0 — Reusable WebAssembly specification model for parsers, validators, and frontends
+- **`mizchi/npm_typed`** v0.1.18 — Typed npm library bindings(40+) for js backend
+- **`Milky2018/wasm_component`** v0.18.0 — Portable WebAssembly Component Model syntax and validation
+- **`moonrockz/extism`** v0.1.1 — An Extism host for MoonBit: a WASM engine layer, the Extism kernel and a plugin API
+- **`mizchi/libgit2`** v0.1.0 — MoonBit bindings for libgit2 - Git operations from MoonBit
+- **`mizchi/ts`** v0.6.0 — TypeScript <-> MoonBit bridge generator
+- **`mizchi/v8`** v0.3.0 — MoonBit bindings for V8 aimed at prototyping MoonBit-first runtimes in the style of Node or Deno.
+- **`mizchi/simd`** v0.6.1 — SIMD primitives for MoonBit across wasm / wasm-gc / native / js — @simdcore, @simd_buffer, codecs, hashes, ima…
+- **`f4ah6o/duckdb`** v0.8.0 — MoonBit bindings for DuckDB on native and JavaScript targets (Node.js and browser WASM backends)
+- **`mizchi/wasmx`** v0.1.1 — Experimental fork of moonbitlang/wasm5. WebAssembly VM built with pure MoonBit.
+- **`Milky2018/wasm_milkir`** v0.18.0 — WebAssembly dialect adapter for MilkIR extension operations
+- **`golemcloud/golem_sdk`** v0.6.2 — Golem SDK for MoonBit — build durable, fault-tolerant agents on the Golem platform
+- **`golemcloud/golem_sdk_tools`** v0.6.2 — Code generation tools for the Golem SDK for MoonBit
+- **`dowdiness/js_engine`** v0.9.0 — Pure MoonBit cross-target embedded JavaScript engine
+- **`Nanaloveyuki/dynlib`** v0.2.3 — Checked dynamic library loading for MoonBit native targets.
+- **`marianoguerra/wax`** v0.4.2 — The Wax language in MoonBit: parser, formatter, type checker, and wasm/wat emitters
+- **`tiye/dom-ffi`** v0.5.1 — Typed MoonBit bindings for browser DOM APIs
+- **`rami3l/js-ffi`** v0.4.0
+- **`daqing/sqlite`** v0.4.0 — SQLite3 bindings for latest MoonBit toolchian
+- **`mizchi/glfw`** v0.2.3 — GLFW MoonBit bindings (native FFI + C stub)
+- **`mizchi/js_core`** v0.13.0 — js ffi foundation for MoonBit (Any, Promise, Nullable, target-specific interop)
+- **`moonbit-community/evol-minifier`** v0.3.1 — A slightly faster JavaScript mangler/compressor for MoonBit.
+- **`BigOrangeQWQ/wit-ffi`** v0.1.0 — A WIT FFI for the Moon programming language
+- **`moonbit-community/ffi`** v0.1.14 — MoonBit Foreign Function Interface.
+- **`moonbit-community/js-ffi`** v0.4.3
+- **`Milky2018/wasm_machv`** v0.12.6 — WebAssembly MilkIR dialect adapter for target-neutral MachV
+- **`marianoguerra/wap`** v0.4.2 — Wap: an Oberon-level language on shrubbery notation, compiled through the Wax AST
+- **`BigOrangeQWQ/wasi-io`** v0.2.6
+- **`wzzc-dev/webview-ffi`** v0.1.1
+- **`tonyfettes/wasm`** v0.1.3
+- **`illusory0x0/native`** v0.2.1 — native FFI utility
+- **`justjavac/quickjs`** v0.1.7 — MoonBit bindings for the QuickJS JavaScript engine.
+- **`Demonmasterlqx/box2d_ffi`** v0.2.7 — moonbit ffi box2d
+- **`mizchi/wasi`** v0.1.2 — WASIp2 (0.2.9) bindings for MoonBit
+- **`BigOrangeQWQ/wasi-clocks`** v0.2.6
+- **`BigOrangeQWQ/wasi-sockets`** v0.2.6
+- **`BigOrangeQWQ/wasi-filesystem`** v0.2.6
+- **`BigOrangeQWQ/wasi-random`** v0.2.6
+- **`BigOrangeQWQ/wit-wasi-io`** v0.2.6
+- **`0717lee/moonhostabi`** v0.6.0 — Artifact-first MoonBit Wasm-GC Host ABI lock, adapter, and validation toolchain
+- **`marianoguerra/wax-cli`** v0.4.2 — The wax-mb command-line tool: convert, format and check Wax source
+- **`moonbitstack/moonrpc`** v0.21.12 — gRPC for MoonBit.
+- **`BigSaltyMan/moonsize`** v0.6.0 — A Wasm size profiler for MoonBit — section breakdown, function ranking, call graph and retained-size analysis
+- **`peter-jerry-ye/wasi`** v0.25.0 — wasip1 implementation + experimental wrapper (async/sync) for Moonbit
+- **`mizchi/wasmtime`** v0.1.6 — Wasmtime C API bindings for MoonBit (native target)
+- **`Milky2018/wasmoon_jit`** v0.18.0 — Wasmoon-specific JIT integration and native runtime glue
+- **`marianoguerra/was`** v0.2.2 — Was: Wax in shrubbery notation -- a reader that produces the Wax AST
+- **`moonbitstack/moonregex`** v0.1.3 — Regular expressions for MoonBit.
+- **`zhangbowen2006/moonbit-target-parity`** v0.5.1 — Reusable cross-target behavior contract comparison for MoonBit programs.
+- **`jtenner/starshine`** v0.3.0 — WebAssembly parsing, validation, encoding, and optimization toolkit
+- **`gaato/dave`** v0.1.1 — Safe native MoonBit bindings for Discord's official libdave C API
+- **`moonbitstack/moonsqlite`** v0.3.5 — SQLite driver for moondb/moonorm — native FFI, amalgamation vendored here (isolated).
+- **`0717lee/moonav1`** v0.2.0 — Pure MoonBit AV1 and AVIF decoder for native, JavaScript, and WebAssembly GC.
+- **`dijdzv/websys`** v0.3.0 — MoonBit bindings for Web APIs (DOM, HTML, Canvas, WebGL, etc.)
+- **`illusory0x0/jcore`** v0.1.1 — JavaScript core library' s wasm binding
+- **`Nanaloveyuki/orbit-plugin-abi`** v0.2.5 — Fixed, auditable native ABI bridge for Orbit plugins.
+- **`LING71671/moon-egui`** v0.6.0 — High-performance, pure MoonBit Immediate-Mode GUI library for WebAssembly, Canvas, and Games.
+- **`Milky2018/wasm_isa_lower`** v0.2.2 — WebAssembly MilkIR dialect adapter for MachV lowering
+- **`moonbitlang/wasm4`** v0.2.9 — An opinionated binding for WASM-4, a retro game framework using WebAssembly
+- **`tonyfettes/glib`** v0.2.0 — MoonBit bindings for GLib non-GObject types (GError, GMainLoop, GVariant, etc.)
+- **`emptist/ibmoonwa`** v0.1.0 — MoonBit wrapper for Interactive Brokers TWS/Gateway API with WebAssembly FFI socket implementation
+- **`Nanaloveyuki/wasee-moon`** v0.1.0 — Android WASI host integration for MoonBit guests.
+- **`walkzzz/image`** v0.5.0 — MoonBit image library: pure MoonBit backend for native/wasm-gc/js/wasm multi-target support.
+- **`tonyfettes/gobject`** v0.2.0 — MoonBit bindings for the GObject base type
+- **`clbbbb/moonbit-wasm-inspect`** v0.1.0 — A MoonBit-native WebAssembly binary inspection and analysis library.
+- **`tonyfettes/pango`** v0.2.0 — MoonBit bindings for Pango text layout and rendering
+- **`pei0331/moon-wit`** v0.1.1 — A dependency-free WIT parser and MoonBit API scaffold generator
+- **`tonyfettes/gio`** v0.2.0 — MoonBit bindings for GIO (Application, File, D-Bus, streams, sockets, etc.)
+- **`tonyfettes/gdk`** v0.2.0 — MoonBit bindings for GDK4 (Display, Clipboard, Cursor, etc.)
+- **`tonyfettes/gtk`** v0.2.0 — MoonBit bindings for GTK4 widgets (Window, Button, Box, Label, etc.)
+- **`AdUhTkJm/wasmtools`** v0.1.0 — A tool to convert between WebAssembly and WAT.
+- **`moonbit-community/proton_codegen`** v0.7.0 — WASM code generator for typed Proton command registrars.
+- **`Ag108/moon-wasi`** v0.1.0 — Capability-aware WASI Preview 1 utilities for MoonBit
+- **`caijiewei295/tzif-engine`** v0.1.0 — Pure MoonBit IANA TZif v2/v3 parser and timezone conversion engine. UTC ↔ local time with full DST handling, P…
+- **`13131116363/routeable`** v0.2.0 — An explainable accessibility route-planning engine and WebAssembly demo.
+- **`Milky2018/pptz`** v0.7.1 — PowerPoint Zero: a portable MoonBit PPTX generator driven by YAML deck and page sources.
+- **`0717lee/pixelforge`** v0.19.0 — Pure MoonBit image processing library with filters, morphology, color-space operations, affine transforms, dra…
+- **`zhangbowen2006/wasmslim`** v0.3.1 — Dead-code elimination and size attribution for WebAssembly modules produced by MoonBit.
+- **`Milky2018/meshopt_mbt`** v0.1.2 — MoonBit bindings for meshoptimizer
+- **`cg-zhou/moon_lottie`** v0.3.0 — MoonBit 原生高性能 Lottie 动画引擎 | High-performance Lottie animation engine in native MoonBit
+- **`Yoorkin/jmop`** v0.1.1 — A safe JavaScript interop tool.
+- **`FrozenLemonTee/TerminalEvent`** v0.1.0 — C++ terminal event backend with a stable C FFI surface
+- **`niuniu513-ask/MoonRetrieve`** v0.6.0 — 纯 MoonBit 零 FFI 的本地全文检索与 RAG 检索库：中英日分词、BM25 倒排索引、向量索引、RRF 混合检索与 LLM 上下文组装，可编译为 wasm / wasm-gc / js / native 多后…
+- **`LL728/moonvorbis`** v0.1.4 — 纯 MoonBit 实现的 OGG/Vorbis 音频解码器，不依赖任何 C 库或系统编解码器
+- **`LL728/moonopus`** v0.2.2 — 纯 MoonBit 实现的 Ogg Opus 容器与 CELT 音频解码器，不依赖任何 C 库或系统编解码器
+- **`emptist/ibmoonjs`** v0.2.7 — JavaScript/Node.js target of ibmoon - MoonBit wrapper for IB TWS/Gateway API with JavaScript FFI socket implem…
+- **`peter-jerry-ye/wasi-imports`** v0.1.5 — Binding for WASI HTTP and WASI CLI v0.2.0
+- **`tonyfettes/tree_sitter_javascript`** v0.1.26 — JavaScript grammar for tree-sitter
+- **`colmugx/sqlite-vec`** v0.2.4 — SQLite3 binding with sqlite-vec vector search extension.
+- **`Mairzzcllo/moonbit_sqlc_plugin`** v0.1.9 — sqlc WASM plugin ? generate type-safe MoonBit database layer from SQL queries
+- **`moonbit-community/embed`** v0.1.5 — Embed files into a generated MoonBit source file.
+- **`yamajik/wasi`** v0.1.25
+- **`mizchi/wasi_interface`** v0.3.1 — WASI Preview2/Preview3 contract definitions for host integration boundaries.
+- **`tonyfettes/libghostty-vt`** v0.1.2 — MoonBit bindings for Ghostty's libghostty-vt virtual terminal emulator library.
+- **`nuskey8/c`** v0.3.4 — Provides C FFI types for MoonBit's native backend
+- **`PaiGack/ssh_client`** v0.4.0 — SSHv2 client library for MoonBit with password and publickey authentication, SFTP v3, and local/remote/SOCKS5 …
+- **`xmyd0915/moonpkgconfig`** v0.3.1 — Source-aware pkg-config metadata parsing and native dependency inspection in MoonBit
+- **`justjavac/windows_subsystem`** v0.1.6 — Keep the Windows GUI subsystem linker stub alive for MoonBit native executables.
+- **`moonrockz/zig-cross`** v0.3.2 — Cross-compile MoonBit native binaries with zig
+- **`unmbt/native-toolchain`** v0.1.1 — Deterministic native compiler and linker discovery for MoonBit tools
+- **`peter-jerry-ye/md-outline`** v0.2.1 — Markdown outline and section reader CLI for agent workflows
+- **`sennenki/js`** v0.1.2 — This package is deprecated. https://mooncakes.io/docs/moonbit-community/js-ffi should be preferred.
+- **`mizchi/vfs`** v0.2.3 — Cross-platform virtual filesystem with pluggable backends
+- **`sennenki/js-ffi`** v0.4.2 — A fork of moonbit-community/js-ffi that does not abort compilation on targets other than js
+- **`0xA672/moonwasm_probe`** v0.10.0 — CI-native WASM runtime environment probe. JSON output, env-var-driven checks. Designed for CI pipelines and au…
+- **`bobzhang/jq`** v0.2.0 — Run jq-compatible JSON filters directly with moonx
+- **`justjavac/platform`** v0.1.2 — Minimal native platform detection for MoonBit packages.
+- **`Qisu-dev/ffi`** v0.2.5
+- **`moonrockz/wit`** v0.3.0 — WIT syntax tooling for MoonBit
+- **`bobzhang/tail`** v0.1.3 — Print the last lines or bytes of inputs like tail, runnable via moonx
+- **`CAIMEOX/cairoon`** v0.2.0 — MoonBit native bindings for the Cairo graphics library.
+- **`KeqingMoe/qt`** v0.5.2 — Qt MoonBit Binding
+- **`mizchi/crater-wasm`** v0.19.0 — Wasm bindings and WIT-facing facade for crater
+- **`PerfectPan/svgo`** v0.3.2 — SVG optimizer in pure MoonBit: svgo-compatible plugin pipeline with path data optimization, colour and number …
+- **`shop1111/moonohos`** v0.6.0 — HarmonyOS Native module framework for MoonBit: async tasks, platform modules and HAR packaging.
+- **`tonyfettes/ds4`** v0.1.1 — MoonBit native bindings for the local DwarfStar 4 engine
+- **`tonyfettes/epoxy`** v0.2.0 — A MoonBit reimplementation of libepoxy: OpenGL function pointer dispatch.
+- **`tuya-me/aegisrun`** v0.9.3 — AegisRun - AI Agent Secure Tool Runtime (MoonBit + Wasm)
+- **`Xcsa-ee/moonflac`** v0.3.4 — 纯 MoonBit 实现的 FLAC 无损音频解码器，不依赖任何 C 库或系统编解码器
+- **`moonbitlang/wasm5`** v0.1.1 — A WebAssembly virtual machine implemented in MoonBit
+- **`moonrockz/wac`** v0.3.0 — WAC language tooling for MoonBit
+- **`bobzhang/printf`** v0.1.3 — Format and print data like printf, runnable via moonx
+- **`bobzhang/sort`** v0.1.2 — Sort lines of text like sort, runnable via moonx
+- **`justjavac/win32_messagebox`** v0.1.3 — A MoonBit FFI demo for calling the Win32 MessageBoxW API.
+- **`bobzhang/wc`** v0.1.3 — Count lines, words, and bytes like wc, runnable via moonx
+- **`mizchi/whisper`** v0.3.1 — MoonBit native bindings for whisper.cpp speech-to-text inference
+- **`V1GreenSummer/codemoonbit`** v0.1.2 — A CodeMirror-like code editor implemented in MoonBit, targeting wasm-gc with DOM FFI
+- **`bobzhang/crescent_wasm_demo`** v0.1.1 — A minimal Crescent web server that also builds for the wasm target.
+- **`icyaaaww/moonbind`** v0.10.0 — Generate type-safe MoonBit FFI bindings from C headers.
+- **`moonbit-community/meta-skill`** v0.1.1 — Create minimal MoonBit WASM skill templates.
+- **`tonyfettes/cairo`** v0.2.0 — MoonBit bindings for the Cairo 2D graphics library
+- **`bobzhang/head`** v0.1.3 — Print the first lines or bytes of inputs like head, runnable via moonx
+- **`illusory0x0/posix`** v0.2.2 — a simple posix API FFI library
+- **`klaseca/skia-sys`** v0.2.0 — Low-level MoonBit bindings for Skia C API
+- **`peter-jerry-ye/hn-brief`** v0.1.1 — Hacker News hot-comment briefing demo built with MoonBit async and Wasm
+- **`soehi/moonlm`** v0.1.3 — Local LLM inference engine and strongly-typed agent runtime, in MoonBit
+- **`ZSeanYves/MoonJust`** v0.1.3-rc.1 — A MoonBit implementation of the just command runner
+- **`bobzhang/scheme`** v0.1.3 — Run R6RS Scheme programs directly with moonx
+- **`0xA672/mwp`** v0.1.0 — WASM runtime environment detection tool. Probes installed WASM runtimes (wasmtime, wasmer, wazero, node, etc.)…
+- **`illusory0x0/qpainter`** v0.3.1 — Moonbit FFI Bindings for Qt's QPainter
+- **`bobzhang/cat`** v0.1.2 — Concatenate files or stdin to stdout byte-transparently, like cat, runnable via moonx
+- **`bobzhang/xxd`** v0.1.2 — Hex dump and reverse like xxd, runnable via moonx
+- **`BigOrangeQWQ/wasi-cli`** v0.2.6
+- **`bobzhang/sleep`** v0.1.2 — Pause for a number of seconds, like sleep, runnable via moonx
+- **`Lyllyl789/mustache`** v0.1.6 — A spec-compliant Mustache template engine in pure MoonBit.
+- **`yamajik/wasi-bindings`** v0.2.1
+- **`123123213weqw/moon_proto`** v0.1.1 — A MoonBit protobuf ecosystem lab for dynamic schema validation, compatibility testing, and AI code verificatio…
+- **`daqing/moon-sqlite3`** v0.4.3 — SQLite3 bindings for latest MoonBit toolchian
+- **`fan-ere/moonbarcode`** v0.2.0 — 纯 MoonBit 原生的一维条码（1D barcode）生成、校验与渲染工具库：EAN-13 / EAN-8 / UPC-A / Code 39 / Code 93 / Code 128 / ITF-14 编码、ISB…
+- **`klaseca/skia`** v0.2.0 — MoonBit bindings for Skia
+- **`tonyfettes/adw`** v0.2.0 — MoonBit bindings for libadwaita (Adw) widgets
+- **`tonyfettes/soup`** v0.2.0 — MoonBit bindings for libsoup 3.0 (HTTP client, WebSocket)
+- **`wccerty/moonbit-artboard`** v0.1.2 — A high-performance vector artboard data model and operation kernel for Web/WASM built in MoonBit.
+- **`BigOrangeQWQ/wit-wasi-random`** v0.2.6
+- **`bobzhang/nl`** v0.1.2 — Number lines of inputs like nl, runnable via moonx
+- **`bobzhang/uniq`** v0.1.2 — Filter adjacent duplicate lines like uniq, runnable via moonx
+- **`FrozenLemonTee/formulas-calculator-web`** v0.1.2 — A lightweight MoonBit-powered web interface for formulas-calculator.
+- **`Milky2018/tic80`** v0.2.1 — MoonBit bindings for TIC-80.
+- **`moonrockz/wasm-devkit`** v0.3.0 — WIT and WAC language tools for files and stdin
+- **`shop1111/moonbindgen`** v0.6.0 — Generate MoonBit native C FFI declarations from C headers with Clang.
+- **`tonyfettes/pangocairo`** v0.2.0 — MoonBit bindings for rendering Pango layouts with Cairo
+- **`2d5rrr333/moonbridge`** v0.1.0 — The 'wasm owns state, JS is a thin shell' architecture as a reusable kit: a generic Session with an init/dispa…
+- **`bobzhang/base64`** v0.1.2 — Base64 encode and decode like base64, runnable via moonx
+- **`bobzhang/comm`** v0.1.2 — Compare two sorted files line by line like comm, runnable via moonx
+- **`bobzhang/join`** v0.1.2 — Join lines of two sorted files on a common field like join, runnable via moonx
+- **`lin2077-zeming/moonecho`** v0.1.4 — Local-first acoustic fingerprint search, alignment, and WASM workbench for MoonBit.
+- **`mizchi/whisper-mbt`** v0.1.1 — DEPRECATED: Use mizchi/whisper instead. MoonBit native bindings for whisper.cpp.
+- **`bobzhang/cut`** v0.1.2 — Select fields or characters from lines like cut, runnable via moonx
+- **`bobzhang/paste`** v0.1.2 — Merge lines of files like paste, runnable via moonx
+- **`heyq02/openui`** v0.2.0
+- **`HuLunTunTao/moon-ort`** v0.1.1 — Native MoonBit CPU inference SDK for ONNX Runtime
+- **`2d5rrr333/mtab`** v0.5.0 — MoonBit-powered browser start page: clock with lunar calendar, bookmark grid, multi-engine search, wallpapers …
+- **`bobzhang/tr`** v0.1.2 — Translate, squeeze, or delete bytes like tr, runnable via moonx
+- **`asdshuaishuai/moonviz`** v0.1.11 — Agent-Native 原型绘制引擎：.mbt.md 唯一事实源，人类画布与 Agent 声明共同演化，MoonBit 不崩谓词护航
+- **`Hhsqoo/artifactdock`** v0.2.3 — A lightweight MoonBit-native OCI Distribution registry server
+- **`HK-SHAO/dsp`** v0.1.4 — Numeric kernel of atools: FFT, STFT codec and phase reconstruction, compiled to WASM for direct browser use
+- **`mizchi/wacon`** v0.1.1 — Minimal OCI container runtime for WASM modules
+- **`Bemly/cstdio-ffi`** v0.1.0 — standard C library I/O FFI binding. 对C标准库中stdio的绑定
+- **`BigOrangeQWQ/wit-wasi-clocks`** v0.2.6
+- **`wqbcs/moon_collections`** v0.2.4 — DETERMINISTIC × VERIFIABLE × COMPOSABLE collections for MoonBit/WASM — 12 ordered structures, FNV-1a fingerpri…
+- **`wskwsk68/MoonEmbed`** v0.1.6 — MoonBit-native word embedding loader and lightweight semantic retrieval library
+- **`2d5rrr333/moonwebtest`** v0.1.0 — Test toolkit for MoonBit wasm-gc web apps: a Node harness that drives your wasm exports over the JSON bridge, …
+- **`colmugx/ofdx`** v0.1.0 — OFD fixed-layout document reader library for MoonBit.
+- **`liu666789987/moonbtkit`** v0.1.6 — Serializable behavior-tree assets, deterministic execution, and regression analysis for MoonBit.
+- **`zploc/loci`** v0.1.0 — Deterministic hashing, Merkle tree sealing, FST swarms, and AI inhabitation substrate for the loci runtime
+- **`chen333w/moon-lite`** v0.3.0 — Pure MoonBit reader for the SQLite 3 file format: pages, b-trees, records and rows, with no C dependency and n…
+- **`dowdiness/ffi_c`** v0.1.1
+- **`morning-start/prism`** v0.1.4 — A unified LLM protocol middleware converting between OpenAI, Anthropic, Gemini and other provider formats via …
+- **`FrozenLemonTee/units-converter-web`** v0.1.0 — A lightweight MoonBit-powered web interface for units-converter.
+- **`moonbitstack/moonegui`** v0.2.1 — Immediate-mode graphical interfaces for MoonBit.
+- **`shunge/moonvision`** v0.2.3 — Reproducible annotation-aware augmentation and differentiable image warping in pure MoonBit.
+- **`illusory0x0/moonbit-wasm-nodejs-ts-template`** v0.1.0 — moonbit node.js wasm app template
+- **`illusory0x0/moonbit-wasm-vite-ts-template`** v0.1.0 — moonbit vite template
+- **`tiye/thin_ws`** v0.1.0 — Thin WebSocket FFI for MoonBit — Node.js server + browser client with typed JSON messaging
+- **`wzzc-dev/imgui`** v0.1.0 — Moonbit binding for Dear ImGui library - A simple GUI example
+- **`yyyt0807/curvefit`** v0.2.1 — Pure MoonBit bounded residual optimization and nonlinear fitting with auditable diagnostics
+- **`mizchi/mayo`** v0.1.0 — Zero-copy data-parallel Worker pool for MoonBit on Web, Deno, Node, and Bun
+- **`serikaonoe123/moonffi-lab`** v0.1.0 — Stateful native FFI failure reproduction and dependency-aware trace reduction for MoonBit.
+- **`WhisperJXH/moonflags`** v0.2.1 — MoonBit-native feature flag, segment targeting, rollout and validation toolkit
+- **`XiaoChenxu/msdoc-viewer`** v0.1.1 — High-performance MS-DOC (.doc binary Word) parser and renderer for MoonBit, supporting JS, WASM, and WASM-GC b…
+- **`ZBZ-ai-nb/cakecheck`** v0.3.0 — MoonBit cross-target scenario reproduction matrix and evidence toolkit
+- **`mizchi/web_runtime_hooks`** v0.6.0 — Kagura runtime hooks for browser JavaScript and WebAssembly, with native integration
+- **`any07557-wq/moonvcs`** v0.1.0 — Native MoonBit VCS core with typed SHA-256 objects, lazy storage and policy boundaries.
+- **`bobzhang/false`** v0.1.0 — Exit unsuccessfully, like false, runnable via moonx
+- **`bobzhang/true`** v0.1.0 — Exit successfully, like true, runnable via moonx
+- **`chiooo09/moonbit-ifc`** v0.1.3 — A zero-dependency IFC STEP parser and BIM extraction engine for MoonBit
+- **`HK-SHAO/sfengine`** v0.1.2 — Shaofeng numerical core: fluid, vertex batch and tracer kernels compiled to WASM for the game
+- **`Ridge-Lab/moonphaserkit`** v0.3.0 — A MoonBit JavaScript binding for Phaser 3 scenes, sprites, animation, audio, camera, tilemaps, input, text, an…
+- **`tonyfettes/vte`** v0.2.0 — MoonBit bindings for VTE terminal emulator widget (GTK4)
+- **`yuntian/cube_render`** v0.0.3 — Minecraft Bedrock model renderer in MoonBit + WebGL
+- **`prowk/binschema`** v0.3.1 — Safe, composable binary protocol codecs for MoonBit with CLI inspection and a Wasm visualizer
+- **`QuietlyChan/moonschema`** v0.1.0 — JSON Schema 2020-12 validator with a zod-style builder API for MoonBit — one engine, two frontends (ajv / zod)…
+- **`sujy123456/voltweave`** v0.1.0 — Offline household energy scheduling and outage resilience simulation
+- **`uiwcvb/moonsql`** v0.1.0 — A pure MoonBit embedded relational SQL engine
+- **`Tino-hue/depsight-wasm-api`** v0.8.2 — MoonBit dependency health analysis engine — WASM API for browser/Node.js
+- **`uiwcvb/moonprompt`** v0.1.0 — A pure MoonBit prompt template engine for LLM applications
+- **`V1GreenSummer/typstbit`** v0.1.1 — MoonBit application core of Typst.bit: commands, outline, multi-file projects, diagnostics, packages and theme…
+- **`aspnmy/moodtcpcli`** v0.1.0 — Zero-dependency TCP network primitives for MoonBit - ported from rstcpcli
+- **`CJR-ai-nb/evowitness`** v0.1.1 — Minimal compatibility counterexample witness generator for MoonBit
+- **`Mostan-303/moonbit-cog`** v0.2.0 — Cloud-Optimized GeoTIFF and Multispectral Remote Sensing Engine in MoonBit
+- **`V1GreenSummer/watermark-toolkit`** v0.1.0 — LLM 文本水印工具箱:隐形 Unicode 载体清洗与检测、keyed-Gumbel 统计水印重放检测、检测引导的 LLM 改写循环(纯 CPU、零模型推理)
+- **`WSH-ai-nb/reslock`** v0.1.0 — Deterministic resource lockfile and integrity manifest toolkit for MoonBit asset pipelines.
+- **`XiaoMao-MYY/acceptkit`** v0.1.0 — Dependency-free HTTP representation negotiation toolkit for MoonBit.
+- **`chensuiyi/pcap`** v0.1.1 — MoonBit 抓包绑定层：运行时动态加载 wpcap.dll（Npcap）
+- **`felix-schultz/flow-like-wasm-sdk`** v0.1.0 — SDK for building Flow-Like WASM nodes in MoonBit
+- **`HYF-ai2006/moonsec-headers`** v0.1.0 — MoonBit native HTTP security header and CSP audit library
+- **`BB-ai-nb/spongekit`** v0.1.1 — MoonBit-native small-site stormwater retrofit and rain-garden sizing toolkit.
+- **`cn-xjr/moonplan`** v0.1.0 — An explainable finite-domain constraint solver and scheduling toolkit for MoonBit.
+- **`Yu-zh/cvc5.mbt`** v0.1.0 — Native MoonBit bindings for the cvc5 SMT solver
+- **`anccnuer/onho`** v0.3.0 — A Hono-style lightweight web framework for MoonBit
+- **`Ankaluoer/moon-tensor`** v0.1.0 — MoonBit neural network inference operators for small, portable deployments.
+- **`httt-star/moonshrink`** v0.1.1 — MoonBit Wasm 二进制体积分析工具，解析 .wasm 文件统计 section/函数/符号/包维度的体积分布
+- **`JM-ai-n/moonfolio`** v0.1.0 — MoonBit-native Markdown metadata contract and content folio toolkit.
+- **`LH-DD-lh/csp-weaver-mbt`** v0.1.0 — MoonBit native Content-Security-Policy parser, auditor and migration planner.
+- **`pqx123-lgtm/moonbit-vrp-solver`** v0.2.1 — Vehicle-routing heuristics in pure MoonBit, with CVRP and VRPTW support.
+- **`Qisu-dev/cat`** v0.1.2
+- **`xiaoxiao1211/moonbit-sourcemap`** v0.1.1 — Source Map v3 mappings, lookup, and Wasm sourceMappingURL integration for MoonBit
+- **`Mitsuha11zz/moonifc_inspector`** v0.1.0 — A lightweight IFC STEP inspector for structure auditing and WASM demos
+- **`lycvvt/moonplc`** v0.1.0 — IEC 61131-3 Soft PLC Runtime and Structured Text Engine in MoonBit
+- **`cn-wn/moonsuffix`** v0.1.0 — A portable Public Suffix List engine for registrable-domain decisions in MoonBit.
+- **`suqinxi/voltweave`** v0.1.1 — Offline household energy scheduling and outage resilience simulation
+- **`WYT-ai-nb/moonabi`** v0.1.0 — Cross-platform C ABI contract verification for MoonBit native bindings
+- **`Sxy11112/moon7z`** v0.1.0 — 纯 MoonBit 实现的 7z 归档只读解包库：容器解析 + LZMA/LZMA2 解码内核（库本体零第三方依赖）

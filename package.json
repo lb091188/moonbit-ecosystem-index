@@ -4,8 +4,8 @@
   "private": true,
   "description": "Scenario-oriented package index for the MoonBit ecosystem",
   "scripts": {
-    "build": "python3 pipeline/analyze.py",
-    "preview": "python3 -m http.server 8000 --directory dist",
+    "build": "cd app && moon run . -- --build",
+    "preview": "cd app && moon run . -- --serve",
     "deploy": "wrangler pages deploy dist"
   },
   "engines": {

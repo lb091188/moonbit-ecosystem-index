@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 """
+【旧版工具链，仅留档】当前构建由 app/ 的 MoonBit 工作台完成，见 docs/maintenance.md。
+
 构建 MoonBit 生态索引，并生成「不同场景下的包推荐」。
 
 数据来源（全部为公开数据，已落盘到 data/raw/）：
@@ -7,7 +9,7 @@
   2. downloads.json     mooncakes.io /api/v0/search    每个模块的下载量（3518）
 
 下载量**只参与构建期的排序**，不进入任何对外产物：站点数据里没有这个字段，
-页面与报告里也没有这个数字。理由见 README「为什么站内不展示下载量」。因此
+页面与报告里也没有这个数字。理由见 docs/methodology.md「为什么站内不展示下载量」。因此
 对外只有一份事实性数据（模块元数据），下载量退化为一个不公开的量级因子。
 
 本索引只做场景导航，不复制注册表的能力：不引入依赖图、不计算反向依赖数、
@@ -37,7 +39,7 @@ DIST = ROOT / "dist"          # 静态发布目录（Cloudflare Pages / 任意�
 # 仓库地址：页首的 GitHub 入口与页脚的反馈段都由它生成，避免两处写死不同地址。
 REPO = "https://github.com/lb091188/moonbit-ecosystem-index"
 # 站点地址：og:url 与 og:image 必须是绝对 URL（抓取方不解析相对路径）。
-# 换域名时改这里，README 的部署一节也提到这一行。
+# 旧版脚本留档用；当前构建改 app/build.mbt 的 SITE / REPO，见 docs/maintenance.md。
 SITE = "https://moonbit-ecosystem-index.pages.dev"
 OUT.mkdir(parents=True, exist_ok=True)
 

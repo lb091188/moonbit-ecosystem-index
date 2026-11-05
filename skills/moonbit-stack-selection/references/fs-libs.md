@@ -1,0 +1,78 @@
+# 文件 / 路径 / IO（`fs`）· 基础库全量
+
+> 快照 2026-11-05｜按推荐次序列出｜返回 [fs.md](fs.md)｜在线版 <https://moonbit-ecosystem-index.pages.dev/#/s/fs>
+
+单点能力，需自行组合；没有骨架级实现，不要当成框架推荐。
+
+- **`mizchi/tempfile`** v0.1.3 — Temporary file and directory management for MoonBit
+- **`mizchi/x`** v0.6.1 — Cross-platform MoonBit compatibility facades with native delegation and accelerated JS implementations for asy…
+- **`gmlewis/io`** v0.23.20 — MoonBit io: provide simplified I/O abstractions similar to Go.
+- **`mizchi/fswatch`** v0.2.1 — Cross-platform filesystem watcher for MoonBit: FSEvents on macOS, inotify on Linux, polling fallback elsewhere…
+- **`Kaida-Amethyst/path`** v0.1.1 — A cross-platform file path manipulation library for MoonBit, supporting both Unix and Windows platforms.
+- **`BigOrangeQWQ/wasi-filesystem`** v0.2.6
+- **`trkbt10/osenv`** v0.1.0 — OS environment utilities: platform detection, safe path operations, and OS-standard directory resolution (XDG/…
+- **`totto2727/target-file-discovery`** v0.2.1 — Reusable target file discovery for MoonBit
+- **`ZSeanYves/bufferutils`** v0.37.0 — Zero-copy shared byte buffers with high-performance synchronous, native, and async I/O for MoonBit.
+- **`justjavac/glob`** v0.2.0 — A glob library for MoonBit, supporting wildcard pattern matching on file paths.
+- **`riantr/moonbit_static_analysis`** v0.4.41 — Three-inspection (structural / type / behavior) static analysis for MoonBit programs, every toolchain file kin…
+- **`justjavac/walkdir`** v0.1.9 — A deterministic walkdir library for MoonBit.
+- **`moonbitstack/moonlog`** v0.1.6 — Structured logging for MoonBit.
+- **`moonbitstack/moonquic`** v0.3.11 — QUIC transport for MoonBit.
+- **`Lxxbv/glob`** v0.2.6 — 面向 MoonBit 的可复用通配符路径匹配与文件检索库，支持 Wasm、JS 与 Native 目标。
+- **`mizchi/vfs`** v0.2.3 — Cross-platform virtual filesystem with pluggable backends
+- **`mldong/moon-file-storage-local`** v0.1.6 — Local filesystem platform for moon-file-storage
+- **`illusory0x0/path`** v0.2.0 — A cross-platform path manipulation library for MoonBit that provides robust handling of both Unix and Windows …
+- **`tonyfettes/gio`** v0.2.0 — MoonBit bindings for GIO (Application, File, D-Bus, streams, sockets, etc.)
+- **`marianoguerra/sos`** v0.2.1 — Simple Object Storage
+- **`totto2727/x`** v0.7.0 — Focused utility collections, traits, and value types for MoonBit
+- **`xingwangzhe/files_tree`** v0.1.3 — recursively builds and displays directory structures in ASCII tree format.
+- **`moonrockz/directories`** v0.1.2 — Platform-specific config, cache, and data directory paths for MoonBit (XDG on Linux, conventions on macOS/Wind…
+- **`i5ting/glob-watcher`** v0.1.0 — Glob-pattern file watcher for MoonBit native — debounced, queue-aware, chokidar-backed.
+- **`mldong/moon-token-store-file`** v0.1.20 — File-backed TokenStore for moon-token: in-memory authority with write-through to a directory, so a restart kee…
+- **`chenliyi-cly/moonfat`** v0.1.2 — FAT12/16/32 on-disk volume codec for MoonBit
+- **`Ag108/moon-wasi`** v0.1.0 — Capability-aware WASI Preview 1 utilities for MoonBit
+- **`peter-jerry-ye/async`** v0.2.1 — Async library: promise, event loop, i/o
+- **`mldong/moon-file-storage`** v0.1.8 — File storage models, the platform and recorder ports, and the service facade
+- **`kokic/uniform-path`** v0.1.6 — Cross-platform paths with consistent / separators.
+- **`mldong/moon-file-storage-verify`** v0.1.12 — Shared platform contract suite for moon-file-storage
+- **`mldong/moon-file-storage-qiniu`** v0.1.7 — Qiniu Kodo platform adapter for moon-file-storage
+- **`mldong/moon-file-storage-ftp`** v0.1.7 — FTP platform adapter for moon-file-storage
+- **`mldong/moon-file-storage-s3`** v0.1.6 — S3 platform adapter for moon-file-storage
+- **`mldong/moon-file-storage-cos`** v0.1.6 — Tencent Cloud COS platform adapter for moon-file-storage
+- **`mldong/moon-file-storage-oss`** v0.1.6 — Alibaba Cloud OSS platform adapter for moon-file-storage
+- **`mldong/moon-file-storage-obs`** v0.1.6 — Huawei Cloud OBS platform adapter for moon-file-storage
+- **`mldong/moon-file-storage-recorder-file`** v0.1.6 — File-backed recorder for moon-file-storage
+- **`ttxiangshang/moonbit-pixelkit`** v0.2.0 — A MoonBit toolkit for ASCII, CSV, and Tiled JSON grid maps with pathfinding.
+- **`zgfzgf899/moonbit-vector-trace-plan`** v0.2.2 — A bitmap vector tracing and path planning library in MoonBit.
+- **`Burnling-gx/moonpath`** v0.1.1 — MoonPath: A Grid Pathfinding Toolkit for MoonBit. Provides BFS, Dijkstra, and A* pathfinding on 2D grid maps w…
+- **`i5ting/chokidar`** v0.1.0 — Cross-platform file watching library for MoonBit native target. Port of chokidar v5 with kqueue (macOS/FreeBSD…
+- **`Feather119/moon_path`** v0.1.1 — A lightweight MoonBit pathfinding library for grid maps and graph search.
+- **`liushiman1222/AgriDroneSwarm`** v0.2.0 — A MoonBit algorithm library for agricultural drone swarm coordination, path planning, control, and mission eva…
+- **`mizchi/moonix`** v0.2.1 — [EXPERIMENTAL] Virtual POSIX layer for MoonBit - in-memory filesystem, process emulation, and git-backed versi…
+- **`chensuiyi/fsx`** v0.3.0 — Durable file operations for MoonBit: atomic write (fsync+rename), mkdir_p, append, chmod, rotation and flock
+- **`lijunchen/unstable_io`** v0.1.3 — Unstable IO package for MoonBit
+- **`justjavac/dirs`** v0.1.4 — Returns user-specific, platform-specific directory paths across Linux, macOS, and Windows.
+- **`NoEmotionYY/moon-pathplanning`** v0.1.0 — Reusable MoonBit path planning primitives and grid search algorithms.
+- **`mizchi/pathfind`** v0.6.0 — A* / grid pathfinding helpers on top of mizchi/terrain grids (extracted from kagura)
+- **`ZSeanYves/cygpath`** v0.1.0 — A MoonBit implementation of Cygwin-style path conversion (in development).
+- **`PaiGack/tftp`** v0.1.5 — TFTP (RFC 1350/2347/2348/2349) client and server in pure MoonBit.
+- **`kupas/mails`** v0.2.0 — Watch IMAP mailboxes and run commands when a message matches a keyword rule
+- **`mizchi/sandbox`** v0.1.3 — In-memory sandbox primitives for MoonBit - virtual filesystem, POSIX emulation, shell
+- **`phjphj676/moongeoroute`** v0.1.6 — MoonGeoRoute: Geographic Routing & Spatial Analysis Library for MoonBit
+- **`tonyfettes/path`** v0.2.2
+- **`oboard/assets`** v0.1.1 — Asset loader for Moonbit
+- **`TryAndRun-TvT/tiny-skia-path-moon`** v0.2.0 — tiny-skia's path geometry (Path / PathBuilder / segments) ported to MoonBit
+- **`wbgxiaosu/hexgrid`** v0.2.0 — Hexagonal grid geometry foundation for MoonBit: axial/cube/offset coordinate systems, distance, lines, rings, …
+- **`superbigcup325/jumbit`** v0.1.3 — a MoonBit rewrite of zoxide: jump to directories in a few keystrokes
+- **`moonbitstack/moonconsul`** v0.1.2 — A complete Consul client for MoonBit: agent, catalog, health, KV (with CAS, locks and semaphores), sessions, e…
+- **`moonbitstack/moonetcd`** v0.1.2 — An etcd v3 client for MoonBit.
+- **`Mr-Houjie/mbt-filetype`** v0.2.1 — 核心库无第三方依赖的 MoonBit 文件类型识别引擎：容器结构解析、证据链判定与可扩展规则，附 CLI。
+- **`cxh04/kubemoon`** v0.1.1 — A dynamic Kubernetes client and controller runtime for MoonBit
+- **`R00TK17/moonreader`** v0.1.3 — MoonReader — 纯 MoonBit 实现的文件内容读取库（TXT / CSV / JSON / JSONL / XML / Markdown / ZIP / TAR / DOCX / XLSX / PPTX /…
+- **`kalculos/miao`** v0.1.0-M2 — Another async I/O for moonbit, with libuv served as the default async runtime implementation.
+- **`maria/ini_parser`** v0.1.0 — A complete INI file parser for MoonBit with support for sections, multiple data types, comments, and comprehen…
+- **`moonbitstack/moonseal`** v0.1.3 — File and message encryption for MoonBit, for one or several recipients.
+- **`BenPaoBaMingWangXing/dispokit`** v0.1.1 — HTTP Content-Disposition parser, serializer, filename encoder, and safety diagnostics for MoonBit.
+- **`icyaaaww/moonguard`** v0.1.1 — Preview, validate and recover bounded AI file operations with a shared MoonBit core.
+- **`xiaojing012/moon-content-disposition`** v0.1.1 — RFC 6266 Content-Disposition parser, serializer, filename resolver and safety audit toolkit for MoonBit.
+- **`hxiuzheng/media-pack-audit`** v0.1.1 — A MoonBit library for validating complete file packages against JSON manifests, with optional image metadata c…

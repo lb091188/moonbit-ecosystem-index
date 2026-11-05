@@ -1,0 +1,244 @@
+# 解析器 / 语法（`parser`）· 基础库全量
+
+> 快照 2026-11-05｜按推荐次序列出｜返回 [parser.md](parser.md)｜在线版 <https://moonbit-ecosystem-index.pages.dev/#/s/parser>
+
+单点能力，需自行组合；没有骨架级实现，不要当成框架推荐。
+
+- **`moonbitlang/parser`** v0.4.7 — AST and parsers for the MoonBit programming language
+- **`bobzhang/lexer`** v0.3.1 — A generic lexer library for handwritten lexers in MoonBit
+- **`moonbitlang/lexer`** v0.4.4 — Lexer for the MoonBit programming language
+- **`Milky2018/xml`** v0.6.1 — A document-buffered pull XML parser for MoonBit
+- **`moonrockz/krueger`** v0.8.0 — Parser and parsing utilities for Elm and Elm-like dialects (e.g. Morphir) in MoonBit
+- **`moonbit-community/toml`** v0.5.1 — A TOML parser implementation in MoonBit
+- **`dowdiness/graphviz`** v0.1.0 — Parser, layout engine, and SVG renderer for Graphviz DOT graphs
+- **`mizchi/css`** v0.7.4 — Standalone CSS parser, selector, cascade and computed-style engine for MoonBit
+- **`mizchi/cst`** v0.1.10 — Concrete Syntax Tree library with Red-Green Tree pattern
+- **`mizchi/markdown`** v0.8.4 — Incremental Markdown parser and compiler
+- **`moonrockz/gherkin`** v0.5.1 — A Gherkin parser for MoonBit with DOM, visitor, fold, and SAX-style APIs
+- **`bobzhang/html_parser`** v0.2.3 — MoonBit HTML parser and sanitizer ported from JustHTML.
+- **`moonbitlang/pdflite`** v0.4.1 — Byte-oriented PDF reading, writing, and manipulation toolkit for MoonBit.
+- **`kokic/talcparsec`** v0.4.0 — A fast, trait-driven parser combinator library for MoonBit with explicit backtracking and structured diagnosti…
+- **`tonyfettes/tree_sitter_language`** v0.1.3 — Tree-sitter language type for MoonBit grammar bindings
+- **`TheWaWaR/clap`** v0.2.6 — Command Line Argument Parser
+- **`moonbitstack/moonast`** v0.2.6 — Code generation for MoonBit from annotated declarations.
+- **`Milky2018/css`** v0.6.1 — CSS parser, selector, cascade, and computed-style core maintained for Milky2018/svg
+- **`moonbit-community/html`** v0.2.4 — WHATWG HTML5 spec-compliant parser for MoonBit
+- **`AdUhTkJm/bitviewer`** v0.1.10 — A binary parser.
+- **`tiye/cirru-parser`** v0.3.0 — parser for Cirru Syntax
+- **`prowk/moonsqlitefile`** v0.8.1 — Pure MoonBit read-only SQLite file format parser and inspector
+- **`moonbitlang/formatter`** v0.1.6 — code prettifier for MoonBit
+- **`Nanaloveyuki/parsec`** v0.1.6 — Composable, token-generic parsers for MoonBit.
+- **`moonbit-community/NyaCSV`** v0.3.4 — Purr-fectly parse your CSV files with delightful simplicity!
+- **`bob/lexer`** v0.1.0 — A generic lexer library for handwritten lexers in MoonBit
+- **`sennenki/sexp`** v0.1.1 — A simple S-expression parser and serializer for MoonBit.
+- **`marianoguerra/uri`** v0.1.3 — A generic URI/IRI handling library compliant with RFC 3986/3987, ported from the Rust crate fluent-uri.
+- **`maria/csv_parser`** v0.1.0 — A robust RFC 4180 compliant CSV parser with support for custom delimiters, quoted fields, and serialization
+- **`moonbit-community/sqlparser`** v0.5.2 — Extensible SQL Lexer and Parser in MoonBit
+- **`moonbitstack/moonjson`** v0.4.3 — JSON, its dialects and its binary encodings for MoonBit.
+- **`tonyfettes/tree_sitter`** v0.4.6 — A MoonBit binding to the tree-sitter parsing library
+- **`moonrockz/smithy-syntax`** v0.8.0 — Smithy syntax for MoonBit: lossless IDL parser, traversal, diagnostics and typed JSON AST codec
+- **`mizchi/pkl`** v0.7.0 — Pure MoonBit parser, interpreter, and typechecker experiments for Apple's Pkl language.
+- **`moonbit-community/evol-minifier`** v0.3.1 — A slightly faster JavaScript mangler/compressor for MoonBit.
+- **`moonbitstack/moonyaml`** v0.1.4 — YAML 1.0, 1.1 and 1.2 for MoonBit.
+- **`mizchi/codegen`** v0.2.4 — Generic code generation library with abstract IR
+- **`xunyoyo/NyaCSV`** v0.3.3 — Purr-fectly parse your CSV files with delightful simplicity!
+- **`marianoguerra/wax`** v0.4.2 — The Wax language in MoonBit: parser, formatter, type checker, and wasm/wat emitters
+- **`marianoguerra/pure-py`** v0.12.0 — PurePy (a pure functional subset of Python 3.12): tokenizer, parser, checker and interpreter
+- **`Milky2018/sqlparser`** v0.5.0 — Extensible SQL Lexer and Parser in MoonBit
+- **`illusory0x0/simple_parserc`** v0.2.2 — Monadic parser combinators
+- **`marianoguerra/css`** v0.1.2 — A semantic CSS syntax tree for MoonBit: a tolerant parser, a printer with pretty, compact and minified modes, …
+- **`moonrockz/gleam-parser`** v0.5.1 — Parser and parsing utilities for the Gleam programming language in MoonBit
+- **`tonyfettes/tree_sitter_moonbit`** v0.1.26 — Moonbit grammar for tree-sitter
+- **`kokic/katex-parser`** v0.6.0 — A port of the KaTeX parser: lexing and parsing LaTeX math expressions with macro expansion into a typed AST, p…
+- **`mizchi/ast_printer`** v0.2.4 — A pretty printer for MoonBit AST - converts parsed AST back to source code
+- **`bob/toml`** v0.1.6 — A TOML parser implementation in MoonBit
+- **`marianoguerra/shrubbery`** v0.1.2 — Shrubbery notation for MoonBit: parser, source-faithful and reformatting printers, and structured diagnostics
+- **`moonrockz/wit`** v0.3.0 — WIT syntax tooling for MoonBit
+- **`tonyfettes/tree_sitter_markdown`** v0.1.26 — Markdown grammar for tree-sitter
+- **`bobzhang/pygments`** v0.2.6 — A port of Pygments (generic syntax highlighter) to MoonBit
+- **`tonyfettes/tree_sitter_json`** v0.1.26 — JSON grammar for tree-sitter
+- **`hnlyxiaobing/toml`** v0.4.9 — A TOML parser implementation in MoonBit (fork of bobzhang/toml with array-of-tables fix)
+- **`tonyfettes/tree_sitter_yaml`** v0.1.26 — YAML grammar for tree-sitter
+- **`moonrockz/partiql-syntax`** v0.3.0 — A PartiQL parser for MoonBit.
+- **`howtomakeaname/tokenizers-moonbit`** v0.16.3 — A MoonBit port of HuggingFace tokenizers. Loads tokenizer.json and runs BPE / byte-level BPE / WordPiece / Uni…
+- **`moonrockz/wac`** v0.3.0 — WAC language tooling for MoonBit
+- **`wedarp/moonbit-abc`** v0.1.6 — A source-aware ABC notation parser, validator, AST JSON serializer, and pretty printer.
+- **`sundaysebasidian-byte/moonabnf`** v0.4.0 — Byte-oriented ABNF grammar AST, validation, budgeted recognition and input derivation trees
+- **`moonbitstack/moontoml`** v0.1.1 — TOML for MoonBit, 1.0.0 and earlier.
+- **`DzmingLi/clap`** v0.2.8 — Command Line Argument Parser
+- **`heyq02/openui`** v0.2.0
+- **`conglinyizhi/toml`** v0.1.0 — Nightly-compatible TOML parser for MoonBit, maintained from moonbit-community/toml-parser
+- **`eisem/moon_graphql`** v0.1.1 — A GraphQL parser and toolkit for MoonBit
+- **`illusory0x0/lexer`** v0.2.0 — A MoonBit tokenization library for parsing Token payloads from strings and bytes. Provides efficient tokenizat…
+- **`Wyh123456559/moonlexkit`** v0.3.0 — A MoonBit lexical scanning and lightweight parsing toolkit.
+- **`bzy-debug/json_parser`** v0.1.0 — A complete JSON parser implementation in MoonBit supporting all JSON data types with comprehensive error handl…
+- **`elzup/peeler`** v0.1.2 — Bracket parser for MoonBit - parse nested bracket structures into tree nodes
+- **`maria/json_parser`** v0.1.1 — Fast and compliant JSON parser and serializer for MoonBit supporting the full JSON specification with strict v…
+- **`kaashyapan/uri`** v0.1.5 — URI parser and builder for Moonbit
+- **`tonyfettes/tree_sitter_c`** v0.1.26 — C grammar for tree-sitter
+- **`tonyfettes/tree_sitter_markdown_inline`** v0.1.26 — Markdown grammar for tree-sitter
+- **`Milky2018/html`** v0.1.2 — WHATWG HTML5 spec-compliant parser for MoonBit
+- **`JingLan0v0/jmespath`** v0.1.15 — A standards-oriented JMESPath parser and JSON query engine in MoonBit.
+- **`marianoguerra/html`** v0.1.1 — A semantic markup tree for MoonBit: HTML, SVG and MathML, with a tolerant parser, a printer with pretty, compa…
+- **`tonyfettes/tree_sitter_query`** v0.1.26 — TS query grammar for tree-sitter
+- **`tonyfettes/tree_sitter_javascript`** v0.1.26 — JavaScript grammar for tree-sitter
+- **`illusory0x0/printer`** v0.1.1 — A MoonBit AST printer for string serialization of Abstract Syntax Tree nodes from moonbitlang/parser/syntax, d…
+- **`CAIMEOX/midi`** v0.1.0 — A MIDI file parser and writer in MoonBit
+- **`tonyfettes/tree_sitter_go`** v0.1.26 — Go grammar for tree-sitter
+- **`L76148/moonrego`** v0.1.0 — A Rego (Open Policy Agent) lexer, parser, evaluator and CLI for MoonBit.
+- **`moonbit-community/tree_sitter_mbt`** v0.1.1 — MoonBit-native Tree-sitter runtime and generator (work in progress)
+- **`tonyfettes/tree_sitter_css`** v0.1.26 — CSS grammar for tree-sitter
+- **`peter-jerry-ye/parser-combinator`** v0.9.1
+- **`bobzhang/ldiff`** v0.1.6 — Lexer-based diff for MoonBit code: weighted token alignment with HTML rendering
+- **`bobzhang/sqlglot`** v0.1.0 — A SQL parser, transpiler and optimizer: a MoonBit port of sqlglot
+- **`tonyfettes/tree_sitter_rust`** v0.1.26 — Rust grammar for tree-sitter
+- **`tonyfettes/tree_sitter_ocaml_type`** v0.1.26 — OCaml grammar for tree-sitter
+- **`tonyfettes/tree_sitter_python`** v0.1.26 — Python grammar for tree-sitter
+- **`oboard/jsonx`** v0.1.0 — JSON Toolkit
+- **`moonbit-community/XMLParser`** v0.2.7 — An XML parsing library written in MoonBit that converts XML strings into structured data, supporting elements,…
+- **`tonyfettes/tree_sitter_cpp`** v0.1.26 — C++ grammar for tree-sitter
+- **`tonyfettes/tree_sitter_html`** v0.1.26 — HTML grammar for tree-sitter
+- **`tonyfettes/tree_sitter_java`** v0.1.26 — Java grammar for tree-sitter
+- **`tonyfettes/tree_sitter_ocaml`** v0.1.26 — OCaml grammar for tree-sitter
+- **`tonyfettes/tree_sitter_ocaml_interface`** v0.1.26 — OCaml grammar for tree-sitter
+- **`tonyfettes/tree_sitter_tsx`** v0.1.26 — TypeScript and TSX grammars for tree-sitter
+- **`moonrockz/jmespath`** v0.8.0 — JMESPath expressions, parsing and JSON evaluation for MoonBit
+- **`tonyfettes/tree_sitter_typescript`** v0.1.26 — TypeScript and TSX grammars for tree-sitter
+- **`moonbit-community/tree-sitter-json`** v0.24.8 — JSON grammar for tree-sitter (tree-sitter/tree-sitter-json v0.24.8), for the MoonBit port of Tree-sitter (moon…
+- **`moonbit-community/tree-sitter-python`** v0.23.6 — Python grammar for tree-sitter (tree-sitter/tree-sitter-python v0.23.6), for the MoonBit port of Tree-sitter (…
+- **`moonbit-community/tree-sitter-typescript`** v0.23.2 — TypeScript and TSX grammars for tree-sitter (tree-sitter/tree-sitter-typescript v0.23.2), for the MoonBit port…
+- **`moonbit-community/ini`** v0.2.3 — High-performance INI parser for MoonBit with nested section support.
+- **`illusory0x0/parserc`** v0.1.5 — A simple parser combinator
+- **`AdUhTkJm/moonc`** v0.2.16 — A frontend of Moonbit language itself.
+- **`moonbitlang/mbt_lexer`** v0.1.13
+- **`BigOrangeQWQ/uri`** v0.1.0 — URI parser for Moonbit
+- **`marianoguerra/was`** v0.2.2 — Was: Wax in shrubbery notation -- a reader that produces the Wax AST
+- **`001-Elsa/mooncron`** v0.1.4 — A cron expression parser and schedule calculator written in MoonBit.
+- **`R00TK17/hex_editor`** v0.1.3 — Terminal hex editor & binary analysis toolkit: 20 format parsers, wildcard search, entropy analysis, steganogr…
+- **`tonyfettes/tree_sitter_moonbit_quotation`** v0.1.26 — Moonbit grammar for tree-sitter
+- **`tonyfettes/tree_sitter_swift`** v0.1.26 — A tree-sitter grammar for the Swift programming language.
+- **`dtzrttp/moonbit-rtl`** v0.2.5 — A Verilog-2001 RTL parser, hierarchy analyzer, and lint tool written in MoonBit.
+- **`bobzhang/cfront`** v0.4.0 — C syntax suite for meta-programming: parse C to an AST, build or transform it from MoonBit, and print it back …
+- **`mizchi/nom`** v0.1.3 — Nom-like parser combinators for MoonBit.
+- **`lenitain/hcl`** v0.2.0 — HCL parser, formatter, and serialization library for MoonBit
+- **`tonyfettes/tree_sitter_bash`** v0.1.26 — Bash grammar for tree-sitter
+- **`tonyfettes/tree_sitter_c_sharp`** v0.1.26 — C# grammar for tree-sitter
+- **`tonyfettes/tree_sitter_kotlin`** v0.1.26 — Tree-sitter grammar for Kotlin
+- **`tonyfettes/tree_sitter_sql`** v0.1.26 — Tree-sitter Grammar for SQL
+- **`oilleelssq-wq/moonmarkdown`** v0.2.0 — A CommonMark spec-compliant Markdown to HTML parser written in pure MoonBit
+- **`prowk/mrtkit`** v0.2.2 — BGP MRT parser and route change analyzer in MoonBit
+- **`tonyfettes/tree_sitter_toml`** v0.1.26 — TOML grammar for tree-sitter
+- **`ShellWen/sw_ini`** v0.2.0 — High-performance INI parser for MoonBit with nested section support.
+- **`tonyfettes/json_test_parser`** v0.1.0 — A lightweight and efficient JSON parser for MoonBit with support for parsing and stringifying JSON data
+- **`yzfyzf12345678/moonbit-rtl`** v0.1.5 — A practical Verilog RTL parser and rule checker written in MoonBit.
+- **`tonyfettes/tree_sitter_lua`** v0.1.26 — Lua grammar for tree-sitter
+- **`tonyfettes/tree_sitter_zig`** v0.1.26 — Zig grammar for tree-sitter
+- **`bobzhang/html_parser_examples`** v0.1.0 — Runnable examples and documentation for bobzhang/html_parser.
+- **`lenitain/kdl`** v0.2.0 — KDL document language parser, formatter, query engine, and schema validation library for MoonBit
+- **`tonyfettes/amjson`** v0.1.0 — A complete JSON parser implementation in MoonBit
+- **`vicoproplus/moon_ua_parser`** v0.2.0 — User-agent parser library ported from uap-core rules with uap-python-compatible semantics
+- **`yhsrtty/moontls-parser`** v0.1.2 — TLS ClientHello parser and JA3/JA4-style fingerprint toolkit for MoonBit traffic-audit probes.
+- **`tonyfettes/amtoml`** v0.1.0 — A comprehensive TOML (Tom's Obvious, Minimal Language) parser for MoonBit with full support for TOML v1.0.0 sp…
+- **`moonrockz/gleam-parser-morphir`** v0.1.2 — Optional Morphir target profile for moonrockz/gleam-parser
+- **`MX-ai-nb/taptrail`** v0.3.0 — Pure MoonBit TAP13 parser, CI validation gate, and Markdown/JSON report renderer.
+- **`Ronlands/ttf_parser_moonbit`** v0.1.1 — High-performance TrueType font parser with modular architecture, supporting TTF/OTF/Variable/Color fonts
+- **`tonyfettes/toml_parser`** v0.1.0 — A pure MoonBit TOML parser supporting strings, numbers, booleans, arrays, tables, and comments
+- **`trkbt10/isobmff`** v0.1.0 — ISO Base Media File Format parser for extracting duration and track info from MP4, 3GP, 3G2, MJ2, HEIF, F4V, D…
+- **`Rz-coder8848/moonpe`** v0.8.1 — Pure-MoonBit Windows PE32/PE32+ reader: IAT, resources, .NET metadata tables, LoadConfig, JSON and recursive s…
+- **`tonyfettes/json_parser`** v0.1.0 — A complete JSON parser for MoonBit with full spec compliance, error handling, and pretty-printing support
+- **`tonyfettes/maria_json_parser`** v0.1.0 — A pure MoonBit JSON parser with comprehensive parsing and serialization capabilities
+- **`WeiR-h/moonldif`** v0.7.5 — LDIF byte-preserving records and offline structural checks in MoonBit
+- **`ppyj663/moon-jsonpath`** v0.2.0 — A small MoonBit JSONPath parser and evaluator for RFC 9535 core query patterns.
+- **`vicoproplus/moon_ua_parser_middleware_core`** v0.1.0 — Shared pure helper for framework middleware adapters of vicoproplus/moon_ua_parser: UaInfo assembly, degradati…
+- **`Charles67676767/moonvalve`** v0.8.4 — Ordered Valve KeyValues tooling, source editing, streaming and Steam metadata in MoonBit
+- **`maria/toml_parser`** v0.1.0 — A complete TOML (Tom's Obvious, Minimal Language) parser implementation in MoonBit with support for all basic …
+- **`sennenki/tsparser`** v0.1.2 — Yet another TypeScript parser.
+- **`ruifeng/XMLParser`** v0.2.6 — An XML parsing library written in MoonBit that converts XML strings into structured data, supporting elements,…
+- **`bobzhang/peg`** v0.1.1 — A MoonBit port of PEG.js: parser generator for MoonBit
+- **`yoshitsugu/parsem`** v0.0.4 — Parser combinator for Moonbit
+- **`Areo-Joe/webidl`** v0.2.0 — A Web IDL parser for MoonBit
+- **`cou723/html-parser`** v0.1.0 — Lightweight and practical HTML parser for MoonBit
+- **`haol-05/moon-vcard`** v0.3.0 — Offline vCard 3.0/4.0 contact text parser and writer
+- **`plhjbg/moonbit-hl7v2`** v0.1.3 — MoonBit Clinical Message HL7v2 Parser - Hospital LIS/HIS messaging infrastructure
+- **`XiaoChenxu/msdoc-viewer`** v0.1.1 — High-performance MS-DOC (.doc binary Word) parser and renderer for MoonBit, supporting JS, WASM, and WASM-GC b…
+- **`maria/ini_parser`** v0.1.0 — A complete INI file parser for MoonBit with support for sections, multiple data types, comments, and comprehen…
+- **`moyunijieshi1/moon-securitytxt`** v0.1.0 — RFC 9116 security.txt parser, validator, generator and audit toolkit for MoonBit.
+- **`weopqrst/agent`** v0.5.1 — MoonBit version of LangChain core library — type-safe, composable, embeddable AI Agent framework. Depends on m…
+- **`chiooo09/moonbit-ifc`** v0.1.3 — A zero-dependency IFC STEP parser and BIM extraction engine for MoonBit
+- **`sikadi123/moonbit-csv`** v0.1.1 — A lightweight CSV parser and writer for MoonBit.
+- **`JYPeng487/moonopenmetrics`** v0.1.1 — OpenMetrics 1.0 text parser, canonical encoder, semantic validator, and document merge toolkit for MoonBit.
+- **`L76148/moon-ron`** v0.2.0 — A strict RON parser, serializer, formatter, and typed codec for MoonBit.
+- **`sa2360/toml`** v0.1.1 — A TOML v1.0.0 parser and serializer for MoonBit with full toml-test compliance.
+- **`cauchyQ/moonbit-robots`** v0.1.0 — A small robots.txt parser and access decision library for MoonBit.
+- **`lijunjie860/moonbit_cron`** v0.1.0 — A pure MoonBit parser and next-trigger calculator for five-field Cron expressions.
+- **`curry3point/dbc-toolkit`** v0.1.1 — Validated CAN DBC parser and signal codec toolkit for MoonBit
+- **`Qlcdsba/moonbit-barcoder`** v0.2.1 — GS1-128 and Code 128 data parser toolkit for MoonBit logistics applications.
+- **`bobzhang/yaml`** v0.1.2 — YAML 1.2 parser in MoonBit
+- **`liuhang0001/moon-robots`** v0.1.1 — RFC 9309 robots.txt parser, matcher, serializer and audit toolkit for MoonBit.
+- **`niuniu513-ask/MoonRetrieve`** v0.6.0 — 纯 MoonBit 零 FFI 的本地全文检索与 RAG 检索库：中英日分词、BM25 倒排索引、向量索引、RRF 混合检索与 LLM 上下文组装，可编译为 wasm / wasm-gc / js / native 多后…
+- **`f4ah6o/jww_parser`** v0.202609.1
+- **`YumeXi/nanocake`** v0.4.3 — Composable, type-safe AST and compiler-pass generation for MoonBit.
+- **`Lxxbv/moon_typst`** v0.2.1 — A lightweight MoonBit implementation of a supported Typst-style markup subset with parser, layout engine, and …
+- **`Mr-Houjie/mbt-email`** v0.1.0 — An RFC 5322/2045 email address and MIME message parser written in pure MoonBit. Supports email address validat…
+- **`Sam-Hui-dot/moon-sfv`** v0.1.0 — RFC 9651 Structured Field Values parser and serializer for MoonBit
+- **`vicoproplus/moon_ua_parser_mars`** v0.1.0 — mars framework middleware adapter for vicoproplus/moon_ua_parser: mounts parsed UA families on the typed reque…
+- **`moonrockz/diagrams-mermaid`** v0.4.0 — Mermaid for diagrams.mbt: lossless CST, parser, AST, printer and conversion to diagram models
+- **`2515050243qyf/moon_bencode`** v0.2.0 — A fast and compliant Bencode encoder and decoder for MoonBit.
+- **`bobzhang/dateutil`** v0.1.0 — A port of python-dateutil to MoonBit: relativedelta, rrule, parser, tz, easter.
+- **`jingmo653/sshconfig-resolve`** v0.1.0 — OpenSSH client configuration parser, evaluator, and explainable resolver for MoonBit.
+- **`lmclmc1/dns-zone-toolkit`** v0.1.0 — Validated DNS zone file parser and analysis toolkit for MoonBit
+- **`ShiChengxu/MoonEdifact`** v0.1.1 — Bounded byte-oriented UN/EDIFACT syntax 3 parser, envelope validator and native CLI
+- **`erzhuzi259/moongrammata`** v0.1.1 — Structure-aware feedback-guided fuzzing toolkit for MoonBit
+- **`vicoproplus/moon_ua_parser_crescent`** v0.1.0 — Crescent framework middleware adapter for vicoproplus/moon_ua_parser: mounts parsed UaInfo on the request/resp…
+- **`Ljh684/MoonParse`** v0.1.4 — MoonBit 解析器组合子库 — 与生态中其他 combinator 不同：(1)内置完整 JSON 解析器（JsonValue 枚举+双向序列化）和 TOML 解析器，开箱即用；(2)支持二进制解析（u8-u64/L…
+- **`weopqrst/tally`** v0.8.1 — Verifiable context-assembly contract for MoonBit LLM apps: frozen report formats (tally-plan v3, tally-digest …
+- **`p1nbored/moon_cron`** v0.1.0 — A dependency-free cron expression parser and schedule matcher for MoonBit.
+- **`xiaojing012/moon-warc`** v0.1.0 — Streaming WARC 1.1 parser, writer, validator, indexer and audit toolkit for MoonBit.
+- **`cn-cheems/moondbc`** v0.1.0 — A DBC parser and CAN signal codec toolkit written in MoonBit.
+- **`hackwaly/querystring`** v0.1.2 — A small MoonBit library for parsing query strings and reading typed values.
+- **`fundon/vtty`** v0.1.0 — Zero-allocation, panic-free DEC VT500 terminal parser with UTF-8 decoding (MoonBit port)
+- **`colmugx/ofd`** v0.1.1 — OFD fixed-layout document reader library for MoonBit.
+- **`trail-it/moonstream`** v0.1.1 — Incremental, chunk-invariant parsing of streaming JSON tool-call arguments.
+- **`shiguri-01/markdown`** v0.1.1 — Event-driven Markdown parser with CommonMark, GFM, HTML, and AST support.
+- **`mizchi/tmgrammar`** v0.1.0 — TextMate grammar based syntax highlighter for MoonBit
+- **`tonyyuyiding/asdl`** v0.1.0 — Generate AST types from ASDL (Abstract Syntax Description Language) descriptions.
+- **`cjcjwe/gcode-toolkit`** v0.3.1 — Typed G-code parsing, validation, rewriting, and offline toolpath review for MoonBit
+- **`zhanshishan/jsonmend`** v0.8.1 — Streaming JSON repair and partial parsing in pure MoonBit
+- **`AdUhTkJm/wasmtools`** v0.1.0 — A tool to convert between WebAssembly and WAT.
+- **`fantix/mmhttp`** v0.3.0 — MoonBit 的 HTTP 工具包
+- **`ppyq882/moonnlp`** v0.3.0 — A high-performance, Wasm-native, extensible Natural Language Processing library in MoonBit.
+- **`ZSeanYves/doc_parser`** v0.1.1 — MoonBit-native document structure foundation for source-native parsing, inspect, validation, and custom toolin…
+- **`Lampese/biblatex`** v0.1.0
+- **`mik1e80/dxfkit`** v0.1.1 — MoonBit ASCII DXF 读取与二维轮廓辅助检查库：七类核心轮廓、普通块展开、SVG预览与流式统计
+- **`horideicom/jww_parser`** v0.202602.0
+- **`moonbitlang/mbt-lexer`** v0.0.1
+- **`LuoYunxin1/moonnginx`** v0.2.0 — nginx.conf directive-tree codec for MoonBit
+- **`hzfhzf89/moonbit-gltf-tools`** v0.1.2 — A MoonBit library for reading, validating, and processing glTF/GLB 3D asset files. Provides node tree traversa…
+- **`yj-qin/llhttp`** v0.1.1 — llhttp bindings for MoonBit
+- **`Atman-Angle/oas2moon_frontend`** v0.1.0 — OpenAPI frontend adapter for the oas2moon MoonBit client SDK generator.
+- **`2973181701/moongpx`** v0.1.0 — A spec-compliant GPX (GPS Exchange Format) library for MoonBit: parse, validate, serialize and migrate GPX 1.0…
+- **`chensuiyi/packet`** v0.1.1 — MoonBit 协议解析层：Ethernet/IPv4/IPv6/TCP/UDP 头解析
+- **`joanna/moonfeed`** v0.2.0 — RSS 2.0, Atom 1.0 and JSON Feed 1.1 parsing and normalization for MoonBit.
+- **`Armyhealthyhappy/moonbit-roman`** v0.3.0 — Roman numeral parsing, linting, safe rewriting, and document indexing for MoonBit
+- **`LuoYunze-nuist/moonearley`** v0.1.1 — Runtime token CFG parsing with ambiguity-preserving packed forests and bounded queries.
+- **`sennenki/pkgparser`** v0.1.0 — Parses moon.pkg files
+- **`prowk/binschema`** v0.3.1 — Safe, composable binary protocol codecs for MoonBit with CLI inspection and a Wasm visualizer
+- **`sombozone/moon_expr`** v0.1.0 — A high-performance, extensible mathematical and logical expression evaluation engine for MoonBit.
+- **`2200732518gjy/moonfountain`** v0.1.0 — Source-mapped Fountain screenplay parsing and rehearsal breakdowns
+- **`chenliyi-cly/moonfluent`** v0.2.1 — Fluent FTL syntax, message resolution and JavaScript Intl localization in MoonBit
+- **`forey217/moonged`** v0.2.0 — GEDCOM 7 data interchange, relationship queries and audit tools for MoonBit
+- **`hutingyu-nuist/moonsqlguard`** v0.1.1 — MoonBit port of the libinjection SQLi core
+- **`cravan371/xpath-evaluator`** v0.1.0 — A specification-driven XPath 1.0 compiler and evaluator for MoonBit.
+- **`geniuszby/pagelens`** v0.1.0 — Read-only SQLite database and WAL file analyzer written in MoonBit
+- **`lexchb/moonbit-texteditor`** v0.1.0 — A pure MoonBit Markdown to HTML conversion library.
+- **`Ryan-1125/moonlibconfig`** v0.2.0 — A pure MoonBit reader and writer for a documented subset of libconfig 1.8.2
+- **`serene-WJ/moon_sfv`** v0.1.0 — A strict, cross-target RFC 8941 Structured Fields implementation for MoonBit.
+- **`jiujitong/nmea-toolkit`** v0.1.0 — Typed NMEA 0183 parsing, diagnostics, and evidence toolkit
+- **`zhanshishan/interjson`** v0.13.0 — The execution gate for LLM output: local MCP server, streaming JSON repair and partial parsing in pure MoonBit
+- **`youyong5/feedlens`** v0.2.0 — Multi-format RSS 2.0, Atom 1.0 and JSON Feed 1.0/1.1 parsing library with source-aware links and diagnostics
+- **`aloyscc/moon_cel`** v0.1.0 — A pure MoonBit Common Expression Language core with parsing, checking, and deterministic evaluation.
+- **`jshsj124/moonaerowx`** v0.1.0 — Pure MoonBit toolkit for parsing aviation weather reports and timelines
+- **`moonbitstack/moonxml`** v0.1.4 — HTML, XML and SVG for MoonBit: parse, query and edit.
+- **`Zongzuixi114514/moonmarc`** v0.1.0 — Pure MoonBit toolkit for parsing, validating, and transforming MARC 21 / ISO 2709 bibliographic records
+- **`tiye/monastry`** v0.1.0 — The command-line AST indexer and data service for Monastry
+- **`chen333w/moon-lite`** v0.3.0 — Pure MoonBit reader for the SQLite 3 file format: pages, b-trees, records and rows, with no C dependency and n…

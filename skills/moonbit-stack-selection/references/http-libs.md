@@ -1,0 +1,79 @@
+# Web 后端 / HTTP 服务（`http`）· 基础库全量
+
+> 快照 2026-11-05｜按推荐次序列出｜返回 [http.md](http.md)｜在线版 <https://moonbit-ecosystem-index.pages.dev/#/s/http>
+
+单点能力，需自行组合；没有骨架级实现，不要当成框架推荐。
+
+- **`moonbitstack/moonasgi`** v0.10.6 — ASGI 3.0 for MoonBit: the interface between servers and frameworks.
+- **`ShellWen/sw_router`** v0.2.0 — A fast and flexible URL router implementation for the MoonBit language.
+- **`mizchi/crater-browser-http`** v0.19.0 — HTTP, cache, cookie, and request sandbox helpers for crater browser
+- **`moonbitstack/moonhttp`** v0.15.8 — HTTP formats for MoonBit with no I/O: HTTP/1 to HTTP/3, WebSocket, SSE and multipart.
+- **`mldong/moon-token-moonback`** v0.1.20 — moonback adapter for moon-token: per-route authentication middleware, request principal in context, route perm…
+- **`gaato/sdk-runtime`** v0.7.0 — API-agnostic client runtime for MoonBit SDKs: error taxonomy, Retry-After and backoff, tri-state JSON fields, …
+- **`moonbitstack/moontls`** v0.9.14 — TLS 1.3 and DTLS 1.3 for MoonBit.
+- **`hnlyxiaobing/crescent`** v0.10.7 — Crescent: A web framework for MoonBit. Fork of hnlyxiaobing/crescent with Debug trait fix for wbtest.
+- **`oboard/mio`** v0.5.4 — Best async http library for Moonbit
+- **`moonbitstack/moonrpc`** v0.21.12 — gRPC for MoonBit.
+- **`mizchi/astra`** v0.23.4 — Mountable Mars middleware for static site generation
+- **`moonbitstack/mooncat`** v0.19.5 — A native ASGI server for MoonBit.
+- **`mldong/moon-hutool`** v0.1.8 — Hutool-style utility library for MoonBit: all packages depend only on moonbitlang/core (no FFI, fully synchron…
+- **`vicoproplus/moon_ua_parser_middleware_core`** v0.1.0 — Shared pure helper for framework middleware adapters of vicoproplus/moon_ua_parser: UaInfo assembly, degradati…
+- **`paveg/httprouter`** v0.2.0 — A high-performance HTTP router for MoonBit, inspired by julienschmidt/httprouter
+- **`naokikawamoto16/turn`** v0.1.0 — A simple HTTP router for MoonBit
+- **`vicoproplus/moon_ua_parser_mars`** v0.1.0 — mars framework middleware adapter for vicoproplus/moon_ua_parser: mounts parsed UA families on the typed reque…
+- **`xiewenchen/moonbit-platform`** v0.1.0 — 纯 MoonBit 实现的后端开发平台：Redis / PostgreSQL 协议驱动 + HTTP 1.1 服务端 + 应用框架层与工具链
+- **`vicoproplus/moon_ua_parser_crescent`** v0.1.0 — Crescent framework middleware adapter for vicoproplus/moon_ua_parser: mounts parsed UaInfo on the request/resp…
+- **`cpypypypy/har-toolkit`** v0.1.0 — Validated HAR 1.2 parser and performance analysis toolkit for MoonBit
+- **`mldong/moon-token-store-file`** v0.1.20 — File-backed TokenStore for moon-token: in-memory authority with write-through to a directory, so a restart kee…
+- **`zhuguiyuan/eda-router`** v0.1.3 — An simple congestion-aware EDA router implemented in MoonBit
+- **`ZSeanYves/MoonbitHTTP`** v0.7.0 — Streaming HTTP protocol suite for MoonBit with HTTP/1.1, HTTP/2, HTTP/3, QUIC, TLS integration, and policy-dri…
+- **`kaashyapan/uri`** v0.1.5 — URI parser and builder for Moonbit
+- **`mizchi/crater-browser-http-sqlite`** v0.17.1 — Optional SQLite-backed cache backend for crater-browser-http
+- **`marianoguerra/atproto-http`** v0.1.3 — Native HTTP transport for marianoguerra/atproto, over moonbitlang/async. Implements @xrpc.Transport; native ta…
+- **`1726914517-spec/moonproxy`** v0.2.1 — A native L7 reverse proxy / load balancer runtime: host/path routing, five balancing policies, forwarding head…
+- **`unmbt/http-server-mbt`** v0.5.0
+- **`posoco/ext-llm`** v0.2.0 — Posoco LLM Extension - host-injected model slot router
+- **`BigOrangeQWQ/uri`** v0.1.0 — URI parser for Moonbit
+- **`chenqi-arch/moonbit-project`** v0.3.2 — MoonBit HTTP recording, replay, response contract validation, and offline testing library
+- **`Ag108/MoonCache`** v0.2.0 — A transport-independent, explainable HTTP cache policy and runtime toolkit.
+- **`bobzhang/crescent_wasm_demo`** v0.1.1 — A minimal Crescent web server that also builds for the wasm target.
+- **`bzhangui/moonrestore`** v0.12.0 — Verifiable incremental backups with content-addressed storage and safe restore, powered by MoonBit.
+- **`marianoguerra/megalodon-http`** v0.1.2 — Native HTTP transport for marianoguerra/megalodon.
+- **`paveg/molt`** v0.1.8 — Simple HTTP load testing CLI built with MoonBit
+- **`lin2077-zeming/MoonHook`** v0.4.0 — Outbound webhook delivery framework for MoonBit: signing, retry with backoff, outbox, dead letter, idempotency…
+- **`fantix/mmhttp`** v0.3.0 — MoonBit 的 HTTP 工具包
+- **`Songyz002/moon-multipart`** v0.2.1 — 面向 MoonBit HTTP 生态的流式 multipart/form-data 解析与生成库，支持 RFC 7578 标准。
+- **`vicoproplus/moon_ua_parser`** v0.2.0 — User-agent parser library ported from uap-core rules with uap-python-compatible semantics
+- **`conglinyizhi/rootwarren`** v0.1.0 — rootwarren: MoonBit full-stack Markdown wiki backend with protected REST API for LLM/client read and write
+- **`morning-start/prism`** v0.1.4 — A unified LLM protocol middleware converting between OpenAI, Anthropic, Gemini and other provider formats via …
+- **`longhuanlin/multipart-stream`** v0.1.1 — Streaming multipart/form-data parser and writer for MoonBit.
+- **`yj-qin/llhttp`** v0.1.1 — llhttp bindings for MoonBit
+- **`tiye/respo-router`** v0.0.1
+- **`6P66006/moon-problem-details`** v0.1.0 — RFC 9457 Problem Details JSON parser, serializer, validator, registry and audit toolkit for MoonBit.
+- **`bobzhang/h11`** v0.1.2 — A pure, bring-your-own-I/O implementation of HTTP/1.1 (port of python-hyper/h11)
+- **`GCodinggo/moon-multipart`** v0.3.2 — 面向 MoonBit HTTP 生态的流式 multipart/form-data 解析与生成库，支持 RFC 7578 标准。
+- **`15614376790/moon-weblink`** v0.1.1 — RFC 8288 Web Linking and RFC 9264 Linkset parser, serializer, query and audit toolkit for MoonBit.
+- **`wuhaiting321/moonprobe`** v0.2.1 — A pure-MoonBit declarative API test runner: parses .probe cases, sends HTTP requests, asserts responses, and e…
+- **`xiguaAp6y3/moon-httpsig`** v0.1.1 — RFC 9421 HTTP Message Signatures canonicalization, HMAC signing, verification, and policy toolkit for MoonBit.
+- **`hjn0123/moon-http-range`** v0.1.0 — RFC 9110 HTTP byte-range parser, resolver, serializer, response planner and audit toolkit for MoonBit.
+- **`CYang-dep/moonrestrict`** v0.1.0 — Offline strand-aware restriction maps and verified DNA fragment reconstruction
+- **`eisem/moonpart`** v0.1.0 — Streaming-oriented multipart/form-data parser and encoder for MoonBit.
+- **`k5111114s/xb123`** v0.2.0 — MoonHAR: a MoonBit library and CLI toolkit for parsing, validating, and analyzing HTTP Archive files.
+- **`BenPaoBaMingWangXing/dispokit`** v0.1.1 — HTTP Content-Disposition parser, serializer, filename encoder, and safety diagnostics for MoonBit.
+- **`JSJ222/tus-core`** v0.1.1 — Framework-neutral tus 1.0 resumable upload protocol state machine for MoonBit
+- **`oboard/reqbest`** v0.6.0 — Best async http library for Moonbit
+- **`oyjh0381/http-cache`** v0.1.0 — Deterministic RFC 9111 HTTP cache decision engine for MoonBit
+- **`serene-WJ/moon_sfv`** v0.1.0 — A strict, cross-target RFC 8941 Structured Fields implementation for MoonBit.
+- **`XiaoMao-MYY/acceptkit`** v0.1.0 — Dependency-free HTTP representation negotiation toolkit for MoonBit.
+- **`HYF-ai2006/moonsec-headers`** v0.1.0 — MoonBit native HTTP security header and CSP audit library
+- **`xiaojing012/moon-content-disposition`** v0.1.1 — RFC 6266 Content-Disposition parser, serializer, filename resolver and safety audit toolkit for MoonBit.
+- **`conglinyizhi/dsh-console-backend`** v0.2.0 — dsh-console 的本地只读接口后端：与 Node 版响应形状逐字段一致
+- **`oboard/reqmest`** v0.5.4 — Best async http library for Moonbit
+- **`Sam-Hui-dot/moon-sfv`** v0.1.0 — RFC 9651 Structured Field Values parser and serializer for MoonBit
+- **`chenliyi-cly/mooncsp`** v0.1.0 — Parse, serialize, and check Content-Security-Policy headers in MoonBit
+- **`HaQiLyner/moon_digest_fields`** v0.2.0 — RFC 9530 SHA-256/SHA-512 digest generation, HTTP header integration, negotiation, verification, and audit
+- **`LH-DD-lh/csp-weaver-mbt`** v0.1.0 — MoonBit native Content-Security-Policy parser, auditor and migration planner.
+- **`zkc-long/faultcanvas`** v0.1.0 — Programmable HTTP fault proxy and stateful service virtualization gateway for MoonBit
+- **`qianfuzsc/moon-webfinger`** v0.1.0 — RFC 7033 WebFinger and JRD parser, serializer, request builder, query and audit toolkit for MoonBit.
+- **`wiretokenbotca4491/wire_token`** v0.1.0 — Allocation-free RFC 9110 HTTP token syntax validation.
+- **`sebastian/http_retry`** v0.1.0 — Deterministic HTTP retry decisions with Retry-After and bounded time budgets

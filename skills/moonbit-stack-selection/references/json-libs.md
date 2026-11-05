@@ -1,0 +1,133 @@
+# JSON 解析（`json`）· 基础库全量
+
+> 快照 2026-11-05｜按推荐次序列出｜返回 [json.md](json.md)｜在线版 <https://moonbit-ecosystem-index.pages.dev/#/s/json>
+
+单点能力，需自行组合；没有骨架级实现，不要当成框架推荐。
+
+- **`moonbitlang/x`** v0.5.7 — experimental packages for moonbitlang/core
+- **`moonbitlang/jsonl`** v0.2.1 — Async reader for JSON Lines (newline-delimited JSON) streams.
+- **`colmugx/json-schema`** v0.1.5 — Compile-once JSON Schema 2020-12 validator for MoonBit: exact decimal arithmetic, precise pattern semantics, n…
+- **`moonbitstack/moonjson`** v0.4.3 — JSON, its dialects and its binary encodings for MoonBit.
+- **`moonrockz/cucumber-messages`** v0.5.0 — Cucumber Messages protocol types for MoonBit with JSON serialization and NDJSON streaming
+- **`mizchi/jsonschema`** v0.8.1 — JSON Schema validator and code generator for MoonBit
+- **`moonbitstack/moonschema`** v0.2.4 — JSON Schema validation for MoonBit, draft-04 through v1: four output formats, nineteen format names, and vocab…
+- **`mizchi/js_builtin`** v0.13.0 — javascript built-in object bindings (Object, Array, JSON, RegExp, Symbol, Proxy, ...)
+- **`moonbitstack/moonmodel`** v0.1.3 — One model description for MoonBit, projected to JSON Schema, OpenAPI, SQL and GraphQL.
+- **`moonbitstack/moonapi`** v0.17.9 — A typed web framework for MoonBit.
+- **`gaato/sdk-runtime`** v0.7.0 — API-agnostic client runtime for MoonBit SDKs: error taxonomy, Retry-After and backoff, tri-state JSON fields, …
+- **`colmugx/acp`** v0.3.0 — Type-safe Agent Client Protocol (ACP) SDK for MoonBit.
+- **`colmugx/lody`** v0.1.0 — 1:1 MoonBit mirror of the LodyAI acp-extension-core contract (tool vocabulary, _meta.lody DTOs, _lody/ methods…
+- **`totto2727/agent-core-sdk`** v0.1.2 — Shared MoonBit process foundation for agent CLIs
+- **`mizchi/js_convert`** v0.13.0 — MoonBit <-> JavaScript value conversion (Map/Json/Option/Result <-> Any) and runtime type inspection
+- **`mizchi/jq`** v0.2.2 — A jq clone implemented in MoonBit
+- **`totto2727/lens`** v0.4.3 — Typed JSON lenses, builders, and aggregate validation for MoonBit
+- **`bobzhang/moonjq`** v0.2.0 — A jq implementation in MoonBit
+- **`moonrockz/smithy-jsonschema`** v0.8.0 — Convert assembled Smithy models to JSON Schema
+- **`moonbitstack/moonlog`** v0.1.6 — Structured logging for MoonBit.
+- **`totto2727/agent-cli-sdk`** v0.2.1 — Shared MoonBit process foundation for JSONL agent CLIs
+- **`bobzhang/typify`** v0.2.1 — Generate Rust and MoonBit types from JSON Schema (port of oxidecomputer/typify)
+- **`marianoguerra/mcp`** v0.10.1 — MCP 2026-07-28 protocol types, JSON-RPC codec and SEP-2243 header validation. No dependencies.
+- **`tonyfettes/tree_sitter_json`** v0.1.26 — JSON grammar for tree-sitter
+- **`tiye/json5`** v0.0.3 — JSON5 parser and stringifier for MoonBit
+- **`123123213weqw/moon_scrub`** v0.5.2 — Offline sensitive-data detection, redaction, JSON and streaming pipelines for MoonBit applications.
+- **`moonbitstack/moonfetch`** v0.1.5 — An HTTP client for MoonBit, synchronous or asynchronous.
+- **`bobzhang/jqlog`** v0.2.0 — Run jq-compatible filters over JSON Lines input
+- **`oboard/jsonx`** v0.1.0 — JSON Toolkit
+- **`Betterlol/moon_zod`** v0.10.0 — A runtime JSON schema validation library for MoonBit, inspired by Zod and Pydantic
+- **`moonrockz/jmespath`** v0.8.0 — JMESPath expressions, parsing and JSON evaluation for MoonBit
+- **`nawei123/runledger`** v0.3.0 — Offline agent-log auditing with external merge and resumable checkpoints
+- **`Wchwch777/moonverity`** v0.1.2 — MoonBit-native data contract and quality gate toolkit for CSV and JSONL datasets.
+- **`Tino-hue/projdesk-kernel`** v0.3.0 — ProjDesk MoonBit kernel — six independent algorithm engines (DSL compiler, constraint solver, migration, equiv…
+- **`Xu107-hhh/moonbit-jsonschema`** v0.1.0 — A standards-compliant JSON Schema (2020-12) validator for MoonBit, with precise error paths and full error col…
+- **`thy1016/jsonld`** v0.1.3 — JSON-LD 1.1 (expand / compact / flatten / frame / toRDF / fromRDF) + RDFC-1.0 canonicalization for MoonBit.
+- **`chensuiyi/logfly`** v0.3.0 — Logging for MoonBit: plain text and JSONL appenders with timestamps, and size-triggered log rotation
+- **`kaigeliang/jsonlogic`** v0.2.1 — Portable JSONLogic evaluation, scoped analysis, batch execution and native QueryX integration
+- **`sundaysebasidian-byte/moon-loglens`** v0.2.0 — Reusable streaming JSONL queries with nested fields, filters and grouped metrics; includes HTTP log analysis
+- **`maria/json_parser`** v0.1.1 — Fast and compliant JSON parser and serializer for MoonBit supporting the full JSON specification with strict v…
+- **`QuietlyChan/moonschema`** v0.1.0 — JSON Schema 2020-12 validator with a zod-style builder API for MoonBit — one engine, two frontends (ajv / zod)…
+- **`riantr/moonbit_labeler`** v0.2.14 — Image / video labeling backend for the MoonBit Labeler app: 24 async ops over @fs/@json for folder browsing, i…
+- **`FidollarinLA/moonmask`** v0.1.0 — Constrained decoding for LLMs in MoonBit: compile JSON Schema and regex to byte-level DFAs and mask invalid to…
+- **`cxh123-alt/moonbit-fhir`** v0.2.1 — MoonBit-native FHIR R4/R5 JSON validation, profiles, NDJSON, Bundle analytics, terminology, privacy, and CLI w…
+- **`cosgammmmma/moonschema`** v0.1.1 — Schema validation and data modeling library for MoonBit — declarative type definitions, constraint validation,…
+- **`mizchi/json`** v0.4.0 — simple json parser
+- **`JingLan0v0/jmespath`** v0.1.15 — A standards-oriented JMESPath parser and JSON query engine in MoonBit.
+- **`Rz-coder8848/moonpe`** v0.8.1 — Pure-MoonBit Windows PE32/PE32+ reader: IAT, resources, .NET metadata tables, LoadConfig, JSON and recursive s…
+- **`gmlewis/json`** v0.15.0 — simple json parser
+- **`shina1024/jqx`** v0.4.3 — jq-compatible JSON processor written in MoonBit with a CLI and TypeScript bindings
+- **`yyyt0807/external-sort`** v0.1.0 — Stable bounded-memory external sorting and merge planning for MoonBit
+- **`chensuiyi/fndash`** v0.3.0 — lodash-style utility belt for MoonBit: string trimming, strict int parsing, quoted-value extraction, JSON buil…
+- **`Tigls/mb-jwt`** v0.1.0 — JWT (JSON Web Tokens) for MoonBit with HS256 signing and verification
+- **`R00TK17/moonreader`** v0.1.3 — MoonReader — 纯 MoonBit 实现的文件内容读取库（TXT / CSV / JSON / JSONL / XML / Markdown / ZIP / TAR / DOCX / XLSX / PPTX /…
+- **`moonbitlang/json_deriving`** v0.1.2 — deriving JSON serialization and deserialization automatically
+- **`bobzhang/jq`** v0.2.0 — Run jq-compatible JSON filters directly with moonx
+- **`0xA672/strip`** v0.1.2 — Recursively strip empty/null/zero values from JSON-like structures
+- **`cogna-dev/parkit`** v0.1.1 — A nom-like parser combinator framework for MoonBit
+- **`BigSaltyMan/moonjson-toolkit`** v0.3.1 — A JSON toolkit for MoonBit: format, validate, diagnose, analyse and visualise JSON documents.
+- **`Ljh684/MoonParse`** v0.1.4 — MoonBit 解析器组合子库 — 与生态中其他 combinator 不同：(1)内置完整 JSON 解析器（JsonValue 枚举+双向序列化）和 TOML 解析器，开箱即用；(2)支持二进制解析（u8-u64/L…
+- **`tiye/recollect`** v0.2.1 — Structural JSON diff/patch for MoonBit — compute and apply PatchOp sequences between Json trees
+- **`poteto0/endor`** v0.8.0 — An Ethereum SDK for MoonBit: typed JSON-RPC reads, contracts through their ABI, and signing — over a browser w…
+- **`moonrockz/smithy-openrpc`** v0.8.0 — Convert Smithy JSON-RPC services to OpenRPC
+- **`caassien/jsonpath`** v0.1.0 — A High-Performance JSONPath Engine for MoonBit ecosystem
+- **`pangbit/moonjsonnet`** v0.2.3 — An embeddable, lazy Jsonnet interpreter for MoonBit native applications
+- **`trail-it/moonstream`** v0.1.1 — Incremental, chunk-invariant parsing of streaming JSON tool-call arguments.
+- **`bobzhang/referencing`** v0.1.2 — A faithful MoonBit port of python-jsonschema/referencing: cross-specification JSON referencing.
+- **`jaredzhou/queryx`** v0.2.1 — JSON-queryable filter DSL with foxql SQL builder bridge
+- **`RabitLogic/mjwt`** v0.2.0 — A JWT (JSON Web Token) library for MoonBit with extensible trait-based signers
+- **`Freesia666/moonjsonpath`** v0.1.1 — JSON Pointer and JSONPath query utilities for MoonBit
+- **`zhanshishan/jsonmend`** v0.8.1 — Streaming JSON repair and partial parsing in pure MoonBit
+- **`YeeHh2004/moonrule`** v0.4.1 — An explainable expression rules engine for JSON data, implemented in MoonBit.
+- **`jaredzhou/pony`** v0.5.0 — Lightweight HTTP web framework and router for MoonBit, inspired by Chi
+- **`2d5rrr333/moonbridge`** v0.1.0 — The 'wasm owns state, JS is a thin shell' architecture as a reusable kit: a generic Session with an init/dispa…
+- **`tonyfettes/json_test_parser`** v0.1.0 — A lightweight and efficient JSON parser for MoonBit with support for parsing and stringifying JSON data
+- **`Yu-zh/data`** v0.2.1 — A serde-shaped serialization framework: one data model, many formats
+- **`bobzhang/jsonschema`** v0.1.2 — A faithful MoonBit port of python-jsonschema: JSON Schema validation.
+- **`YumeCross/schema`** v0.4.3 — Json Schema validation for MoonBit.
+- **`tonyfettes/amjson`** v0.1.0 — A complete JSON parser implementation in MoonBit
+- **`yuzhiblue/moon-diff`** v0.2.2 — A text diff & patch library for MoonBit: LCS & Myers diff, 5 diff algorithms, unified/git patch apply, 3-way m…
+- **`bobzhang/jmespath`** v0.1.2 — A faithful MoonBit port of jmespath.py, a query language for JSON.
+- **`btlqql/moon_json_repair`** v0.2.0 — Conservative JSON syntax repair with replayable edits and explicit refusal boundaries.
+- **`tonyfettes/json_parser`** v0.1.0 — A complete JSON parser for MoonBit with full spec compliance, error handling, and pretty-printing support
+- **`tonyfettes/maria_json_parser`** v0.1.0 — A pure MoonBit JSON parser with comprehensive parsing and serialization capabilities
+- **`moonrockz/smithy-cli`** v0.8.0 — Smithy command-line application
+- **`ppyj663/moon-jsonpath`** v0.2.0 — A small MoonBit JSONPath parser and evaluator for RFC 9535 core query patterns.
+- **`MuVirus/moonfig`** v0.1.8 — MoonBit 原生配置库：一处声明，多来源汇入。
+- **`peter-jerry-ye/json`** v0.4.0
+- **`6P66006/moon-problem-details`** v0.1.0 — RFC 9457 Problem Details JSON parser, serializer, validator, registry and audit toolkit for MoonBit.
+- **`Xu107-hhh/moonbit-jsonpatch`** v0.2.0 — RFC 6902 JSON Patch (apply + diff) and RFC 7386 JSON Merge Patch for MoonBit, with RFC 6901 JSON Pointer suppo…
+- **`Noverberrain/configscope`** v0.6.1 — Configuration contract compatibility checks for MoonBit
+- **`bzy-debug/json_parser`** v0.1.0 — A complete JSON parser implementation in MoonBit supporting all JSON data types with comprehensive error handl…
+- **`123123213weqw/moonbit_jwt`** v0.1.0 — A MoonBit library for JSON Web Token (JWT) creation and verification. Pure MoonBit SHA256 + HMAC implementatio…
+- **`joanna/moonfeed`** v0.2.0 — RSS 2.0, Atom 1.0 and JSON Feed 1.1 parsing and normalization for MoonBit.
+- **`tonyfettes/json`** v0.4.2
+- **`sgy1023-crt/MoonCheck`** v0.2.0 — Batch / CI JSON Schema validation CLI with schema linting and JSON reports, built on mizchi/jsonschema.
+- **`z2823253773-p/moonrules`** v0.2.0 — Explainable and budget-limited JSON business rules for MoonBit
+- **`willzhang/json_regress`** v0.1.2 — JSON, tensor and trajectory regression assertions with explicit tolerances and structured differences.
+- **`xlyyyyyy112/moonbit-json-jcs`** v0.1.0 — Strict JSON parsing and deterministic JSON canonicalization for MoonBit.
+- **`gepheum/skir-client`** v0.1.1 — SkirRPC integration for MoonBit
+- **`zdu881/webmocket`** v0.1.0 — A simple WebSocket client for MoonBit with pure JSON messaging support
+- **`gmlewis/jsonutil`** v0.24.0 — DEPRECATED AND ARCHIVED - USE STANDARD LIBRARY INSTEAD
+- **`zhanshishan/interjson`** v0.13.0 — The execution gate for LLM output: local MCP server, streaming JSON repair and partial parsing in pure MoonBit
+- **`forey217/moonconfig`** v0.2.0 — JSON configuration three-way review with explicit decisions and guarded patch replay
+- **`youyong5/feedlens`** v0.2.0 — Multi-format RSS 2.0, Atom 1.0 and JSON Feed 1.0/1.1 parsing library with source-aware links and diagnostics
+- **`Lampese/moonbead`** v0.1.3 — Minimal single-machine issue tracker for AI agents, backed by JSONL.
+- **`JingLan0v0/moonpatch`** v0.2.0 — Guarded rollback receipts for RFC 6902 JSON Patch transactions in MoonBit.
+- **`ppyj663/moonjtd`** v0.2.0 — MoonBit-native RFC 8927 JSON Type Definition validator and code generator
+- **`haol-05/moonloom`** v0.1.1 — Pipeline query engine over semi-structured text: CSV, JSON, logfmt, access logs and syslog in, query plans, in…
+- **`kupas/orjson`** v0.1.1 — MoonBit bindings for orjson's JSON engine (yyjson), with orjson-compatible parsing and serialization semantics…
+- **`moonrockz/smithy-codec`** v0.8.0 — Schema-driven JSON codecs with declared serialization profiles for Smithy shapes
+- **`moonbitlang/json_deriving_codegen`** v0.0.2
+- **`codeworm96/magpiedb`** v0.2.0 — vibe coded lightweight OLAP database
+- **`ZSeanYves/doc_parser`** v0.1.1 — MoonBit-native document structure foundation for source-native parsing, inspect, validation, and custom toolin…
+- **`moonbit-community/tree-sitter-json`** v0.24.8 — JSON grammar for tree-sitter (tree-sitter/tree-sitter-json v0.24.8), for the MoonBit port of Tree-sitter (moon…
+- **`red6667/moonjsone`** v0.1.1 — Portable JSON-e structured template interpreter and bounded JSON generation
+- **`GuoXBQ-Q/moon-boofuzz`** v0.1.3 — Deterministic protocol fuzzing core with native TCP/UDP execution and portable JSONL replay
+- **`Lyhdsba/moonbit-chemreport`** v0.3.1 — A reusable report layer for MoonBit chemical-engineering calculations.
+- **`bobzhang/atd`** v0.3.0 — A MoonBit port of ATD (Adaptable Type Definitions) with a MoonBit code generator
+- **`kosei28/maru`** v0.3.0 — A minimal MoonBit validation library that constructs a typed value while validating, without holding a schema …
+- **`wallll-wal6/moonbit-design-tokens`** v0.1.1 — MoonBit-first design token parser, validator, and multi-target generator.
+- **`bobzhang/atd_runtime`** v0.1.0 — Runtime library of the MoonBit code generated by atdmbt (bobzhang/atd)
+- **`jinser/json`** v0.0.1
+- **`lllg123/moonbit-chemreport`** v0.3.0 — A MoonBit-native report layer for chemical engineering calculations.
+- **`qianfuzsc/moon-webfinger`** v0.1.0 — RFC 7033 WebFinger and JRD parser, serializer, request builder, query and audit toolkit for MoonBit.
+- **`moonbit-community/moonjq`** v0.2.0 — A jq implementation in MoonBit
+- **`zmjknn/openrpc`** v0.1.0 — OpenRPC document modeling and validation for MoonBit

@@ -1,0 +1,24 @@
+import {
+  "NoahLiu/yoga-mbt/src" @yoga,
+  "NoahLiu/native-gui/ui",
+  "NoahLiu/native-gui/style" @style,
+  "NoahLiu/native-gui/sys" @sys,
+  "NoahLiu/native-gui/base" @base,
+  "NoahLiu/native-gui/widget" @widget,
+  "moonbitlang/core/json" @json,
+  "moonbitlang/core/math" @math,
+  "moonbitlang/core/env" @env,
+  "moonbitlang/core/string" @str,
+  "moonbitlang/core/encoding/utf8" @utf8,
+  "moonbitlang/core/buffer" @buffer,
+  "moonbitlang/async" @async,
+  "moonbitlang/async/http" @http,
+  "moonbitlang/async/socket" @socket,
+  "moonbitlang/async/signal" @signal,
+}
+
+pkgtype(kind: "executable")
+
+supported_targets = "native"
+
+// 没有 native-stub：网络走 async 自带的实现，不再需要任何 C 垫片。

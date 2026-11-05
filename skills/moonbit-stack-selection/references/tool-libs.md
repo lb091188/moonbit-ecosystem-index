@@ -1,0 +1,70 @@
+# 开发工具 / 代码质量（`tool`）· 基础库全量
+
+> 快照 2026-11-05｜按推荐次序列出｜返回 [tool.md](tool.md)｜在线版 <https://moonbit-ecosystem-index.pages.dev/#/s/tool>
+
+单点能力，需自行组合；没有骨架级实现，不要当成框架推荐。
+
+- **`moonbitlang/formatter`** v0.1.6 — code prettifier for MoonBit
+- **`riantr/moonbit_static_analysis`** v0.4.41 — Three-inspection (structural / type / behavior) static analysis for MoonBit programs, every toolchain file kin…
+- **`moonbitlang/protobuf`** v0.2.0 — The runtime library for protobuf
+- **`moonbitstack/moonast`** v0.2.6 — Code generation for MoonBit from annotated declarations.
+- **`mizchi/codegen`** v0.2.4 — Generic code generation library with abstract IR
+- **`moonbit-community/moongrep`** v0.3.10 — Experimental MoonBit structural search and taint-analysis tool
+- **`golemcloud/golem_sdk_tools`** v0.6.2 — Code generation tools for the Golem SDK for MoonBit
+- **`moonbitstack/moonctl`** v0.12.7 — Project and code generator for MoonBit services.
+- **`Milky2018/aarch64_target`** v0.18.0 — AArch64 direct MilkIR target pipeline to native code
+- **`Milky2018/x64_target`** v0.18.0 — x64 direct MilkIR target pipeline to native code
+- **`Milky2018/vcode`** v0.18.0 — Target-independent native lowering, VCode, and code-object infrastructure
+- **`marianoguerra/wax`** v0.4.2 — The Wax language in MoonBit: parser, formatter, type checker, and wasm/wat emitters
+- **`yzfyzf12345678/moonbit-rtl`** v0.1.5 — A practical Verilog RTL parser and rule checker written in MoonBit.
+- **`668xin/modbus_lint`** v0.1.2 — General-purpose Modbus point-table linter: catches duplicate register names, out-of-range and overlapping addr…
+- **`moonbit-community/bashcheck`** v0.0.2 — MoonBit reimplementation of ShellCheck
+- **`Milky2018/machv`** v0.12.6 — Target-neutral semantic machine IR
+- **`Milky2018/milkir_machv`** v0.12.6 — MilkIR-to-MachV lowering
+- **`moonbit-community/proton_codegen`** v0.7.0 — WASM code generator for typed Proton command registrars.
+- **`Mr-Houjie/mbt-typeset`** v0.1.0 — 中文排版校对工具：检查并自动修复中英文间距、全角标点、术语统一等问题，提供命令行工具与可复用库。
+- **`Ridge-Lab/capnp`** v0.3.1 — Cap'n Proto serialization runtime and schema code generation for MoonBit.
+- **`moonrockz/smithy-codegen`** v0.8.0 — Language-neutral Smithy code generation core
+- **`spectacleCase/moonhadolint`** v0.1.3 — Dockerfile parser and hadolint-style linter for MoonBit
+- **`mizchi/starlint`** v0.10.1 — Opinionated moonbit linter
+- **`minie135/moon-audit`** v0.5.0-dev — Static security scanner for MoonBit projects
+- **`marianoguerra/wax-cli`** v0.4.2 — The wax-mb command-line tool: convert, format and check Wax source
+- **`justjavac/template_codegen`** v0.1.5 — Code generator for precompiled MoonBit templates.
+- **`Mairzzcllo/moonbit_sqlc_plugin`** v0.1.9 — sqlc WASM plugin ? generate type-safe MoonBit database layer from SQL queries
+- **`Zhouz-z/moon_l10n`** v0.2.0 — A cross-target ICU MessageFormat subset runtime and catalog linter for MoonBit.
+- **`bobzhang/typify`** v0.2.1 — Generate Rust and MoonBit types from JSON Schema (port of oxidecomputer/typify)
+- **`mizchi/sqlc_gen_moonbit`** v0.4.0 — sqlc plugin for MoonBit
+- **`bobzhang/cfront`** v0.4.0 — C syntax suite for meta-programming: parse C to an AST, build or transform it from MoonBit, and print it back …
+- **`001-Elsa/moonpack`** v0.1.2 — MoonPack is a MoonBit-native schema-first binary serialization toolkit.
+- **`youyong5/a11ytrace`** v0.6.0 — Pure HTML accessibility checks for MoonBit projects.
+- **`pei0331/moon-wit`** v0.1.1 — A dependency-free WIT parser and MoonBit API scaffold generator
+- **`dtzrttp/moonbit-rtl`** v0.2.5 — A Verilog-2001 RTL parser, hierarchy analyzer, and lint tool written in MoonBit.
+- **`icyaaaww/moonbind`** v0.10.0 — Generate type-safe MoonBit FFI bindings from C headers.
+- **`moonbitlang/protoc-gen-mbt`** v0.3.0 — The Protocol Buffers compiler plugin for MoonBit
+- **`tonyfettes/gir`** v0.3.2 — GIR XML code generator for MoonBit GTK/GLib/GIO bindings
+- **`123123213weqw/moon_proto`** v0.1.1 — A MoonBit protobuf ecosystem lab for dynamic schema validation, compatibility testing, and AI code verificatio…
+- **`NaIWaniubi/moon-slice`** v0.7.8 — Program slicing, dependency graphs, and data-flow paths for MoonBit
+- **`bobzhang/html_parser_examples`** v0.1.0 — Runnable examples and documentation for bobzhang/html_parser.
+- **`lenitain/kdl`** v0.2.0 — KDL document language parser, formatter, query engine, and schema validation library for MoonBit
+- **`Milky2018/isa_target`** v0.1.0 — ISA lowering from MilkIR to MachV
+- **`marianoguerra/shrubbery-cli`** v0.1.2 — The shrubbery command-line tool: parse, print, format and check Shrubbery notation
+- **`Atman-Angle/oas2moon_codegen`** v0.1.0 — MoonBit SDK emitter for the oas2moon OpenAPI client generator.
+- **`moonrockz/smithy-codegen-python`** v0.8.0 — A Smithy code generator for Python JSON-RPC peers
+- **`wflixu/Orion`** v0.2.0 — Derive + Codegen ORM for MoonBit. Schema DSL, type-safe CRUD, Query Builder.
+- **`Atman-Angle/oas2moon_core`** v0.1.0 — Canonical Client IR, validation, naming, and type mapping for oas2moon.
+- **`Atman-Angle/oas2moon_frontend`** v0.1.0 — OpenAPI frontend adapter for the oas2moon MoonBit client SDK generator.
+- **`moonrockz/smithy-codegen-go`** v0.8.0 — Go JSON-RPC peers from prepared Smithy contracts
+- **`moonrockz/smithy-codegen-moonbit`** v0.8.0 — A Smithy code generator for MoonBit JSON-RPC peers
+- **`joanna/minitpl`** v0.1.2 — A lightweight MoonBit template toolkit for rendering, variable extraction, and template validation.
+- **`kupas/xmlfmt`** v0.1.4 — An XML formatter written in MoonBit, ported from python xmlformatter.
+- **`Armyhealthyhappy/moonbit-roman`** v0.3.0 — Roman numeral parsing, linting, safe rewriting, and document indexing for MoonBit
+- **`Derk2006/sarifkit`** v0.1.1 — Pure MoonBit SARIF 2.1.0 report builder, validator and merger
+- **`pocket7878/cog_complex`** v0.1.0 — Cognitive Complexity score analyzer for MoonBit source code
+- **`2227057182/moonshim`** v0.1.1 — Conservative, compile-tested compatibility shims for evolving MoonBit public APIs.
+- **`zbhzs1/moonasyncapi`** v0.2.0 — AsyncAPI 3.0 to MoonBit type and message interface generator
+- **`moonbit-community/gen_version`** v0.0.2 — Generate a MoonBit `MODULE_VERSION` constant from the version in `moon.mod`
+- **`Noverberrain/moonsarif`** v0.4.0 — Pure MoonBit toolkit for parsing, validating, filtering and summarizing SARIF 2.1.0 logs
+- **`tlhuecdkoyg/MoonEditorConfig`** v0.1.0 — An explainable EditorConfig core and style diagnostics toolkit for MoonBit projects.
+- **`Atman-Angle/oas2moon`** v0.1.0 — Umbrella entry point for the complete oas2moon MoonBit client SDK generator suite.
+- **`jonesmelton/sqlbrook`** v0.3.0 — Whole-statement SQLite formatter for the river style, as a library and a stdin CLI.
+- **`cn-xjr/migration_lens`** v0.1.0 — Offline PostgreSQL index migration review with explicit execution context

@@ -1,0 +1,63 @@
+# Web 前端框架（`ui`）· 基础库全量
+
+> 快照 2026-11-05｜按推荐次序列出｜返回 [ui.md](ui.md)｜在线版 <https://moonbit-ecosystem-index.pages.dev/#/s/ui>
+
+单点能力，需自行组合；没有骨架级实现，不要当成框架推荐。
+
+- **`mizchi/signals`** v0.6.6 — Fine-grained reactive signals for MoonBit (alien-signals inspired)
+- **`mizchi/crater`** v0.19.0 — CSS Layout Engine that implements Box/Flex/Grid
+- **`mizchi/layout`** v0.2.1 — Pure layout computation kernel: alignment, justify, clamp, axis utilities
+- **`dowdiness/incr`** v0.15.1 — Salsa-inspired incremental recomputation library with automatic dependency tracking, backdating, and durabilit…
+- **`mizchi/css`** v0.7.4 — Standalone CSS parser, selector, cascade and computed-style engine for MoonBit
+- **`Milky2018/moon_taffy`** v0.5.3 — MoonBit port of the Rust crate taffy (v0.5.x)
+- **`bobzhang/html_parser`** v0.2.3 — MoonBit HTML parser and sanitizer ported from JustHTML.
+- **`mizchi/crater-dom`** v0.19.0 — DOM, HTML, AOM, and scheduling packages for crater
+- **`moonbit-community/rui`** v0.5.0 — Self-contained Nova-style UI components for Rabbita
+- **`mizchi/js_browser`** v0.13.0 — browser-specific js bindings (DOM, canvas, indexeddb, ...)
+- **`tiye/dom-ffi`** v0.5.1 — Typed MoonBit bindings for browser DOM APIs
+- **`Milky2018/css`** v0.6.1 — CSS parser, selector, cascade, and computed-style core maintained for Milky2018/svg
+- **`tiye/respo_css`** v0.1.7 — Type-safe CSS styling library for Respo framework with comprehensive property definitions, enumeration values,…
+- **`vicTop-cw/RX-MBT`** v0.4.0 — Rx-Rust 的 MoonBit 复刻：基于 Observer 模式的响应式编程库（Observable / Subject / Scheduler / 操作符），零外部依赖。
+- **`mizchi/js_web`** v0.13.1 — web standard api bindings (fetch, Streams, Blob, URL, Crypto, ...)
+- **`mizchi/luna_components`** v0.23.4 — Headless + styled UI components (WAI-ARIA APG patterns) for Luna UI
+- **`Frank-III/onebit-yoga`** v0.2.6 — MoonBit bindings for Yoga Layout Engine
+- **`Milky2018/chicle`** v0.6.3 — A UI layout engine for MoonBit
+- **`Yoorkin/duplix`** v0.2.9 — An RC-friendly reactive graph with lazy computation and bounded retention.
+- **`lampclaw/minimoon_ui`** v0.2.0 — Native, touch-first Skyline components for Minimoon, adapted from RUI.
+- **`helios-house/valence`** v0.3.1 — MoonBit UI where every component is readable by humans and AI equally
+- **`marianoguerra/tailwindcss`** v0.5.0 — A MoonBit implementation of the Tailwind CSS v4 compiler
+- **`bikallem/webapi`** v0.5.0 — Moonbit browser WebApi - dom, fetch, html, xhr, url, svg, uievents and more
+- **`chen333w/moon-element`** v0.2.0 — Web Components runtime for MoonBit, with an offscreen layout engine: the same view tree renders to custom elem…
+- **`howtomakeaname/sumi`** v0.3.0 — A UI component library for MoonBit web apps — dark & light themes, overlay motion, zero config
+- **`lampclaw/lampo`** v0.1.0 — A MoonBit UI runtime for WeChat MiniApp Skyline with pure Elm-style authoring, component-scoped state, and gen…
+- **`conglinyizhi/precss`** v0.1.4 — A pluggable CSS preprocessor compile facade: a single function turns SCSS / LESS / CSS source (or file) into C…
+- **`marianoguerra/css`** v0.1.2 — A semantic CSS syntax tree for MoonBit: a tolerant parser, a printer with pretty, compact and minified modes, …
+- **`2d5rrr333/moonbridge`** v0.1.0 — The 'wasm owns state, JS is a thin shell' architecture as a reusable kit: a generic Session with an init/dispa…
+- **`mizchi/moon_component`** v0.5.5
+- **`marianoguerra/shrubbery-css`** v0.2.1 — CSS in shrubbery notation: lower shrubbery to a CSS tree, and print a CSS tree back as shrubbery
+- **`Atman-Angle/oas2moon_frontend`** v0.1.0 — OpenAPI frontend adapter for the oas2moon MoonBit client SDK generator.
+- **`mizchi/crater-css`** v0.17.1 — CSS parser, selector, cascade, and computed style engine for crater
+- **`himeno/reactive`** v0.1.2 — A reactive programming library, including signals, event emitters, and streams observer.
+- **`XiLaiTL/moobile`** v0.6.0 — MoonBit UI for mobile: Android, iOS and Web from one rabbita (TEA) app, rendered by React Native
+- **`NoahLiu/yoga-mbt`** v0.1.1 — 纯 MoonBit 的 Flexbox 布局引擎：只对齐 Web Flexbox 标准（CSS Flexible Box Layout），为 native-gui 的 MoonBit 化提供布局层
+- **`LING71671/moon-egui`** v0.6.0 — High-performance, pure MoonBit Immediate-Mode GUI library for WebAssembly, Canvas, and Games.
+- **`tonyfettes/giraffe`** v0.2.0 — Elm-style declarative UI framework for MoonBit, built on GTK4
+- **`PerfectPan/svgo`** v0.3.2 — SVG optimizer in pure MoonBit: svgo-compatible plugin pipeline with path data optimization, colour and number …
+- **`bikallem/reactive`** v0.2.0 — A reactive programming library for Moonbit
+- **`dijdzv/websys`** v0.3.0 — MoonBit bindings for Web APIs (DOM, HTML, Canvas, WebGL, etc.)
+- **`moonbit-community/dom_sanitizer`** v0.1.0
+- **`moonrockz/mission-control-desktop`** v0.1.0 — Mission Control desktop shell: Proton command contract and HTML document
+- **`moonrockz/mission-control-web`** v0.1.0 — Mission Control web UI, written with Rabbita
+- **`CGaaaaaa/signal`** v0.1.2 — 高效的函数式响应编程库 - MoonBit Signal 实现
+- **`CGaaaaaa/reactivex`** v0.1.0 — Reactive Extensions for MoonBit - 响应式编程库
+- **`KKKIIO/selene_xaml`** v0.37.5 — MS-XAML-2017 object-mapping profile and typed View generation for Selene
+- **`moonbitstack/moonegui`** v0.2.1 — Immediate-mode graphical interfaces for MoonBit.
+- **`sennenki/rabbitify`** v0.1.0 — Convert HTML document to Rabbita VDom functions
+- **`fgeygfe/dom_api`** v0.1.0
+- **`wallll-wal6/moonbit-design-tokens`** v0.1.1 — MoonBit-first design token parser, validator, and multi-target generator.
+- **`conglinyizhi/dsh-console-frontend`** v0.2.0 — dsh-console 前端：rabbita + precss
+- **`quelgar/lunar-reactor`** v0.1.0 — Asynchronous reactive streams library for Moonbit
+- **`moonbitstack/moonxml`** v0.1.4 — HTML, XML and SVG for MoonBit: parse, query and edit.
+- **`moonrockz/moonbase-desktop`** v0.0.1 — Moonbase desktop shell: Proton command contract and HTML document
+- **`moonrockz/moonbase-web`** v0.0.1 — Moonbase web UI, written with Rabbita
+- **`azhzx/qiang`** v0.1.0 — Qiang: a C11 compiler front end that lowers to QBE IR (formerly qpcc)
