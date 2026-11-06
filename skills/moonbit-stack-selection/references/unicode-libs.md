@@ -21,8 +21,8 @@
 - **`moonbit-community/normalization`** v0.5.2 — Unicode normalization forms for MoonBit
 - **`bobzhang/beautiful_mermaid`** v0.2.1 — MoonBit port of beautiful-mermaid: render Mermaid diagrams to SVG and ASCII/Unicode text.
 - **`moonbit-community/unicode-normalization`** v0.7.0 — Unicode normalization forms for MoonBit
-- **`moonbit-community/punycode`** v0.7.0 — RFC 3492 Punycode for MoonBit
 - **`moonbit-community/unicode-bidi`** v0.7.0 — Unicode Bidirectional Algorithm for MoonBit
+- **`moonbit-community/punycode`** v0.7.0 — RFC 3492 Punycode for MoonBit
 - **`moonbitstack/moonucd`** v0.1.3 — The Unicode Character Database for MoonBit.
 - **`moonbit-community/harfbuzz`** v0.2.0 — MoonBit port of HarfBuzz.
 - **`moonbit-community/idna`** v0.5.2 — UTS #46 IDNA processing for MoonBit
@@ -39,22 +39,22 @@
 - **`AdUhTkJm/u8str`** v0.1.5 — UTF-8 String and its functionalities.
 - **`amor2025/convert`** v0.3.2 — 这是一个用 Moonbit 编写的类型转换库，提供了将字符串转换为整数、浮点数和布尔值等功能。
 - **`wzzc-dev/moui_sun`** v0.3.0 — Experimental MoonBit-native CPU raster stack for MoUI
-- **`maria/json_parser`** v0.1.1 — Fast and compliant JSON parser and serializer for MoonBit supporting the full JSON specification with strict v…
 - **`moonbitstack/moonregex`** v0.1.3 — Regular expressions for MoonBit.
+- **`maria/json_parser`** v0.1.1 — Fast and compliant JSON parser and serializer for MoonBit supporting the full JSON specification with strict v…
+- **`moonbit-community/unicode-segmentation`** v0.7.0 — Unicode Text Segmentation for MoonBit
 - **`mldong/moon-hutool`** v0.1.8 — Hutool-style utility library for MoonBit: all packages depend only on moonbitlang/core (no FFI, fully synchron…
 - **`moonbit-community/find_cluster_break`** v0.1.3 — Find the position of grapheme cluster breaks in a string
 - **`kawaz/unicodegrapheme`** v0.9.0 — DEPRECATED: Use kawaz/grapheme instead. This package re-exports kawaz/grapheme for backwards compatibility.
-- **`moonbit-community/unicode-segmentation`** v0.7.0 — Unicode Text Segmentation for MoonBit
 - **`helios-house/aho-corasick`** v0.4.0 — Aho-Corasick multi-pattern string matching algorithm for MoonBit
 - **`hackwaly/find_cluster_break`** v0.1.2 — Find the position of grapheme cluster breaks in a string
 - **`illusory0x0/case_conv`** v0.1.0 — A comprehensive MoonBit library for converting between different case styles including camelCase, snake_case, …
 - **`CaptainK-65/moon-collate`** v0.2.1 — Unicode Collation Algorithm and DUCET sort-key toolkit for MoonBit
 - **`chawyehsu/stringprep`** v0.0.1 — Preparation of Internationalized Strings (stringprep) in MoonBit
 - **`Atman-Angle/moonbit-unicode`** v0.1.0 — Unicode 16.0 normalization and extended grapheme segmentation for MoonBit
+- **`ShiChengxu/moonlayout`** v0.2.0 — Unicode 17 paragraph layout, line breaking and word/sentence segmentation
+- **`lampclaw/i18n`** v0.9.3 — Typed internationalization, MF2 formatting, and catalog tooling for MoonBit
 - **`fuwasegu/moonbitap`** v0.1.0 — Bitap (Shift-Or) algorithm for fuzzy string matching with full Unicode support
 - **`tonyfettes/pango`** v0.2.0 — MoonBit bindings for Pango text layout and rendering
-- **`lampclaw/i18n`** v0.9.3 — Typed internationalization, MF2 formatting, and catalog tooling for MoonBit
-- **`ShiChengxu/moonlayout`** v0.2.0 — Unicode 17 paragraph layout, line breaking and word/sentence segmentation
 - **`pei0331/moonbit_diff`** v0.5.0 — Unicode-safe text diff and Unified Diff rendering for MoonBit
 - **`illusory0x0/fuzzy_match`** v0.2.5 — A library for fuzzy string matching and fuzzy string searching
 - **`Lampese/moonbit-chalk`** v0.5.0 — Terminal string styling support for MoonBit.
@@ -64,11 +64,11 @@
 - **`mizchi/text`** v0.6.0 — Text rendering helpers (glyph cache, batch builder, font engine) on top of mizchi/gfx and mizchi/font, extract…
 - **`KeqingMoe/unicode_xid`** v0.0.1 — Unicode XID
 - **`fundon/emoji`** v0.3.0 — Unicode Emoji Segmentation — MoonBit implementation of UTS #51 v17.0.0
-- **`bobzhang/loop_invariants_string`** v0.16.0 — String algorithms with loop-invariant explanations
 - **`chensuiyi/fndash`** v0.3.0 — lodash-style utility belt for MoonBit: string trimming, strict int parsing, quoted-value extraction, JSON buil…
+- **`bobzhang/loop_invariants_string`** v0.16.0 — String algorithms with loop-invariant explanations
 - **`Sidney-sunny/moonspoof`** v0.2.0 — Unicode Spoof and Homoglyph Detection for MoonBit (UTS #39)
-- **`Careylq/spell`** v0.9.6 — Pure-MoonBit spell checker compatible with the Hunspell .aff/.dic dictionary format.
 - **`MINGtoMING/simdstring`** v0.2.0 — SIMD-accelerated string operations for Moonbit's native backend
+- **`Careylq/spell`** v0.9.6 — Pure-MoonBit spell checker compatible with the Hunspell .aff/.dic dictionary format.
 - **`albertoforni/symspell`** v0.4.2 — SymSpell spelling correction, compound splitting and merging, and Unicode word segmentation in MoonBit.
 - **`xunyoyo/NyaSearch`** v0.1.0 — NyaSearch: A High-Performance Text Search Library
 - **`hiroyannnn/strsim`** v0.2.1 — String similarity and distance algorithms for MoonBit (Hamming, Levenshtein, Jaro, Jaro-Winkler, OSA, Damerau-…
@@ -93,25 +93,26 @@
 - **`bobzhang/paste`** v0.1.2 — Merge lines of files like paste, runnable via moonx
 - **`bobzhang/tr`** v0.1.2 — Translate, squeeze, or delete bytes like tr, runnable via moonx
 - **`yuzhiblue/moon-diff`** v0.2.2 — A text diff & patch library for MoonBit: LCS & Myers diff, 5 diff algorithms, unified/git patch apply, 3-way m…
+- **`wallll-wal6/arachne`** v0.1.1 — Behavior contract testing across MoonBit regex backends with Unicode boundary fixtures.
 - **`CMoonBack/string-Algorithm`** v0.1.0
 - **`amor2025/pad`** v0.1.3 — 用于填充字符串的Moonbit包。
 - **`illusory0x0/lexer`** v0.2.0 — A MoonBit tokenization library for parsing Token payloads from strings and bytes. Provides efficient tokenizat…
 - **`illusory0x0/string_of_bytes`** v0.1.0 — A MoonBit package for converting bytes to strings with efficient memory operations
+- **`moonbitstack/moonegui`** v0.2.1 — Immediate-mode graphical interfaces for MoonBit.
 - **`myfreess/unicode_data`** v0.1.1
 - **`illusory0x0/ryu`** v0.1.1 — A MoonBit implementation of the Ryu algorithm for fast floating-point to string conversion, compliant with ECM…
-- **`moonbitstack/moonegui`** v0.2.1 — Immediate-mode graphical interfaces for MoonBit.
 - **`Teddy-Yangjiale/rope`** v0.1.0 — A B-tree rope data structure for efficient text manipulation in MoonBit
 - **`chenliyi-cly/moonweave`** v0.1.1 — Portable weaving draft simulation, liftplan compilation and periodic float analysis
 - **`elzup/peeler`** v0.1.2 — Bracket parser for MoonBit - parse nested bracket structures into tree nodes
 - **`bzy-debug/text_document`** v0.1.0 — A high-performance text document library for MoonBit that provides LSP-compatible text editing operations. Thi…
+- **`vicoproplus/moon_textstat`** v0.2.0 — Readability metrics for MoonBit — text counts plus the eight textstat formulas, with all data embedded (no run…
 - **`rabbyte/suffix-array`** v0.1.0 — Optimal In-Place Suffix Sorting implementation in MoonBit Lang
 - **`sennenki/lz_string`** v0.1.0 — Port of lz-string algorithm to MoonBit
-- **`vicoproplus/moon_textstat`** v0.2.0 — Readability metrics for MoonBit — text counts plus the eight textstat formulas, with all data embedded (no run…
 - **`wwj1203/string2int`** v0.1.0 — This is a package that make a string to integer conversion.
 - **`lexchb/memcached`** v0.2.0 — A memcached text protocol client library implemented in MoonBit.
 - **`Ljh684/opencc`** v0.1.1 — OpenCC-compatible Chinese script conversion (simplified, traditional, Taiwan, Hong Kong, Japanese shinjitai) i…
+- **`walkzzz/pinyin`** v0.1.1 — MoonBit 拼音转换库 — 汉字→拼音 + 繁简转换 + 多音字 + 声调格式，移植自 pinyin4cj
 - **`sacckey/moon8bit`** v0.1.0 — A minimal retro 2D game engine for MoonBit with text-first assets, deterministic runtime, and compact APIs for…
-- **`walkzzz/pinyin`** v0.1.0 — MoonBit port of pinyin4cj: Chinese-to-pinyin conversion
 - **`wjhfather/pinyin-toolkit`** v0.1.0 — Deterministic Chinese Pinyin normalization and text matching toolkit for MoonBit
-- **`Mr-Houjie/mbt-diffview`** v0.1.0 — 文本 Diff 查看器：行级/词级差异、左右对照、统一补丁导出，附 CLI 与 Web GUI。
 - **`wzzc-dev/moui_text_providers`** v0.3.0 — Platform text providers for MoUI renderers
+- **`Mr-Houjie/mbt-diffview`** v0.1.0 — 文本 Diff 查看器：行级/词级差异、左右对照、统一补丁导出，附 CLI 与 Web GUI。

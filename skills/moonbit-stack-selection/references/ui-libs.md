@@ -33,31 +33,31 @@
 - **`conglinyizhi/precss`** v0.1.4 — A pluggable CSS preprocessor compile facade: a single function turns SCSS / LESS / CSS source (or file) into C…
 - **`marianoguerra/css`** v0.1.2 — A semantic CSS syntax tree for MoonBit: a tolerant parser, a printer with pretty, compact and minified modes, …
 - **`2d5rrr333/moonbridge`** v0.1.0 — The 'wasm owns state, JS is a thin shell' architecture as a reusable kit: a generic Session with an init/dispa…
-- **`mizchi/moon_component`** v0.5.5
 - **`marianoguerra/shrubbery-css`** v0.2.1 — CSS in shrubbery notation: lower shrubbery to a CSS tree, and print a CSS tree back as shrubbery
+- **`mizchi/moon_component`** v0.5.5
 - **`Atman-Angle/oas2moon_frontend`** v0.1.0 — OpenAPI frontend adapter for the oas2moon MoonBit client SDK generator.
 - **`mizchi/crater-css`** v0.17.1 — CSS parser, selector, cascade, and computed style engine for crater
 - **`himeno/reactive`** v0.1.2 — A reactive programming library, including signals, event emitters, and streams observer.
-- **`XiLaiTL/moobile`** v0.6.0 — MoonBit UI for mobile: Android, iOS and Web from one rabbita (TEA) app, rendered by React Native
 - **`NoahLiu/yoga-mbt`** v0.1.1 — 纯 MoonBit 的 Flexbox 布局引擎：只对齐 Web Flexbox 标准（CSS Flexible Box Layout），为 native-gui 的 MoonBit 化提供布局层
+- **`XiLaiTL/moobile`** v0.6.0 — MoonBit UI for mobile: Android, iOS and Web from one rabbita (TEA) app, rendered by React Native
 - **`LING71671/moon-egui`** v0.6.0 — High-performance, pure MoonBit Immediate-Mode GUI library for WebAssembly, Canvas, and Games.
 - **`tonyfettes/giraffe`** v0.2.0 — Elm-style declarative UI framework for MoonBit, built on GTK4
 - **`PerfectPan/svgo`** v0.3.2 — SVG optimizer in pure MoonBit: svgo-compatible plugin pipeline with path data optimization, colour and number …
+- **`moonrockz/mission-control-desktop`** v0.1.0 — Mission Control desktop shell: Proton command contract and HTML document
 - **`bikallem/reactive`** v0.2.0 — A reactive programming library for Moonbit
 - **`dijdzv/websys`** v0.3.0 — MoonBit bindings for Web APIs (DOM, HTML, Canvas, WebGL, etc.)
 - **`moonbit-community/dom_sanitizer`** v0.1.0
-- **`moonrockz/mission-control-desktop`** v0.1.0 — Mission Control desktop shell: Proton command contract and HTML document
 - **`moonrockz/mission-control-web`** v0.1.0 — Mission Control web UI, written with Rabbita
 - **`CGaaaaaa/signal`** v0.1.2 — 高效的函数式响应编程库 - MoonBit Signal 实现
+- **`moonbitstack/moonegui`** v0.2.1 — Immediate-mode graphical interfaces for MoonBit.
 - **`CGaaaaaa/reactivex`** v0.1.0 — Reactive Extensions for MoonBit - 响应式编程库
 - **`KKKIIO/selene_xaml`** v0.37.5 — MS-XAML-2017 object-mapping profile and typed View generation for Selene
-- **`moonbitstack/moonegui`** v0.2.1 — Immediate-mode graphical interfaces for MoonBit.
 - **`sennenki/rabbitify`** v0.1.0 — Convert HTML document to Rabbita VDom functions
 - **`fgeygfe/dom_api`** v0.1.0
+- **`moonbitstack/moonxml`** v0.1.4 — HTML, XML and SVG for MoonBit: parse, query and edit.
 - **`wallll-wal6/moonbit-design-tokens`** v0.1.1 — MoonBit-first design token parser, validator, and multi-target generator.
 - **`conglinyizhi/dsh-console-frontend`** v0.2.0 — dsh-console 前端：rabbita + precss
 - **`quelgar/lunar-reactor`** v0.1.0 — Asynchronous reactive streams library for Moonbit
-- **`moonbitstack/moonxml`** v0.1.4 — HTML, XML and SVG for MoonBit: parse, query and edit.
 - **`moonrockz/moonbase-desktop`** v0.0.1 — Moonbase desktop shell: Proton command contract and HTML document
 - **`moonrockz/moonbase-web`** v0.0.1 — Moonbase web UI, written with Rabbita
 - **`azhzx/qiang`** v0.1.0 — Qiang: a C11 compiler front end that lowers to QBE IR (formerly qpcc)

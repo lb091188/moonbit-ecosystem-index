@@ -9,9 +9,9 @@
 - **`Milky2018/x64_target`** v0.18.0 — x64 direct MilkIR target pipeline to native code
 - **`Milky2018/vcode`** v0.18.0 — Target-independent native lowering, VCode, and code-object infrastructure
 - **`dowdiness/js_engine`** v0.9.0 — Pure MoonBit cross-target embedded JavaScript engine
+- **`moonbitstack/moonast`** v0.2.6 — Code generation for MoonBit from annotated declarations.
 - **`mizchi/jsonschema`** v0.8.1 — JSON Schema validator and code generator for MoonBit
 - **`moonbitlang/protobuf`** v0.2.0 — The runtime library for protobuf
-- **`moonbitstack/moonast`** v0.2.6 — Code generation for MoonBit from annotated declarations.
 - **`mizchi/codegen`** v0.2.4 — Generic code generation library with abstract IR
 - **`Milky2018/machv`** v0.12.6 — Target-neutral semantic machine IR
 - **`Kaida-Amethyst/llvm`** v0.6.2 — llvm-c binding for Moonbit with friendly API, keeps the Cpp Style.
@@ -23,9 +23,9 @@
 - **`Milky2018/regalloc`** v0.18.0 — Target-independent register allocation algorithm
 - **`Milky2018/wasm_milkir`** v0.18.0 — WebAssembly dialect adapter for MilkIR extension operations
 - **`Milky2018/vcode_regalloc`** v0.18.0 — Target VCode adapter for the reusable register allocator
+- **`moonbitstack/moonmodel`** v0.1.3 — One model description for MoonBit, projected to JSON Schema, OpenAPI, SQL and GraphQL.
 - **`Kaida-Amethyst/MoonMIR`** v0.1.2 — Machine IR, support compile llvm module (from MoonLLVM) to different architecture machine code.
 - **`marianoguerra/pure-py`** v0.12.0 — PurePy (a pure functional subset of Python 3.12): tokenizer, parser, checker and interpreter
-- **`moonbitstack/moonmodel`** v0.1.3 — One model description for MoonBit, projected to JSON Schema, OpenAPI, SQL and GraphQL.
 - **`marianoguerra/wax`** v0.4.2 — The Wax language in MoonBit: parser, formatter, type checker, and wasm/wat emitters
 - **`marianoguerra/error-report`** v0.1.1 — Source-annotated diagnostic reports: data first, renderers second. Inspired by miette, codespan-reporting and …
 - **`Milky2018/isa_target`** v0.1.0 — ISA lowering from MilkIR to MachV
@@ -34,12 +34,12 @@
 - **`ubugeeei/vapor_moon`** v0.1.1 — Vapor Moon is a MoonBit-first Single File Component compiler and tooling layer built on top of luna.mbt.
 - **`moonbit-community/proton_codegen`** v0.7.0 — WASM code generator for typed Proton command registrars.
 - **`Milky2018/machv_regalloc`** v0.12.6 — Target VCode adapter for the reusable register allocator
-- **`FlyCloudC/scheme`** v0.7.0 — A Scheme interpreter implemented in Moonbit for teaching purposes
 - **`unmbt/native-toolchain`** v0.1.1 — Deterministic native compiler and linker discovery for MoonBit tools
+- **`moonrockz/smithy-codegen`** v0.8.0 — Language-neutral Smithy code generation core
+- **`FlyCloudC/scheme`** v0.7.0 — A Scheme interpreter implemented in Moonbit for teaching purposes
 - **`Ridge-Lab/capnp`** v0.3.1 — Cap'n Proto serialization runtime and schema code generation for MoonBit.
 - **`bobzhang/prolog`** v0.1.6 — A small Prolog interpreter in MoonBit: SLD resolution with iterative deepening, cut, negation-as-failure, arit…
 - **`conglinyizhi/precss`** v0.1.4 — A pluggable CSS preprocessor compile facade: a single function turns SCSS / LESS / CSS source (or file) into C…
-- **`moonrockz/smithy-codegen`** v0.8.0 — Language-neutral Smithy code generation core
 - **`YumeXi/nanocake`** v0.4.3 — Composable, type-safe AST and compiler-pass generation for MoonBit.
 - **`t-ujiie-g/yxl`** v0.7.2 — A YAML-driven Excel (.xlsx) compiler and CLI — manage spreadsheets as version-controllable YAML with reuse/ded…
 - **`marianoguerra/wap`** v0.4.2 — Wap: an Oberon-level language on shrubbery notation, compiled through the Wax AST
@@ -60,27 +60,27 @@
 - **`mizchi/sqlc_gen_moonbit`** v0.4.0 — sqlc plugin for MoonBit
 - **`001-Elsa/moonpack`** v0.1.2 — MoonPack is a MoonBit-native schema-first binary serialization toolkit.
 - **`hongweifei/lua`** v0.1.0 — A complete Lua 5.4 interpreter written in MoonBit
+- **`moonrockz/smithy-codegen-jsonrpc`** v0.8.0 — Language-neutral JSON-RPC contracts for Smithy code generators
 - **`Milky2018/machv_emit`** v0.2.2 — Reusable MachV machine-code emitter
 - **`icyaaaww/moonbind`** v0.10.0 — Generate type-safe MoonBit FFI bindings from C headers.
-- **`bobzhang/scheme`** v0.1.3 — Run R6RS Scheme programs directly with moonx
 - **`tonyfettes/gir`** v0.3.2 — GIR XML code generator for MoonBit GTK/GLib/GIO bindings
+- **`bobzhang/scheme`** v0.1.3 — Run R6RS Scheme programs directly with moonx
 - **`moonbitlang/json_deriving_codegen`** v0.0.2
-- **`moonrockz/smithy-codegen-jsonrpc`** v0.8.0 — Language-neutral JSON-RPC contracts for Smithy code generators
+- **`red6667/moonjsone`** v0.1.1 — Portable JSON-e structured template interpreter and bounded JSON generation
 - **`123123213weqw/moon_proto`** v0.1.1 — A MoonBit protobuf ecosystem lab for dynamic schema validation, compatibility testing, and AI code verificatio…
 - **`azhzx/qiang`** v0.1.0 — Qiang: a C11 compiler front end that lowers to QBE IR (formerly qpcc)
-- **`red6667/moonjsone`** v0.1.1 — Portable JSON-e structured template interpreter and bounded JSON generation
 - **`thy1016/moonspace`** v0.1.0 — Deterministic agent space kernel for MoonBit: TOML space contracts, gate-enforced code generation, Mealy-pure …
-- **`Atman-Angle/oas2moon_codegen`** v0.1.0 — MoonBit SDK emitter for the oas2moon OpenAPI client generator.
 - **`moonrockz/smithy-codegen-python`** v0.8.0 — A Smithy code generator for Python JSON-RPC peers
-- **`wflixu/Orion`** v0.2.0 — Derive + Codegen ORM for MoonBit. Schema DSL, type-safe CRUD, Query Builder.
-- **`Atman-Angle/oas2moon_core`** v0.1.0 — Canonical Client IR, validation, naming, and type mapping for oas2moon.
-- **`Derk2006/sourcemap`** v0.1.1 — Pure MoonBit Source Map v3 parser, encoder, validator and lookup toolkit
-- **`Atman-Angle/oas2moon_frontend`** v0.1.0 — OpenAPI frontend adapter for the oas2moon MoonBit client SDK generator.
-- **`bobzhang/atd`** v0.3.0 — A MoonBit port of ATD (Adaptable Type Definitions) with a MoonBit code generator
 - **`moonrockz/smithy-codegen-go`** v0.8.0 — Go JSON-RPC peers from prepared Smithy contracts
 - **`moonrockz/smithy-codegen-moonbit`** v0.8.0 — A Smithy code generator for MoonBit JSON-RPC peers
-- **`sennenki/ytyj`** v0.1.1 — Implementation of YTYJ language in MoonBit. Does not support embedded assembly yet.
+- **`Atman-Angle/oas2moon_codegen`** v0.1.0 — MoonBit SDK emitter for the oas2moon OpenAPI client generator.
+- **`Derk2006/sourcemap`** v0.1.1 — Pure MoonBit Source Map v3 parser, encoder, validator and lookup toolkit
+- **`wflixu/Orion`** v0.2.0 — Derive + Codegen ORM for MoonBit. Schema DSL, type-safe CRUD, Query Builder.
+- **`Atman-Angle/oas2moon_core`** v0.1.0 — Canonical Client IR, validation, naming, and type mapping for oas2moon.
+- **`Atman-Angle/oas2moon_frontend`** v0.1.0 — OpenAPI frontend adapter for the oas2moon MoonBit client SDK generator.
+- **`bobzhang/atd`** v0.3.0 — A MoonBit port of ATD (Adaptable Type Definitions) with a MoonBit code generator
 - **`kaigeliang/jsonlogic`** v0.2.1 — Portable JSONLogic evaluation, scoped analysis, batch execution and native QueryX integration
+- **`sennenki/ytyj`** v0.1.1 — Implementation of YTYJ language in MoonBit. Does not support embedded assembly yet.
 - **`2227057182/moonshim`** v0.1.1 — Conservative, compile-tested compatibility shims for evolving MoonBit public APIs.
 - **`sombozone/moon_expr`** v0.1.0 — A high-performance, extensible mathematical and logical expression evaluation engine for MoonBit.
 - **`zbhzs1/moonasyncapi`** v0.2.0 — AsyncAPI 3.0 to MoonBit type and message interface generator
@@ -89,6 +89,6 @@
 - **`zlhahaha/moonreport`** v0.1.0 — Source-aware diagnostic reports for MoonBit developer tools
 - **`pei0331/moon-wit`** v0.1.1 — A dependency-free WIT parser and MoonBit API scaffold generator
 - **`aloyscc/moon_cel`** v0.1.0 — A pure MoonBit Common Expression Language core with parsing, checking, and deterministic evaluation.
-- **`Atman-Angle/oas2moon`** v0.1.0 — Umbrella entry point for the complete oas2moon MoonBit client SDK generator suite.
 - **`ppyj663/moonjtd`** v0.2.0 — MoonBit-native RFC 8927 JSON Type Definition validator and code generator
+- **`Atman-Angle/oas2moon`** v0.1.0 — Umbrella entry point for the complete oas2moon MoonBit client SDK generator suite.
 - **`L76148/moonrego`** v0.1.0 — A Rego (Open Policy Agent) lexer, parser, evaluator and CLI for MoonBit.

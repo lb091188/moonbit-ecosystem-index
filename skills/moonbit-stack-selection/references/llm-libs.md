@@ -12,13 +12,13 @@
 - **`wzzc-dev/moui_agent_mcp`** v0.3.0 — MCP JSON-RPC router and stdio transport exposing a MoUI AgentHost to external agents
 - **`totto2727/codex-sdk`** v0.4.1 — MoonBit SDK for embedding the Codex agent in workflows and applications
 - **`gaato/openai`** v0.6.0 — Thin OpenAI API client for MoonBit built on gaato/http and gaato/sdk-runtime: models, embeddings, responses (b…
-- **`shiguri-01/mcp`** v0.2.0 — A library for building Model Context Protocol servers and clients.
 - **`moonbitstack/moonmcp`** v0.1.10 — Model Context Protocol servers and clients for MoonBit.
-- **`totto2727/agent-core-sdk`** v0.1.2 — Shared MoonBit process foundation for agent CLIs
+- **`shiguri-01/mcp`** v0.2.0 — A library for building Model Context Protocol servers and clients.
 - **`wzzc-dev/moui_agent`** v0.3.0 — MoUI agent protocol layer: observable/controllable runtime surface for external agents
+- **`totto2727/agent-core-sdk`** v0.1.2 — Shared MoonBit process foundation for agent CLIs
 - **`mizchi/mnemo`** v0.2.2 — Hermes-compatible memory / skills / session / prompt layer for AI agents (MoonBit native + JS)
-- **`trkbt10/llm_interop`** v0.3.0 — Unified LLM protocol abstraction for MoonBit — multi-provider support with streaming, tool calling, and protoc…
 - **`hnlyxiaobing/MBOpenClacky`** v0.3.1 — AI Agent CLI tool rewritten in MoonBit
+- **`trkbt10/llm_interop`** v0.3.0 — Unified LLM protocol abstraction for MoonBit — multi-provider support with streaming, tool calling, and protoc…
 - **`howtomakeaname/tokenizers-moonbit`** v0.16.3 — A MoonBit port of HuggingFace tokenizers. Loads tokenizer.json and runs BPE / byte-level BPE / WordPiece / Uni…
 - **`conglinyizhi/better-edit-tools-mcp`** v0.1.1 — MoonBit MCP file editing toolkit — atomic writes, function-scope detection, snapshot rollback, and fault-toler…
 - **`golemcloud/golem_sdk_tools`** v0.6.2 — Code generation tools for the Golem SDK for MoonBit
@@ -31,76 +31,76 @@
 - **`conglinyizhi/moonbit-llm-faceoff`** v0.2.0 — OpenAI-compatible LLM client, a harness that compares multiple models on the same case set, and a browser UI f…
 - **`Across2005/harness-self-evolution`** v0.3.8 — 面向 DeepSeek Harness（DSH）的全盘自进化 stdio MCP 插件（MoonBit 原生）：16 个工具完成 扫描→监控→提案→审批→执行 闭环，含子 Agent 工厂与只读运行时快照；人工审批闸门；…
 - **`123123213weqw/moonbit_mcp`** v0.1.0 — A MoonBit SDK for the Model Context Protocol (MCP). Build MCP servers and clients in MoonBit.
-- **`totto2727/agent-sdk`** v0.2.1 — Provider-neutral MoonBit interfaces for agent CLI SDKs
 - **`marianoguerra/mcp-server`** v0.10.1 — Define MCP 2026-07-28 servers: a side-effect-free routing core, tools/resources/prompts, and a transport trait…
+- **`totto2727/agent-sdk`** v0.2.1 — Provider-neutral MoonBit interfaces for agent CLI SDKs
 - **`tuya-me/aegisrun`** v0.9.3 — AegisRun - AI Agent Secure Tool Runtime (MoonBit + Wasm)
 - **`totto2727/workgraph-llm`** v0.1.4 — Runtime-independent typed LLM nodes for workgraph
 - **`marianoguerra/mcp`** v0.10.1 — MCP 2026-07-28 protocol types, JSON-RPC codec and SEP-2243 header validation. No dependencies.
+- **`lllg123/mooncontext`** v0.2.0 — A deterministic context audit tool for LLM and agent workflows
 - **`QuietlyChan/moonai`** v0.1.0 — Unified, provider-neutral AI SDK for MoonBit inspired by Vercel AI SDK 7
 - **`uiwcvb/moonprompt`** v0.1.0 — A pure MoonBit prompt template engine for LLM applications
-- **`lllg123/mooncontext`** v0.2.0 — A deterministic context audit tool for LLM and agent workflows
-- **`sennenki/mbt_prompt_services`** v0.1.2
 - **`zhanshishan/interjson`** v0.13.0 — The execution gate for LLM output: local MCP server, streaming JSON repair and partial parsing in pure MoonBit
+- **`sennenki/mbt_prompt_services`** v0.1.2
 - **`poipoiiii/agent-runtime`** v0.1.0 — Lightweight AI Agent Runtime based on MoonBit
 - **`weopqrst/mooncassette`** v0.10.0 — Deterministic record-and-replay (cassette) for LLM interactions: write offline, reproducible, drift-detecting …
 - **`morning-start/prism`** v0.1.4 — A unified LLM protocol middleware converting between OpenAI, Anthropic, Gemini and other provider formats via …
 - **`totto2727/agent-cli-sdk`** v0.2.1 — Shared MoonBit process foundation for JSONL agent CLIs
-- **`Betterlol/moon_zod`** v0.10.0 — A runtime JSON schema validation library for MoonBit, inspired by Zod and Pydantic
-- **`totto2727/workgraph-agent-cli`** v0.2.1 — Coding-agent nodes for workgraph
-- **`marianoguerra/mcp-client`** v0.10.1 — MCP 2026-07-28 client: streamable-HTTP and stdio transports, MRTR, subscriptions and the tasks extension.
 - **`gaato/kbbi`** v0.1.6 — Unofficial KBBI (Kamus Besar Bahasa Indonesia) lookup for MoonBit: a library, a CLI, and an agent skill.
+- **`Betterlol/moon_zod`** v0.10.0 — A runtime JSON schema validation library for MoonBit, inspired by Zod and Pydantic
+- **`marianoguerra/mcp-client`** v0.10.1 — MCP 2026-07-28 client: streamable-HTTP and stdio transports, MRTR, subscriptions and the tasks extension.
 - **`gaato/discord-cli`** v0.1.8 — Discord REST CLI for coding agents: read guilds, channels and messages, send messages, and call raw routes wit…
-- **`heyq02/moomem`** v0.8.4
+- **`totto2727/workgraph-agent-cli`** v0.2.1 — Coding-agent nodes for workgraph
 - **`marianoguerra/mcp-inspector`** v0.10.1 — Session, capability state and mcp.json catalog handling for MCP debugging tools.
+- **`heyq02/moomem`** v0.8.4
 - **`AlexenderSokolov/moonflowgraph`** v0.3.0 — A MoonBit task graph and provenance trace library for reproducible research and agent workflows.
-- **`peter-jerry-ye/mcp-server`** v0.3.5 — A library for implementing mcp servers in MoonBit.
-- **`weopqrst/tally`** v0.8.1 — Verifiable context-assembly contract for MoonBit LLM apps: frozen report formats (tally-plan v3, tally-digest …
 - **`marianoguerra/mcp-server-native`** v0.10.1 — Native transports for MCP 2026-07-28 servers: stdio and streamable HTTP with SSE.
+- **`weopqrst/tally`** v0.8.1 — Verifiable context-assembly contract for MoonBit LLM apps: frozen report formats (tally-plan v3, tally-digest …
+- **`peter-jerry-ye/mcp-server`** v0.3.5 — A library for implementing mcp servers in MoonBit.
 - **`cybershang/agent-telemetry`** v0.1.6
 - **`moonbitlang/openseek_tui`** v0.7.5 — OpenSeek interactive terminal UI: the openseek_tui binary
 - **`mizchi/tornado`** v0.6.1 — Multi-agent development orchestrator with TUI
 - **`PerfectPan/agent-finder`** v0.1.2 — Read-only local code agent discovery for agent-task-loop.
-- **`nawei123/runledger`** v0.3.0 — Offline agent-log auditing with external merge and resumable checkpoints
 - **`marianoguerra/mcp-inspector-cli`** v0.10.1 — One-shot command-line MCP client for the 2026-07-28 protocol era.
-- **`Across2005/MoonBit-memory`** v0.1.1 — MoonBit-memory - a local agent self-evolving memory system, ported from Python to MoonBit.
 - **`guo-dong-123/moon-trace`** v0.1.3 — Agent execution trace observability and debugging toolkit for MoonBit
+- **`nawei123/runledger`** v0.3.0 — Offline agent-log auditing with external merge and resumable checkpoints
+- **`Across2005/MoonBit-memory`** v0.1.1 — MoonBit-memory - a local agent self-evolving memory system, ported from Python to MoonBit.
 - **`totto2727/workgraph-core`** v0.1.4 — Runtime-independent asynchronous graph compiler and runtime
 - **`vicTop-cw/fist-mbt`** v0.3.10 — FIST commander task orchestration rewritten in pure MoonBit, exposed as an MCP server.
 - **`marianoguerra/mcp-slack`** v0.10.1 — A Slack MCP server for the 2026-07-28 era, built on marianoguerra/mcp-server. Runs against an in-process mock …
-- **`gaato/anthropic`** v0.12.0 — Thin Anthropic Messages API client for MoonBit built on gaato/http and gaato/sdk-runtime.
 - **`soehi/edgeflow`** v0.1.4 — Composable text-pipeline skeleton for on-device LLM applications, in MoonBit
+- **`gaato/anthropic`** v0.12.0 — Thin Anthropic Messages API client for MoonBit built on gaato/http and gaato/sdk-runtime.
 - **`mhh12345678/behavior_tree`** v0.1.2 — A pure MoonBit implementation of Behavior Tree (BT) for Game AI and Agents.
 - **`marianoguerra/mcp-bsky`** v0.10.1 — A Bluesky MCP server for the 2026-07-28 era, built on marianoguerra/mcp-server and marianoguerra/atproto. Read…
 - **`moonbit-community/embed`** v0.1.5 — Embed files into a generated MoonBit source file.
 - **`weopqrst/mooncassette-llm`** v0.10.0 — mizchi/llm adapter for mooncassette: drive mizchi/llm conversations from recorded cassettes, and replace its e…
 - **`Yoorkin/handoff`** v0.1.0 — Compact the current session into a safe, actionable handoff for a fresh agent.
 - **`yuzhiblue/moon-qdrant`** v0.5.0 — A MoonBit client for the Qdrant vector database REST API.
-- **`totto2727/moon-agent-graph`** v0.1.2 — Native asynchronous agent graph runtime with Mermaid visualization
 - **`kupas/imrelay`** v0.2.0 — Hermes-style agent gateway in MoonBit: bridges 14 messaging platforms (Telegram, Discord, Slack, WhatsApp, Sig…
+- **`totto2727/moon-agent-graph`** v0.1.2 — Native asynchronous agent graph runtime with Mermaid visualization
 - **`cogna-dev/mcp-sdk`** v0.1.0 — MoonBit implementation of the Model Context Protocol (MCP)
 - **`V1GreenSummer/watermark-toolkit`** v0.1.0 — LLM 文本水印工具箱:隐形 Unicode 载体清洗与检测、keyed-Gumbel 统计水印重放检测、检测引导的 LLM 改写循环(纯 CPU、零模型推理)
 - **`co63oc/moonbit_promptkit`** v0.1.7 — The MoonBit-implemented AI model SDK supports OpenAI compatible interfaces and is compatible with multiple pla…
 - **`posoco/ext-llm`** v0.2.0 — Posoco LLM Extension - host-injected model slot router
 - **`trail-it/llm_mb_adapter`** v0.1.0 — Adapter mapping marianoguerra/llm streaming events onto MoonStream sessions.
 - **`tonyfettes/openai`** v0.1.1
+- **`thy1016/moonspace`** v0.1.0 — Deterministic agent space kernel for MoonBit: TOML space contracts, gate-enforced code generation, Mealy-pure …
 - **`Yoorkin/grill-me`** v0.2.5 — Grill the user relentlessly through a dependency-aware decision-tree interview.
 - **`QuietlyChan/agui`** v0.1.0 — AG-UI protocol SDK for MoonBit agents
-- **`thy1016/moonspace`** v0.1.0 — Deterministic agent space kernel for MoonBit: TOML space contracts, gate-enforced code generation, Mealy-pure …
 - **`trail-it/mizchi_llm_adapter`** v0.1.0 — Adapter mapping mizchi/llm streaming events onto MoonStream sessions.
 - **`2515050242/moonagentcheck`** v0.3.0
 - **`posoco/ext-herdr`** v0.1.0 — Herdr presence extension for Posoco: reports agent lifecycle state to the herdr terminal multiplexer via a sin…
 - **`sennenki/pretty_prompt_demo`** v0.1.3 — pretty_prompt demonstration
 - **`moonbit-community/meta-skill`** v0.1.1 — Create minimal MoonBit WASM skill templates.
+- **`vicTop-cw/mcpconftest`** v0.9.0 — MCP protocol conformance probe — checks any MCP server (stdio or WebSocket) against the spec. 15 check categor…
 - **`1123Javayanglei/moonbit_claude_proxy`** v0.1.0 — Claude Code Proxy - translate Claude API requests to OpenAI-compatible API calls
 - **`peter-jerry-ye/hn-brief`** v0.1.1 — Hacker News hot-comment briefing demo built with MoonBit async and Wasm
-- **`vicTop-cw/mcpconftest`** v0.9.0 — MCP protocol conformance probe — checks any MCP server (stdio or WebSocket) against the spec. 15 check categor…
 - **`trail-it/moonstream`** v0.1.1 — Incremental, chunk-invariant parsing of streaming JSON tool-call arguments.
 - **`totto2727/workgraph-opencode-cli`** v0.2.1 — OpenCode CLI integration for workgraph
 - **`zhanshishan/jsonmend`** v0.8.1 — Streaming JSON repair and partial parsing in pure MoonBit
 - **`PingGuoMiaoMiao/MoonRoute`** v0.1.3 — AI model routing, governance, and resilience infrastructure for MoonBit
+- **`wskwsk68/MoonEmbed`** v0.1.6 — MoonBit-native word embedding loader and lightweight semantic retrieval library
 - **`Xu107-hhh/moonbit-jsonschema`** v0.1.0 — A standards-compliant JSON Schema (2020-12) validator for MoonBit, with precise error paths and full error col…
 - **`tiye/genai`** v0.0.2 — MoonBit bindings for the Google GenAI (Gemini) JavaScript SDK
-- **`wskwsk68/MoonEmbed`** v0.1.6 — MoonBit-native word embedding loader and lightweight semantic retrieval library
 - **`btlqql/moon_json_repair`** v0.2.0 — Conservative JSON syntax repair with replayable edits and explicit refusal boundaries.
 - **`cybershang/agent-o11y-demo`** v0.1.1
 - **`totto2727/workgraph-codex-cli`** v0.2.1 — Codex CLI integration for workgraph
@@ -118,6 +118,6 @@
 - **`zhangbowen2006/agentcanary`** v0.1.1 — Deterministic, artifact-aware policy replay and counterfactual regression testing for AI tool traces.
 - **`lexchb/moon_vector`** v0.1.1 — Type-safe vector search client (Qdrant REST) and in-memory backend for MoonBit
 - **`yadidyc/moonpod`** v0.2.0 — A transport-neutral resource policy and audit engine for MoonBit hosts
-- **`clhhhhhh/moonbit-treespec`** v0.1.0 — MoonBit tree speculative decoding algorithms and reproducible offline experiments
 - **`jonesmelton/sqlbrook`** v0.3.0 — Whole-statement SQLite formatter for the river style, as a library and a stdin CLI.
+- **`clhhhhhh/moonbit-treespec`** v0.1.0 — MoonBit tree speculative decoding algorithms and reproducible offline experiments
 - **`trail-it/moonllm_adapter`** v0.1.0 — Adapter mapping DC-Z-lab/moonllm streaming chunks onto MoonStream sessions.

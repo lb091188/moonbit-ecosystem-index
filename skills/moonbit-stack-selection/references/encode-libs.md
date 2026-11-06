@@ -6,20 +6,20 @@
 
 - **`cc06b/mooncry`** v0.95.0 — Pure-MoonBit crypto primitives: SHA-1/2 (incl. SHA-512/224/256), SHA-3, Keccak-256, SHAKE/cSHAKE, BLAKE2b/BLAK…
 - **`gmlewis/base64`** v0.16.14 — MoonBit base64: provide simple base64 operations.
-- **`mizchi/cbor`** v0.1.1 — CBOR (RFC 8949) implementation for MoonBit - Pure and FFI versions
 - **`moonbitstack/moonbase`** v0.4.3 — Every base encoding, one shape: base2 through base85, bech32 and multibase for MoonBit.
+- **`mizchi/cbor`** v0.1.1 — CBOR (RFC 8949) implementation for MoonBit - Pure and FFI versions
 - **`moonbitstack/moonvar`** v0.2.1 — Fixed-width and variable-length integer encodings for MoonBit.
 - **`moonbitstack/moonurl`** v0.2.5 — URLs for MoonBit: WHATWG and RFC 3986 parsing, IDNA, URI templates, percent coding.
 - **`tonyfettes/encoding`** v0.3.9 — Encoding package extracted from moonbitlang/x
 - **`LL728/moon_encoding`** v0.2.0 — WHATWG Encoding Standard 的 MoonBit 实现：label 解析、流式解码与一次性编码 API，覆盖规范定义的全部 40 种编码（含 GBK、Big5、Shift_JIS、ISO-2022-J…
 - **`superbigcup325/colenc`** v0.1.3 — Columnar encoding kernel for MoonBit: the Parquet page-level encoding family as a reusable, verifiable, plugga…
 - **`f4ah6o/encoding_sjis`** v0.1.1 — encoding_rs-compliant Shift_JIS decoder for MoonBit
-- **`horideicom/encoding_sjis`** v0.1.1 — encoding_rs-compliant Shift_JIS decoder for MoonBit
 - **`moonbitstack/moonhttp`** v0.15.8 — HTTP formats for MoonBit with no I/O: HTTP/1 to HTTP/3, WebSocket, SSE and multipart.
+- **`horideicom/encoding_sjis`** v0.1.1 — encoding_rs-compliant Shift_JIS decoder for MoonBit
 - **`tonyfettes/base64`** v0.1.0
 - **`2d5rrr333/toolsfx-moonbit`** v0.3.0 — Pure-MoonBit crypto & CTF toolbox (a port of ToolsFx): national crypto SM2/SM3/SM4 (GB/T 32905/32907/32918, by…
-- **`PerfectPan/base64`** v0.3.0 — Independent Base64 for UTF-8 strings and bytes; discontinued in favor of moonbitlang/core/encoding/base64
 - **`chensuiyi/fndash`** v0.3.0 — lodash-style utility belt for MoonBit: string trimming, strict int parsing, quoted-value extraction, JSON buil…
+- **`PerfectPan/base64`** v0.3.0 — Independent Base64 for UTF-8 strings and bytes; discontinued in favor of moonbitlang/core/encoding/base64
 - **`A-23187/encoding`** v0.1.0
 - **`hackwaly/pem`** v0.1.2 — PEM (Privacy-Enhanced Mail) encoding and decoding library for MoonBit
 - **`Arcelyth/html_escape`** v0.3.5 — Escaping/unescaping HTML entities.

@@ -11,8 +11,8 @@
 - **`moonbitstack/mooncrypt`** v0.4.11 — Cryptographic algorithms for MoonBit, one per package.
 - **`mizchi/experimental_crypto`** v0.0.2 — EXPERIMENTAL — pure-MoonBit cryptography / PKI / JOSE building blocks. Educational reference, not production-g…
 - **`moonbitstack/moontls`** v0.9.14 — TLS 1.3 and DTLS 1.3 for MoonBit.
-- **`justinwongcn/moonpgp`** v0.4.0 — Pure-MoonBit OpenPGP implementation (RFC 4880/9580): email encryption, decryption, signing and verification, i…
 - **`moonbitstack/mooncred`** v0.6.9 — Credentials for MoonBit: JWT, JWK and X.509.
+- **`justinwongcn/moonpgp`** v0.4.0 — Pure-MoonBit OpenPGP implementation (RFC 4880/9580): email encryption, decryption, signing and verification, i…
 - **`moonbitstack/moonrand`** v0.1.2 — Reproducible pseudo-random generators, unbiased sampling and the common distributions for MoonBit.
 - **`ruifeng/moondsa`** v0.2.1 — moondsa is a MoonBit implementation of Dilithium, a post-quantum signature scheme.
 - **`RabitLogic/mjwt`** v0.2.0 — A JWT (JSON Web Token) library for MoonBit with extensible trait-based signers

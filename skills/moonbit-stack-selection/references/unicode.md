@@ -29,8 +29,8 @@ Unicode 分类、字素簇、宽度计算、字符串工具。
 - **`moonbit-community/normalization`** v0.5.2 — Unicode normalization forms for MoonBit
 - **`bobzhang/beautiful_mermaid`** v0.2.1 — MoonBit port of beautiful-mermaid: render Mermaid diagrams to SVG and ASCII/Unicode text.
 - **`moonbit-community/unicode-normalization`** v0.7.0 — Unicode normalization forms for MoonBit
-- **`moonbit-community/punycode`** v0.7.0 — RFC 3492 Punycode for MoonBit
 - **`moonbit-community/unicode-bidi`** v0.7.0 — Unicode Bidirectional Algorithm for MoonBit
+- **`moonbit-community/punycode`** v0.7.0 — RFC 3492 Punycode for MoonBit
 - **`moonbitstack/moonucd`** v0.1.3 — The Unicode Character Database for MoonBit.
 - **`moonbit-community/harfbuzz`** v0.2.0 — MoonBit port of HarfBuzz.
 - **`moonbit-community/idna`** v0.5.2 — UTS #46 IDNA processing for MoonBit

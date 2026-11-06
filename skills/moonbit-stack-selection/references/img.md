@@ -26,21 +26,21 @@
 - **`TryAndRun-TvT/png-moon`** v0.1.2 — PNG encoder/decoder written in MoonBit
 - **`Asterless/MoonQOI`** v0.1.3 — QOI (Quite OK Image Format) encoder/decoder library for MoonBit
 - **`Milky2018/svgdiff-image-compat`** v0.1.0 — WIP image codec primitives for MoonBit (PNG-first).
-- **`WGYo90/moonbit-gif`** v0.1.0 — A mizchi/image extension for multi-frame GIF89a composition, palette quantization, and streaming LZW.
 - **`Milky2018/svgdiff-pixelmatch`** v0.1.0 — Fast pixel-level image comparison library for MoonBit/WASM
-- **`yuzhiblue/moon-watermark`** v0.1.18 — Image watermark library for MoonBit: visible and invisible traceable watermarks with embed/extract/verify APIs…
+- **`WGYo90/moonbit-gif`** v0.1.0 — A mizchi/image extension for multi-frame GIF89a composition, palette quantization, and streaming LZW.
 - **`WENwenZU/moon-webp`** v0.1.2 — Pure MoonBit decoder for lossless WebP (VP8L) images, with container, alpha, and animation support
+- **`yuzhiblue/moon-watermark`** v0.1.18 — Image watermark library for MoonBit: visible and invisible traceable watermarks with embed/extract/verify APIs…
+- **`moonbitstack/moonimage`** v0.1.2 — Image codecs for MoonBit: PNG, QOI, BMP, TGA, JPEG, GIF and WebP, and the pixel arithmetic between them.
 - **`riantr/moonbit_labeler`** v0.2.14 — Image / video labeling backend for the MoonBit Labeler app: 24 async ops over @fs/@json for folder browsing, i…
 - **`V1GreenSummer/paddleocr`** v0.1.1 — PaddleOCR glue for MoonBit: JPEG/PNG/BMP decode, DBNet boxes, CTC decode, and native ONNX Runtime inference.
 - **`CXREN/moonocr`** v0.1.0 — A pure-MoonBit OCR engine: BMP/PGM/PPM decoding, binarization, segmentation, feature extraction and nearest-ne…
-- **`moonbitstack/moonimage`** v0.1.2 — Image codecs for MoonBit: PNG, QOI, BMP, TGA, JPEG, GIF and WebP, and the pixel arithmetic between them.
 - **`PixelPoet/pixelate`** v0.1.3 — Image pixelation and color quantization core for PixelPoet.
 - **`MYmodddd/pixelate`** v0.1.6 — Image pixelation and color quantization core for PixelPoet.
 - **`gaato/png`** v0.1.0 — A streaming PNG and APNG decoder for MoonBit: arbitrary input chunks, whole rows into bounded output slices, t…
 - **`shencangsheng513/moonmeta`** v0.1.0 — Read, write and redact EXIF metadata in JPEG, PNG and TIFF files, in pure MoonBit.
 - **`PingGuoMiaoMiao/MoonVision`** v0.2.5 — MoonBit-native lightweight image processing and basic computer vision algorithms.
 - **`mizchi/crater-terminal-image-cache`** v0.19.0 — Terminal image cache entry format and raster normalization helpers for crater
+- **`cjyhjy/visionleak`** v0.8.0 — Bounded image fingerprint and cross-split evidence audit
 - **`Zzqy-yi/firmware-image-toolkit`** v0.1.0 — Validated Intel HEX and Motorola S-record firmware image toolkit
-- **`shunge/moonvision`** v0.2.3 — Reproducible annotation-aware augmentation and differentiable image warping in pure MoonBit.
 
 *其余基础库见 [img-libs.md](img-libs.md) 全量分册。*

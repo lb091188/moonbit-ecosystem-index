@@ -14,8 +14,8 @@
 - **`gmlewis/crc32`** v0.9.2 — MoonBit crc32: provide simple crc32 hash algorithm.
 - **`gmlewis/sha1`** v0.12.17 — MoonBit sha1: provide simple sha1 hash algorithm.
 - **`shu-kitamura/sha256`** v0.1.1 — A simple sha256 algorithm implemented in moonbit
-- **`tonyfettes/xxh64`** v0.1.0 — XXH64 — a fast, portable, high-quality non-cryptographic hash. Faithful MoonBit port of the reference xxHash.
 - **`moonbitstack/moonasgi`** v0.10.6 — ASGI 3.0 for MoonBit: the interface between servers and frameworks.
+- **`tonyfettes/xxh64`** v0.1.0 — XXH64 — a fast, portable, high-quality non-cryptographic hash. Faithful MoonBit port of the reference xxHash.
 - **`Tigls/mb-hmac`** v0.1.0 — HMAC message authentication for MoonBit (HMAC-SHA256, HMAC-SHA512; native+WASM)
 - **`AXiX-official/xxhash`** v0.1.0 — xxHash implementation in MoonBit.
 - **`mldong/moon-hutool`** v0.1.8 — Hutool-style utility library for MoonBit: all packages depend only on moonbitlang/core (no FFI, fully synchron…
@@ -47,5 +47,5 @@
 - **`hcjbat/moonbit-notary`** v0.1.0 — Reusable MoonBit library and CLI for electronic evidence manifests, integrity verification, audit trails, and …
 - **`MM-ai-nb/bech32-kit`** v0.1.0 — Pure MoonBit Bech32/Bech32m codec and SegWit address validator.
 - **`HaQiLyner/moon_digest_fields`** v0.2.0 — RFC 9530 SHA-256/SHA-512 digest generation, HTTP header integration, negotiation, verification, and audit
-- **`Yingqingxue/mooncas`** v0.1.0 — A portable content-addressed storage kernel for MoonBit
 - **`SWJ-ai-srw/bech32-kit`** v0.1.0 — Pure MoonBit Bech32/Bech32m codec and SegWit address validator.
+- **`Yingqingxue/mooncas`** v0.1.0 — A portable content-addressed storage kernel for MoonBit

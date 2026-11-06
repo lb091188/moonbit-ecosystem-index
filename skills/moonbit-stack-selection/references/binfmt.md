@@ -31,8 +31,8 @@ CBOR、Protocol Buffers、MessagePack、ASN.1 等二进制序列化格式。
 - **`2515050243qyf/moon_bencode`** v0.2.0 — A fast and compliant Bencode encoder and decoder for MoonBit.
 - **`Ljh684/MoonParse`** v0.1.4 — MoonBit 解析器组合子库 — 与生态中其他 combinator 不同：(1)内置完整 JSON 解析器（JsonValue 枚举+双向序列化）和 TOML 解析器，开箱即用；(2)支持二进制解析（u8-u64/L…
 - **`Ridge-Lab/capnp`** v0.3.1 — Cap'n Proto serialization runtime and schema code generation for MoonBit.
-- **`Duan-lang-dev/moonproto`** v0.2.0 — A pure-runtime Protocol Buffers wire format encoder/decoder and proto3 subset parser in MoonBit
 - **`moonbitlang/protoc-gen-mbt`** v0.3.0 — The Protocol Buffers compiler plugin for MoonBit
+- **`Duan-lang-dev/moonproto`** v0.2.0 — A pure-runtime Protocol Buffers wire format encoder/decoder and proto3 subset parser in MoonBit
 - **`suiyunonghen/moonvalue`** v0.1.14 — moonbitlang实现的msgpack,bson库
 - **`123123213weqw/moon_proto`** v0.1.1 — A MoonBit protobuf ecosystem lab for dynamic schema validation, compatibility testing, and AI code verificatio…
 - **`lindividual/der`** v0.2.1 — ASN.1 DER parser for MoonBit. Supports PKCS#1 and PKCS#8 RSA private key parsing.

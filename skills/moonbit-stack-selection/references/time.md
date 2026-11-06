@@ -22,9 +22,9 @@
 - **`moonbitstack/moonward`** v0.2.1 — Resilience for MoonBit without I/O: circuit breaking, load shedding, rate limits and deadlines.
 - **`001-Elsa/mooncron`** v0.1.4 — A cron expression parser and schedule calculator written in MoonBit.
 - **`marianoguerra/temporal`** v0.1.2 — An implementation of ECMAScript Temporal: calendar and time-zone aware dates, times, instants and durations. P…
+- **`chensuiyi/dateku`** v0.3.0 — MoonBit date-time formatting: epoch-milliseconds to ISO 8601 and RFC 5322 timestamps, UTC only
 - **`iceBear67/time`** v0.1.2 — A date-time library in MoonBit, including zone offsets and clocks that support JS and Native backend.
 - **`mizchi/whenwords`** v0.1.3 — A relative time formatting library for MoonBit, following the whenwords specification
-- **`chensuiyi/dateku`** v0.3.0 — MoonBit date-time formatting: epoch-milliseconds to ISO 8601 and RFC 5322 timestamps, UTC only
 - **`suiyunonghen/datetime`** v0.1.6 — datetime type of moonbit
 - **`connect0459/almanac`** v0.3.0 — A date and time library for MoonBit
 - **`Asterless/MoonPtime`** v0.1.2 — A POSIX time library for MoonBit with picosecond precision, inspired by OCaml's ptime library. Provides immuta…
@@ -36,8 +36,8 @@
 - **`justjavac/ttl`** v0.1.3 — A small in-memory TTL cache for MoonBit
 - **`MaoDingA/moonpost`** v0.2.1 — Pure MoonBit toolkit for subtitles, timecode, creator cleanup, delivery checks, and post-production QC.
 - **`cxh04/cron_mbt`** v0.2.4 — A cron expression parser, matcher, scheduler, and CLI for MoonBit.
-- **`bobzhang/sleep`** v0.1.2 — Pause for a number of seconds, like sleep, runnable via moonx
 - **`white-bear233/moontimeline`** v0.2.0 — MoonBit OTIO schemas, timeline semantics, algorithms, bundles and plugins
+- **`bobzhang/sleep`** v0.1.2 — Pause for a number of seconds, like sleep, runnable via moonx
 - **`Zy789kl/moon-change-point`** v0.3.1 — Production-oriented MoonBit change-point detection, streaming windows, multivariate monitoring, replay, SLO an…
 - **`CAIMEOX/Motiva`** v0.3.0 — A MoonBit animation engine inspired by Manim.
 - **`cn-wn/moonsignalkit`** v0.3.0 — Streaming telemetry statistics and change detection for MoonBit.

@@ -21,27 +21,28 @@
 - **`justjavac/terminal_size`** v0.1.7 — Cross-platform terminal size helpers for MoonBit.
 - **`chensuiyi/clicolor`** v0.2.0 — Terminal color and hyperlink escape sequences for MoonBit
 - **`wzzc-dev/moui_tui`** v0.3.0 — Terminal cell model: colors, attributes, rows and a damage-tracked screen buffer
-- **`FrozenLemonTee/TextEditor`** v0.1.1 — Demo app for LunarEvent and LunarTUI event loop integration
 - **`wzzc-dev/moui_tui_renderer`** v0.3.0 — Experimental terminal cell renderer: projects MoUI semantics frames into ANSI text
+- **`FrozenLemonTee/TextEditor`** v0.1.1 — Demo app for LunarEvent and LunarTUI event loop integration
+- **`wzzc-dev/moui_terminal_host`** v0.3.0 — Experimental terminal host: raw-mode TTY input channels for the MoUI TUI renderer
 - **`zkazure/moonfocus`** v0.1.1 — A Pomodoro timer and habit tracker with a lightweight TUI rendering engine and web console, written in MoonBit…
 - **`bobzhang/rich`** v0.1.2 — A port of Rich (rich text and beautiful formatting in the terminal) to MoonBit
 - **`CGaaaaaa/MoonProgress`** v0.1.0 — A configurable command-line progress bar library for MoonBit
-- **`wzzc-dev/moui_terminal_host`** v0.3.0 — Experimental terminal host: raw-mode TTY input channels for the MoUI TUI renderer
 - **`Yu-zh/termbit`** v0.1.1 — A terminal manipulation library written in MoonBit
 - **`xrr2016/tui-ansi`** v0.1.2
 - **`sennenki/console`** v0.1.4 — Cross-platform console I/O library
 - **`R00TK17/hex_editor`** v0.1.3 — Terminal hex editor & binary analysis toolkit: 20 format parsers, wildcard search, entropy analysis, steganogr…
 - **`DWS-ai-nb/termproof`** v0.1.1 — Streaming ANSI/ECMA-48 terminal log sanitizer and security auditor for MoonBit
 - **`grandEarshot/tui`** v0.1.0 — A terminal user interface library for MoonBit inspired by Bubble Tea.
+- **`SongYZZZ/ansi-guard`** v0.1.0 — Audit and sanitize untrusted ANSI terminal output in pure MoonBit
 - **`tonyfettes/pty`** v0.1.0 — Cross-platform PTY (pseudo-terminal) spawning for MoonBit native targets, integrated with moonbitlang/async.
 - **`Kaida-Amethyst/readline`** v0.1.2 — readline library for MoonBit
-- **`SongYZZZ/ansi-guard`** v0.1.0 — Audit and sanitize untrusted ANSI terminal output in pure MoonBit
 - **`xrr2016/tui`** v0.1.0
 - **`cstoooo/terminfo`** v0.1.0 — terminfo(5) terminal capability library in pure MoonBit: compiled binary format, source language, and tparm pa…
-- **`mizchi/vivebox`** v0.1.1 — Terminal chat UI built with tui.mbt
 - **`fundon/vtty`** v0.1.0 — Zero-allocation, panic-free DEC VT500 terminal parser with UTF-8 decoding (MoonBit port)
+- **`mizchi/vivebox`** v0.1.1 — Terminal chat UI built with tui.mbt
 - **`tonyfettes/libghostty-vt`** v0.1.2 — MoonBit bindings for Ghostty's libghostty-vt virtual terminal emulator library.
 - **`choplin/noctui`** v0.1.0 — A MoonBit-first toolkit for cooking up terminal UIs (ratatui/Charm-style).
+- **`moonbitstack/moonrgba`** v0.1.1 — Colour for MoonBit: CSS syntax, colour spaces, gamut mapping, terminal colours and colour arithmetic.
 - **`mizchi/crater-terminal-image-cache`** v0.19.0 — Terminal image cache entry format and raster normalization helpers for crater
 - **`tonyfettes/rabbita_xterm`** v0.1.2 — Rabbita-friendly xterm.js bindings for MoonBit
 - **`Luna-Flow/geometry3d`** v0.5.3 — A small MoonBit 3D geometry foundation with core, view, frontend, TUI, Canvas, and GSAP SVG backend packages b…
@@ -53,8 +54,8 @@
 - **`mizchi/tornado`** v0.6.1 — Multi-agent development orchestrator with TUI
 - **`guo-dong-123/moon-trace`** v0.1.3 — Agent execution trace observability and debugging toolkit for MoonBit
 - **`allwefantasy/readline.mbt`** v0.1.0 — A complete Node.js readline-compatible library for MoonBit
-- **`npmstudy/readline`** v0.1.6 — A readline library for MoonBit
 - **`daqing/moon-md-viewer`** v0.1.0 — Render CommonMark as ANSI for the terminal.
+- **`npmstudy/readline`** v0.1.6 — A readline library for MoonBit
 - **`conglinyizhi/dsh-console-frontend`** v0.2.0 — dsh-console 前端：rabbita + precss
 - **`conglinyizhi/dsh-console-backend`** v0.2.0 — dsh-console 的本地只读接口后端：与 Node 版响应形状逐字段一致
 - **`moonbit-community/patdiff`** v0.3.0 — File diff using the patience diff algorithm: a MoonBit port of Jane Street's patdiff

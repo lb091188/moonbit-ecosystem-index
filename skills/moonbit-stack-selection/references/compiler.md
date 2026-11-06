@@ -17,9 +17,9 @@
 - **`Milky2018/x64_target`** v0.18.0 — x64 direct MilkIR target pipeline to native code
 - **`Milky2018/vcode`** v0.18.0 — Target-independent native lowering, VCode, and code-object infrastructure
 - **`dowdiness/js_engine`** v0.9.0 — Pure MoonBit cross-target embedded JavaScript engine
+- **`moonbitstack/moonast`** v0.2.6 — Code generation for MoonBit from annotated declarations.
 - **`mizchi/jsonschema`** v0.8.1 — JSON Schema validator and code generator for MoonBit
 - **`moonbitlang/protobuf`** v0.2.0 — The runtime library for protobuf
-- **`moonbitstack/moonast`** v0.2.6 — Code generation for MoonBit from annotated declarations.
 - **`mizchi/codegen`** v0.2.4 — Generic code generation library with abstract IR
 - **`Milky2018/machv`** v0.12.6 — Target-neutral semantic machine IR
 - **`Kaida-Amethyst/llvm`** v0.6.2 — llvm-c binding for Moonbit with friendly API, keeps the Cpp Style.
@@ -31,9 +31,9 @@
 - **`Milky2018/regalloc`** v0.18.0 — Target-independent register allocation algorithm
 - **`Milky2018/wasm_milkir`** v0.18.0 — WebAssembly dialect adapter for MilkIR extension operations
 - **`Milky2018/vcode_regalloc`** v0.18.0 — Target VCode adapter for the reusable register allocator
+- **`moonbitstack/moonmodel`** v0.1.3 — One model description for MoonBit, projected to JSON Schema, OpenAPI, SQL and GraphQL.
 - **`Kaida-Amethyst/MoonMIR`** v0.1.2 — Machine IR, support compile llvm module (from MoonLLVM) to different architecture machine code.
 - **`marianoguerra/pure-py`** v0.12.0 — PurePy (a pure functional subset of Python 3.12): tokenizer, parser, checker and interpreter
-- **`moonbitstack/moonmodel`** v0.1.3 — One model description for MoonBit, projected to JSON Schema, OpenAPI, SQL and GraphQL.
 - **`marianoguerra/wax`** v0.4.2 — The Wax language in MoonBit: parser, formatter, type checker, and wasm/wat emitters
 - **`marianoguerra/error-report`** v0.1.1 — Source-annotated diagnostic reports: data first, renderers second. Inspired by miette, codespan-reporting and …
 - **`Milky2018/isa_target`** v0.1.0 — ISA lowering from MilkIR to MachV

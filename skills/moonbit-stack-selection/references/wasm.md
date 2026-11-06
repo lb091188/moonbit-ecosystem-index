@@ -43,6 +43,6 @@ Wasm 组件模型、WASI、FFI、JS 绑定。
 - **`daqing/sqlite`** v0.4.0 — SQLite3 bindings for latest MoonBit toolchian
 - **`mizchi/glfw`** v0.2.3 — GLFW MoonBit bindings (native FFI + C stub)
 - **`mizchi/js_core`** v0.13.0 — js ffi foundation for MoonBit (Any, Promise, Nullable, target-specific interop)
-- **`moonbit-community/evol-minifier`** v0.3.1 — A slightly faster JavaScript mangler/compressor for MoonBit.
+- **`moonbit-community/evol-minifier`** v0.3.2 — A slightly faster JavaScript mangler/compressor for MoonBit.
 
 *其余基础库见 [wasm-libs.md](wasm-libs.md) 全量分册。*

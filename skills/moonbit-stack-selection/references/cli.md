@@ -27,8 +27,9 @@
 ## 基础库 · 单点能力，自行组合
 
 - **`DzmingLi/clap`** v0.2.8 — Command Line Argument Parser
+- **`hustcer/cmder`** v0.6.1 — Declarative CLI builder for MoonBit, inspired by gunshi
 - **`Milky2018/options`** v0.1.3 — Command line argument parser for MoonBit
 - **`peter-jerry-ye/parse_args`** v0.1.2 — A arg parser inspired by minimalist
-- **`cauchyQ/moonbit-argkit`** v0.1.0 — Small dependency-free command line argument parser for MoonBit.
 - **`jqlssg/moondocopt`** v0.1.1 — Help-first command-line parsing with docopt semantics and bounded reusable compilation
+- **`cauchyQ/moonbit-argkit`** v0.1.0 — Small dependency-free command line argument parser for MoonBit.
 - **`moonrockz/zig-cross`** v0.3.2 — Cross-compile MoonBit native binaries with zig

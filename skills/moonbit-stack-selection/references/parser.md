@@ -44,9 +44,9 @@
 - **`Nanaloveyuki/parsec`** v0.1.6 — Composable, token-generic parsers for MoonBit.
 - **`moonbit-community/NyaCSV`** v0.3.4 — Purr-fectly parse your CSV files with delightful simplicity!
 - **`bob/lexer`** v0.1.0 — A generic lexer library for handwritten lexers in MoonBit
-- **`sennenki/sexp`** v0.1.1 — A simple S-expression parser and serializer for MoonBit.
+- **`moonbitstack/moonjson`** v0.4.3 — JSON, its dialects and its binary encodings for MoonBit.
 - **`marianoguerra/uri`** v0.1.3 — A generic URI/IRI handling library compliant with RFC 3986/3987, ported from the Rust crate fluent-uri.
+- **`sennenki/sexp`** v0.1.1 — A simple S-expression parser and serializer for MoonBit.
 - **`maria/csv_parser`** v0.1.0 — A robust RFC 4180 compliant CSV parser with support for custom delimiters, quoted fields, and serialization
-- **`moonbit-community/sqlparser`** v0.5.2 — Extensible SQL Lexer and Parser in MoonBit
 
 *其余基础库见 [parser-libs.md](parser-libs.md) 全量分册。*

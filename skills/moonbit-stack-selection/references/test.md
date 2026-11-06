@@ -38,8 +38,8 @@
 - **`CaptainK-65/moon-statelens`** v0.5.0 — Active black-box Mealy model learning and replay-confirmed behavioral compatibility checks.
 - **`Han-Wentao/mooncontract`** v0.1.1 — MoonBit-native OpenAPI contract validation and deterministic mock toolkit
 - **`xziheng/testcontainers`** v0.1.0 — Throwaway Docker containers for MoonBit integration tests
-- **`CAIMEOX/quickcheck`** v0.6.9 — Automatic testing of MoonBit programs
 - **`moonbit-community/quickcheck_statemachine`** v0.0.1
+- **`CAIMEOX/quickcheck`** v0.6.9 — Automatic testing of MoonBit programs
 - **`weopqrst/mooncassette`** v0.10.0 — Deterministic record-and-replay (cassette) for LLM interactions: write offline, reproducible, drift-detecting …
 - **`Magic486/moon_mutest`** v0.1.7 — Mutation testing toolkit for MoonBit projects
 - **`erzhuzi259/moongrammata`** v0.1.1 — Structure-aware feedback-guided fuzzing toolkit for MoonBit
@@ -52,9 +52,9 @@
 - **`ryota0624/moonbit_test_containers`** v0.0.5 — Test containers implementation for MoonBit
 - **`123123213weqw/moon_historycheck`** v0.7.0 — Bounded concurrent-history checking with verified witnesses and counterexample reduction
 - **`illusory0x0/inspect`** v0.1.1 — A powerful quotation meta programming library that hacks MoonBit's snapshot test system, allowing you to custo…
+- **`liu666789987/moonbtkit`** v0.1.6 — Serializable behavior-tree assets, deterministic execution, and regression analysis for MoonBit.
 - **`tonyfettes/assert`** v0.1.0
 - **`2d5rrr333/moonwebtest`** v0.1.0 — Test toolkit for MoonBit wasm-gc web apps: a Node harness that drives your wasm exports over the JSON bridge, …
-- **`liu666789987/moonbtkit`** v0.1.6 — Serializable behavior-tree assets, deterministic execution, and regression analysis for MoonBit.
 - **`Ag108/MoonReduce`** v0.2.0 — Deterministic failure-preserving testcase reduction for MoonBit projects
 
 *其余基础库见 [test-libs.md](test-libs.md) 全量分册。*

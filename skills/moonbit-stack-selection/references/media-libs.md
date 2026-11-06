@@ -18,8 +18,8 @@
 - **`Xcsa-ee/moonflac`** v0.3.4 — 纯 MoonBit 实现的 FLAC 无损音频解码器，不依赖任何 C 库或系统编解码器
 - **`hyl-star/moonsic`** v0.1.0 — A MoonBit music IR and interoperability library with MIDI, MusicXML, WAV, and browser event export.
 - **`cp15695540483/moontag`** v0.2.1 — 纯 MoonBit 实现的音频标签元数据读写库（ID3v2 / Vorbis Comment / APEv2 / MP4 ilst），不依赖任何 C 库
-- **`colmugx/ai-passport`** v0.2.6 — MoonBit application SDK and host toolchain for supported embedded devices and the Web host.
 - **`NoahLiu/ffmpeg-mbt`** v0.2.0 — FFmpeg 的 MoonBit 封装：音视频解码/转码/封装的进程内绑定，链接系统 ffmpeg 开发包，为 gui-media 提供媒体解码层
+- **`colmugx/ai-passport`** v0.2.6 — MoonBit application SDK and host toolchain for supported embedded devices and the Web host.
 - **`moonbit-community/moon_cpal`** v0.11.8 — A MoonBit port (subset) of RustAudio/cpal.
 - **`dowdiness/moondsp`** v0.6.0 — MoonBit DSP audio engine
 - **`bw448/moon-wav`** v0.3.0 — MoonBit 原生 WAV 音频解码库 | A native MoonBit WAV audio decoding library
@@ -29,13 +29,14 @@
 - **`Sakuraqwq1/moonmp3-encoder`** v0.2.1 — Pure MoonBit MPEG-1 Layer III encoder: 44.1 kHz mono/stereo, 128 kbps CBR, polyphase filterbank and MDCT, scal…
 - **`CXREN/flac`** v0.1.0 — Pure-MoonBit FLAC lossless audio decoder: parses stream metadata and decodes frames to PCM with no native depe…
 - **`matrix486/moonflactag`** v0.4.0 — Pure MoonBit FLAC tags, pictures and lossless metadata rewriting
+- **`moonbitstack/moonmedia`** v0.1.1 — Streaming playlists and containers for MoonBit: m3u8, MPD, MPEG-TS, fMP4 and RTMP.
 - **`LL728/moonvorbis`** v0.1.4 — 纯 MoonBit 实现的 OGG/Vorbis 音频解码器，不依赖任何 C 库或系统编解码器
 - **`gaato/discord_voice`** v0.3.1 — Experimental Discord voice for gaato/discord bots on MoonBit's native backend: voice gateway v8, Opus playback…
 - **`trkbt10/isobmff`** v0.1.0 — ISO Base Media File Format parser for extracting duration and track info from MP4, 3GP, 3G2, MJ2, HEIF, F4V, D…
 - **`mizchi/kagura_audio`** v0.6.0 — Backend-agnostic audio output contracts for Kagura (AudioOutputHooks injection point over mizchi/audio; extrac…
 - **`Ridge-Lab/moonphaserkit`** v0.3.0 — A MoonBit JavaScript binding for Phaser 3 scenes, sprites, animation, audio, camera, tilemaps, input, text, an…
-- **`mizchi/whisper`** v0.3.1 — MoonBit native bindings for whisper.cpp speech-to-text inference
 - **`1zhouhaoran1/moonmel`** v0.1.6 — Lightweight, portable audio feature extraction engine for MoonBit (Mel Spectrogram, Log-Mel, MFCC)
+- **`mizchi/whisper`** v0.3.1 — MoonBit native bindings for whisper.cpp speech-to-text inference
 - **`white-bear233/moontimeline`** v0.2.0 — MoonBit OTIO schemas, timeline semantics, algorithms, bundles and plugins
 - **`lin2077-zeming/moonecho`** v0.1.4 — Local-first acoustic fingerprint search, alignment, and WASM workbench for MoonBit.
 - **`mizchi/whisper-mbt`** v0.1.1 — DEPRECATED: Use mizchi/whisper instead. MoonBit native bindings for whisper.cpp.

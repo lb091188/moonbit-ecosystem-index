@@ -16,8 +16,8 @@
 - **`CaptainK-65/moon-statelens`** v0.5.0 — Active black-box Mealy model learning and replay-confirmed behavioral compatibility checks.
 - **`Han-Wentao/mooncontract`** v0.1.1 — MoonBit-native OpenAPI contract validation and deterministic mock toolkit
 - **`xziheng/testcontainers`** v0.1.0 — Throwaway Docker containers for MoonBit integration tests
-- **`CAIMEOX/quickcheck`** v0.6.9 — Automatic testing of MoonBit programs
 - **`moonbit-community/quickcheck_statemachine`** v0.0.1
+- **`CAIMEOX/quickcheck`** v0.6.9 — Automatic testing of MoonBit programs
 - **`weopqrst/mooncassette`** v0.10.0 — Deterministic record-and-replay (cassette) for LLM interactions: write offline, reproducible, drift-detecting …
 - **`Magic486/moon_mutest`** v0.1.7 — Mutation testing toolkit for MoonBit projects
 - **`erzhuzi259/moongrammata`** v0.1.1 — Structure-aware feedback-guided fuzzing toolkit for MoonBit
@@ -30,32 +30,33 @@
 - **`ryota0624/moonbit_test_containers`** v0.0.5 — Test containers implementation for MoonBit
 - **`123123213weqw/moon_historycheck`** v0.7.0 — Bounded concurrent-history checking with verified witnesses and counterexample reduction
 - **`illusory0x0/inspect`** v0.1.1 — A powerful quotation meta programming library that hacks MoonBit's snapshot test system, allowing you to custo…
+- **`liu666789987/moonbtkit`** v0.1.6 — Serializable behavior-tree assets, deterministic execution, and regression analysis for MoonBit.
 - **`tonyfettes/assert`** v0.1.0
 - **`2d5rrr333/moonwebtest`** v0.1.0 — Test toolkit for MoonBit wasm-gc web apps: a Node harness that drives your wasm exports over the JSON bridge, …
-- **`liu666789987/moonbtkit`** v0.1.6 — Serializable behavior-tree assets, deterministic execution, and regression analysis for MoonBit.
 - **`Ag108/MoonReduce`** v0.2.0 — Deterministic failure-preserving testcase reduction for MoonBit projects
 - **`bobzhang/scrut`** v0.1.1 — CLI testing in Markdown and Cram files (port of facebookincubator/scrut), the engine for `moon cram`
 - **`wuhaiting321/moonprobe`** v0.2.1 — A pure-MoonBit declarative API test runner: parses .probe cases, sends HTTP requests, asserts responses, and e…
 - **`zhzh12345678/moon_tracekit`** v0.1.2 — A deterministic tracing and observability toolkit for MoonBit.
-- **`GuoXBQ-Q/moon-boofuzz`** v0.1.3 — Deterministic protocol fuzzing core with native TCP/UDP execution and portable JSONL replay
 - **`serikaonoe123/moonffi-lab`** v0.1.0 — Stateful native FFI failure reproduction and dependency-aware trace reduction for MoonBit.
-- **`Xpeng/mooncov`** v0.1.1 — Coverage report parsing, merging, filtering, gating, and conversion for MoonBit projects.
+- **`GuoXBQ-Q/moon-boofuzz`** v0.1.3 — Deterministic protocol fuzzing core with native TCP/UDP execution and portable JSONL replay
 - **`willzhang/json_regress`** v0.1.2 — JSON, tensor and trajectory regression assertions with explicit tolerances and structured differences.
-- **`2515050242/agentcheck`** v0.1.0
+- **`Xpeng/mooncov`** v0.1.1 — Coverage report parsing, merging, filtering, gating, and conversion for MoonBit projects.
 - **`LF-ai-nb/caseweave`** v0.1.1 — Deterministic constrained combinatorial test matrix generator for MoonBit.
+- **`2515050242/agentcheck`** v0.1.0
 - **`nkwork9999/ayatsumugi`** v0.2.0 — Self-contained MoonBit UI audit and optimization core for Ayatsumugi
-- **`z2823253773-p/moontick`** v0.1.1 — Audit a fixed-interval sampling plan against observed tick timestamps.
 - **`Kai-Junhan/moonbit-evidence-bundle`** v0.2.0 — A portable evidence bundle model for reproducible MoonBit builds, tests, diagnostics, and artifacts.
+- **`z2823253773-p/moontick`** v0.1.1 — Audit a fixed-interval sampling plan against observed tick timestamps.
 - **`zhangbowen2006/agentcanary`** v0.1.1 — Deterministic, artifact-aware policy replay and counterfactual regression testing for AI tool traces.
 - **`zkc-long/faultcanvas`** v0.1.0 — Programmable HTTP fault proxy and stateful service virtualization gateway for MoonBit
 - **`yinlaomo112/moon-lsp-compiletest`** v0.1.0 — MoonBit-native compiletest-style regression runner for moon-lsp publishDiagnostics across document changes.
 - **`paveg/molt`** v0.1.8 — Simple HTTP load testing CLI built with MoonBit
 - **`kaigeliang/casekit`** v0.1.0 — Collect and compare MoonBit behavior across compiler backends
 - **`illusory0x0/fuzzy_match`** v0.2.5 — A library for fuzzy string matching and fuzzy string searching
+- **`wallll-wal6/arachne`** v0.1.1 — Behavior contract testing across MoonBit regex backends with Unicode boundary fixtures.
 - **`Kali-Leo/moonbit-CryptoAssert`** v0.2.0 — Multi-chain cryptographic assertion & formal verification library.
 - **`vicTop-cw/mcpconftest`** v0.9.0 — MCP protocol conformance probe — checks any MCP server (stdio or WebSocket) against the spec. 15 check categor…
-- **`Young-Flash/try_publish`** v0.1.6
 - **`wcx789ll/moon-reliability`** v0.3.3 — A practical MoonBit reliability engineering library with lifetime distributions, censored survival analysis, M…
+- **`Young-Flash/try_publish`** v0.1.6
 - **`Han-Wentao/moonbench`** v0.3.0 — A lightweight stopwatch, benchmark reporting, and baseline comparison toolkit for MoonBit projects.
 - **`sa2360/moonbench`** v0.3.0 — A tiny MoonBit benchmark statistics toolkit for stopwatch-style measurements.
 - **`myc1234567/moon_metric_lab`** v0.1.3 — A pure MoonBit machine learning evaluation metrics and experiment comparison framework supporting native, wasm…
@@ -64,7 +65,7 @@
 - **`Lyhdsba/moonbit-chemreport`** v0.3.1 — A reusable report layer for MoonBit chemical-engineering calculations.
 - **`albertoforni/symspell`** v0.4.2 — SymSpell spelling correction, compound splitting and merging, and Unicode word segmentation in MoonBit.
 - **`q0w1ertyuiop/moonrag-bench`** v0.2.1 — MoonRAGBench is a MoonBit-native toolkit for retrieval and RAG benchmark evaluation.
-- **`fuwasegu/moonbitap`** v0.1.0 — Bitap (Shift-Or) algorithm for fuzzy string matching with full Unicode support
 - **`wzx2007/moonpath`** v0.31.0 — A MoonBit graph algorithms and tile-grid pathfinding library for reusable open-source ecosystem building.
+- **`fuwasegu/moonbitap`** v0.1.0 — Bitap (Shift-Or) algorithm for fuzzy string matching with full Unicode support
 - **`moonbit-community/testdock`** v0.1.0 — Disposable Docker Compose environments for MoonBit tests
 - **`Rz-coder8848/moon-neo4j`** v0.1.0 — A pure-MoonBit Neo4j client: Bolt protocol, PackStream codec, HTTP transactional endpoint, and a typed Cypher …

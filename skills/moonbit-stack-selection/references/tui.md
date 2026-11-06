@@ -47,18 +47,18 @@
 - **`justjavac/terminal_size`** v0.1.7 — Cross-platform terminal size helpers for MoonBit.
 - **`chensuiyi/clicolor`** v0.2.0 — Terminal color and hyperlink escape sequences for MoonBit
 - **`wzzc-dev/moui_tui`** v0.3.0 — Terminal cell model: colors, attributes, rows and a damage-tracked screen buffer
-- **`FrozenLemonTee/TextEditor`** v0.1.1 — Demo app for LunarEvent and LunarTUI event loop integration
 - **`wzzc-dev/moui_tui_renderer`** v0.3.0 — Experimental terminal cell renderer: projects MoUI semantics frames into ANSI text
+- **`FrozenLemonTee/TextEditor`** v0.1.1 — Demo app for LunarEvent and LunarTUI event loop integration
+- **`wzzc-dev/moui_terminal_host`** v0.3.0 — Experimental terminal host: raw-mode TTY input channels for the MoUI TUI renderer
 - **`zkazure/moonfocus`** v0.1.1 — A Pomodoro timer and habit tracker with a lightweight TUI rendering engine and web console, written in MoonBit…
 - **`bobzhang/rich`** v0.1.2 — A port of Rich (rich text and beautiful formatting in the terminal) to MoonBit
 - **`CGaaaaaa/MoonProgress`** v0.1.0 — A configurable command-line progress bar library for MoonBit
-- **`wzzc-dev/moui_terminal_host`** v0.3.0 — Experimental terminal host: raw-mode TTY input channels for the MoUI TUI renderer
 - **`Yu-zh/termbit`** v0.1.1 — A terminal manipulation library written in MoonBit
 - **`xrr2016/tui-ansi`** v0.1.2
 - **`sennenki/console`** v0.1.4 — Cross-platform console I/O library
 - **`R00TK17/hex_editor`** v0.1.3 — Terminal hex editor & binary analysis toolkit: 20 format parsers, wildcard search, entropy analysis, steganogr…
 - **`DWS-ai-nb/termproof`** v0.1.1 — Streaming ANSI/ECMA-48 terminal log sanitizer and security auditor for MoonBit
 - **`grandEarshot/tui`** v0.1.0 — A terminal user interface library for MoonBit inspired by Bubble Tea.
-- **`tonyfettes/pty`** v0.1.0 — Cross-platform PTY (pseudo-terminal) spawning for MoonBit native targets, integrated with moonbitlang/async.
+- **`SongYZZZ/ansi-guard`** v0.1.0 — Audit and sanitize untrusted ANSI terminal output in pure MoonBit
 
 *其余基础库见 [tui-libs.md](tui-libs.md) 全量分册。*

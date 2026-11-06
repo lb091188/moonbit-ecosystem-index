@@ -32,8 +32,8 @@
 - **`JunJunTnT/moonchart`** v0.1.2 — A statistical chart SVG generation library for MoonBit. Supports bar charts, line charts, scatter plots with e…
 - **`bikallem/webapi`** v0.5.0 — Moonbit browser WebApi - dom, fetch, html, xhr, url, svg, uievents and more
 - **`Mitsuha11zz/MoonChartSVG`** v0.1.5 — 纯 MoonBit 实现的 SVG 图表生成库，支持柱状图、折线图、饼图、散点图、雷达图、面积图、堆叠柱状图、水平柱状图、环形图共9种图表类型，零依赖，Builder API 设计。
-- **`dgmxjj/moonbit-posterkit`** v0.1.4 — Typed, data-driven SVG poster and cover generation for MoonBit.
 - **`wccerty/moonbit-artboard`** v0.1.2 — A high-performance vector artboard data model and operation kernel for Web/WASM built in MoonBit.
+- **`dgmxjj/moonbit-posterkit`** v0.1.4 — Typed, data-driven SVG poster and cover generation for MoonBit.
 - **`colmugx/ai-passport`** v0.2.6 — MoonBit application SDK and host toolchain for supported embedded devices and the Web host.
 - **`668xin/moonbit-chart`** v0.2.0 — A native MoonBit SVG chart library with light/dark theme, CLI tool and Markdown to HTML converter
 - **`moonbitstack/moonegui`** v0.2.1 — Immediate-mode graphical interfaces for MoonBit.

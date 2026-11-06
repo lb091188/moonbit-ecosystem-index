@@ -53,6 +53,7 @@
 - **`WangYF0829/moonpixelanimkit`** v0.1.2 — MoonBit-native pixel animation asset parser, validator, runtime model, and export toolkit.
 - **`zhangbowen2006/moonbvhkit`** v0.2.0 — MoonBit-native BVH motion capture parser, validator, analysis helpers, and asset pipeline toolkit.
 - **`moonbitlang/wasm4`** v0.2.9 — An opinionated binding for WASM-4, a retro game framework using WebAssembly
+- **`moonbitstack/moonmath`** v0.1.2 — Vectors, matrices, quaternions and geometry for MoonBit: column-major, right-handed, and ready to copy into a …
 - **`nuskey8/raylib`** v0.1.0 — High-level raylib bindings for MoonBit.
 - **`mizchi/kagura_game`** v0.6.0 — Gameplay rules, inventory, progression and scene transitions
 - **`sennenki/2048`** v0.1.1 — A MoonBit implementation of the 2048 game on browser.
@@ -63,6 +64,5 @@
 - **`HK-SHAO/sfengine`** v0.1.2 — Shaofeng numerical core: fluid, vertex batch and tracer kernels compiled to WASM for the game
 - **`sacckey/lunaboy`** v0.1.2 — A Game Boy emulator written in MoonBit
 - **`tonyfettes/raylib-examples`** v0.2.4
-- **`Ridge-Lab/moonphaserkit`** v0.3.0 — A MoonBit JavaScript binding for Phaser 3 scenes, sprites, animation, audio, camera, tilemaps, input, text, an…
 
 *其余基础库见 [game-libs.md](game-libs.md) 全量分册。*

@@ -8,45 +8,45 @@
 - **`mizchi/sqlite`** v0.3.1 — libsqlite3 bindings for MoonBit
 - **`moonbit-community/proton_safe_storage`** v0.7.0 — Native OS-backed safe storage helpers for MoonBit.
 - **`prowk/moonsqlitefile`** v0.8.1 — Pure MoonBit read-only SQLite file format parser and inspector
-- **`f4ah6o/duckdb`** v0.8.0 — MoonBit bindings for DuckDB on native and JavaScript targets (Node.js and browser WASM backends)
 - **`moonbitstack/moonsqlite`** v0.3.5 — SQLite driver for moondb/moonorm — native FFI, amalgamation vendored here (isolated).
+- **`f4ah6o/duckdb`** v0.8.0 — MoonBit bindings for DuckDB on native and JavaScript targets (Node.js and browser WASM backends)
 - **`myfreess/sqlite3`** v0.1.1
 - **`daqing/sqlite`** v0.4.0 — SQLite3 bindings for latest MoonBit toolchian
-- **`moonbitstack/moonmysql`** v0.7.9 — Pure-MoonBit MySQL wire-protocol driver implementing @moondb.Driver — no C, like PyMySQL.
 - **`moonbitstack/moonvar`** v0.2.1 — Fixed-width and variable-length integer encodings for MoonBit.
+- **`moonbitstack/moonmysql`** v0.7.9 — Pure-MoonBit MySQL wire-protocol driver implementing @moondb.Driver — no C, like PyMySQL.
 - **`moonbitstack/moonpostgres`** v0.6.9 — Pure-MoonBit PostgreSQL wire-protocol driver implementing @moondb.AsyncDriver — no C, like asyncpg.
 - **`jaredzhou/moonpg`** v0.14.0 — A pure MoonBit PostgreSQL client, wire protocol from scratch.
 - **`mizchi/cloudflare`** v0.1.13 — MoonBit bindings for Cloudflare Workers APIs (KV, D1, R2, Durable Objects, etc.)
 - **`moonbit-community/postgres`** v0.1.3 — A secure, easy-to-use PostgreSQL client library for MoonBit with an included connection pool.
-- **`mattn/postgres`** v0.10.7 — A PostgreSQL client library for MoonBit using libpq.
 - **`moonbitstack/moonctl`** v0.12.7 — Project and code generator for MoonBit services.
 - **`mizchi/bit_objstore`** v0.49.1 — Object storage abstraction with compare-and-swap writes (S3/R2/GCS)
+- **`mattn/postgres`** v0.10.7 — A PostgreSQL client library for MoonBit using libpq.
 - **`moonbit-community/migrate`** v0.1.5 — Database migrations for MoonBit with SQLite and PostgreSQL support.
 - **`kath61105/moon_schema_plan`** v0.4.0 — Deterministic schema diff, migration planning, and destructive-change gates for MoonBit
-- **`ash1day/sql`** v0.2.1 — PostgreSQL query builder for MoonBit: SQL AST and bound parameters
 - **`riantr/tesseract`** v0.1.15 — Tiny multi-key JSON value database over a 4D sudoku lattice (1..215 cells per axis, 81 by default), with a SQL…
+- **`ash1day/sql`** v0.2.1 — PostgreSQL query builder for MoonBit: SQL AST and bound parameters
 - **`jaredzhou/foxql`** v0.1.4 — Compile-time type-safe PostgreSQL SQL builder with fluent API
 - **`KKKIIO/moondark_postgresql`** v0.1.0 — PostgreSQL backends for the moondark framework
 - **`QYF795/regolith`** v0.5.1 — 月壤：纯 MoonBit LSM-tree 嵌入式 KV 存储（WAL + 跳表 MemTable + SSTable + 合并压缩）。
 - **`mizchi/sqlc_gen_moonbit`** v0.4.0 — sqlc plugin for MoonBit
+- **`moonbitstack/moonmodel`** v0.1.3 — One model description for MoonBit, projected to JSON Schema, OpenAPI, SQL and GraphQL.
 - **`PingGuoMiaoMiao/moonlsm`** v0.3.2 — Embedded LSM-tree storage engine for MoonBit
 - **`kaashyapan/postgresx`** v0.2.0 — Extends moonbitlang/x types for use with moonbit-community/postgres
-- **`moonbitstack/moonmodel`** v0.1.3 — One model description for MoonBit, projected to JSON Schema, OpenAPI, SQL and GraphQL.
+- **`daqing/moon-sqlite3`** v0.4.3 — SQLite3 bindings for latest MoonBit toolchian
 - **`wallll-wal6/moonkv`** v0.1.3 — An append-only key-value storage engine in MoonBit based on Bitcask architecture.
 - **`liuhuo23/clickhouse-driver`** v0.4.0 — 一个ClickHouse的驱动库
 - **`codeworm96/magpiedb`** v0.2.0 — vibe coded lightweight OLAP database
-- **`daqing/moon-sqlite3`** v0.4.3 — SQLite3 bindings for latest MoonBit toolchian
-- **`Mairzzcllo/moonbit_sqlc_plugin`** v0.1.9 — sqlc WASM plugin ? generate type-safe MoonBit database layer from SQL queries
 - **`Nanaloveyuki/vellum`** v0.4.2 — Single-file page store. One writer, crash recovery from a write-ahead log.
+- **`Mairzzcllo/moonbit_sqlc_plugin`** v0.1.9 — sqlc WASM plugin ? generate type-safe MoonBit database layer from SQL queries
 - **`Tino-hue/projdesk-kernel`** v0.3.0 — ProjDesk MoonBit kernel — six independent algorithm engines (DSL compiler, constraint solver, migration, equiv…
 - **`mldong/jeeflow-repository-mysql`** v0.1.60 — jeeflow MySQL repository (moondb Driver trait + moonmysql async conn)
 - **`uiwcvb/moonsql`** v0.1.0 — A pure MoonBit embedded relational SQL engine
-- **`moonbit-community/sqlparser`** v0.5.2 — Extensible SQL Lexer and Parser in MoonBit
 - **`mldong/moon-token-store`** v0.1.20 — Token state storage contract for moon-token: async storage port, account-to-token reverse index, shared value …
+- **`moonbit-community/sqlparser`** v0.5.2 — Extensible SQL Lexer and Parser in MoonBit
 - **`geniuszby/pagelens`** v0.1.0 — Read-only SQLite database and WAL file analyzer written in MoonBit
 - **`KKKIIO/moondark_sqlite`** v0.1.0 — SQLite backends for the moondark framework
-- **`Rz-coder8848/moon-typed-orm`** v0.1.0 — A typed, injection-safe SQL query builder with a pluggable connection boundary and a dependency-free in-memory…
 - **`jonesmelton/sqlbrook`** v0.3.0 — Whole-statement SQLite formatter for the river style, as a library and a stdin CLI.
+- **`Rz-coder8848/moon-typed-orm`** v0.1.0 — A typed, injection-safe SQL query builder with a pluggable connection boundary and a dependency-free in-memory…
 - **`colmugx/sqlite3`** v0.2.0 — A lightweight, low-level SQLite3 binding for MoonBit, providing a thin interface over the SQLite3 C API.
 - **`colmugx/sqlite-vec`** v0.2.4 — SQLite3 binding with sqlite-vec vector search extension.
 - **`mldong/moon-file-storage`** v0.1.8 — File storage models, the platform and recorder ports, and the service facade
@@ -54,56 +54,56 @@
 - **`cn-xjr/migration_lens`** v0.1.0 — Offline PostgreSQL index migration review with explicit execution context
 - **`prowk/mooncql`** v0.2.1 — Cassandra CQL native protocol v5 asynchronous driver for MoonBit
 - **`mldong/moon-file-storage-verify`** v0.1.12 — Shared platform contract suite for moon-file-storage
-- **`mldong/moon-file-storage-qiniu`** v0.1.7 — Qiniu Kodo platform adapter for moon-file-storage
 - **`superbigcup325/moonlake`** v0.6.4 — Embeddable analytical query engine for MoonBit: run SQL over CSV/Parquet files, native and WebAssembly from on…
+- **`mldong/moon-file-storage-qiniu`** v0.1.7 — Qiniu Kodo platform adapter for moon-file-storage
 - **`mldong/moon-file-storage-ftp`** v0.1.7 — FTP platform adapter for moon-file-storage
 - **`mldong/moon-token-store-redis`** v0.1.20 — Redis-backed TokenStore for moon-token: shared sessions across processes and instances, with family CAS, Lua g…
 - **`shiyukonghui/kingbase-client`** v0.1.1 — KingbaseES client for MoonBit: PostgreSQL wire protocol 3.0, SCRAM-SHA-256, text COPY, and a dialect layer for…
+- **`mldong/moon-file-storage-oss`** v0.1.6 — Alibaba Cloud OSS platform adapter for moon-file-storage
 - **`mldong/moon-file-storage-s3`** v0.1.6 — S3 platform adapter for moon-file-storage
 - **`mldong/moon-file-storage-cos`** v0.1.6 — Tencent Cloud COS platform adapter for moon-file-storage
-- **`mldong/moon-file-storage-oss`** v0.1.6 — Alibaba Cloud OSS platform adapter for moon-file-storage
 - **`mldong/moon-file-storage-obs`** v0.1.6 — Huawei Cloud OBS platform adapter for moon-file-storage
+- **`mldong/moon-file-storage-local`** v0.1.6 — Local filesystem platform for moon-file-storage
 - **`mldong/moon-file-storage-recorder-file`** v0.1.6 — File-backed recorder for moon-file-storage
 - **`bobzhang/issues`** v0.1.8 — SQLite-backed DAG issue tracker with a MoonBit CLI and Rabbit Tea dashboard.
-- **`mldong/moon-file-storage-local`** v0.1.6 — Local filesystem platform for moon-file-storage
 - **`mizchi/bitx_kv`** v0.49.1 — Git-backed KV store with CRDT sync (extension module for mizchi/bit)
 - **`Milky2018/sqlparser`** v0.5.0 — Extensible SQL Lexer and Parser in MoonBit
 - **`HhWw96/moonmmdb`** v0.9.4 — Native MoonBit MaxMind DB reader with bounded decoding and exact values
 - **`bobzhang/sqlglot`** v0.1.0 — A SQL parser, transpiler and optimizer: a MoonBit port of sqlglot
 - **`KKKIIO/sqlite`** v0.3.2 — SQLite bindings for MoonBit that link against your own libsqlite3 (native) or node:sqlite (js)
 - **`Hosi121/sql_session`** v0.1.0 — Typed scoped SQL sessions and transaction ownership for MoonBit
+- **`moonbitstack/moonconsul`** v0.1.2 — A complete Consul client for MoonBit: agent, catalog, health, KV (with CAS, locks and semaphores), sessions, e…
 - **`moonrockz/partiql-syntax`** v0.3.0 — A PartiQL parser for MoonBit.
 - **`moonrockz/partiql-value`** v0.3.0 — The PartiQL data model for MoonBit, with PartiQL-encoded Ion, JSON and YAML input codecs.
+- **`moonbitstack/moonetcd`** v0.1.2 — An etcd v3 client for MoonBit.
+- **`JIA2JIA2/moonbitgeodb`** v0.1.6
 - **`tonyfettes/tree_sitter_sql`** v0.1.26 — Tree-sitter Grammar for SQL
 - **`zlhahaha/zarr`** v0.7.0 — Zarr v2 and v3 chunked array storage for MoonBit
-- **`JIA2JIA2/moonbitgeodb`** v0.1.6
-- **`marianoguerra/sos`** v0.2.1 — Simple Object Storage
-- **`mizchi/crater-browser-http-sqlite`** v0.17.1 — Optional SQLite-backed cache backend for crater-browser-http
-- **`Hosi121/mysql`** v0.3.0 — Typed async MySQL pool for native MoonBit using Connector/C workers
-- **`mizchi/bitx_wal`** v0.49.1 — Write-ahead log over object storage, coordinated by compare-and-swap
-- **`pangbit/mooncdc`** v0.1.3 — PostgreSQL to ClickHouse CDC library and replicator with durable checkpoints
-- **`thy1016/mooncmd`** v0.2.2 — Command-side event sourcing kernel for MoonBit: pure command handlers, auto-wrapped EventMessage metadata (cor…
 - **`riantr/MAKED`** v0.1.8 — MAKED on MoonBit: rabbita SPA frontend + a Flask-style micro-framework on moonback
-- **`bikallem/mariadb`** v0.0.1 — MariaDB/MySQL client library for Moonbit
+- **`marianoguerra/sos`** v0.2.1 — Simple Object Storage
+- **`thy1016/mooncmd`** v0.2.2 — Command-side event sourcing kernel for MoonBit: pure command handlers, auto-wrapped EventMessage metadata (cor…
+- **`mizchi/bitx_wal`** v0.49.1 — Write-ahead log over object storage, coordinated by compare-and-swap
+- **`mizchi/crater-browser-http-sqlite`** v0.17.1 — Optional SQLite-backed cache backend for crater-browser-http
+- **`pangbit/mooncdc`** v0.1.3 — PostgreSQL to ClickHouse CDC library and replicator with durable checkpoints
+- **`Hosi121/mysql`** v0.3.0 — Typed async MySQL pool for native MoonBit using Connector/C workers
 - **`moonrockz/partiql`** v0.3.0 — The partiql command-line tool.
-- **`moonbitstack/moonconsul`** v0.1.2 — A complete Consul client for MoonBit: agent, catalog, health, KV (with CAS, locks and semaphores), sessions, e…
-- **`moonbitstack/moonetcd`** v0.1.2 — An etcd v3 client for MoonBit.
 - **`moonrockz/partiql-eval`** v0.3.0 — A PartiQL evaluator for MoonBit.
+- **`bikallem/mariadb`** v0.0.1 — MariaDB/MySQL client library for Moonbit
+- **`Mr-Shi123/moondynamo`** v0.4.2 — Typed DynamoDB client for MoonBit with AWS Signature V4
+- **`LuoYunxin1/moonnormal`** v0.1.2 — Bounded relational schema normalization, decomposition verification and tuple audits
 - **`Dz-6666/moonshardkit`** v0.4.0 — Deterministic shard placement, replica isolation and migration planning for MoonBit.
 - **`Hosi121/postgres_session`** v0.1.0 — Scoped SQL adapter for moonbit-community/postgres
-- **`LuoYunxin1/moonnormal`** v0.1.2 — Bounded relational schema normalization, decomposition verification and tuple audits
 - **`lyjttio/moon-data-contract`** v0.2.2 — Deterministic schema governance for MoonBit: validate contracts, audit evolution, plan migrations, and enforce…
 - **`oyjh0381/moonerasure`** v0.3.0 — Reed-Solomon coding, byte-range parity updates and placement-aware repair planning
-- **`Mr-Shi123/moondynamo`** v0.4.2 — Typed DynamoDB client for MoonBit with AWS Signature V4
 - **`Sxy11112/moonjournalkit`** v0.2.0 — Deterministic transactional write-ahead log framing and crash recovery for MoonBit.
-- **`haol-05/moondatalog`** v0.1.1 — A pure MoonBit Datalog query engine with stratified negation, aggregation, static checks and moon prove formal…
 - **`snorfyang/moonupgradeguard`** v0.2.2 — EVM contract upgrade compatibility checks for MoonBit
+- **`haol-05/moondatalog`** v0.1.1 — A pure MoonBit Datalog query engine with stratified negation, aggregation, static checks and moon prove formal…
 - **`allain/mongodb`** v0.1.1 — MongoDB binary wire protocol driver for MoonBit
 - **`le065-tc/moonredis`** v0.1.3 — A lightweight Redis-protocol compatible server implemented in MoonBit.
 - **`2227057182/moonshim`** v0.1.1 — Conservative, compile-tested compatibility shims for evolving MoonBit public APIs.
 - **`xgzh1111/moonchunk`** v0.1.0 — Content-defined chunking and incremental synchronization primitives for MoonBit
 - **`xiewenchen/moonbit-platform`** v0.1.0 — 纯 MoonBit 实现的后端开发平台：Redis / PostgreSQL 协议驱动 + HTTP 1.1 服务端 + 应用框架层与工具链
 - **`Yingqingxue/mooncas`** v0.1.0 — A portable content-addressed storage kernel for MoonBit
-- **`xiaobai718-ab/moondisk`** v0.1.0 — Disk usage analysis, snapshot comparison, and safe cleanup planning for MoonBit
 - **`TangShiJi/moonpageflow`** v0.1.0 — Stable cursor pagination, keyset query planning, snapshot guards, and resumable traversal for MoonBit
+- **`xiaobai718-ab/moondisk`** v0.1.0 — Disk usage analysis, snapshot comparison, and safe cleanup planning for MoonBit
 - **`cauchyQ/moon-nfs3`** v0.1.0 — NFSv3 over TCP file client for MoonBit

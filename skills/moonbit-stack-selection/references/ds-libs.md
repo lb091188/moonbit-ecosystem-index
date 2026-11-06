@@ -53,26 +53,26 @@
 - **`CAIMEOX/fenwick`** v0.1.1 — Fenwick tree implementation in MoonBit
 - **`totto2727/workgraph-opencode-cli`** v0.2.1 — OpenCode CLI integration for workgraph
 - **`gaato/mooncakes-graph`** v0.1.1 — The mooncakes.io registry as a dependency graph: what depends on what, ranked by direct, transitive and other-…
-- **`illusory0x0/graphviz`** v0.1.2
 - **`usersD609/moonqueuelab`** v0.1.2 — Analytical queueing networks, service-level capacity sizing and exact integer server planning
+- **`illusory0x0/graphviz`** v0.1.2
 - **`totto2727/workgraph-codex-cli`** v0.2.1 — Codex CLI integration for workgraph
 - **`kesmeey/immut_IntervalTree`** v0.1.0 — Experimenting with implementing an immutable interval tree in Moonbit
-- **`cn-cheems/moonnavkit`** v0.3.0 — Weighted path planning, multi-goal flow fields, and search visualization for MoonBit.
 - **`cauchyQ/moonbit-roaring`** v0.2.0 — Pure MoonBit 32-bit Roaring Bitmap indexes
+- **`cn-cheems/moonnavkit`** v0.3.0 — Weighted path planning, multi-goal flow fields, and search visualization for MoonBit.
+- **`tc-adventureking/ipset`** v0.3.1 — Pure MoonBit IPv4/IPv6 addresses, networks, interfaces and address sets
 - **`wcx789ll/moonsim`** v0.1.2 — A high-performance deterministic discrete-event and multi-agent systems simulation framework in MoonBit
 - **`haol-05/moondatalog`** v0.1.1 — A pure MoonBit Datalog query engine with stratified negation, aggregation, static checks and moon prove formal…
-- **`tc-adventureking/ipset`** v0.3.1 — Pure MoonBit IPv4/IPv6 addresses, networks, interfaces and address sets
 - **`totto2727/workgraph-visualization`** v0.1.4 — Runtime-independent workgraph visualization
-- **`totto2727/workgraph-llm`** v0.1.4 — Runtime-independent typed LLM nodes for workgraph
 - **`qyt1234567/moongraphlearn`** v0.1.2 — MoonGraphLearn: Graph Machine Learning Preprocessing and Message Passing Experimental Library in MoonBit
+- **`totto2727/workgraph-llm`** v0.1.4 — Runtime-independent typed LLM nodes for workgraph
 - **`Bobojy00/moonbit_factory_graph`** v0.2.1 — Industrial plant topology, multi-layer material/control/energy flow modeling and failure propagation graph eng…
-- **`FikaRomantic/moongraphml`** v0.2.0 — Typed, bounded GraphML interchange with atomic relabeling and edge subgraphs
 - **`forey217/moonged`** v0.2.0 — GEDCOM 7 data interchange, relationship queries and audit tools for MoonBit
+- **`FikaRomantic/moongraphml`** v0.2.0 — Typed, bounded GraphML interchange with atomic relabeling and edge subgraphs
 - **`NBB2006/routeweave`** v0.2.0 — MoonBit-native route encoding, GeoJSON export, route metrics, simplification, and Web Mercator tile coverage t…
 - **`totto2727/moon-agent-graph`** v0.1.2 — Native asynchronous agent graph runtime with Mermaid visualization
 - **`Deviaana/pathforge`** v0.1.0 — A MoonBit graph search and grid pathfinding toolkit with BFS, Dijkstra and A*.
 - **`yyqdbngt/moon_graphdesk`** v0.2.0 — Property graph import, indexing, query and impact analysis
 - **`clhhhhhh/moon-hprof`** v0.2.0 — Experimental HPROF heap dump parser for MoonBit.
 - **`xcc-ordinary/moonbit-roaring`** v0.1.0 — Interoperability-focused RoaringBitmap with automatic run compression and portable serialization
-- **`Rz-coder8848/moon-neo4j`** v0.1.0 — A pure-MoonBit Neo4j client: Bolt protocol, PackStream codec, HTTP transactional endpoint, and a typed Cypher …
 - **`code3055/moon_graph`** v0.1.0 — A native MoonBit graph layout and SVG rendering toolkit
+- **`Rz-coder8848/moon-neo4j`** v0.1.0 — A pure-MoonBit Neo4j client: Bolt protocol, PackStream codec, HTTP transactional endpoint, and a typed Cypher …

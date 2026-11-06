@@ -14,11 +14,11 @@
 
 - **`moonbitstack/moonfetch`** v0.1.5 — An HTTP client for MoonBit, synchronous or asynchronous.
 - **`gaato/http`** v0.5.0 — Sans-IO HTTP vocabulary for MoonBit SDKs: request/response types, a Transport trait, Retry-After and Link pars…
-- **`gaato/http-async`** v0.5.0 — gaato/http Transport over moonbitlang/async. Native, JS, and moonrun Wasm targets.
 - **`q2316367743/moonhttp`** v0.6.1 — axios 风格的 MoonBit HTTP 客户端：实例与配置合并、四种请求体形态、流式与 SSE、自动重定向
+- **`gaato/http-async`** v0.5.0 — gaato/http Transport over moonbitlang/async. Native, JS, and moonrun Wasm targets.
 - **`moonbitstack/moonnet`** v0.1.10 — Networking for MoonBit: connections, listeners and dialers over TCP, TLS and QUIC.
-- **`DC-Z-lab/moonllm`** v0.1.0 — Type-safe, OpenAI-compatible LLM client for MoonBit: chat completions, streaming (SSE), tool calling, and mult…
 - **`moonbitstack/moonquic`** v0.3.11 — QUIC transport for MoonBit.
+- **`DC-Z-lab/moonllm`** v0.1.0 — Type-safe, OpenAI-compatible LLM client for MoonBit: chat completions, streaming (SSE), tool calling, and mult…
 - **`gaato/requesto`** v0.2.2 — A human-facing async HTTP client for MoonBit: verb functions, a client with defaults, body encoders, responses…
 - **`SundayT1998/chroma-client`** v0.1.1 — A Chroma vector database HTTP client for MoonBit: collections, records, queries and embeddings.
 - **`marianoguerra/mcp-client`** v0.10.1 — MCP 2026-07-28 client: streamable-HTTP and stdio transports, MRTR, subscriptions and the tasks extension.

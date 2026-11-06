@@ -27,10 +27,11 @@
 - **`oboard/numoon`** v0.4.1 — MoonBit Mathematical Operation
 - **`Kaida-Amethyst/openblas`** v0.1.3 — Use OpenBlas in MoonBit
 - **`qjgqjg/moon-causal`** v0.2.5 — A practical MoonBit causal-inference toolkit with propensity modeling, weighting, matching, diagnostics, uncer…
-- **`Kaida-Amethyst/moonbit-math`** v0.1.14 — High-precision Math library
 - **`AdUhTkJm/nummoon`** v0.2.3 — A high-speed native numerical library.
+- **`Kaida-Amethyst/moonbit-math`** v0.1.14 — High-precision Math library
 - **`KCN-judu/calculus-numerical`** v0.3.1 — This repo is no longer maintaining here, it is maintained by Luna-Flow now.
 - **`justjoheinz/complex`** v0.4.2 — Complex number arithmetics
+- **`moonbitstack/moonnum`** v0.2.3 — Python's numbers for MoonBit.
 - **`Luna-Flow/mare_mark`** v0.4.1 — Reproducible benchmarking, statistical comparison, tuning, and self-contained reports for MoonBit payloads.
 - **`wcx789ll/moon-reliability`** v0.3.3 — A practical MoonBit reliability engineering library with lifetime distributions, censored survival analysis, M…
 - **`pla678889/moon-experiment`** v0.2.3 — A mature A/B testing analysis library for MoonBit, supporting sample size estimation, sequential testing, metr…
@@ -38,9 +39,8 @@
 - **`hxiuzheng/robust_stats`** v0.2.2 — Production-oriented robust statistics, streaming analytics, anomaly detection, and risk toolkit for MoonBit.
 - **`noweizongqing/numsolve`** v0.6.0 — Pure MoonBit ODE suite with dense output, events, direct/iterative/banded linear systems, root finding, and in…
 - **`lhw153766-ctrl/sparse-linalg`** v0.1.3 — Numeric sparse matrix storage (COO/CSR/CSC), sparse kernels, and iterative/direct solvers for MoonBit.
-- **`moonbitstack/moonnum`** v0.2.3 — Python's numbers for MoonBit.
+- **`moonbitstack/moonmath`** v0.1.2 — Vectors, matrices, quaternions and geometry for MoonBit: column-major, right-handed, and ready to copy into a …
 - **`hp0200/moonbit-sparse-math`** v0.2.1 — A sparse matrix and numerical diagnostic library for data science.
 - **`Luna-Flow/floating`** v0.10.1 — Arbitrary-precision binary, decimal, and ball arithmetic for MoonBit, with checked operations and explicit num…
-- **`CAIMEOX/symbit`** v0.5.10 — A symbolic mathematics library for Moonbit.
 
 *其余基础库见 [math-libs.md](math-libs.md) 全量分册。*

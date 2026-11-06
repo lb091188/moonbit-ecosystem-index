@@ -23,8 +23,8 @@ DEFLATE / zlib / gzip / ZIP 的压缩与解压实现。
 - **`gmlewis/flate`** v0.36.17 — MoonBit flate: provide simplified flate (LZW) compression algorithm.
 - **`moonbit-community/zipc`** v0.2.2 — Typed, in-memory ZIP archive library for MoonBit (deflate via moonbit-community/flate)
 - **`Milky2018/zstd`** v0.1.4
-- **`bikallem/compress`** v0.3.4 — Compression library for MoonBit: flate, gzip, zlib, lzw, bzip2, snappy, lz4, zstd, brotli
 - **`moonbitstack/moonzip`** v0.3.6 — Compression and archives for MoonBit, one format per package.
+- **`bikallem/compress`** v0.3.4 — Compression library for MoonBit: flate, gzip, zlib, lzw, bzip2, snappy, lz4, zstd, brotli
 - **`gaato/codec`** v0.1.0 — Error kinds and limits shared by the streaming codecs of gaato/codecs.mbt.
 - **`gaato/codec_bytes`** v0.1.1 — The streaming contract of byte-stream codecs: step through input chunks into bounded output slices, with bound…
 - **`gaato/deflate`** v0.1.0 — Streaming DEFLATE, zlib and gzip decoders and encoders (RFC 1951, 1950, 1952) for MoonBit: arbitrary input chu…
@@ -37,10 +37,10 @@ DEFLATE / zlib / gzip / ZIP 的压缩与解压实现。
 - **`aurora0x27/lzma-mbt`** v0.1.0 — Independent MoonBit implementation of liblzma core functionality
 - **`mizchi/bit_archive`** v0.49.1 — Tar archive writing (gix-archive equivalent)
 - **`lin2077-zeming/moonxz`** v0.4.6 — Pure MoonBit XZ/LZMA/LZMA2 compression and decompression toolkit
-- **`moonbit-community/evol-minifier`** v0.3.1 — A slightly faster JavaScript mangler/compressor for MoonBit.
+- **`moonbit-community/evol-minifier`** v0.3.2 — A slightly faster JavaScript mangler/compressor for MoonBit.
 - **`bobzhang/tar`** v0.1.3 — Pure MoonBit library to read and write tar files with streaming support
 - **`ivgtr/moonzip`** v0.2.4 — A MoonBit compression library compatible with fflate
-- **`Asterless/MoonQOI`** v0.1.3 — QOI (Quite OK Image Format) encoder/decoder library for MoonBit
 - **`moonbitstack/moonapi`** v0.17.9 — A typed web framework for MoonBit.
+- **`Asterless/MoonQOI`** v0.1.3 — QOI (Quite OK Image Format) encoder/decoder library for MoonBit
 
 *其余基础库见 [archive-libs.md](archive-libs.md) 全量分册。*

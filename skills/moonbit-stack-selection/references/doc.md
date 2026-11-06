@@ -22,15 +22,15 @@ Markdown 解析、HTML/PDF/DOCX 转换、文档排版。
 - **`moonrockz/pretty`** v0.3.0 — Wadler-style pretty printer for MoonBit: documents, groups and layout that fits a line width
 - **`Lampese/office-viewer`** v0.2.6 — A read-only DOCX, XLSX, PPTX, and PDF viewer with structured selections.
 - **`moonbit-community/html`** v0.2.4 — WHATWG HTML5 spec-compliant parser for MoonBit
-- **`Xiao-li-He/MoonMarkMind`** v0.1.0 — Markdown mind-map toolkit and browser application built with MoonBit
 - **`wzzc-dev/moui_markdown`** v0.3.0 — Reusable Markdown editing chrome components for MoUI (outline, find/replace, format palette, document info, HT…
+- **`Xiao-li-He/MoonMarkMind`** v0.1.0 — Markdown mind-map toolkit and browser application built with MoonBit
 - **`hnlyxiaobing/moonbitmark`** v0.5.0 — Convert documents and URLs to Markdown with a MoonBit engine
 - **`ZSeanYves/markitdown`** v0.8.0 — A MoonBit-native document-to-Markdown converter with multi-format parsing, metadata, assets, batch conversion,…
 - **`Freakz2z/tracecite`** v0.8.0 — Maintain Markdown references, code excerpts and source snapshots
 - **`wzzc-dev/moui_richtext`** v0.3.0 — Optional rich text and markdown addon for MoUI
 - **`tonyfettes/tree_sitter_markdown`** v0.1.26 — Markdown grammar for tree-sitter
-- **`moonbitlang/office`** v0.3.1 — Agent-oriented Office and PDF command-line tooling
 - **`moonbitlang/pdf2md`** v0.1.3 — Command-line PDF to Markdown extraction built on pdflite.
+- **`moonbitlang/office`** v0.3.1 — Agent-oriented Office and PDF command-line tooling
 - **`Estrella-11/moondockit`** v0.6.0 — A MoonBit-first documentation site toolkit with AI-enhanced docs, quality assessment, content summarization, c…
 - **`bikallem/webapi`** v0.5.0 — Moonbit browser WebApi - dom, fetch, html, xhr, url, svg, uievents and more
 - **`bobzhang/asciidoctor-pdf`** v0.2.1 — PDF backend for asciidoctor.mbt: a port of Asciidoctor PDF 2.3.27 with its themes and fonts bundled

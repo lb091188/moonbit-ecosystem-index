@@ -38,13 +38,13 @@
 - **`wzzc-dev/moui_agent_mcp`** v0.3.0 — MCP JSON-RPC router and stdio transport exposing a MoUI AgentHost to external agents
 - **`totto2727/codex-sdk`** v0.4.1 — MoonBit SDK for embedding the Codex agent in workflows and applications
 - **`gaato/openai`** v0.6.0 — Thin OpenAI API client for MoonBit built on gaato/http and gaato/sdk-runtime: models, embeddings, responses (b…
-- **`shiguri-01/mcp`** v0.2.0 — A library for building Model Context Protocol servers and clients.
 - **`moonbitstack/moonmcp`** v0.1.10 — Model Context Protocol servers and clients for MoonBit.
-- **`totto2727/agent-core-sdk`** v0.1.2 — Shared MoonBit process foundation for agent CLIs
+- **`shiguri-01/mcp`** v0.2.0 — A library for building Model Context Protocol servers and clients.
 - **`wzzc-dev/moui_agent`** v0.3.0 — MoUI agent protocol layer: observable/controllable runtime surface for external agents
+- **`totto2727/agent-core-sdk`** v0.1.2 — Shared MoonBit process foundation for agent CLIs
 - **`mizchi/mnemo`** v0.2.2 — Hermes-compatible memory / skills / session / prompt layer for AI agents (MoonBit native + JS)
-- **`trkbt10/llm_interop`** v0.3.0 — Unified LLM protocol abstraction for MoonBit — multi-provider support with streaming, tool calling, and protoc…
 - **`hnlyxiaobing/MBOpenClacky`** v0.3.1 — AI Agent CLI tool rewritten in MoonBit
+- **`trkbt10/llm_interop`** v0.3.0 — Unified LLM protocol abstraction for MoonBit — multi-provider support with streaming, tool calling, and protoc…
 - **`howtomakeaname/tokenizers-moonbit`** v0.16.3 — A MoonBit port of HuggingFace tokenizers. Loads tokenizer.json and runs BPE / byte-level BPE / WordPiece / Uni…
 - **`conglinyizhi/better-edit-tools-mcp`** v0.1.1 — MoonBit MCP file editing toolkit — atomic writes, function-scope detection, snapshot rollback, and fault-toler…
 - **`golemcloud/golem_sdk_tools`** v0.6.2 — Code generation tools for the Golem SDK for MoonBit
@@ -57,8 +57,8 @@
 - **`conglinyizhi/moonbit-llm-faceoff`** v0.2.0 — OpenAI-compatible LLM client, a harness that compares multiple models on the same case set, and a browser UI f…
 - **`Across2005/harness-self-evolution`** v0.3.8 — 面向 DeepSeek Harness（DSH）的全盘自进化 stdio MCP 插件（MoonBit 原生）：16 个工具完成 扫描→监控→提案→审批→执行 闭环，含子 Agent 工厂与只读运行时快照；人工审批闸门；…
 - **`123123213weqw/moonbit_mcp`** v0.1.0 — A MoonBit SDK for the Model Context Protocol (MCP). Build MCP servers and clients in MoonBit.
-- **`totto2727/agent-sdk`** v0.2.1 — Provider-neutral MoonBit interfaces for agent CLI SDKs
 - **`marianoguerra/mcp-server`** v0.10.1 — Define MCP 2026-07-28 servers: a side-effect-free routing core, tools/resources/prompts, and a transport trait…
+- **`totto2727/agent-sdk`** v0.2.1 — Provider-neutral MoonBit interfaces for agent CLI SDKs
 - **`tuya-me/aegisrun`** v0.9.3 — AegisRun - AI Agent Secure Tool Runtime (MoonBit + Wasm)
 
 *其余基础库见 [llm-libs.md](llm-libs.md) 全量分册。*

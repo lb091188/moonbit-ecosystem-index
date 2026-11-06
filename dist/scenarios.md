@@ -1,6 +1,6 @@
 # MoonBit 生态：场景化选包指南
 
-> 覆盖 3564 个已发布模块；被 yanked 的包不计入推荐。
+> 覆盖 3565 个已发布模块；被 yanked 的包不计入推荐。
 
 数据源：mooncakes.io 官方 API（模块元数据）。本索引仅做场景导航，不复制注册表能力：版本历史、完整 API 文档与依赖关系请到 mooncakes 包页查看，报告内包名均指向该页。
 
@@ -19,40 +19,40 @@
 - [桌面](#gui) — 方案 7 / 基础库 30
 - [移动端](#mobi) — 方案 7 / 基础库 8
 - [Web 前端框架](#ui) — 方案 6 / 基础库 57
-- [终端 / TUI](#tui) — 方案 5 / 基础库 54
-- [CLI 参数解析](#cli) — 方案 4 / 基础库 6
-- [游戏引擎 / ECS](#game) — 方案 6 / 基础库 42
-- [图形 / 图表 / 渲染](#graphics) — 无方案 / 基础库 101
-- [图像编解码](#img) — 无方案 / 基础库 41
-- [音频 / 视频](#media) — 无方案 / 基础库 39
+- [终端 / TUI](#tui) — 方案 5 / 基础库 55
+- [CLI 参数解析](#cli) — 方案 4 / 基础库 7
+- [游戏引擎 / ECS](#game) — 方案 6 / 基础库 43
+- [图形 / 图表 / 渲染](#graphics) — 无方案 / 基础库 102
+- [图像编解码](#img) — 无方案 / 基础库 42
+- [音频 / 视频](#media) — 无方案 / 基础库 40
 - [Web 后端 / HTTP 服务](#http) — 方案 13 / 基础库 73
 - [HTTP 客户端](#httpc) — 无方案 / 基础库 16
 - [网络传输 / 套接字](#net) — 无方案 / 基础库 68
 - [应用协议 / RPC](#proto) — 无方案 / 基础库 34
 - [数据库 / 存储](#db) — 方案 5 / 基础库 103
 - [异步 / 并发](#async) — 方案 4 / 基础库 49
-- [JSON 解析](#json) — 无方案 / 基础库 127
-- [配置 / 标记格式](#datafmt) — 方案 1 / 基础库 67
+- [JSON 解析](#json) — 无方案 / 基础库 128
+- [配置 / 标记格式](#datafmt) — 方案 1 / 基础库 68
 - [二进制编码](#binfmt) — 无方案 / 基础库 26
-- [日志 / 追踪](#log) — 无方案 / 基础库 33
+- [日志 / 追踪](#log) — 无方案 / 基础库 35
 - [运维 / 系统管理](#ops) — 方案 4 / 基础库 8
 - [LLM / Agent / MCP](#llm) — 方案 5 / 基础库 117
-- [解析器 / 语法](#parser) — 方案 2 / 基础库 238
+- [解析器 / 语法](#parser) — 方案 2 / 基础库 242
 - [编译器 / 代码生成](#compiler) — 无方案 / 基础库 88
-- [正则匹配](#regex) — 无方案 / 基础库 10
-- [Unicode / 文本处理](#unicode) — 无方案 / 基础库 111
+- [正则匹配](#regex) — 无方案 / 基础库 12
+- [Unicode / 文本处理](#unicode) — 无方案 / 基础库 112
 - [哈希 / 校验](#hash) — 无方案 / 基础库 45
 - [加密 / 签名](#cipher) — 无方案 / 基础库 31
 - [编码 / 转义](#encode) — 无方案 / 基础库 38
 - [压缩 / 归档](#archive) — 无方案 / 基础库 58
 - [文件 / 路径 / IO](#fs) — 无方案 / 基础库 72
-- [数学 / 数值计算](#math) — 无方案 / 基础库 66
+- [数学 / 数值计算](#math) — 无方案 / 基础库 68
 - [数据结构 / 算法](#ds) — 无方案 / 基础库 72
-- [测试 / 断言 / 属性测试](#test) — 方案 4 / 基础库 64
+- [测试 / 断言 / 属性测试](#test) — 方案 4 / 基础库 65
 - [开发工具 / 代码质量](#tool) — 无方案 / 基础库 64
 - [Markdown / 文档转换](#doc) — 无方案 / 基础库 92
-- [时间 / 日期](#time) — 无方案 / 基础库 42
-- [WebAssembly / JS 互操作](#wasm) — 方案 1 / 基础库 251
+- [时间 / 日期](#time) — 无方案 / 基础库 44
+- [WebAssembly / JS 互操作](#wasm) — 方案 1 / 基础库 253
 
 
 ## 桌面
@@ -162,7 +162,7 @@ Android、iOS、HarmonyOS 与微信小程序上的应用开发。生态中尚无
 | 4 | [Frank-III/onebit-tui](https://mooncakes.io/docs/Frank-III/onebit-tui) | 0.1.3 | 集成 Yoga flexbox 布局引擎的终端 UI 库，以 CSS 盒模型方式排版。 |
 | 5 | [brickfrog/pippa](https://mooncakes.io/docs/brickfrog/pippa) | 0.1.0 | 终端 UI 框架，采用 Bubble Tea 风格与 Model-Update-View 模式，消息类型化。 |
 
-### 基础库（54）
+### 基础库（55）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -189,16 +189,17 @@ Android、iOS、HarmonyOS 与微信小程序上的应用开发。生态中尚无
 | 3 | [TheWaWaR/clap](https://mooncakes.io/docs/TheWaWaR/clap) | 0.2.6 | 命令行参数解析库，支持选项、位置参数与多层子命令，帮助输出沿用 clap-rs 风格。 |
 | 4 | [totto2727/admiral](https://mooncakes.io/docs/totto2727/admiral) | 0.6.5 | admiral 的异步优先分支，命令处理可直接返回异步结果。 |
 
-### 基础库（6）
+### 基础库（7）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
 | 1 | [DzmingLi/clap](https://mooncakes.io/docs/DzmingLi/clap) | 0.2.8 | Command Line Argument Parser |
-| 2 | [Milky2018/options](https://mooncakes.io/docs/Milky2018/options) | 0.1.3 | Command line argument parser for MoonBit |
-| 3 | [peter-jerry-ye/parse_args](https://mooncakes.io/docs/peter-jerry-ye/parse_args) | 0.1.2 | A arg parser inspired by minimalist |
-| 4 | [cauchyQ/moonbit-argkit](https://mooncakes.io/docs/cauchyQ/moonbit-argkit) | 0.1.0 | Small dependency-free command line argument parser for MoonBit. |
+| 2 | [hustcer/cmder](https://mooncakes.io/docs/hustcer/cmder) | 0.6.1 | Declarative CLI builder for MoonBit, inspired by gunshi |
+| 3 | [Milky2018/options](https://mooncakes.io/docs/Milky2018/options) | 0.1.3 | Command line argument parser for MoonBit |
+| 4 | [peter-jerry-ye/parse_args](https://mooncakes.io/docs/peter-jerry-ye/parse_args) | 0.1.2 | A arg parser inspired by minimalist |
 | 5 | [jqlssg/moondocopt](https://mooncakes.io/docs/jqlssg/moondocopt) | 0.1.1 | Help-first command-line parsing with docopt semantics and bounded reusable compi… |
-| 6 | [moonrockz/zig-cross](https://mooncakes.io/docs/moonrockz/zig-cross) | 0.3.2 | Cross-compile MoonBit native binaries with zig |
+| 6 | [cauchyQ/moonbit-argkit](https://mooncakes.io/docs/cauchyQ/moonbit-argkit) | 0.1.0 | Small dependency-free command line argument parser for MoonBit. |
+| 7 | [moonrockz/zig-cross](https://mooncakes.io/docs/moonrockz/zig-cross) | 0.3.2 | Cross-compile MoonBit native binaries with zig |
 
 
 ## 游戏引擎 / ECS
@@ -216,7 +217,7 @@ Android、iOS、HarmonyOS 与微信小程序上的应用开发。生态中尚无
 | 5 | [firefly/firefly](https://mooncakes.io/docs/firefly/firefly) | 0.10.0 | Firefly Zero 掌机的游戏 SDK，仅面向该硬件平台，不适用于通用桌面环境。 |
 | 6 | [sennenki/reisen](https://mooncakes.io/docs/sennenki/reisen) | 0.3.2 | 视觉小说引擎，以剧本、立绘与分支组织内容，不适用于通用游戏开发。 |
 
-### 基础库（42）
+### 基础库（43）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -234,9 +235,9 @@ Android、iOS、HarmonyOS 与微信小程序上的应用开发。生态中尚无
 
 矢量图形、SVG、场景图、图表与图形布局、绘图原语。
 
-> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 101 个候选均为基础库，需按需组合。
+> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 102 个候选均为基础库，需按需组合。
 
-### 基础库（101）
+### 基础库（102）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -258,9 +259,9 @@ Android、iOS、HarmonyOS 与微信小程序上的应用开发。生态中尚无
 
 图像格式的编解码与像素处理：PNG / JPEG / GIF / BMP / QOI / WebP。
 
-> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 41 个候选均为基础库，需按需组合。
+> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 42 个候选均为基础库，需按需组合。
 
-### 基础库（41）
+### 基础库（42）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -282,9 +283,9 @@ Android、iOS、HarmonyOS 与微信小程序上的应用开发。生态中尚无
 
 音频采集与播放、音频编码、MIDI、麦克风与设备接口。
 
-> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 39 个候选均为基础库，需按需组合。
+> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 40 个候选均为基础库，需按需组合。
 
-### 基础库（39）
+### 基础库（40）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -327,10 +328,10 @@ HTTP 服务、路由、中间件与后端 API 开发。
 | 2 | [ShellWen/sw_router](https://mooncakes.io/docs/ShellWen/sw_router) | 0.2.0 | A fast and flexible URL router implementation for the MoonBit language. |
 | 3 | [mizchi/crater-browser-http](https://mooncakes.io/docs/mizchi/crater-browser-http) | 0.19.0 | HTTP, cache, cookie, and request sandbox helpers for crater browser |
 | 4 | [moonbitstack/moonhttp](https://mooncakes.io/docs/moonbitstack/moonhttp) | 0.15.8 | HTTP formats for MoonBit with no I/O: HTTP/1 to HTTP/3, WebSocket, SSE and multi… |
-| 5 | [mldong/moon-token-moonback](https://mooncakes.io/docs/mldong/moon-token-moonback) | 0.1.20 | moonback adapter for moon-token: per-route authentication middleware, request pr… |
-| 6 | [gaato/sdk-runtime](https://mooncakes.io/docs/gaato/sdk-runtime) | 0.7.0 | API-agnostic client runtime for MoonBit SDKs: error taxonomy, Retry-After and ba… |
-| 7 | [moonbitstack/moontls](https://mooncakes.io/docs/moonbitstack/moontls) | 0.9.14 | TLS 1.3 and DTLS 1.3 for MoonBit. |
-| 8 | [hnlyxiaobing/crescent](https://mooncakes.io/docs/hnlyxiaobing/crescent) | 0.10.7 | Crescent: A web framework for MoonBit. Fork of hnlyxiaobing/crescent with Debug … |
+| 5 | [moonbitstack/moontls](https://mooncakes.io/docs/moonbitstack/moontls) | 0.9.14 | TLS 1.3 and DTLS 1.3 for MoonBit. |
+| 6 | [mldong/moon-token-moonback](https://mooncakes.io/docs/mldong/moon-token-moonback) | 0.1.20 | moonback adapter for moon-token: per-route authentication middleware, request pr… |
+| 7 | [gaato/sdk-runtime](https://mooncakes.io/docs/gaato/sdk-runtime) | 0.7.0 | API-agnostic client runtime for MoonBit SDKs: error taxonomy, Retry-After and ba… |
+| 8 | [moonbitstack/moonrpc](https://mooncakes.io/docs/moonbitstack/moonrpc) | 0.21.12 | gRPC for MoonBit. |
 
 
 ## HTTP 客户端
@@ -345,11 +346,11 @@ HTTP 服务、路由、中间件与后端 API 开发。
 |---|---|---|---|
 | 1 | [moonbitstack/moonfetch](https://mooncakes.io/docs/moonbitstack/moonfetch) | 0.1.5 | An HTTP client for MoonBit, synchronous or asynchronous. |
 | 2 | [gaato/http](https://mooncakes.io/docs/gaato/http) | 0.5.0 | Sans-IO HTTP vocabulary for MoonBit SDKs: request/response types, a Transport tr… |
-| 3 | [gaato/http-async](https://mooncakes.io/docs/gaato/http-async) | 0.5.0 | gaato/http Transport over moonbitlang/async. Native, JS, and moonrun Wasm target… |
-| 4 | [q2316367743/moonhttp](https://mooncakes.io/docs/q2316367743/moonhttp) | 0.6.1 | axios 风格的 MoonBit HTTP 客户端：实例与配置合并、四种请求体形态、流式与 SSE、自动重定向 |
+| 3 | [q2316367743/moonhttp](https://mooncakes.io/docs/q2316367743/moonhttp) | 0.6.1 | axios 风格的 MoonBit HTTP 客户端：实例与配置合并、四种请求体形态、流式与 SSE、自动重定向 |
+| 4 | [gaato/http-async](https://mooncakes.io/docs/gaato/http-async) | 0.5.0 | gaato/http Transport over moonbitlang/async. Native, JS, and moonrun Wasm target… |
 | 5 | [moonbitstack/moonnet](https://mooncakes.io/docs/moonbitstack/moonnet) | 0.1.10 | Networking for MoonBit: connections, listeners and dialers over TCP, TLS and QUI… |
-| 6 | [DC-Z-lab/moonllm](https://mooncakes.io/docs/DC-Z-lab/moonllm) | 0.1.0 | Type-safe, OpenAI-compatible LLM client for MoonBit: chat completions, streaming… |
-| 7 | [moonbitstack/moonquic](https://mooncakes.io/docs/moonbitstack/moonquic) | 0.3.11 | QUIC transport for MoonBit. |
+| 6 | [moonbitstack/moonquic](https://mooncakes.io/docs/moonbitstack/moonquic) | 0.3.11 | QUIC transport for MoonBit. |
+| 7 | [DC-Z-lab/moonllm](https://mooncakes.io/docs/DC-Z-lab/moonllm) | 0.1.0 | Type-safe, OpenAI-compatible LLM client for MoonBit: chat completions, streaming… |
 | 8 | [gaato/requesto](https://mooncakes.io/docs/gaato/requesto) | 0.2.2 | A human-facing async HTTP client for MoonBit: verb functions, a client with defa… |
 | 9 | [SundayT1998/chroma-client](https://mooncakes.io/docs/SundayT1998/chroma-client) | 0.1.1 | A Chroma vector database HTTP client for MoonBit: collections, records, queries … |
 | 10 | [marianoguerra/mcp-client](https://mooncakes.io/docs/marianoguerra/mcp-client) | 0.10.1 | MCP 2026-07-28 client: streamable-HTTP and stdio transports, MRTR, subscriptions… |
@@ -373,12 +374,12 @@ TCP / UDP、套接字、DNS、TLS 等传输层能力。
 | 4 | [fangyinc/socket](https://mooncakes.io/docs/fangyinc/socket) | 0.1.2-rc2 | A socket binding for MoonBit |
 | 5 | [moonbitstack/moontls](https://mooncakes.io/docs/moonbitstack/moontls) | 0.9.14 | TLS 1.3 and DTLS 1.3 for MoonBit. |
 | 6 | [ZSeanYves/MoonbitHTTP](https://mooncakes.io/docs/ZSeanYves/MoonbitHTTP) | 0.7.0 | Streaming HTTP protocol suite for MoonBit with HTTP/1.1, HTTP/2, HTTP/3, QUIC, T… |
-| 7 | [oboard/mio](https://mooncakes.io/docs/oboard/mio) | 0.5.4 | Best async http library for Moonbit |
-| 8 | [moonbitstack/moonquic](https://mooncakes.io/docs/moonbitstack/moonquic) | 0.3.11 | QUIC transport for MoonBit. |
-| 9 | [moonbitstack/moonrpc](https://mooncakes.io/docs/moonbitstack/moonrpc) | 0.21.12 | gRPC for MoonBit. |
+| 7 | [moonbitstack/moonquic](https://mooncakes.io/docs/moonbitstack/moonquic) | 0.3.11 | QUIC transport for MoonBit. |
+| 8 | [moonbitstack/moonrpc](https://mooncakes.io/docs/moonbitstack/moonrpc) | 0.21.12 | gRPC for MoonBit. |
+| 9 | [oboard/mio](https://mooncakes.io/docs/oboard/mio) | 0.5.4 | Best async http library for Moonbit |
 | 10 | [moonbitstack/mooncat](https://mooncakes.io/docs/moonbitstack/mooncat) | 0.19.5 | A native ASGI server for MoonBit. |
 | 11 | [moonbitstack/moonfetch](https://mooncakes.io/docs/moonbitstack/moonfetch) | 0.1.5 | An HTTP client for MoonBit, synchronous or asynchronous. |
-| 12 | [cghyyrrt/moonbit-pcap](https://mooncakes.io/docs/cghyyrrt/moonbit-pcap) | 0.1.2 | Pure MoonBit network packet capture (PCAP / PCAPNG) parser, stream reassembly, a… |
+| 12 | [moonbitstack/moonmysql](https://mooncakes.io/docs/moonbitstack/moonmysql) | 0.7.9 | Pure-MoonBit MySQL wire-protocol driver implementing @moondb.Driver — no C, like… |
 
 
 ## 应用协议 / RPC
@@ -400,8 +401,8 @@ WebSocket、MQTT、gRPC、SSE 等应用层协议与 RPC 通信。
 | 7 | [gaato/http](https://mooncakes.io/docs/gaato/http) | 0.5.0 | Sans-IO HTTP vocabulary for MoonBit SDKs: request/response types, a Transport tr… |
 | 8 | [moonbitstack/moonzero](https://mooncakes.io/docs/moonbitstack/moonzero) | 0.14.6 | 服务框架，面向服务化场景，与 Web 框架定位不同。 |
 | 9 | [f4ah6o/direct_sdk](https://mooncakes.io/docs/f4ah6o/direct_sdk) | 0.11.2 | MoonBit SDK for Direct4B WebSocket API with MessagePack RPC |
-| 10 | [zbhzs1/moonbit-mqtt](https://mooncakes.io/docs/zbhzs1/moonbit-mqtt) | 0.1.0 | MQTT 3.1.1 packet codec helpers for MoonBit without transport or client runtime |
-| 11 | [moonbitstack/moonfetch](https://mooncakes.io/docs/moonbitstack/moonfetch) | 0.1.5 | An HTTP client for MoonBit, synchronous or asynchronous. |
+| 10 | [moonbitstack/moonfetch](https://mooncakes.io/docs/moonbitstack/moonfetch) | 0.1.5 | An HTTP client for MoonBit, synchronous or asynchronous. |
+| 11 | [zbhzs1/moonbit-mqtt](https://mooncakes.io/docs/zbhzs1/moonbit-mqtt) | 0.1.0 | MQTT 3.1.1 packet codec helpers for MoonBit without transport or client runtime |
 | 12 | [Duckweed/moon-mqtt](https://mooncakes.io/docs/Duckweed/moon-mqtt) | 0.3.3 | moon-mqtt：MoonBit 生态的 MQTT 3.1.1 客户端库——QoS0/1/2、持久会话恢复、core/ 纯计算状态机（四后端可测）、浏览器 W… |
 
 
@@ -427,8 +428,8 @@ SQLite 绑定、ORM、KV 存储、迁移工具。
 | 2 | [mizchi/sqlite](https://mooncakes.io/docs/mizchi/sqlite) | 0.3.1 | libsqlite3 bindings for MoonBit |
 | 3 | [moonbit-community/proton_safe_storage](https://mooncakes.io/docs/moonbit-community/proton_safe_storage) | 0.7.0 | Native OS-backed safe storage helpers for MoonBit. |
 | 4 | [prowk/moonsqlitefile](https://mooncakes.io/docs/prowk/moonsqlitefile) | 0.8.1 | Pure MoonBit read-only SQLite file format parser and inspector |
-| 5 | [f4ah6o/duckdb](https://mooncakes.io/docs/f4ah6o/duckdb) | 0.8.0 | MoonBit bindings for DuckDB on native and JavaScript targets (Node.js and browse… |
-| 6 | [moonbitstack/moonsqlite](https://mooncakes.io/docs/moonbitstack/moonsqlite) | 0.3.5 | SQLite driver for moondb/moonorm — native FFI, amalgamation vendored here (isola… |
+| 5 | [moonbitstack/moonsqlite](https://mooncakes.io/docs/moonbitstack/moonsqlite) | 0.3.5 | SQLite driver for moondb/moonorm — native FFI, amalgamation vendored here (isola… |
+| 6 | [f4ah6o/duckdb](https://mooncakes.io/docs/f4ah6o/duckdb) | 0.8.0 | MoonBit bindings for DuckDB on native and JavaScript targets (Node.js and browse… |
 | 7 | [myfreess/sqlite3](https://mooncakes.io/docs/myfreess/sqlite3) | 0.1.1 | — |
 | 8 | [daqing/sqlite](https://mooncakes.io/docs/daqing/sqlite) | 0.4.0 | SQLite3 bindings for latest MoonBit toolchian |
 
@@ -464,9 +465,9 @@ async 运行时、协程、并发原语、任务调度。
 
 JSON、JSON Lines、JSON5 的解析、生成与 JSON Schema 校验。
 
-> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 127 个候选均为基础库，需按需组合。
+> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 128 个候选均为基础库，需按需组合。
 
-### 基础库（127）
+### 基础库（128）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -475,8 +476,8 @@ JSON、JSON Lines、JSON5 的解析、生成与 JSON Schema 校验。
 | 3 | [colmugx/json-schema](https://mooncakes.io/docs/colmugx/json-schema) | 0.1.5 | Compile-once JSON Schema 2020-12 validator for MoonBit: exact decimal arithmetic… |
 | 4 | [moonbitstack/moonjson](https://mooncakes.io/docs/moonbitstack/moonjson) | 0.4.3 | JSON, its dialects and its binary encodings for MoonBit. |
 | 5 | [moonrockz/cucumber-messages](https://mooncakes.io/docs/moonrockz/cucumber-messages) | 0.5.0 | Cucumber Messages protocol types for MoonBit with JSON serialization and NDJSON … |
-| 6 | [mizchi/jsonschema](https://mooncakes.io/docs/mizchi/jsonschema) | 0.8.1 | JSON Schema validator and code generator for MoonBit |
-| 7 | [moonbitstack/moonschema](https://mooncakes.io/docs/moonbitstack/moonschema) | 0.2.4 | JSON Schema validation for MoonBit, draft-04 through v1: four output formats, ni… |
+| 6 | [moonbitstack/moonschema](https://mooncakes.io/docs/moonbitstack/moonschema) | 0.2.4 | JSON Schema validation for MoonBit, draft-04 through v1: four output formats, ni… |
+| 7 | [mizchi/jsonschema](https://mooncakes.io/docs/mizchi/jsonschema) | 0.8.1 | JSON Schema validator and code generator for MoonBit |
 | 8 | [mizchi/js_builtin](https://mooncakes.io/docs/mizchi/js_builtin) | 0.13.0 | javascript built-in object bindings (Object, Array, JSON, RegExp, Symbol, Proxy,… |
 | 9 | [moonbitstack/moonmodel](https://mooncakes.io/docs/moonbitstack/moonmodel) | 0.1.3 | One model description for MoonBit, projected to JSON Schema, OpenAPI, SQL and Gr… |
 | 10 | [moonbitstack/moonapi](https://mooncakes.io/docs/moonbitstack/moonapi) | 0.17.9 | 类型化 Web 框架，由类型化路由构建服务端并生成 OpenAPI 文档，可编译为原生或 wasm。 |
@@ -496,7 +497,7 @@ YAML、TOML、XML、CSV、INI、Ion 等配置与标记语言的解析与生成�
 
 > 完整方案仅 1 个，说明该类需求目前在生态中主要依靠基础库组合实现，下方基础库清单的实用价值更高。
 
-### 基础库（67）
+### 基础库（68）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -538,16 +539,16 @@ CBOR、Protocol Buffers、MessagePack、ASN.1 等二进制序列化格式。
 
 结构化日志、tracing、OpenTelemetry、指标。
 
-> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 33 个候选均为基础库，需按需组合。
+> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 35 个候选均为基础库，需按需组合。
 
-### 基础库（33）
+### 基础库（35）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
 | 1 | [tonyfettes/xlog](https://mooncakes.io/docs/tonyfettes/xlog) | 0.4.2 | Native structured logging with levels and category-based filtering. |
-| 2 | [moonrockz/moon-lander-logging](https://mooncakes.io/docs/moonrockz/moon-lander-logging) | 0.11.0 | Structured logging with a bring-your-own logger trait for the Moon-Lander framew… |
-| 3 | [moonrockz/moon-lander-logging-hosting-async](https://mooncakes.io/docs/moonrockz/moon-lander-logging-hosting-async) | 0.11.0 | Console and rolling file delivery for Moon-Lander logging, with bounded async se… |
-| 4 | [moonbitstack/moonlog](https://mooncakes.io/docs/moonbitstack/moonlog) | 0.1.6 | Structured logging for MoonBit. |
+| 2 | [moonbitstack/moonlog](https://mooncakes.io/docs/moonbitstack/moonlog) | 0.1.6 | Structured logging for MoonBit. |
+| 3 | [moonrockz/moon-lander-logging](https://mooncakes.io/docs/moonrockz/moon-lander-logging) | 0.11.0 | Structured logging with a bring-your-own logger trait for the Moon-Lander framew… |
+| 4 | [moonrockz/moon-lander-logging-hosting-async](https://mooncakes.io/docs/moonrockz/moon-lander-logging-hosting-async) | 0.11.0 | Console and rolling file delivery for Moon-Lander logging, with bounded async se… |
 | 5 | [brickfrog/moontrace](https://mooncakes.io/docs/brickfrog/moontrace) | 0.14.0 | Structured tracing for MoonBit with spans, structured fields, pluggable subscrib… |
 | 6 | [moonbitstack/moonzero](https://mooncakes.io/docs/moonbitstack/moonzero) | 0.14.6 | 服务框架，面向服务化场景，与 Web 框架定位不同。 |
 | 7 | [moonbitstack/moonmcp](https://mooncakes.io/docs/moonbitstack/moonmcp) | 0.1.10 | Model Context Protocol servers and clients for MoonBit. |
@@ -555,7 +556,7 @@ CBOR、Protocol Buffers、MessagePack、ASN.1 等二进制序列化格式。
 | 9 | [ryota0624/moonbit_otel](https://mooncakes.io/docs/ryota0624/moonbit_otel) | 0.1.0 | — |
 | 10 | [mohongquan0630/moon-prometheus](https://mooncakes.io/docs/mohongquan0630/moon-prometheus) | 0.2.6 | — |
 | 11 | [CCllff-jpg/MoonLogTrace](https://mooncakes.io/docs/CCllff-jpg/MoonLogTrace) | 0.1.4 | Pure MoonBit structured logging and tracing library with safe formatters, replay… |
-| 12 | [LilaLola67/moonmcap](https://mooncakes.io/docs/LilaLola67/moonmcap) | 0.17.4 | MoonBit-native MCAP message-log codec, indexed queries and file transformations |
+| 12 | [moonbitstack/moonp8s](https://mooncakes.io/docs/moonbitstack/moonp8s) | 0.1.0 | Prometheus metrics for MoonBit. |
 
 
 ## 运维 / 系统管理
@@ -630,7 +631,7 @@ CBOR、Protocol Buffers、MessagePack、ASN.1 等二进制序列化格式。
 
 > 完整方案仅 2 个，说明该类需求目前在生态中主要依靠基础库组合实现，下方基础库清单的实用价值更高。
 
-### 基础库（238）
+### 基础库（242）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -659,9 +660,9 @@ CBOR、Protocol Buffers、MessagePack、ASN.1 等二进制序列化格式。
 | 3 | [Milky2018/x64_target](https://mooncakes.io/docs/Milky2018/x64_target) | 0.18.0 | x64 direct MilkIR target pipeline to native code |
 | 4 | [Milky2018/vcode](https://mooncakes.io/docs/Milky2018/vcode) | 0.18.0 | Target-independent native lowering, VCode, and code-object infrastructure |
 | 5 | [dowdiness/js_engine](https://mooncakes.io/docs/dowdiness/js_engine) | 0.9.0 | Pure MoonBit cross-target embedded JavaScript engine |
-| 6 | [mizchi/jsonschema](https://mooncakes.io/docs/mizchi/jsonschema) | 0.8.1 | JSON Schema validator and code generator for MoonBit |
-| 7 | [moonbitlang/protobuf](https://mooncakes.io/docs/moonbitlang/protobuf) | 0.2.0 | The runtime library for protobuf |
-| 8 | [moonbitstack/moonast](https://mooncakes.io/docs/moonbitstack/moonast) | 0.2.6 | Code generation for MoonBit from annotated declarations. |
+| 6 | [moonbitstack/moonast](https://mooncakes.io/docs/moonbitstack/moonast) | 0.2.6 | Code generation for MoonBit from annotated declarations. |
+| 7 | [mizchi/jsonschema](https://mooncakes.io/docs/mizchi/jsonschema) | 0.8.1 | JSON Schema validator and code generator for MoonBit |
+| 8 | [moonbitlang/protobuf](https://mooncakes.io/docs/moonbitlang/protobuf) | 0.2.0 | The runtime library for protobuf |
 | 9 | [mizchi/codegen](https://mooncakes.io/docs/mizchi/codegen) | 0.2.4 | Generic code generation library with abstract IR |
 | 10 | [Milky2018/machv](https://mooncakes.io/docs/Milky2018/machv) | 0.12.6 | Target-neutral semantic machine IR |
 | 11 | [Kaida-Amethyst/llvm](https://mooncakes.io/docs/Kaida-Amethyst/llvm) | 0.6.2 | llvm-c binding for Moonbit with friendly API, keeps the Cpp Style. |
@@ -672,9 +673,9 @@ CBOR、Protocol Buffers、MessagePack、ASN.1 等二进制序列化格式。
 
 正则表达式引擎与匹配。
 
-> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 10 个候选均为基础库，需按需组合。
+> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 12 个候选均为基础库，需按需组合。
 
-### 基础库（10）
+### 基础库（12）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -688,15 +689,17 @@ CBOR、Protocol Buffers、MessagePack、ASN.1 等二进制序列化格式。
 | 8 | [YeeHh2004/mooninput](https://mooncakes.io/docs/YeeHh2004/mooninput) | 0.2.2 | Composable structured input editing: dynamic masks, bounded regex, validation, n… |
 | 9 | [hackwaly/regex](https://mooncakes.io/docs/hackwaly/regex) | 0.0.1 | — |
 | 10 | [FidollarinLA/moonmask](https://mooncakes.io/docs/FidollarinLA/moonmask) | 0.1.0 | Constrained decoding for LLMs in MoonBit: compile JSON Schema and regex to byte-… |
+| 11 | [moonbit-community/tree-sitter-regex](https://mooncakes.io/docs/moonbit-community/tree-sitter-regex) | 0.100.0 | regex grammar for tree-sitter (tree-sitter/tree-sitter-regex v1.0.0), for the Mo… |
+| 12 | [wallll-wal6/arachne](https://mooncakes.io/docs/wallll-wal6/arachne) | 0.1.1 | Behavior contract testing across MoonBit regex backends with Unicode boundary fi… |
 
 
 ## Unicode / 文本处理
 
 Unicode 分类、字素簇、宽度计算、字符串工具。
 
-> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 111 个候选均为基础库，需按需组合。
+> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 112 个候选均为基础库，需按需组合。
 
-### 基础库（111）
+### 基础库（112）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -734,8 +737,8 @@ Unicode 分类、字素簇、宽度计算、字符串工具。
 | 8 | [gmlewis/crc32](https://mooncakes.io/docs/gmlewis/crc32) | 0.9.2 | MoonBit crc32: provide simple crc32 hash algorithm. |
 | 9 | [gmlewis/sha1](https://mooncakes.io/docs/gmlewis/sha1) | 0.12.17 | MoonBit sha1: provide simple sha1 hash algorithm. |
 | 10 | [shu-kitamura/sha256](https://mooncakes.io/docs/shu-kitamura/sha256) | 0.1.1 | A simple sha256 algorithm implemented in moonbit |
-| 11 | [tonyfettes/xxh64](https://mooncakes.io/docs/tonyfettes/xxh64) | 0.1.0 | XXH64 — a fast, portable, high-quality non-cryptographic hash. Faithful MoonBit … |
-| 12 | [moonbitstack/moonasgi](https://mooncakes.io/docs/moonbitstack/moonasgi) | 0.10.6 | ASGI 3.0 for MoonBit: the interface between servers and frameworks. |
+| 11 | [moonbitstack/moonasgi](https://mooncakes.io/docs/moonbitstack/moonasgi) | 0.10.6 | ASGI 3.0 for MoonBit: the interface between servers and frameworks. |
+| 12 | [tonyfettes/xxh64](https://mooncakes.io/docs/tonyfettes/xxh64) | 0.1.0 | XXH64 — a fast, portable, high-quality non-cryptographic hash. Faithful MoonBit … |
 
 
 ## 加密 / 签名
@@ -755,8 +758,8 @@ Unicode 分类、字素簇、宽度计算、字符串工具。
 | 5 | [moonbitstack/mooncrypt](https://mooncakes.io/docs/moonbitstack/mooncrypt) | 0.4.11 | Cryptographic algorithms for MoonBit, one per package. |
 | 6 | [mizchi/experimental_crypto](https://mooncakes.io/docs/mizchi/experimental_crypto) | 0.0.2 | EXPERIMENTAL — pure-MoonBit cryptography / PKI / JOSE building blocks. Education… |
 | 7 | [moonbitstack/moontls](https://mooncakes.io/docs/moonbitstack/moontls) | 0.9.14 | TLS 1.3 and DTLS 1.3 for MoonBit. |
-| 8 | [justinwongcn/moonpgp](https://mooncakes.io/docs/justinwongcn/moonpgp) | 0.4.0 | Pure-MoonBit OpenPGP implementation (RFC 4880/9580): email encryption, decryptio… |
-| 9 | [moonbitstack/mooncred](https://mooncakes.io/docs/moonbitstack/mooncred) | 0.6.9 | Credentials for MoonBit: JWT, JWK and X.509. |
+| 8 | [moonbitstack/mooncred](https://mooncakes.io/docs/moonbitstack/mooncred) | 0.6.9 | Credentials for MoonBit: JWT, JWK and X.509. |
+| 9 | [justinwongcn/moonpgp](https://mooncakes.io/docs/justinwongcn/moonpgp) | 0.4.0 | Pure-MoonBit OpenPGP implementation (RFC 4880/9580): email encryption, decryptio… |
 | 10 | [moonbitstack/moonrand](https://mooncakes.io/docs/moonbitstack/moonrand) | 0.1.2 | Reproducible pseudo-random generators, unbiased sampling and the common distribu… |
 | 11 | [ruifeng/moondsa](https://mooncakes.io/docs/ruifeng/moondsa) | 0.2.1 | moondsa is a MoonBit implementation of Dilithium, a post-quantum signature schem… |
 | 12 | [RabitLogic/mjwt](https://mooncakes.io/docs/RabitLogic/mjwt) | 0.2.0 | A JWT (JSON Web Token) library for MoonBit with extensible trait-based signers |
@@ -774,16 +777,16 @@ Base64 / Base32 / Hex 等编码、URL 百分号编码、转义与变长整数。
 |---|---|---|---|
 | 1 | [cc06b/mooncry](https://mooncakes.io/docs/cc06b/mooncry) | 0.95.0 | Pure-MoonBit crypto primitives: SHA-1/2 (incl. SHA-512/224/256), SHA-3, Keccak-2… |
 | 2 | [gmlewis/base64](https://mooncakes.io/docs/gmlewis/base64) | 0.16.14 | MoonBit base64: provide simple base64 operations. |
-| 3 | [mizchi/cbor](https://mooncakes.io/docs/mizchi/cbor) | 0.1.1 | CBOR (RFC 8949) implementation for MoonBit - Pure and FFI versions |
-| 4 | [moonbitstack/moonbase](https://mooncakes.io/docs/moonbitstack/moonbase) | 0.4.3 | Every base encoding, one shape: base2 through base85, bech32 and multibase for M… |
+| 3 | [moonbitstack/moonbase](https://mooncakes.io/docs/moonbitstack/moonbase) | 0.4.3 | Every base encoding, one shape: base2 through base85, bech32 and multibase for M… |
+| 4 | [mizchi/cbor](https://mooncakes.io/docs/mizchi/cbor) | 0.1.1 | CBOR (RFC 8949) implementation for MoonBit - Pure and FFI versions |
 | 5 | [moonbitstack/moonvar](https://mooncakes.io/docs/moonbitstack/moonvar) | 0.2.1 | Fixed-width and variable-length integer encodings for MoonBit. |
 | 6 | [moonbitstack/moonurl](https://mooncakes.io/docs/moonbitstack/moonurl) | 0.2.5 | URLs for MoonBit: WHATWG and RFC 3986 parsing, IDNA, URI templates, percent codi… |
 | 7 | [tonyfettes/encoding](https://mooncakes.io/docs/tonyfettes/encoding) | 0.3.9 | Encoding package extracted from moonbitlang/x |
 | 8 | [LL728/moon_encoding](https://mooncakes.io/docs/LL728/moon_encoding) | 0.2.0 | WHATWG Encoding Standard 的 MoonBit 实现：label 解析、流式解码与一次性编码 API，覆盖规范定义的全部 40 种编码（含… |
 | 9 | [superbigcup325/colenc](https://mooncakes.io/docs/superbigcup325/colenc) | 0.1.3 | Columnar encoding kernel for MoonBit: the Parquet page-level encoding family as … |
 | 10 | [f4ah6o/encoding_sjis](https://mooncakes.io/docs/f4ah6o/encoding_sjis) | 0.1.1 | encoding_rs-compliant Shift_JIS decoder for MoonBit |
-| 11 | [horideicom/encoding_sjis](https://mooncakes.io/docs/horideicom/encoding_sjis) | 0.1.1 | encoding_rs-compliant Shift_JIS decoder for MoonBit |
-| 12 | [moonbitstack/moonhttp](https://mooncakes.io/docs/moonbitstack/moonhttp) | 0.15.8 | HTTP formats for MoonBit with no I/O: HTTP/1 to HTTP/3, WebSocket, SSE and multi… |
+| 11 | [moonbitstack/moonhttp](https://mooncakes.io/docs/moonbitstack/moonhttp) | 0.15.8 | HTTP formats for MoonBit with no I/O: HTTP/1 to HTTP/3, WebSocket, SSE and multi… |
+| 12 | [horideicom/encoding_sjis](https://mooncakes.io/docs/horideicom/encoding_sjis) | 0.1.1 | encoding_rs-compliant Shift_JIS decoder for MoonBit |
 
 
 ## 压缩 / 归档
@@ -807,7 +810,7 @@ DEFLATE / zlib / gzip / ZIP 的压缩与解压实现。
 | 9 | [gmlewis/flate](https://mooncakes.io/docs/gmlewis/flate) | 0.36.17 | MoonBit flate: provide simplified flate (LZW) compression algorithm. |
 | 10 | [moonbit-community/zipc](https://mooncakes.io/docs/moonbit-community/zipc) | 0.2.2 | Typed, in-memory ZIP archive library for MoonBit (deflate via moonbit-community/… |
 | 11 | [Milky2018/zstd](https://mooncakes.io/docs/Milky2018/zstd) | 0.1.4 | — |
-| 12 | [bikallem/compress](https://mooncakes.io/docs/bikallem/compress) | 0.3.4 | Compression library for MoonBit: flate, gzip, zlib, lzw, bzip2, snappy, lz4, zst… |
+| 12 | [moonbitstack/moonzip](https://mooncakes.io/docs/moonbitstack/moonzip) | 0.3.6 | Compression and archives for MoonBit, one format per package. |
 
 
 ## 文件 / 路径 / IO
@@ -831,16 +834,16 @@ DEFLATE / zlib / gzip / ZIP 的压缩与解压实现。
 | 9 | [ZSeanYves/bufferutils](https://mooncakes.io/docs/ZSeanYves/bufferutils) | 0.37.0 | Zero-copy shared byte buffers with high-performance synchronous, native, and asy… |
 | 10 | [justjavac/glob](https://mooncakes.io/docs/justjavac/glob) | 0.2.0 | A glob library for MoonBit, supporting wildcard pattern matching on file paths. |
 | 11 | [riantr/moonbit_static_analysis](https://mooncakes.io/docs/riantr/moonbit_static_analysis) | 0.4.41 | Three-inspection (structural / type / behavior) static analysis for MoonBit prog… |
-| 12 | [justjavac/walkdir](https://mooncakes.io/docs/justjavac/walkdir) | 0.1.9 | A deterministic walkdir library for MoonBit. |
+| 12 | [moonbitstack/moonlog](https://mooncakes.io/docs/moonbitstack/moonlog) | 0.1.6 | Structured logging for MoonBit. |
 
 
 ## 数学 / 数值计算
 
 高精度数学、线性代数、矩阵、BLAS、统计。
 
-> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 66 个候选均为基础库，需按需组合。
+> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 68 个候选均为基础库，需按需组合。
 
-### 基础库（66）
+### 基础库（68）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -895,7 +898,7 @@ DEFLATE / zlib / gzip / ZIP 的压缩与解压实现。
 | 3 | [aspnmy/moonitest](https://mooncakes.io/docs/aspnmy/moonitest) | 0.2.1 | 集成测试框架，通过真实 Docker、TCP 与 HTTP 调用后端接口，作为单元测试的补充。 |
 | 4 | [Duckweed/moon-proof](https://mooncakes.io/docs/Duckweed/moon-proof) | 0.1.3 | 文档示例的持续验证框架，抽取文档中的代码块并隔离编译运行，用于确认示例是否仍然有效。 |
 
-### 基础库（64）
+### 基础库（65）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -921,8 +924,8 @@ DEFLATE / zlib / gzip / ZIP 的压缩与解压实现。
 |---|---|---|---|
 | 1 | [moonbitlang/formatter](https://mooncakes.io/docs/moonbitlang/formatter) | 0.1.6 | code prettifier for MoonBit |
 | 2 | [riantr/moonbit_static_analysis](https://mooncakes.io/docs/riantr/moonbit_static_analysis) | 0.4.41 | Three-inspection (structural / type / behavior) static analysis for MoonBit prog… |
-| 3 | [moonbitlang/protobuf](https://mooncakes.io/docs/moonbitlang/protobuf) | 0.2.0 | The runtime library for protobuf |
-| 4 | [moonbitstack/moonast](https://mooncakes.io/docs/moonbitstack/moonast) | 0.2.6 | Code generation for MoonBit from annotated declarations. |
+| 3 | [moonbitstack/moonast](https://mooncakes.io/docs/moonbitstack/moonast) | 0.2.6 | Code generation for MoonBit from annotated declarations. |
+| 4 | [moonbitlang/protobuf](https://mooncakes.io/docs/moonbitlang/protobuf) | 0.2.0 | The runtime library for protobuf |
 | 5 | [mizchi/codegen](https://mooncakes.io/docs/mizchi/codegen) | 0.2.4 | Generic code generation library with abstract IR |
 | 6 | [moonbit-community/moongrep](https://mooncakes.io/docs/moonbit-community/moongrep) | 0.3.10 | Experimental MoonBit structural search and taint-analysis tool |
 | 7 | [golemcloud/golem_sdk_tools](https://mooncakes.io/docs/golemcloud/golem_sdk_tools) | 0.6.2 | Code generation tools for the Golem SDK for MoonBit |
@@ -953,17 +956,17 @@ Markdown 解析、HTML/PDF/DOCX 转换、文档排版。
 | 8 | [moonrockz/pretty](https://mooncakes.io/docs/moonrockz/pretty) | 0.3.0 | Wadler-style pretty printer for MoonBit: documents, groups and layout that fits … |
 | 9 | [Lampese/office-viewer](https://mooncakes.io/docs/Lampese/office-viewer) | 0.2.6 | A read-only DOCX, XLSX, PPTX, and PDF viewer with structured selections. |
 | 10 | [moonbit-community/html](https://mooncakes.io/docs/moonbit-community/html) | 0.2.4 | WHATWG HTML5 spec-compliant parser for MoonBit |
-| 11 | [Xiao-li-He/MoonMarkMind](https://mooncakes.io/docs/Xiao-li-He/MoonMarkMind) | 0.1.0 | Markdown mind-map toolkit and browser application built with MoonBit |
-| 12 | [wzzc-dev/moui_markdown](https://mooncakes.io/docs/wzzc-dev/moui_markdown) | 0.3.0 | Reusable Markdown editing chrome components for MoUI (outline, find/replace, for… |
+| 11 | [wzzc-dev/moui_markdown](https://mooncakes.io/docs/wzzc-dev/moui_markdown) | 0.3.0 | Reusable Markdown editing chrome components for MoUI (outline, find/replace, for… |
+| 12 | [Xiao-li-He/MoonMarkMind](https://mooncakes.io/docs/Xiao-li-He/MoonMarkMind) | 0.1.0 | Markdown mind-map toolkit and browser application built with MoonBit |
 
 
 ## 时间 / 日期
 
 日期时间、时区、RFC3339、cron。
 
-> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 42 个候选均为基础库，需按需组合。
+> 本场景**尚无完整方案**：生态中还没有框架或引擎级的实现。下列 44 个候选均为基础库，需按需组合。
 
-### 基础库（42）
+### 基础库（44）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|
@@ -977,8 +980,8 @@ Markdown 解析、HTML/PDF/DOCX 转换、文档排版。
 | 8 | [moonbitstack/moonward](https://mooncakes.io/docs/moonbitstack/moonward) | 0.2.1 | Resilience for MoonBit without I/O: circuit breaking, load shedding, rate limits… |
 | 9 | [001-Elsa/mooncron](https://mooncakes.io/docs/001-Elsa/mooncron) | 0.1.4 | A cron expression parser and schedule calculator written in MoonBit. |
 | 10 | [marianoguerra/temporal](https://mooncakes.io/docs/marianoguerra/temporal) | 0.1.2 | An implementation of ECMAScript Temporal: calendar and time-zone aware dates, ti… |
-| 11 | [iceBear67/time](https://mooncakes.io/docs/iceBear67/time) | 0.1.2 | A date-time library in MoonBit, including zone offsets and clocks that support J… |
-| 12 | [mizchi/whenwords](https://mooncakes.io/docs/mizchi/whenwords) | 0.1.3 | A relative time formatting library for MoonBit, following the whenwords specific… |
+| 11 | [chensuiyi/dateku](https://mooncakes.io/docs/chensuiyi/dateku) | 0.3.0 | MoonBit date-time formatting: epoch-milliseconds to ISO 8601 and RFC 5322 timest… |
+| 12 | [iceBear67/time](https://mooncakes.io/docs/iceBear67/time) | 0.1.2 | A date-time library in MoonBit, including zone offsets and clocks that support J… |
 
 
 ## WebAssembly / JS 互操作
@@ -993,7 +996,7 @@ Wasm 组件模型、WASI、FFI、JS 绑定。
 
 > 完整方案仅 1 个，说明该类需求目前在生态中主要依靠基础库组合实现，下方基础库清单的实用价值更高。
 
-### 基础库（251）
+### 基础库（253）
 
 | # | 包 | 版本 | 说明 |
 |---|---|---|---|

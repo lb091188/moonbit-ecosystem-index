@@ -14,15 +14,15 @@
 - **`moonrockz/pretty`** v0.3.0 — Wadler-style pretty printer for MoonBit: documents, groups and layout that fits a line width
 - **`Lampese/office-viewer`** v0.2.6 — A read-only DOCX, XLSX, PPTX, and PDF viewer with structured selections.
 - **`moonbit-community/html`** v0.2.4 — WHATWG HTML5 spec-compliant parser for MoonBit
-- **`Xiao-li-He/MoonMarkMind`** v0.1.0 — Markdown mind-map toolkit and browser application built with MoonBit
 - **`wzzc-dev/moui_markdown`** v0.3.0 — Reusable Markdown editing chrome components for MoUI (outline, find/replace, format palette, document info, HT…
+- **`Xiao-li-He/MoonMarkMind`** v0.1.0 — Markdown mind-map toolkit and browser application built with MoonBit
 - **`hnlyxiaobing/moonbitmark`** v0.5.0 — Convert documents and URLs to Markdown with a MoonBit engine
 - **`ZSeanYves/markitdown`** v0.8.0 — A MoonBit-native document-to-Markdown converter with multi-format parsing, metadata, assets, batch conversion,…
 - **`Freakz2z/tracecite`** v0.8.0 — Maintain Markdown references, code excerpts and source snapshots
 - **`wzzc-dev/moui_richtext`** v0.3.0 — Optional rich text and markdown addon for MoUI
 - **`tonyfettes/tree_sitter_markdown`** v0.1.26 — Markdown grammar for tree-sitter
-- **`moonbitlang/office`** v0.3.1 — Agent-oriented Office and PDF command-line tooling
 - **`moonbitlang/pdf2md`** v0.1.3 — Command-line PDF to Markdown extraction built on pdflite.
+- **`moonbitlang/office`** v0.3.1 — Agent-oriented Office and PDF command-line tooling
 - **`Estrella-11/moondockit`** v0.6.0 — A MoonBit-first documentation site toolkit with AI-enhanced docs, quality assessment, content summarization, c…
 - **`bikallem/webapi`** v0.5.0 — Moonbit browser WebApi - dom, fetch, html, xhr, url, svg, uievents and more
 - **`bobzhang/asciidoctor-pdf`** v0.2.1 — PDF backend for asciidoctor.mbt: a port of Asciidoctor PDF 2.3.27 with its themes and fonts bundled
@@ -36,10 +36,10 @@
 - **`R00TK17/moonreader`** v0.1.3 — MoonReader — 纯 MoonBit 实现的文件内容读取库（TXT / CSV / JSON / JSONL / XML / Markdown / ZIP / TAR / DOCX / XLSX / PPTX /…
 - **`cyypyhon123/moonbit-brandbook`** v0.2.2 — Import, audit, benchmark, and export production-ready brand systems from MoonBit design tokens.
 - **`hua1104/moonpress`** v0.1.0 — A MoonBit-first static site and documentation generator for reusable project docs.
-- **`tonyfettes/tree_sitter_markdown_inline`** v0.1.26 — Markdown grammar for tree-sitter
 - **`lllg123/moonbit-chemreport`** v0.3.0 — A MoonBit-native report layer for chemical engineering calculations.
-- **`ushironoko/mdclip`** v0.4.0 — Preview clipboard markdown as GitHub-styled HTML in browser
+- **`tonyfettes/tree_sitter_markdown_inline`** v0.1.26 — Markdown grammar for tree-sitter
 - **`bobzhang/asciidoctor`** v0.3.4 — A port of Asciidoctor (AsciiDoc processor) to MoonBit
+- **`ushironoko/mdclip`** v0.4.0 — Preview clipboard markdown as GitHub-styled HTML in browser
 - **`lexchb/moonbit-texteditor`** v0.1.0 — A pure MoonBit Markdown to HTML conversion library.
 - **`moonrockz/ears`** v0.1.0 — Immutable EARS requirements and extraction from text and MDC documents
 - **`Lxxbv/moon_typst`** v0.2.1 — A lightweight MoonBit implementation of a supported Typst-style markup subset with parser, layout engine, and …
@@ -47,29 +47,29 @@
 - **`spectacleCase/moonbook`** v0.3.1 — A Markdown documentation and book generator written in MoonBit
 - **`vectie/moonleaf`** v0.1.15 — A pure MoonBit, cross-platform OOXML viewer and lightweight editor core.
 - **`peter-jerry-ye/md-outline`** v0.2.1 — Markdown outline and section reader CLI for agent workflows
+- **`moonbitlang/typst`** v0.1.10 — A port of the Typst typesetting engine to MoonBit.
 - **`rami3l/cmark`** v0.4.0 — A CommonMark toolkit for MoonBit
 - **`sennenki/rabbitify`** v0.1.0 — Convert HTML document to Rabbita VDom functions
 - **`tiye/respo-markdown`** v0.1.3 — Parse Markdown subset to Respo virtual DOM
-- **`moonbitlang/typst`** v0.1.10 — A port of the Typst typesetting engine to MoonBit.
-- **`kokic/katex-parser`** v0.6.0 — A port of the KaTeX parser: lexing and parsing LaTeX math expressions with macro expansion into a typed AST, p…
-- **`kokic/sexp-html`** v0.6.0 — HTML's s-expression representation
 - **`moonrockz/mdc`** v0.1.0 — Markdown with YAML frontmatter and traversal APIs for Mission Control
+- **`kokic/sexp-html`** v0.6.0 — HTML's s-expression representation
+- **`kokic/katex-parser`** v0.6.0 — A port of the KaTeX parser: lexing and parsing LaTeX math expressions with macro expansion into a typed AST, p…
 - **`kokic/tinymark`** v0.3.9 — The kernel of altsia markup language
 - **`moonrockz/moonbase-ears`** v0.0.1 — Immutable EARS requirements and extraction from text and MDC documents
-- **`totto2727/mdt`** v0.1.9 — Native MoonBit CLI for translating Markdown with OpenCode or Codex
 - **`icyaaaww/moonatlas`** v0.1.0 — Local multi-document knowledge maps with source evidence and explicit incremental changes.
+- **`totto2727/mdt`** v0.1.9 — Native MoonBit CLI for translating Markdown with OpenCode or Codex
 - **`illusory0x0/prettyprinter`** v0.1.1 — A pretty printer library for MoonBit using immutable deque implementation for efficient document layout and fo…
 - **`lenitain/kdl`** v0.2.0 — KDL document language parser, formatter, query engine, and schema validation library for MoonBit
 - **`Milky2018/html`** v0.1.2 — WHATWG HTML5 spec-compliant parser for MoonBit
 - **`MX-ai-nb/taptrail`** v0.3.0 — Pure MoonBit TAP13 parser, CI validation gate, and Markdown/JSON report renderer.
-- **`cosettese/moonchartkit`** v0.2.0 — Accessible SVG and Markdown report artifacts for MoonBit.
 - **`marianoguerra/html`** v0.1.1 — A semantic markup tree for MoonBit: HTML, SVG and MathML, with a tolerant parser, a printer with pretty, compa…
+- **`cosettese/moonchartkit`** v0.2.0 — Accessible SVG and Markdown report artifacts for MoonBit.
 - **`zlhahaha/partsieve`** v0.8.0-spike — OOXML capability audit and verified rebuild; restricted Word and spreadsheet profiles
-- **`tonyfettes/tree_sitter_html`** v0.1.26 — HTML grammar for tree-sitter
 - **`moonbitlang/office-lib`** v0.7.1 — Agent-oriented XLSX and DOCX tooling for MoonBit
+- **`moonrockz/moonbase-mdc`** v0.0.1 — Markdown with YAML frontmatter and traversal APIs for Moonbase
+- **`tonyfettes/tree_sitter_html`** v0.1.26 — HTML grammar for tree-sitter
 - **`shop1111/frontierlab`** v0.10.0 — A MoonBit algorithm trace protocol and polished offline HTML visualization kit.
 - **`marianoguerra/shrubbery-html`** v0.1.1 — HTML in shrubbery notation: lower shrubbery to a markup tree, and print a markup tree back as shrubbery
-- **`moonrockz/moonbase-mdc`** v0.0.1 — Markdown with YAML frontmatter and traversal APIs for Moonbase
 - **`bobzhang/ldiff`** v0.1.6 — Lexer-based diff for MoonBit code: weighted token alignment with HTML rendering
 - **`bzy-debug/text_document`** v0.1.0 — A high-performance text document library for MoonBit that provides LSP-compatible text editing operations. Thi…
 - **`gywcs101/MoonDocCheck`** v0.1.0 — A MoonBit documentation quality checker for open-source packages and contest submissions.
@@ -91,8 +91,8 @@
 - **`xz-xuezhe/moonblox-cli`** v0.2.0 — MoonBlox command-line tool
 - **`cou723/html-parser`** v0.1.0 — Lightweight and practical HTML parser for MoonBit
 - **`XiaoChenxu/msdoc-viewer`** v0.1.1 — High-performance MS-DOC (.doc binary Word) parser and renderer for MoonBit, supporting JS, WASM, and WASM-GC b…
+- **`moonbitstack/moonxml`** v0.1.4 — HTML, XML and SVG for MoonBit: parse, query and edit.
 - **`Duckweed/moon-proof`** v0.1.3 — MoonProof：MoonBit 文档与教程示例的持续验证框架——把文档里的代码块抽出来，隔离编译运行，回答“我们文档里的例子还都对吗”
 - **`chen333w/moon-element`** v0.2.0 — Web Components runtime for MoonBit, with an offscreen layout engine: the same view tree renders to custom elem…
-- **`moonbitstack/moonxml`** v0.1.4 — HTML, XML and SVG for MoonBit: parse, query and edit.
 - **`Mr-Houjie/mbt-typeset`** v0.1.0 — 中文排版校对工具：检查并自动修复中英文间距、全角标点、术语统一等问题，提供命令行工具与可复用库。
 - **`moonrockz/okf`** v0.1.0 — Read, query, validate and edit Open Knowledge Format (OKF) bundles

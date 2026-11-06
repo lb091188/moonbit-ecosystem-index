@@ -15,8 +15,8 @@
 - **`gmlewis/flate`** v0.36.17 — MoonBit flate: provide simplified flate (LZW) compression algorithm.
 - **`moonbit-community/zipc`** v0.2.2 — Typed, in-memory ZIP archive library for MoonBit (deflate via moonbit-community/flate)
 - **`Milky2018/zstd`** v0.1.4
-- **`bikallem/compress`** v0.3.4 — Compression library for MoonBit: flate, gzip, zlib, lzw, bzip2, snappy, lz4, zstd, brotli
 - **`moonbitstack/moonzip`** v0.3.6 — Compression and archives for MoonBit, one format per package.
+- **`bikallem/compress`** v0.3.4 — Compression library for MoonBit: flate, gzip, zlib, lzw, bzip2, snappy, lz4, zstd, brotli
 - **`gaato/codec`** v0.1.0 — Error kinds and limits shared by the streaming codecs of gaato/codecs.mbt.
 - **`gaato/codec_bytes`** v0.1.1 — The streaming contract of byte-stream codecs: step through input chunks into bounded output slices, with bound…
 - **`gaato/deflate`** v0.1.0 — Streaming DEFLATE, zlib and gzip decoders and encoders (RFC 1951, 1950, 1952) for MoonBit: arbitrary input chu…
@@ -29,11 +29,11 @@
 - **`aurora0x27/lzma-mbt`** v0.1.0 — Independent MoonBit implementation of liblzma core functionality
 - **`mizchi/bit_archive`** v0.49.1 — Tar archive writing (gix-archive equivalent)
 - **`lin2077-zeming/moonxz`** v0.4.6 — Pure MoonBit XZ/LZMA/LZMA2 compression and decompression toolkit
-- **`moonbit-community/evol-minifier`** v0.3.1 — A slightly faster JavaScript mangler/compressor for MoonBit.
+- **`moonbit-community/evol-minifier`** v0.3.2 — A slightly faster JavaScript mangler/compressor for MoonBit.
 - **`bobzhang/tar`** v0.1.3 — Pure MoonBit library to read and write tar files with streaming support
 - **`ivgtr/moonzip`** v0.2.4 — A MoonBit compression library compatible with fflate
-- **`Asterless/MoonQOI`** v0.1.3 — QOI (Quite OK Image Format) encoder/decoder library for MoonBit
 - **`moonbitstack/moonapi`** v0.17.9 — A typed web framework for MoonBit.
+- **`Asterless/MoonQOI`** v0.1.3 — QOI (Quite OK Image Format) encoder/decoder library for MoonBit
 - **`Ronlands/moonbit_zstd`** v0.1.2 — A pure Moonbit implementation of Zstandard (ZSTD) compression algorithm following RFC 8878
 - **`MINGtoMING/bzip2`** v0.0.0 — libbz2 bindings for MoonBit
 - **`R00TK17/moonreader`** v0.1.3 — MoonReader — 纯 MoonBit 实现的文件内容读取库（TXT / CSV / JSON / JSONL / XML / Markdown / ZIP / TAR / DOCX / XLSX / PPTX /…
@@ -49,16 +49,16 @@
 - **`oyjh0381/moonoci`** v0.1.4 — Deterministic OCI image layout builder and validator for MoonBit
 - **`Xpeng/linuxpkg`** v0.5.0 — Pure-MoonBit toolkit to build, inspect and verify Linux packages (deb, rpm, Arch, Alpine) and apt/dnf reposito…
 - **`mizchi/rkyv`** v0.5.0 — Safe MoonBit reader and small encoder for rkyv 0.8 archives
-- **`ZSeanYves/doc_parser`** v0.1.1 — MoonBit-native document structure foundation for source-native parsing, inspect, validation, and custom toolin…
 - **`PaiGack/dive`** v0.2.1 — A MoonBit toolkit for analyzing OCI container images: layer stacking, whiteout diffs and size-efficiency repor…
+- **`ZSeanYves/doc_parser`** v0.1.1 — MoonBit-native document structure foundation for source-native parsing, inspect, validation, and custom toolin…
 - **`668xin/moon_epub`** v0.1.2 — EPUB 3 ebook generation engine for MoonBit: builds spec-conformant .epub files from a structured book model, w…
+- **`binhongcha/moonsuccinct`** v0.2.0 — Static succinct indexes with threshold queries, cursor pages and byte fuzzy search
 - **`Hjyyutr/moon-minhash`** v0.1.0 — High-performance MinHash, LSH indexing, b-bit compression, streaming deduplication & document clustering for M…
 - **`jinshengmeng46/moon-dns-stub`** v0.1.0 — Native DNS wire format codec and async stub resolver. Supports A/AAAA/MX/SRV/TXT/CNAME/NS/PTR/SOA with name co…
-- **`binhongcha/moonsuccinct`** v0.2.0 — Static succinct indexes with threshold queries, cursor pages and byte fuzzy search
 - **`CaptainK-65/moon-car`** v0.1.0 — Bounded CARv1 archive streaming, verification and offset indexing for MoonBit.
 - **`chgttyyr/moon_dns`** v0.1.0 — Pure MoonBit authoritative DNS server (RFC 1035/6891) with robust pointer compression security
-- **`wjcoomk/moondns`** v0.1.0 — Pure MoonBit authoritative DNS server (RFC 1035) with robust compression pointer defense.
 - **`TWISTY2Ynb/moonmspack`** v0.1.1 — MoonBit CAB, CHM, MSZIP, and LZX archive reader
+- **`wjcoomk/moondns`** v0.1.0 — Pure MoonBit authoritative DNS server (RFC 1035) with robust compression pointer defense.
 - **`oilleelssq-wq/moon-cpio`** v0.1.0 — Safe cpio parsing, streaming, deterministic writing, and CLI extraction.
 - **`xiaojing012/moon-warc`** v0.1.0 — Streaming WARC 1.1 parser, writer, validator, indexer and audit toolkit for MoonBit.
 - **`Sxy11112/moon7z`** v0.1.0 — 纯 MoonBit 实现的 7z 归档只读解包库：容器解析 + LZMA/LZMA2 解码内核（库本体零第三方依赖）

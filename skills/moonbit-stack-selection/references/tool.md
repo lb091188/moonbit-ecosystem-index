@@ -14,8 +14,8 @@
 
 - **`moonbitlang/formatter`** v0.1.6 — code prettifier for MoonBit
 - **`riantr/moonbit_static_analysis`** v0.4.41 — Three-inspection (structural / type / behavior) static analysis for MoonBit programs, every toolchain file kin…
-- **`moonbitlang/protobuf`** v0.2.0 — The runtime library for protobuf
 - **`moonbitstack/moonast`** v0.2.6 — Code generation for MoonBit from annotated declarations.
+- **`moonbitlang/protobuf`** v0.2.0 — The runtime library for protobuf
 - **`mizchi/codegen`** v0.2.4 — Generic code generation library with abstract IR
 - **`moonbit-community/moongrep`** v0.3.10 — Experimental MoonBit structural search and taint-analysis tool
 - **`golemcloud/golem_sdk_tools`** v0.6.2 — Code generation tools for the Golem SDK for MoonBit
@@ -31,8 +31,8 @@
 - **`Milky2018/milkir_machv`** v0.12.6 — MilkIR-to-MachV lowering
 - **`moonbit-community/proton_codegen`** v0.7.0 — WASM code generator for typed Proton command registrars.
 - **`Mr-Houjie/mbt-typeset`** v0.1.0 — 中文排版校对工具：检查并自动修复中英文间距、全角标点、术语统一等问题，提供命令行工具与可复用库。
-- **`Ridge-Lab/capnp`** v0.3.1 — Cap'n Proto serialization runtime and schema code generation for MoonBit.
 - **`moonrockz/smithy-codegen`** v0.8.0 — Language-neutral Smithy code generation core
+- **`Ridge-Lab/capnp`** v0.3.1 — Cap'n Proto serialization runtime and schema code generation for MoonBit.
 - **`spectacleCase/moonhadolint`** v0.1.3 — Dockerfile parser and hadolint-style linter for MoonBit
 - **`mizchi/starlint`** v0.10.1 — Opinionated moonbit linter
 - **`minie135/moon-audit`** v0.5.0-dev — Static security scanner for MoonBit projects
@@ -41,6 +41,6 @@
 - **`Mairzzcllo/moonbit_sqlc_plugin`** v0.1.9 — sqlc WASM plugin ? generate type-safe MoonBit database layer from SQL queries
 - **`Zhouz-z/moon_l10n`** v0.2.0 — A cross-target ICU MessageFormat subset runtime and catalog linter for MoonBit.
 - **`bobzhang/typify`** v0.2.1 — Generate Rust and MoonBit types from JSON Schema (port of oxidecomputer/typify)
-- **`mizchi/sqlc_gen_moonbit`** v0.4.0 — sqlc plugin for MoonBit
+- **`bobzhang/cfront`** v0.4.0 — C syntax suite for meta-programming: parse C to an AST, build or transform it from MoonBit, and print it back …
 
 *其余基础库见 [tool-libs.md](tool-libs.md) 全量分册。*
